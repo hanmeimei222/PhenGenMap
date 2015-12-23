@@ -243,7 +243,8 @@ public class PhenoDataLoad {
 	//输入单个节点id/name，找n步以内可达的节点集合
 	public static Set<PNode> getNStepNode(Map<String,PNode> allnodes,Map<String,String>namemap,String query,int n){
 		Set<PNode>result = new HashSet<PNode>();
-		if(query.startsWith("MP:")){
+		if(query.startsWith("N")){
+			
 			
 		}
 		

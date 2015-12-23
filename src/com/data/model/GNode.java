@@ -3,6 +3,7 @@ package com.data.model;
 public class GNode
 {
 	private String id;
+	private String name;
 	public String getId() {
 		return id;
 	}
@@ -15,5 +16,5 @@ public class GNode
 	public void setName(String name) {
 		this.name = name;
 	}
-	private String name;
+	
 }

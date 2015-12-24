@@ -234,44 +234,97 @@ public class PhenoDataLoad {
 
 
 	//纵向查询
-	//输入单个节点id/name 查询出以它为起点的纵向全部路径，直到叶子节点
-	public static Set<PNode> getPostNodes(Map<String,PNode> allnodes,String id)
+	//输入待查询节点id，输出以他为起点的所有前驱节点
+	public static Set<PNode>getPreNodes(Map<String,PNode> allnodes,String id){
+		Set<PNode>fatherNodes = getNodes(allnodes,id,"Pre");
+		return fatherNodes;
+	}
+	//输入待查询节点id，输出以他为起点的所有后继节点
+	public static Set<PNode>getPostNodes(Map<String,PNode> allnodes,String id){
+		Set<PNode>sonNodes = getNodes(allnodes,id,"Post");
+		return sonNodes;
+	}
+	
+	//输入单个节点id以及 查询方向，输出以它为起点的前驱/后继节点
+	private static Set<PNode> getNodes(Map<String,PNode> allnodes,String id,String direction)
 	{
-		Set<PNode>allPoteNodes = new HashSet<PNode>();
+		Set<PNode>result = new HashSet<PNode>();
 		Set<PNode> currNodes = new HashSet<PNode>();
-		Set<PNode> sonNodes = new HashSet<PNode>();
+		Set<PNode> nextNodes = new HashSet<PNode>();
 		
 		PNode node = allnodes.get(id);
 		
 		currNodes.add(node);
-		while(!currNodes.isEmpty())
-		{
-			allPoteNodes.addAll(currNodes);
+		while(!currNodes.isEmpty()){
+			result.addAll(currNodes);
 			
 			for (PNode pNode : currNodes) {
-				sonNodes.addAll(pNode.getSon().keySet());
+				if(direction.equals("Pre")){
+					nextNodes.addAll(pNode.getFather().keySet());
+				}
+				else if(direction.equals("Post")){
+					nextNodes.addAll(pNode.getSon().keySet());
+				}
 			}
 			currNodes.clear();
-			currNodes.addAll(sonNodes);
-			sonNodes.clear();
+			currNodes.addAll(nextNodes);
+			nextNodes.clear();
 		}
-		return allPoteNodes;
+		return result;
 	}
-
-
+	
+	
 
 	//横纵结合查询
 	//输入单个节点id/name，找n步以内可达的节点集合
-	public static Set<PNode> getNStepNode(Map<String,PNode> allnodes,Map<String,String>namemap,String query,int n){
+	public static Set<PNode> getNStepNode(Map<String,PNode> allnodes,String id,int n){
 		Set<PNode>result = new HashSet<PNode>();
-		if(query.startsWith("Name:")){
-			
-			
-		}
+		Set<PNode> currNodes = new HashSet<PNode>();
+		Set<PNode> nextNodes = new HashSet<PNode>();
+		int count = 0;
+		PNode node = allnodes.get(id);
 		
+		currNodes.add(node);
+		
+		while(count<n){
+			result.addAll(currNodes);
+			
+			for (PNode pNode : currNodes) {
+				nextNodes.addAll(pNode.getFather().keySet());
+				nextNodes.addAll(pNode.getSon().keySet());
+				nextNodes.removeAll(result);
+			}
+			currNodes.clear();
+			currNodes.addAll(nextNodes);
+			nextNodes.clear();
+			count++;
+			if(currNodes.isEmpty()){
+				break;
+			}
+		}
 		return result;
 	}
-
+	
+	//找到某个节点在某一层内的所有孩子节点
+	public static Set<PNode> getPostNodesByLevel(Map<String,PNode> allnodes,Map<String,Map<PNode,Boolean>>levelmap,String id,String level){
+		Set<PNode>result = getNodes(allnodes,id,"Post");
+		Set<PNode>levelNodes = getPNodeBySingleLevel(levelmap,level);
+		//取交集
+		result.retainAll(levelNodes);
+		return result;
+	}
+	
+	//找到某个节点在某一层内的所有父亲节点
+	public static Set<PNode> getPreNodesByLevel(Map<String,PNode> allnodes,Map<String,Map<PNode,Boolean>>levelmap,String id,String level){
+		Set<PNode>result = getNodes(allnodes,id,"Pre");
+		Set<PNode>levelNodes  = getPNodeBySingleLevel(levelmap,level);
+		//取交集
+		result.retainAll(levelNodes);
+		return result;
+	}
+	
+	//找两个不同层节点间的路径，通过level来区分起点终点
+//	public static Set<PNode> getWay
 
 
 	//测试函数
@@ -293,7 +346,7 @@ public class PhenoDataLoad {
 		Map<String,String>namemap = new HashMap<String,String>();
 		readPNodes(infile,allnodes,levelmap,namemap);
 		System.out.println();
-		set = getPostNodes(allnodes,"MP:0001186");
+//		set = getPostNodes(allnodes,"MP:0001186");
 
 //				result = getSinglePNode(allnodes,namemap, query);
 //				mulresult = getMultiPNode(allnodes,namemap, query);
@@ -309,7 +362,18 @@ public class PhenoDataLoad {
 //								for (PNode pn : set) {
 //									System.out.println(pn.getPheno_level());
 //								}
-
+//
+//		Set<String>set1 = new HashSet<String>();
+//		Set<String>set2 = new HashSet<String>();
+//	
+//		set1.add("1");
+//		set1.add("2");
+//		set1.add("3");
+//		set2.add("1");
+//		set2.add("2");
+//		set2.add("4");
+//		set1.removeAll(set2);
+		
 		System.out.println();
 	}
 

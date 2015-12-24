@@ -235,7 +235,28 @@ public class PhenoDataLoad {
 
 	//纵向查询
 	//输入单个节点id/name 查询出以它为起点的纵向全部路径，直到叶子节点
-
+	public static Set<PNode> getPostNodes(Map<String,PNode> allnodes,String id)
+	{
+		Set<PNode>allPoteNodes = new HashSet<PNode>();
+		Set<PNode> currNodes = new HashSet<PNode>();
+		Set<PNode> sonNodes = new HashSet<PNode>();
+		
+		PNode node = allnodes.get(id);
+		
+		currNodes.add(node);
+		while(!currNodes.isEmpty())
+		{
+			allPoteNodes.addAll(currNodes);
+			
+			for (PNode pNode : currNodes) {
+				sonNodes.addAll(pNode.getSon().keySet());
+			}
+			currNodes.clear();
+			currNodes.addAll(sonNodes);
+			sonNodes.clear();
+		}
+		return allPoteNodes;
+	}
 
 
 
@@ -243,7 +264,7 @@ public class PhenoDataLoad {
 	//输入单个节点id/name，找n步以内可达的节点集合
 	public static Set<PNode> getNStepNode(Map<String,PNode> allnodes,Map<String,String>namemap,String query,int n){
 		Set<PNode>result = new HashSet<PNode>();
-		if(query.startsWith("N")){
+		if(query.startsWith("Name:")){
 			
 			
 		}
@@ -262,7 +283,7 @@ public class PhenoDataLoad {
 		PNode result= new PNode();
 		List<PNode>mulresult = new ArrayList<PNode>();
 		Map<String,Set<PNode>> levelsetmap = new HashMap<String,Set<PNode>>();
-		Set<PNode>levelset = new HashSet<PNode>();
+		Set<PNode>set = new HashSet<PNode>();
 
 
 		//读取所有节点，只一次
@@ -272,21 +293,22 @@ public class PhenoDataLoad {
 		Map<String,String>namemap = new HashMap<String,String>();
 		readPNodes(infile,allnodes,levelmap,namemap);
 		System.out.println();
+		set = getPostNodes(allnodes,"MP:0001186");
 
-		//		result = getSinglePNode(allnodes,namemap, query);
-		//		mulresult = getMultiPNode(allnodes,namemap, query);
-		//		levelnode = getPNodeBySingleLevel(levelmap, "3");
-		//		for (PNode pn : levelnode) {
-		//			System.out.println(pn.getPheno_level());
-		//		}
+//				result = getSinglePNode(allnodes,namemap, query);
+//				mulresult = getMultiPNode(allnodes,namemap, query);
+//				set = getPNodeBySingleLevel(levelmap, "3");
+//				for (PNode pn : set) {
+//					System.out.println(pn.getPheno_level());
+//				}
 
-		//		levelsetmap = getPNodeByMultiLevel1(levelmap,"4;5");
-
-
-		//				levelset = getPNodeByMultiLevel2(levelmap, "4;5");
-		//						for (PNode pn : levelset) {
-		//							System.out.println(pn.getPheno_level());
-		//						}
+//				levelsetmap = getPNodeByMultiLevel1(levelmap,"4;5");
+//
+//
+//						set = getPNodeByMultiLevel2(levelmap, "4;5");
+//								for (PNode pn : set) {
+//									System.out.println(pn.getPheno_level());
+//								}
 
 		System.out.println();
 	}

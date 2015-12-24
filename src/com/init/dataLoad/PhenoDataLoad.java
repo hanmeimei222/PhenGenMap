@@ -299,6 +299,7 @@ public class PhenoDataLoad {
 			nextNodes.clear();
 			count++;
 			if(currNodes.isEmpty()){
+				System.out.println("n is too large");
 				break;
 			}
 		}
@@ -324,7 +325,35 @@ public class PhenoDataLoad {
 	}
 	
 	//找两个不同层节点间的路径，通过level来区分起点终点
-//	public static Set<PNode> getWay
+	//从start找后继，一直到包含end节点
+	public static Set<PNode> getContainsNodes(Map<String,PNode> allnodes,String start, String end){
+		Set<PNode>result = new HashSet<PNode>();
+		
+		Set<PNode> currNodes = new HashSet<PNode>();
+		Set<PNode> nextNodes = new HashSet<PNode>();
+		
+		PNode startnode = allnodes.get(start);
+		PNode endnode = allnodes.get(end);
+		
+		currNodes.add(startnode);
+		//判断是否到叶节点
+		while(!result.contains(endnode)){
+			result.addAll(currNodes);
+			
+			for (PNode pNode : currNodes) {
+				nextNodes.addAll(pNode.getFather().keySet());
+				nextNodes.addAll(pNode.getSon().keySet());
+				nextNodes.removeAll(result);
+			}
+			currNodes.clear();
+			currNodes.addAll(nextNodes);
+			nextNodes.clear();
+			if(currNodes.isEmpty()){
+				System.out.println("there is no way between start to end");
+			}
+		}
+		return result;
+}
 
 
 	//测试函数

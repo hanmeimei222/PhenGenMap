@@ -2,22 +2,39 @@ package com.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.global.GlobalData;
 import com.model.Line;
+import com.model.PNode;
+import com.service.QueryPhenService;
 
 @Controller
 @RequestMapping("/")
 public class MVCController {
+	
+	@Autowired
+	QueryPhenService pService;
+	
 	@RequestMapping("/hello")
 	public String hello()
 	{
+		System.out.println(GlobalData.allnodes.size());
 		return "hello";
+		
 	}
 	
+	@ResponseBody
+	@RequestMapping("/genNStepNeighbor")
+	public Set<PNode> getNStepNeighbor()
+	{
+		return pService.getNStepNode("MP:0000026", 2);
+	}
 	@ResponseBody
 	@RequestMapping("/json")
 	public List get()

@@ -21,4 +21,7 @@ public class GlobalData {
 	public static Map<String,Pathway> allways = new HashMap<String,Pathway>();
 	public static Map<String,Map<String,Map<Pathway,Boolean>>> classmap = new HashMap<String, Map<String,Map<Pathway,Boolean>>>();
 	public static Map<String,String>pwnamemap = new HashMap<String,String>();
+	
+	//项目的数据路径
+	public static String PATH="";
 }

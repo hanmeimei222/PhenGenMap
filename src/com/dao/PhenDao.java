@@ -4,8 +4,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.springframework.stereotype.Repository;
+
 import com.model.PNode;
 
+@Repository
 public interface PhenDao {
 	//按节点查找:
 	//按照id查询单个节点全部信息

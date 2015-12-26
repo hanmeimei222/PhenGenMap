@@ -9,9 +9,10 @@ import com.service.InitDataService;
 
 @Service
 public class StartAddDataListener implements ApplicationListener<ContextRefreshedEvent>{
-
+	
 	@Autowired
-	private InitDataService initService;
+	InitDataService initService;
+	
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		// TODO Auto-generated method stub

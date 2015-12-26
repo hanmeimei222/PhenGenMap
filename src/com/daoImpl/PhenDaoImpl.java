@@ -7,9 +7,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.springframework.stereotype.Repository;
+
 import com.dao.PhenDao;
 import com.model.PNode;
 
+@Repository
 public class PhenDaoImpl implements PhenDao{
 	//按节点查找:
 	//按照id查询单个节点全部信息

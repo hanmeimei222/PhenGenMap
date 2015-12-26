@@ -9,12 +9,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Repository;
+
 import com.global.GlobalData;
 import com.model.PNode;
 
+@Repository
 public class PhenoDataLoad {
 	//根据读入的一行新建一个节点
-	public PNode makeNodeByString(String str)
+	private PNode makeNodeByString(String str)
 	{
 		String []templine = str.split("\t");
 		PNode pd = new PNode();
@@ -31,7 +34,7 @@ public class PhenoDataLoad {
 	}
 
 	//从phen_info.txt中读入所有表型节点的信息，构建id-PNode、level-PNodes和name-id
-	public void readPNodes(String infile,Map<String,PNode> allnodes,Map<String,Map<PNode,Boolean>>levelmap,Map<String,String>namemap){
+	private void readPNodes(String infile,Map<String,PNode> allnodes,Map<String,Map<PNode,Boolean>>levelmap,Map<String,String>namemap){
 		Map<String,String> linemap = new HashMap<String,String>();
 		BufferedReader in=null;
 		//把每个节点的信息放到map中
@@ -130,7 +133,8 @@ public class PhenoDataLoad {
 	
 	//加载表型数据
 	public void loadPhenoData() {
-		String infile = "WebRoot/data/inter_data/phen_info.txt";
+		
+		String infile = GlobalData.PATH+"/data/inter_data/phen_info.txt";
 		//读取所有节点，只一次
 		readPNodes(infile,GlobalData.allnodes,GlobalData.levelmap,GlobalData.namemap);
 	}

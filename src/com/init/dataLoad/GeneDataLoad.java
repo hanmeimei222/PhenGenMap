@@ -103,10 +103,45 @@ public class GeneDataLoad {
 		Pathway result = new Pathway();
 		result = allways.get(id);
 		return result;
-	}
+	} 
 	
 	//输入pathway name 查询该条pathway
-//	public static Pathway getPathwayByName
+	public static Pathway getPathwayByName(Map<String,Pathway> allways,Map<String,String>pwnamemap,String name){
+		Pathway result = new Pathway();
+		String id = pwnamemap.get(name);
+		result = allways.get(id);
+		return result;
+	}
+	
+	//输入id或name 查询单条pathway
+	public static Pathway getSinglePathway(Map<String,Pathway> allways,Map<String,String>pwnamemap,String query){
+		Pathway result = new Pathway();
+		if(query.startsWith("mmu")){
+			result = getPathwayById(allways, query);
+			if(result!=null){
+				return result;
+			}
+			else{
+				System.out.println("没有找到该节点");
+				return null;
+			}
+		}
+		else if(query.startsWith("Name:")){
+			query = query.substring(5);
+			result = getPathwayByName(allways, pwnamemap,query);
+			if(result!=null){
+				return result;
+			}
+			else{
+				System.out.println("没有找到该节点!");
+				return null;
+			}
+		}
+		else{
+			System.out.println("您的输入不符合要求!");
+			return null;
+		}
+}
 	
 
 	public static void main(String[] args) {

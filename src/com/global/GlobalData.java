@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.model.PNode;
+import com.model.Pathway;
 
 /**
  * 
@@ -11,6 +12,13 @@ import com.model.PNode;
  *
  */
 public class GlobalData {
-	//存储表型节点的map
-	public static Map<String,PNode> phenMap = new HashMap<String, PNode>();
+	//表型全局数据
+	public static Map<String,PNode> allnodes = new HashMap<String,PNode>();
+	public static Map<String,Map<PNode,Boolean>> levelmap = new HashMap<String,Map<PNode,Boolean>>();
+	public static Map<String,String>namemap = new HashMap<String,String>();
+	
+	//基因全局数据
+	public static Map<String,Pathway> allways = new HashMap<String,Pathway>();
+	public static Map<String,Map<String,Map<Pathway,Boolean>>> classmap = new HashMap<String, Map<String,Map<Pathway,Boolean>>>();
+	public static Map<String,String>pwnamemap = new HashMap<String,String>();
 }

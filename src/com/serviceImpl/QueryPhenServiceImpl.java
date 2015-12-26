@@ -1,5 +1,7 @@
 package com.serviceImpl;
 
-public class QueryPhenServiceImpl {
+import com.service.QueryPhenService;
+
+public class QueryPhenServiceImpl implements QueryPhenService{
 
 }

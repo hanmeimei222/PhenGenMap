@@ -2,15 +2,16 @@ package com.init.dataLoad;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.data.model.GNode;
-import com.data.model.PNode;
 import com.data.model.Pathway;
 
 public class GeneDataLoad {
@@ -21,14 +22,14 @@ public class GeneDataLoad {
 		Pathway pw = new Pathway();
 
 		Map<GNode,Boolean>symbols = new HashMap<GNode,Boolean>();
-		
+
 		pw.setPw_id(templine[0]);
 		pw.setPw_name(templine[1].substring(0,templine[1].length()-23));
 		if(templine.length>2){
 			String []classes = templine[2].split(";");
 			classes[0] = classes[0].replace("\"", "");
 			classes[1] = classes[1].replace("\"", "");
-			
+
 			pw.setClass_1(classes[0]);
 			pw.setClass_2(classes[1].trim());
 			pw.setSymbols(symbols);
@@ -65,7 +66,7 @@ public class GeneDataLoad {
 				//构造Map<String,Map<String,Map<Pathway,Boolean>>> classmap
 				String class1 = pw.getClass_1();
 				String class2 = pw.getClass_2();
-				
+
 				if(class1!=null &&class2!=null){
 					Map<String,Map<Pathway,Boolean>>class2map = classmap.get(class1);
 
@@ -81,7 +82,7 @@ public class GeneDataLoad {
 					}
 					pwmap.put(pw, true);
 				}
-			
+
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -104,7 +105,7 @@ public class GeneDataLoad {
 		result = allways.get(id);
 		return result;
 	} 
-	
+
 	//输入pathway name 查询该条pathway
 	public static Pathway getPathwayByName(Map<String,Pathway> allways,Map<String,String>pwnamemap,String name){
 		Pathway result = new Pathway();
@@ -112,7 +113,7 @@ public class GeneDataLoad {
 		result = allways.get(id);
 		return result;
 	}
-	
+
 	//输入id或name 查询单条pathway
 	public static Pathway getSinglePathway(Map<String,Pathway> allways,Map<String,String>pwnamemap,String query){
 		Pathway result = new Pathway();
@@ -141,19 +142,38 @@ public class GeneDataLoad {
 			System.out.println("您的输入不符合要求!");
 			return null;
 		}
-}
+	}
 	
+	//多条pathway信息的查询，query以分号隔开
+	public static List<Pathway> getMultiPNode(Map<String,Pathway> allways,Map<String,String>pwnamemap,String query){
+		List<Pathway> result = new ArrayList<Pathway>();
+		String []temp = query.split(";");
+		for(int i=0;i<temp.length;i++){
+			Pathway pw = new Pathway();
+			pw = getSinglePathway(allways, pwnamemap,temp[i]);
+			if(null!=pw){
+				result.add(pw);
+			}
+		}
+		return result;
+	}
+
+	
+	public static Set<Pathway> getSubCatalog(Map<String,Map<String,Map<Pathway,Boolean>>> classmap,String query){
+		Set<Pathway>result = new HashSet<Pathway>();
+		return result;
+	}
 
 	public static void main(String[] args) {
-		String infile = "WebRoot/data/inter_data/mmu_pathway_id_name_class_symbols.txt";
+		String infile = "WebContent/data/inter_data/mmu_pathway_id_name_class_symbols.txt";
 		Map<String,Pathway> allways = new HashMap<String,Pathway>();
 		Map<String,Map<String,Map<Pathway,Boolean>>> classmap = new HashMap<String, Map<String,Map<Pathway,Boolean>>>();
 		Map<String,String>pwnamemap = new HashMap<String,String>();
 		readPathway(infile, allways, pwnamemap, classmap);
-		Map<String,Map<Pathway,Boolean>>temp = classmap.get("METABOLISM");
-		System.out.println(temp.keySet());
-		System.out.println(classmap.keySet());
+//		Map<String,Map<Pathway,Boolean>>temp = classmap.get("METABOLISM");
+//		Pathway pw = getPathwayById(allways, "mmu00232");
+//		Pathway pw = getPathwayByName(allways, pwnamemap, "PURINE METABOLISM");
+//		Pathway pw = getSinglePathway(allways, pwnamemap, "Name:PURINE METABOLISM");
 		System.out.println();
-
 	}
 }

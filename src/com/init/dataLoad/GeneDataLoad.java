@@ -98,6 +98,16 @@ public class GeneDataLoad {
 
 	}
 
+	//输入pathway id查询该条pathway具体信息
+	public static Pathway getPathwayById(Map<String,Pathway> allways,String id){
+		Pathway result = new Pathway();
+		result = allways.get(id);
+		return result;
+	}
+	
+	//输入pathway name 查询该条pathway
+//	public static Pathway getPathwayByName
+	
 
 	public static void main(String[] args) {
 		String infile = "WebRoot/data/inter_data/mmu_pathway_id_name_class_symbols.txt";

@@ -21,4 +21,5 @@ public class GlobalData {
 	public static Map<String,Pathway> allways = new HashMap<String,Pathway>();
 	public static Map<String,Map<String,Map<Pathway,Boolean>>> classmap = new HashMap<String, Map<String,Map<Pathway,Boolean>>>();
 	public static Map<String,String>pwnamemap = new HashMap<String,String>();
+	public static Map<String,String>clsmap = new HashMap<String, String>();
 }

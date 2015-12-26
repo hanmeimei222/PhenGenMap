@@ -44,7 +44,7 @@ public class GeneDataLoad {
 	}
 
 	//从文件中逐行读入，构造需要的数据结构
-	public void readPathway(String infile,Map<String,Pathway> allways,Map<String,String>pwnamemap,Map<String,Map<String,Map<Pathway,Boolean>>> classmap){
+	public void readPathway(String infile,Map<String,Pathway> allways,Map<String,String>pwnamemap,Map<String,Map<String,Map<Pathway,Boolean>>> classmap,Map<String,String>clsmap){
 		BufferedReader in=null;
 		try {
 			in = new BufferedReader(new InputStreamReader(new FileInputStream(infile),"UTF-8"));
@@ -64,8 +64,10 @@ public class GeneDataLoad {
 				//构造Map<String,Map<String,Map<Pathway,Boolean>>> classmap
 				String class1 = pw.getClass_1();
 				String class2 = pw.getClass_2();
+				
 
 				if(class1!=null &&class2!=null){
+					clsmap.put(class2, class1);
 					Map<String,Map<Pathway,Boolean>>class2map = classmap.get(class1);
 
 					if(class2map == null){
@@ -100,6 +102,7 @@ public class GeneDataLoad {
 	//加载gene数据
 	public void loadGeneData() {
 		String infile = "WebContent/data/inter_data/mmu_pathway_id_name_class_symbols.txt";
-		readPathway(infile, GlobalData.allways, GlobalData.pwnamemap, GlobalData.classmap);
+		readPathway(infile, GlobalData.allways, GlobalData.pwnamemap, GlobalData.classmap,GlobalData.clsmap);
 	}
+
 }

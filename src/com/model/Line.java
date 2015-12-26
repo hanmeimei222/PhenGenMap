@@ -1,4 +1,4 @@
-package com.data.model;
+package com.model;
 
 public class Line {
 	private String source;

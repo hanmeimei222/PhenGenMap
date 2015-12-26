@@ -9,9 +9,9 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.data.model.GNode;
-import com.data.model.PNode;
-import com.data.model.Pathway;
+import com.model.GNode;
+import com.model.PNode;
+import com.model.Pathway;
 
 public class GeneDataLoad {
 

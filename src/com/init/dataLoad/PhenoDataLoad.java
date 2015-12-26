@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.data.model.PNode;
+import com.model.PNode;
 
 public class PhenoDataLoad {
 	//根据读入的一行新建一个节点

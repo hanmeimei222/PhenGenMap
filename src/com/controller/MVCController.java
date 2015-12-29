@@ -1,16 +1,12 @@
 package com.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.model.Line;
+import com.model.cytoscape.Graph;
 import com.service.QueryPhenService;
 
 @Controller
@@ -23,13 +19,13 @@ public class MVCController {
 	@RequestMapping("/hello")
 	public String hello()
 	{
-		return "hello";
+		return "cytoscape";
 		
 	}
-	
+
 	@ResponseBody
 	@RequestMapping("/getNStepNeighbor")
-	public Set<Line> getNStepNeighbor(@RequestParam("mpoId") String mpoId,
+	public Graph getNStepNeighbor(@RequestParam("mpoId") String mpoId,
 			@RequestParam("step") int step)
 	{
 		return pService.getNStepNode(mpoId, step);
@@ -37,7 +33,7 @@ public class MVCController {
 	
 	@ResponseBody
 	@RequestMapping("/getPostInLevels")
-	public Set<Line> getPostInLevels(@RequestParam("mpoId") String mpoId,
+	public Graph getPostInLevels(@RequestParam("mpoId") String mpoId,
 			@RequestParam("levels") String levels)
 	{
 		return pService.getInterlevelsAndRoot(mpoId,levels);

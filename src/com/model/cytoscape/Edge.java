@@ -1,10 +1,9 @@
-package com.model;
+package com.model.cytoscape;
 
-public class Line {
+public class Edge {
 	private String source;
 	private String target;
-	private String type;
-	
+
 	public String getSource() {
 		return source;
 	}
@@ -17,19 +16,12 @@ public class Line {
 	public void setTarget(String target) {
 		this.target = target;
 	}
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
-	}
-	public Line(String source, String target, String type) {
+
+	public Edge(String source, String target) {
 		super();
 		this.source = source;
 		this.target = target;
-		this.type = type;
 	}
-	
 	
 	
 }

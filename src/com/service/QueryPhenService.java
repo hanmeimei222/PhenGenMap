@@ -1,10 +1,8 @@
 package com.service;
 
-import java.util.Set;
-
 import org.springframework.stereotype.Service;
 
-import com.model.Line;
+import com.model.cytoscape.Graph;
 
 @Service
 public interface QueryPhenService {
@@ -14,7 +12,7 @@ public interface QueryPhenService {
 	 * @param n
 	 * @return
 	 */
-	public Set<Line> getNStepNode(String id,int n);
+	public Graph getNStepNode(String id,int n);
 	
 	/**
 	 * 查找给定节点在特定层中的子孙节点
@@ -22,5 +20,5 @@ public interface QueryPhenService {
 	 * @param levels	例：3;4;5
 	 * @return
 	 */
-	public Set<Line> getInterlevelsAndRoot(String id,String levels);
+	public Graph getInterlevelsAndRoot(String id,String levels);
 }

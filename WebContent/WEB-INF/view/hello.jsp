@@ -18,7 +18,16 @@
 	MPO ID:<input type="text" id="mp_id" name="mp_id" class="input_text"/><br>
 	步 数：<input type="text" id="step_num" name="step_num" class="input_text"/><br>
 	
-	<a href="javascript:void(0);" onclick="draw()">画图</a><br>
+	<a href="javascript:void(0);" onclick="draw('genNStepNeighbor')">画图</a><br>
+	
+	
+	<h2>查询一个MP子孙在给定层次中的节点</h2>
+	ROOT ID:<input type="text" id="root_id" name="root_id" class="input_text"/><br>
+	levels：<input type="text" id="levels" name="levels" class="input_text"/><br>
+	
+	<a href="javascript:void(0);" onclick="draw('getPostInLevels')">画图</a><br>
+	
+	
 	<graph></graph>
 
 </body>

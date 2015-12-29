@@ -28,7 +28,10 @@ public interface PhenDao {
 	//查询单层包含哪些节点
 	public Set<PNode> getPNodeBySingleLevel(String query);
 	
-	//查询多层包含哪些节点的并集，多层用分号隔开，如query = "4;5;6"
+	/**
+	 * 查询多层包含哪些节点的并集，多层用分号隔开，如query = "4;5;6"
+	 * 
+	 */
 	public Map<String,Set<PNode>> getPNodeByMultiLevel1(String query);
 	
 	//多层查询，例如：查找同时在第四层和第五层的点(交集)，输入的query以分号隔开"4;5"

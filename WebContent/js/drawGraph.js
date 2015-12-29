@@ -1,17 +1,31 @@
-function draw() {
+function draw(action) {
 	
-	id = $("#mp_id").val();
-	step = $("#step_num").val();
+	var data={};
+	if(action == 'genNStepNeighbor')
+	{
+		id = $("#mp_id").val();
+		step = $("#step_num").val();
+		data = {"mpoId":id,"step":step};
 
+		
+	}
+	if(action == 'getPostInLevels')
+	{
+		id = $("#root_id").val();
+		step = $("#levels").val();
+		data = {"mpoId":id,"levels":levels};
+	}
 	$.ajax({
 		type : "post",
-		data : {"mpoId":id,"step":step},
-		url : "\genNStepNeighbor.do",
+		data : data,
+		url : action+".do",
 		dataType : "json",
 		success : function(msg) {
 			hahah(msg);
 		}
 	});
+		
+	
 }
 var svg;
 function hahah(data) {

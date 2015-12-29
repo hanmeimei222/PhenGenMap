@@ -7,11 +7,10 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.global.GlobalData;
 import com.model.Line;
-import com.model.PNode;
 import com.service.QueryPhenService;
 
 @Controller
@@ -24,16 +23,16 @@ public class MVCController {
 	@RequestMapping("/hello")
 	public String hello()
 	{
-		System.out.println(GlobalData.allnodes.size());
 		return "hello";
 		
 	}
 	
 	@ResponseBody
 	@RequestMapping("/genNStepNeighbor")
-	public Set<PNode> getNStepNeighbor()
+	public Set<Line> getNStepNeighbor(@RequestParam("mpoId") String mpoId,
+			@RequestParam("step") int step)
 	{
-		return pService.getNStepNode("MP:0000026", 2);
+		return pService.getNStepNode(mpoId, step);
 	}
 	@ResponseBody
 	@RequestMapping("/json")

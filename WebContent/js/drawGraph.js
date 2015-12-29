@@ -1,14 +1,19 @@
 function draw() {
+	
+	id = $("#mp_id").val();
+	step = $("#step_num").val();
 
 	$.ajax({
-		type : "get",
-		url : "\json.do",
+		type : "post",
+		data : {"mpoId":id,"step":step},
+		url : "\genNStepNeighbor.do",
 		dataType : "json",
 		success : function(msg) {
 			hahah(msg);
 		}
 	});
 }
+var svg;
 function hahah(data) {
 	var links = data;
 
@@ -27,15 +32,19 @@ function hahah(data) {
 	var width = 960, height = 500;
 
 	var force = d3.layout.force().nodes(d3.values(nodes)).links(links)
-	.size([ width, height ]).linkDistance(60).charge(-300).on(
+	.size([ width, height ]).linkDistance(40).charge(-100).on(
 			"tick", tick).start();
 
-	var svg = d3.select("graph").append("svg").attr("width", width).attr(
+	if(svg !=undefined)
+	{
+		svg.remove();
+	}
+	svg = d3.select("graph").append("svg").attr("width", width).attr(
 			"height", height);
 
 	// Per-type markers, as they don't inherit styles.
 	svg.append("defs").selectAll("marker").data(
-			[ "suit", "licensing", "resolved" ]).enter().append("marker")
+			[ "suit","licensing", "resolved" ]).enter().append("marker")
 			.attr("id", function(d) {
 				return d;
 			}).attr("viewBox", "0 -5 10 10").attr("refX", 15).attr("refY",
@@ -51,7 +60,7 @@ function hahah(data) {
 	});
 
 	var circle = svg.append("g").selectAll("circle").data(force.nodes())
-	.enter().append("circle").attr("r", 6).call(force.drag);
+	.enter().append("circle").attr("r", 3).call(force.drag);
 
 	var text = svg.append("g").selectAll("text").data(force.nodes())
 	.enter().append("text").attr("x", 8).attr("y", ".31em").text(

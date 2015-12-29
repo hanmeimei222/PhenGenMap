@@ -10,32 +10,33 @@ import java.util.Set;
 import org.springframework.stereotype.Repository;
 
 import com.dao.PhenDao;
+import com.global.GlobalData;
 import com.model.PNode;
 
 @Repository
 public class PhenDaoImpl implements PhenDao{
 	//按节点查找:
 	//按照id查询单个节点全部信息
-	public PNode getSinglePNodeById(String id,Map<String,PNode> allnodes){
+	public PNode getSinglePNodeById(String id){
 		PNode result = new PNode();
-		result = allnodes.get(id);
+		result = GlobalData.allnodes.get(id);
 		return result;
 	}
 
 	//按照name查询单个节点全部信息
-	public PNode getSinglePNodeByName(String name, Map<String,PNode> allnodes, Map<String,String>namemap){
+	public PNode getSinglePNodeByName(String name){
 		PNode result = new PNode();
-		String id = namemap.get(name);
-		result = allnodes.get(id);
+		String id = GlobalData.namemap.get(name);
+		result = GlobalData.allnodes.get(id);
 		return result;
 	}
 
 	//按照id/name查询单个节点全部信息
-	public PNode getSinglePNode(Map<String,PNode> allnodes,Map<String,String>namemap, String query){
+	public PNode getSinglePNode(String query){
 		PNode pn = new PNode();
 		//按照id查询
 		if(query.startsWith("MP:")){
-			pn =getSinglePNodeById(query, allnodes);
+			pn =getSinglePNodeById(query);
 
 			if(pn!=null){
 				return pn;
@@ -48,7 +49,7 @@ public class PhenDaoImpl implements PhenDao{
 		//按照name查询
 		else if(query.startsWith("Name:")){
 			query = query.substring(5);
-			pn = getSinglePNodeByName(query, allnodes, namemap);
+			pn = getSinglePNodeByName(query);
 			if(pn!=null){
 				return pn;
 			}
@@ -64,12 +65,12 @@ public class PhenDaoImpl implements PhenDao{
 	}
 
 	//多个节点全部信息的查询，query以分号隔开
-	public List<PNode> getMultiPNode(Map<String,PNode> allnodes,Map<String,String>namemap, String query){
+	public List<PNode> getMultiPNode(String query){
 		List<PNode> result = new ArrayList<PNode>();
 		String []temp = query.split(";");
 		for(int i=0;i<temp.length;i++){
 			PNode pn = new PNode();
-			pn = getSinglePNode(allnodes, namemap,temp[i]);
+			pn = getSinglePNode(temp[i]);
 			if(null!=pn){
 				result.add(pn);
 			}
@@ -79,21 +80,21 @@ public class PhenDaoImpl implements PhenDao{
 
 	//横向查询：
 	//查询单层包含哪些节点
-	public Set<PNode> getPNodeBySingleLevel(Map<String,Map<PNode,Boolean>>levelmap,String query){
+	public Set<PNode> getPNodeBySingleLevel(String query){
 		Set<PNode> result = new HashSet<PNode>();
 		Map<PNode,Boolean>levelnodes = new HashMap<PNode,Boolean>();
-		levelnodes = levelmap.get(query);
+		levelnodes = GlobalData.levelmap.get(query);
 		result = levelnodes.keySet();
 
 		return result;
 	}
 
 	//查询多层包含哪些节点的并集，多层用分号隔开，如query = "4;5;6"
-	public Map<String,Set<PNode>> getPNodeByMultiLevel1(Map<String,Map<PNode,Boolean>>levelmap,String query){
+	public Map<String,Set<PNode>> getPNodeByMultiLevel1(String query){
 		Map<String,Set<PNode>> result = new HashMap<String,Set<PNode>>();
 		String[]temp=query.split(";");
 		for(int i=0;i<temp.length;i++){
-			Set<PNode>set = getPNodeBySingleLevel(levelmap, temp[i]);
+			Set<PNode>set = getPNodeBySingleLevel(temp[i]);
 			result.put(temp[i], set);
 		}
 		//注：这里先存成不同level-nodes的map，前台输出时，可分开列出，然后将其加在一起，或者只取前者
@@ -102,15 +103,15 @@ public class PhenDaoImpl implements PhenDao{
 
 	//查询多层包含哪些节点的交集
 	//多层查询，例如：查找同时在第四层和第五层的点(交集)，输入的query以分号隔开"4;5"
-	public Set<PNode> getPNodeByMultiLevel2(Map<String,Map<PNode,Boolean>>levelmap,String query){
+	public Set<PNode> getPNodeByMultiLevel2(String query){
 		Set<PNode> result = new HashSet<PNode>();
 
 		String[]temp = query.split(";");
-		result=levelmap.get(temp[0]).keySet();
+		result=GlobalData.levelmap.get(temp[0]).keySet();
 
 		for(int i=1;i<temp.length;i++){
 			Set<PNode> levelnode = new HashSet<PNode>();
-			levelnode = levelmap.get(temp[i]).keySet();
+			levelnode = GlobalData.levelmap.get(temp[i]).keySet();
 			result.retainAll(levelnode);
 		}
 		return result;
@@ -120,24 +121,24 @@ public class PhenDaoImpl implements PhenDao{
 
 	//纵向查询
 	//输入待查询节点id，输出以他为起点的所有前驱节点
-	public Set<PNode>getPreNodes(Map<String,PNode> allnodes,String id){
-		Set<PNode>fatherNodes = getNodes(allnodes,id,"Pre");
+	public Set<PNode>getPreNodes(String id){
+		Set<PNode>fatherNodes = getNodes(id,"Pre");
 		return fatherNodes;
 	}
 	//输入待查询节点id，输出以他为起点的所有后继节点
-	public Set<PNode>getPostNodes(Map<String,PNode> allnodes,String id){
-		Set<PNode>sonNodes = getNodes(allnodes,id,"Post");
+	public Set<PNode>getPostNodes(String id){
+		Set<PNode>sonNodes = getNodes(id,"Post");
 		return sonNodes;
 	}
 
 	//输入单个节点id以及 查询方向，输出以它为起点的前驱/后继节点
-	private Set<PNode> getNodes(Map<String,PNode> allnodes,String id,String direction)
+	private Set<PNode> getNodes(String id,String direction)
 	{
 		Set<PNode>result = new HashSet<PNode>();
 		Set<PNode> currNodes = new HashSet<PNode>();
 		Set<PNode> nextNodes = new HashSet<PNode>();
 
-		PNode node = allnodes.get(id);
+		PNode node = GlobalData.allnodes.get(id);
 
 		currNodes.add(node);
 		while(!currNodes.isEmpty()){
@@ -162,12 +163,12 @@ public class PhenDaoImpl implements PhenDao{
 
 	//横纵结合查询
 	//输入单个节点id/name，找n步以内可达的节点集合
-	public Set<PNode> getNStepNode(Map<String,PNode> allnodes,String id,int n){
+	public Set<PNode> getNStepNode(String id,int n){
 		Set<PNode>result = new HashSet<PNode>();
 		Set<PNode> currNodes = new HashSet<PNode>();
 		Set<PNode> nextNodes = new HashSet<PNode>();
 		int count = 0;
-		PNode node = allnodes.get(id);
+		PNode node = GlobalData.allnodes.get(id);
 
 		currNodes.add(node);
 
@@ -192,18 +193,18 @@ public class PhenDaoImpl implements PhenDao{
 	}
 
 	//找到某个节点在某一层内的所有孩子节点
-	public Set<PNode> getPostNodesByLevel(Map<String,PNode> allnodes,Map<String,Map<PNode,Boolean>>levelmap,String id,String level){
-		Set<PNode>result = getNodes(allnodes,id,"Post");
-		Set<PNode>levelNodes = getPNodeBySingleLevel(levelmap,level);
+	public Set<PNode> getPostNodesByLevel(String id,String level){
+		Set<PNode>result = getNodes(id,"Post");
+		Set<PNode>levelNodes = getPNodeBySingleLevel(level);
 		//取交集
 		result.retainAll(levelNodes);
 		return result;
 	}
 
 	//找到某个节点在某一层内的所有父亲节点
-	public Set<PNode> getPreNodesByLevel(Map<String,PNode> allnodes,Map<String,Map<PNode,Boolean>>levelmap,String id,String level){
-		Set<PNode>result = getNodes(allnodes,id,"Pre");
-		Set<PNode>levelNodes  = getPNodeBySingleLevel(levelmap,level);
+	public Set<PNode> getPreNodesByLevel(String id,String level){
+		Set<PNode>result = getNodes(id,"Pre");
+		Set<PNode>levelNodes  = getPNodeBySingleLevel(level);
 		//取交集
 		result.retainAll(levelNodes);
 		return result;
@@ -211,14 +212,14 @@ public class PhenDaoImpl implements PhenDao{
 
 	//找两个不同层节点间的路径，通过level来区分起点终点
 	//从start找后继，一直到包含end节点
-	public Set<PNode> getContainsNodes(Map<String,PNode> allnodes,String start, String end){
+	public Set<PNode> getContainsNodes(String start, String end){
 		Set<PNode>result = new HashSet<PNode>();
 
 		Set<PNode> currNodes = new HashSet<PNode>();
 		Set<PNode> nextNodes = new HashSet<PNode>();
 
-		PNode startnode = allnodes.get(start);
-		PNode endnode = allnodes.get(end);
+		PNode startnode = GlobalData.allnodes.get(start);
+		PNode endnode = GlobalData.allnodes.get(end);
 
 		currNodes.add(startnode);
 		//判断是否到叶节点

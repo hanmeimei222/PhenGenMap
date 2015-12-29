@@ -14,7 +14,7 @@ import com.init.dataLoad.GeneDataLoad;
 import com.model.GNode;
 import com.model.Pathway;
 
-public class GeneDaoImpl implements GeneDao{
+public final class GeneDaoImpl implements GeneDao{
 
 	//输入pathway id查询该条pathway具体信息
 	public Pathway getPathwayById(Map<String,Pathway> allways,String id){

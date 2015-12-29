@@ -14,7 +14,11 @@
 
 </head>
 <body>
-	<a href="javascript:void(0);" onclick="draw()">画图</a>
+	<h2>查询一个MP节点n步内的所有节点</h2>
+	MPO ID:<input type="text" id="mp_id" name="mp_id" class="input_text"/><br>
+	步 数：<input type="text" id="step_num" name="step_num" class="input_text"/><br>
+	
+	<a href="javascript:void(0);" onclick="draw()">画图</a><br>
 	<graph></graph>
 
 </body>

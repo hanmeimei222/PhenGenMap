@@ -4,9 +4,9 @@ import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
-import com.model.PNode;
+import com.model.Line;
 
 @Service
 public interface QueryPhenService {
-	public Set<PNode> getNStepNode(String id,int n);
+	public Set<Line> getNStepNode(String id,int n);
 }

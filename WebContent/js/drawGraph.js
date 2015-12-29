@@ -1,7 +1,7 @@
 function draw(action) {
 	
 	var data={};
-	if(action == 'genNStepNeighbor')
+	if(action == 'getNStepNeighbor')
 	{
 		id = $("#mp_id").val();
 		step = $("#step_num").val();

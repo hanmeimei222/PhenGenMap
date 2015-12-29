@@ -18,7 +18,7 @@
 	MPO ID:<input type="text" id="mp_id" name="mp_id" class="input_text"/><br>
 	步 数：<input type="text" id="step_num" name="step_num" class="input_text"/><br>
 	
-	<a href="javascript:void(0);" onclick="draw('genNStepNeighbor')">画图</a><br>
+	<a href="javascript:void(0);" onclick="draw('getNStepNeighbor')">画图</a><br>
 	
 	
 	<h2>查询一个MP子孙在给定层次中的节点</h2>

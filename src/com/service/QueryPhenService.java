@@ -1,11 +1,18 @@
 package com.service;
 
+import java.util.Map;
+
 import org.springframework.stereotype.Service;
 
+import com.constant.PhenQueryType;
 import com.model.cytoscape.Graph;
 
 @Service
 public interface QueryPhenService {
+	
+	
+	public Graph queryPhen(String[] nodes,PhenQueryType type,Map<String,String> param);
+	
 	/**
 	 * 根据给定MP，找到其n步内相邻的节点集合
 	 * @param id

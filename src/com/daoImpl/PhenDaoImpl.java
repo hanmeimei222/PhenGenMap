@@ -1,9 +1,7 @@
 package com.daoImpl;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -65,12 +63,11 @@ public class PhenDaoImpl implements PhenDao{
 	}
 
 	//多个节点全部信息的查询，query以分号隔开
-	public List<PNode> getMultiPNode(String query){
-		List<PNode> result = new ArrayList<PNode>();
-		String []temp = query.split(";");
-		for(int i=0;i<temp.length;i++){
+	public Set<PNode> getMultiPNode(String [] query){
+		Set<PNode> result = new HashSet<PNode>();
+		for(int i=0;i<query.length;i++){
 			PNode pn = new PNode();
-			pn = getSinglePNode(temp[i]);
+			pn = getSinglePNode(query[i]);
 			if(null!=pn){
 				result.add(pn);
 			}
@@ -121,14 +118,21 @@ public class PhenDaoImpl implements PhenDao{
 
 	//纵向查询
 	//输入待查询节点id，输出以他为起点的所有前驱节点
-	public Set<PNode>getPreNodes(String id){
-		Set<PNode>fatherNodes = getNodes(id,"Pre");
-		return fatherNodes;
+	public Set<PNode>getPreNodes(String[] ids){
+		Set<PNode> preNodes = new HashSet<PNode>();
+		for (String id : ids) {
+			preNodes.addAll(getNodes(id,"Pre"));
+		}
+		return preNodes;
 	}
 	//输入待查询节点id，输出以他为起点的所有后继节点
-	public Set<PNode>getPostNodes(String id){
-		Set<PNode>sonNodes = getNodes(id,"Post");
-		return sonNodes;
+	public Set<PNode>getPostNodes(String[] ids){
+
+		Set<PNode> postNodes = new HashSet<PNode>();
+		for (String id : ids) {
+			postNodes.addAll(getNodes(id,"Post"));
+		}
+		return postNodes;
 	}
 
 	//输入单个节点id以及 查询方向，输出以它为起点的前驱/后继节点
@@ -163,35 +167,42 @@ public class PhenDaoImpl implements PhenDao{
 
 	//横纵结合查询
 	//输入单个节点id/name，找n步以内可达的节点集合
-	public Set<PNode> getNStepNode(String id,int n){
+	public Set<PNode> getNStepNode(String[] ids,int n){
 		Set<PNode>result = new HashSet<PNode>();
 		Set<PNode> currNodes = new HashSet<PNode>();
 		Set<PNode> nextNodes = new HashSet<PNode>();
-		int count = 0;
-		PNode node = GlobalData.allnodes.get(id);
 
-		currNodes.add(node);
-
-		while(count<n){
-			result.addAll(currNodes);
-
-			for (PNode pNode : currNodes) {
-				nextNodes.addAll(pNode.getFather().keySet());
-				nextNodes.addAll(pNode.getSon().keySet());
-				nextNodes.removeAll(result);
-			}
+		for (String id : ids) {
 			currNodes.clear();
-			currNodes.addAll(nextNodes);
 			nextNodes.clear();
-			count++;
-			if(currNodes.isEmpty()){
-				System.out.println("n is too large");
-				break;
+			int count = 0;
+			PNode node = GlobalData.allnodes.get(id);
+
+			currNodes.add(node);
+
+			while(count<n){
+				result.addAll(currNodes);
+
+				for (PNode pNode : currNodes) {
+					nextNodes.addAll(pNode.getFather().keySet());
+					nextNodes.addAll(pNode.getSon().keySet());
+					nextNodes.removeAll(result);
+				}
+				currNodes.clear();
+				currNodes.addAll(nextNodes);
+				nextNodes.clear();
+				count++;
+				if(currNodes.isEmpty()){
+					System.out.println("n is too large");
+					break;
+				}
 			}
 		}
+
 		return result;
 	}
 
+	
 	//找到某个节点在某一层内的所有孩子节点
 	public Set<PNode> getPostNodesByLevel(String id,String level){
 		Set<PNode>result = getNodes(id,"Post");

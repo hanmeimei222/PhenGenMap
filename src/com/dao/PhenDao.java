@@ -1,6 +1,5 @@
 package com.dao;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -33,7 +32,7 @@ public interface PhenDao {
 	/**
 	 * 多个节点全部信息的查询，query以分号隔开
 	 */
-	public List<PNode> getMultiPNode(String query);
+	public  Set<PNode> getMultiPNode(String[] query);
 	
 	/**
 	 * 横向查询：
@@ -59,12 +58,12 @@ public interface PhenDao {
 	 * 纵向查询
 	 * 输入待查询节点id，输出以他为起点的所有前驱节点
 	 */
-	public Set<PNode>getPreNodes(String id);
+	public Set<PNode>getPreNodes(String[] ids);
 	
 	/**
 	 * 输入待查询节点id，输出以他为起点的所有后继节点
 	 */
-	public Set<PNode>getPostNodes(String id);
+	public Set<PNode>getPostNodes(String[] ids);
 	
 	
 	
@@ -73,7 +72,7 @@ public interface PhenDao {
 	 * 横纵结合查询
 	 * 输入单个节点id/name，找n步以内可达的节点集合
 	 */
-	public Set<PNode> getNStepNode(String id,int n);
+	public Set<PNode> getNStepNode(String[] ids,int n);
 	
 	
 	/**

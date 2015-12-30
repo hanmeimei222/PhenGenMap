@@ -1,6 +1,5 @@
 function draw(action)
 {
-
 	var data={};
 	if(action == 'getNStepNeighbor')
 	{
@@ -19,7 +18,7 @@ function draw(action)
 	$.ajax({
 		type : "post",
 		data : data,
-		url : action+".do",
+		url : query+".do",
 		dataType : "json",
 		success : function(msg) {
 			cytoscapeDraw(msg);
@@ -29,7 +28,6 @@ function draw(action)
 	
 function cytoscapeDraw(data)
 {
-	
 	$('#cy').cytoscape({
 		style: [
 		        {
@@ -49,8 +47,6 @@ function cytoscapeDraw(data)
 
 		        elements:data
 	});
-	$('#cy').cytoscapePanzoom({
-		// options go here
-	});
+
 
 }

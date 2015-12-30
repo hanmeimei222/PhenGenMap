@@ -1,34 +1,9 @@
-function draw(action)
-{
-	var data={};
-	if(action == 'getNStepNeighbor')
-	{
-		id = $("#mp_id").val();
-		step = $("#step_num").val();
-		data = {"mpoId":id,"step":step};
-
-		
-	}
-	if(action == 'getPostInLevels')
-	{
-		id = $("#root_id").val();
-		levels = $("#levels").val();
-		data = {"mpoId":id,"levels":levels};
-	}
-	$.ajax({
-		type : "post",
-		data : data,
-		url : query+".do",
-		dataType : "json",
-		success : function(msg) {
-			cytoscapeDraw(msg);
-		}
-	});
-}	
-	
 function cytoscapeDraw(data)
 {
 	$('#cy').cytoscape({
+		layout:{
+			name:'dagre'
+		},
 		style: [
 		        {
 		        	selector: 'node',
@@ -45,8 +20,13 @@ function cytoscapeDraw(data)
 		        }
 		        ],
 
-		        elements:data
+		        elements:data,
+		        
 	});
+	var layout = cy.makeLayout({
+		  name: 'random'
+		});
 
+		layout.run();
 
 }

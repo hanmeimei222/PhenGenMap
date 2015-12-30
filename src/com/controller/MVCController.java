@@ -37,7 +37,7 @@ public class MVCController {
 		PhenQueryType type = PhenQueryType.getTypeByStr(queryType);
 		
 		Map<String,String>param = new HashMap<String, String>();
-		param.put("level", levels);
+		param.put("levels", levels);
 		param.put("step", step);
 		return pService.queryPhen(mpList,type,param);
 	}

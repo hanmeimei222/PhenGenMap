@@ -1,5 +1,6 @@
 package com.serviceImpl;
 
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -39,6 +40,21 @@ public class QueryPhenServiceImpl implements QueryPhenService{
 			result = pheDao.getNStepNode(ids, Integer.valueOf(param.get("step")));
 		default:
 			break;
+		}
+		
+		//如果level参数不为空，则根据level过滤结果
+		String levels = param.get("levels");
+		Set<PNode> nodeInlevels = new HashSet<PNode>();
+		if(levels !=null && levels != "")
+		{
+			Map<String,Set<PNode>> nodes = pheDao.getPNodeByMultiLevel1(levels);
+			for (Set<PNode> set : nodes.values()) {
+				nodeInlevels.addAll(set);
+			}
+			if(nodeInlevels.size()!=0)
+			{
+				result.retainAll(nodeInlevels);
+			}
 		}
 		Graph g = ModelTransferUtil.pNode2graph(result);
 		return g;

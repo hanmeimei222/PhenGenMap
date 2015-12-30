@@ -47,14 +47,32 @@ public class PNode {
 	public void setSon(Map<PNode, Boolean> son) {
 		this.son = son;
 	}
+	
+	@Override  
+	public int hashCode() {  
 
-	
-	
-//	@Override
-//	public boolean equals(Object obj){
-//		
-//		
-//	}
-	
-	
+		return pheno_id.hashCode();  
+	}  
+	@Override
+	public boolean equals(Object obj) {
+		PNode n=(PNode)obj;
+		if (n instanceof PNode)	
+		{
+			if(n.getPheno_id().equals(this.pheno_id))
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+
+		}	
+		return false;
+	}
+
+
+
+
+
 }

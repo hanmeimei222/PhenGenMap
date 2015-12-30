@@ -36,6 +36,7 @@ public class GeneDataLoad {
 				for(int i=3; i<templine.length;i++){
 					GNode gn = new GNode();
 					gn.setSymbol_name(templine[i]);
+					GlobalData.allgnodes.put(templine[i], gn);
 					symbols.put(gn, true);
 				}
 			}
@@ -44,7 +45,7 @@ public class GeneDataLoad {
 	}
 
 	//从文件中逐行读入，构造需要的数据结构
-	public void readPathway(String infile,Map<String,Pathway> allways,Map<String,String>pwnamemap,Map<String,Map<String,Map<Pathway,Boolean>>> classmap,Map<String,String>clsmap){
+	public void readPathway(String infile){
 		BufferedReader in=null;
 		try {
 			in = new BufferedReader(new InputStreamReader(new FileInputStream(infile),"UTF-8"));
@@ -55,11 +56,11 @@ public class GeneDataLoad {
 				Pathway pw = makeNodeByString(line);
 				//构造Map<String id,Pathway>
 				String pw_id = pw.getPw_id();
-				allways.put(pw_id, pw);
+				GlobalData.allways.put(pw_id, pw);
 
 				//构造Map<String,String>pwnamemap
 				String pw_name = pw.getPw_name();
-				pwnamemap.put(pw_name,pw_id);
+				GlobalData.pwnamemap.put(pw_name,pw_id);
 
 				//构造Map<String,Map<String,Map<Pathway,Boolean>>> classmap
 				String class1 = pw.getClass_1();
@@ -67,12 +68,12 @@ public class GeneDataLoad {
 				
 
 				if(class1!=null &&class2!=null){
-					clsmap.put(class2, class1);
-					Map<String,Map<Pathway,Boolean>>class2map = classmap.get(class1);
+					GlobalData.clsmap.put(class2, class1);
+					Map<String,Map<Pathway,Boolean>>class2map = GlobalData.classmap.get(class1);
 
 					if(class2map == null){
 						class2map = new HashMap<String,Map<Pathway,Boolean>>();
-						classmap.put(class1, class2map);
+						GlobalData.classmap.put(class1, class2map);
 					}
 
 					Map<Pathway,Boolean>pwmap = class2map.get(class2);
@@ -102,7 +103,7 @@ public class GeneDataLoad {
 	//加载gene数据
 	public void loadGeneData() {
 		String infile = "WebContent/data/inter_data/mmu_pathway_id_name_class_symbols.txt";
-		readPathway(infile, GlobalData.allways, GlobalData.pwnamemap, GlobalData.classmap,GlobalData.clsmap);
+		readPathway(infile);
 	}
 
 }

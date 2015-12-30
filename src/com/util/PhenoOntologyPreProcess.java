@@ -254,10 +254,10 @@ public class PhenoOntologyPreProcess {
 
 
 	public static void main(String[] args) throws IOException {
-		String input = "WebRoot/data/input_data/MPheno_OBO.ontology.txt";
-		String output_1 = "WebRoot/data/inter_data/mpo_id_pid.txt";
-		String output_2 = "WebRoot/data/inter_data/mpo_id_pid_name_def.txt";
-		String output_3 = "WebRoot/data/inter_data/phen_info.txt";
+		String input = "WebContent/data/input_data/MPheno_OBO.ontology.txt";
+		String output_1 = "WebContent/data/inter_data/mpo_id_pid.txt";
+		String output_2 = "WebContent/data/inter_data/mpo_id_pid_name_def.txt";
+		String output_3 = "WebContent/data/inter_data/phen_info.txt";
 		//		getPhenoFather(input, output_1);
 		//		getPhenoDetail(input, output_2);
 		//		Map<String, List<String>> pheSons = getPhenoSon(output_1);

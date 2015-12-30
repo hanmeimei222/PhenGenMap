@@ -17,7 +17,7 @@ public class PhenDaoImpl implements PhenDao{
 	//按照id查询单个节点全部信息
 	public PNode getSinglePNodeById(String id){
 		PNode result = new PNode();
-		result = GlobalData.allnodes.get(id);
+		result = GlobalData.allpnodes.get(id);
 		return result;
 	}
 
@@ -25,7 +25,7 @@ public class PhenDaoImpl implements PhenDao{
 	public PNode getSinglePNodeByName(String name){
 		PNode result = new PNode();
 		String id = GlobalData.namemap.get(name);
-		result = GlobalData.allnodes.get(id);
+		result = GlobalData.allpnodes.get(id);
 		return result;
 	}
 
@@ -142,7 +142,7 @@ public class PhenDaoImpl implements PhenDao{
 		Set<PNode> currNodes = new HashSet<PNode>();
 		Set<PNode> nextNodes = new HashSet<PNode>();
 
-		PNode node = GlobalData.allnodes.get(id);
+		PNode node = GlobalData.allpnodes.get(id);
 
 		currNodes.add(node);
 		while(!currNodes.isEmpty()){
@@ -176,7 +176,7 @@ public class PhenDaoImpl implements PhenDao{
 			currNodes.clear();
 			nextNodes.clear();
 			int count = 0;
-			PNode node = GlobalData.allnodes.get(id);
+			PNode node = GlobalData.allpnodes.get(id);
 
 			currNodes.add(node);
 
@@ -229,8 +229,8 @@ public class PhenDaoImpl implements PhenDao{
 		Set<PNode> currNodes = new HashSet<PNode>();
 		Set<PNode> nextNodes = new HashSet<PNode>();
 
-		PNode startnode = GlobalData.allnodes.get(start);
-		PNode endnode = GlobalData.allnodes.get(end);
+		PNode startnode = GlobalData.allpnodes.get(start);
+		PNode endnode = GlobalData.allpnodes.get(end);
 
 		currNodes.add(startnode);
 		//判断是否到叶节点

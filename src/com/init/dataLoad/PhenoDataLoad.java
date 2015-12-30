@@ -34,7 +34,7 @@ public class PhenoDataLoad {
 	}
 
 	//从phen_info.txt中读入所有表型节点的信息，构建id-PNode、level-PNodes和name-id
-	private void readPNodes(String infile,Map<String,PNode> allnodes,Map<String,Map<PNode,Boolean>>levelmap,Map<String,String>namemap){
+	private void readPNodes(String infile){
 		Map<String,String> linemap = new HashMap<String,String>();
 		BufferedReader in=null;
 		//把每个节点的信息放到map中
@@ -75,26 +75,26 @@ public class PhenoDataLoad {
 					String name = n.getPheno_name();
 					String id = n.getPheno_id();
 
-					if(!namemap.containsKey(name)){
-						namemap.put(name, id);
+					if(!GlobalData.namemap.containsKey(name)){
+						GlobalData.namemap.put(name, id);
 					}
 
 					//添加 level -- nodes map
 					String levels = n.getPheno_level();
 					String level[]= levels.split(",");
 					for (String l : level) {
-						Map<PNode,Boolean>map  = levelmap.get(l);
+						Map<PNode,Boolean>map  = GlobalData.levelmap.get(l);
 						if( map == null)
 						{
 							map = new HashMap<PNode,Boolean>();
-							levelmap.put(l, map);
+							GlobalData.levelmap.put(l, map);
 						}
 						map.put(n, true);
 					}
 
 					//根据当前节点的string：child去找到所有他的孩子节点
 
-					allnodes.put(id, n);
+					GlobalData.allpnodes.put(id, n);
 					String [] info =linemap.get(n.getPheno_id()).split("\t");
 					if(!info[5].equals("#")){
 						String []sonId = info[5].split(",");
@@ -105,12 +105,12 @@ public class PhenoDataLoad {
 							child.getFather().put(n, true);
 							//对于当前节点，把孩子节点放到孩子的属性中
 							n.getSon().put(child, true);
-							allnodes.put(sid, child);
+							GlobalData.allpnodes.put(sid, child);
 							nexLevel.add(child);
 						}
 					}
 					if(info[4].equals("#")&&info[5].equals("#")){
-						allnodes.put(n.getPheno_id(), n);
+						GlobalData.allpnodes.put(n.getPheno_id(), n);
 					}
 				}
 				//更新当前节点集合为孩子节点集合
@@ -134,8 +134,9 @@ public class PhenoDataLoad {
 	//加载表型数据
 	public void loadPhenoData() {
 		
-		String infile = GlobalData.PATH+"/data/inter_data/phen_info.txt";
+//		String infile = GlobalData.PATH+"/data/inter_data/phen_info.txt";
+		String infile = "WebContent/data/inter_data/phen_info.txt";
 		//读取所有节点，只一次
-		readPNodes(infile,GlobalData.allnodes,GlobalData.levelmap,GlobalData.namemap);
+		readPNodes(infile);
 	}
 }

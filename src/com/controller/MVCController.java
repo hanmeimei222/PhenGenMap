@@ -33,13 +33,22 @@ public class MVCController {
 			@RequestParam("levels")String levels,
 			@RequestParam("step") String step)
 	{
-		String[] mpList =mpoId.split("\n");
+		Map<String,Boolean> queryMap = new HashMap<String, Boolean>();
+		
+		String[] mpArr =mpoId.split("\n|\t");
+		
+		for (String str : mpArr) {
+			if(!"".equals(str))
+			{
+				queryMap.put(str.trim(),true);
+			}
+		}
 		PhenQueryType type = PhenQueryType.getTypeByStr(queryType);
 		
 		Map<String,String>param = new HashMap<String, String>();
 		param.put("levels", levels);
 		param.put("step", step);
-		return pService.queryPhen(mpList,type,param);
+		return pService.queryPhen(queryMap,type,param);
 	}
 	
 	@ResponseBody

@@ -22,10 +22,12 @@ public class QueryPhenServiceImpl implements QueryPhenService{
 	
 	
 	@Override
-	public Graph queryPhen(String[] ids, PhenQueryType type,
+	public Graph queryPhen(Map<String,Boolean> queryMap, PhenQueryType type,
 			Map<String, String> param) {
 
 		Set<PNode> result = null;
+		
+		String[]  ids = queryMap.keySet().toArray(new String[1]);
 		switch (type) {
 		case SINGLE_NODES:
 			result = pheDao.getMultiPNode(ids);
@@ -56,7 +58,7 @@ public class QueryPhenServiceImpl implements QueryPhenService{
 				result.retainAll(nodeInlevels);
 			}
 		}
-		Graph g = ModelTransferUtil.pNode2graph(result);
+		Graph g = ModelTransferUtil.pNode2graph(result,queryMap);
 		return g;
 	}
 	

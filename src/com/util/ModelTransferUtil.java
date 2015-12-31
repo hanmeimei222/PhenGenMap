@@ -15,7 +15,7 @@ import com.model.cytoscape.Node;
 
 public class ModelTransferUtil {
 	
-	public static Graph pNode2graph(Set<PNode> set)
+	public static Graph pNode2graph(Set<PNode> set,Map<String,Boolean> queryInput)
 	{
 		
 		Graph g = new Graph();
@@ -29,7 +29,13 @@ public class ModelTransferUtil {
 		{
 			mps.put(pNode.getPheno_id(), pNode);
 			//把所有节点加到nodes集合中
-			nodes.add(new CytoNode(new Node(pNode.getPheno_id(), pNode.getPheno_name())));
+			String pid = pNode.getPheno_id();
+			boolean isQuery = false;
+			if(queryInput.containsKey(pid))
+			{
+				isQuery = true;
+			}
+			nodes.add(new CytoNode(new Node(pid, pNode.getPheno_name(),pNode.getPheno_level(),isQuery)));
 		}
 
 		Set<String> keys = mps.keySet();
@@ -41,7 +47,7 @@ public class ModelTransferUtil {
 				String fpid = father.getPheno_id();
 				if(keys.contains(fpid))
 				{
-					Edge l = new Edge(pid, fpid);
+					Edge l = new Edge(fpid, pid);
 					edges.add(new CytoEdge(l));
 				}
 			}

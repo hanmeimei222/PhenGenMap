@@ -11,7 +11,7 @@ import com.model.cytoscape.Graph;
 public interface QueryPhenService {
 	
 	
-	public Graph queryPhen(String[] nodes,PhenQueryType type,Map<String,String> param);
+	public Graph queryPhen(Map<String,Boolean> queryMap,PhenQueryType type,Map<String,String> param);
 	
 	/**
 	 * 根据给定MP，找到其n步内相邻的节点集合

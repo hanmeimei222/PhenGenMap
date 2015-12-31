@@ -62,7 +62,7 @@ public class PhenDaoImpl implements PhenDao{
 		}
 	}
 
-	//多个节点全部信息的查询，query以分号隔开
+	//多个节点全部信息的查询
 	public Set<PNode> getMultiPNode(String [] query){
 		Set<PNode> result = new HashSet<PNode>();
 		for(int i=0;i<query.length;i++){
@@ -143,12 +143,18 @@ public class PhenDaoImpl implements PhenDao{
 		Set<PNode> nextNodes = new HashSet<PNode>();
 
 		PNode node = GlobalData.allpnodes.get(id);
-
-		currNodes.add(node);
+		if(node!=null)
+		{
+			currNodes.add(node);
+		}
 		while(!currNodes.isEmpty()){
 			result.addAll(currNodes);
 
 			for (PNode pNode : currNodes) {
+				if(pNode==null)
+				{
+					System.out.println();
+				}
 				if(direction.equals("Pre")){
 					nextNodes.addAll(pNode.getFather().keySet());
 				}
@@ -157,8 +163,11 @@ public class PhenDaoImpl implements PhenDao{
 				}
 			}
 			currNodes.clear();
-			currNodes.addAll(nextNodes);
-			nextNodes.clear();
+			if(!nextNodes.isEmpty())
+			{
+				currNodes.addAll(nextNodes);
+				nextNodes.clear();
+			}
 		}
 		return result;
 	}

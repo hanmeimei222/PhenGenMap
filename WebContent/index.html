@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+ï»¿<!DOCTYPE HTML>
 <html>
 <head>
 <title>Home</title>
@@ -56,10 +56,10 @@ body {
 			<div class="services-main">
 				<div class="col-md-2 services-left">
 					<div>
-						<h3>²éÑ¯¼Æ»®</h3>
+						<h3>æŸ¥è¯¢è®¡åˆ’</h3>
 						<div class="row post-content-row">
 							<label class="post-content-row-title">
-								step1:ÊäÈëÒª²éÑ¯µÄMPÁĞ±í£¬Ò»ĞĞÒ»¸ö</label>
+								step1:è¾“å…¥è¦æŸ¥è¯¢çš„MPåˆ—è¡¨ï¼Œä¸€è¡Œä¸€ä¸ª</label>
 							<div class="form-group">
 								<div id="search-wrapper">
 									<input type="text" class="form-control" id="singlemp" autofocus
@@ -73,54 +73,54 @@ MP:0008347</textarea>
 							</div>
 						</div>
 						<div class="row post-content-row">
-							<label class="post-content-row-title"> step2:Ñ¡ÔñÒª²éÑ¯µÄÀàĞÍ</label> <select
+							<label class="post-content-row-title"> step2:é€‰æ‹©è¦æŸ¥è¯¢çš„ç±»å‹</label> <select
 								id="queryType" name="queryType" class="form-control"
 								onchange="showAdditionalPanel()">
-								<option value="single">²éÑ¯MPĞÅÏ¢</option>
-								<option value="postNodes">²éÑ¯MP¼°Æäºó¼Ì½ÚµãĞÅÏ¢</option>
-								<option value="preNodes">²éÑ¯¸ÃMP¼°ÆäÇ°Çı½ÚµãĞÅÏ¢</option>
-								<option value="nStepNodes">²éÑ¯ÒÔ¸ÃMPÎªÖĞĞÄn²½¿É´ïµÄ½Úµã</option>
-								<option value="path">²éÑ¯½Úµã¼äµÄ¿É´ïÂ·¾¶</option>
+								<option value="single">æŸ¥è¯¢MPä¿¡æ¯</option>
+								<option value="postNodes">æŸ¥è¯¢MPåŠå…¶åç»§èŠ‚ç‚¹ä¿¡æ¯</option>
+								<option value="preNodes">æŸ¥è¯¢è¯¥MPåŠå…¶å‰é©±èŠ‚ç‚¹ä¿¡æ¯</option>
+								<option value="nStepNodes">æŸ¥è¯¢ä»¥è¯¥MPä¸ºä¸­å¿ƒnæ­¥å¯è¾¾çš„èŠ‚ç‚¹</option>
+								<option value="path">æŸ¥è¯¢èŠ‚ç‚¹é—´çš„å¯è¾¾è·¯å¾„</option>
 							</select>
 							<div class="form-group">
 								<input type="number" id="step" name="step" class="hidden"
-									placeholder="ÊäÈë½Úµã¿É´ï²½Êı" />
+									placeholder="è¾“å…¥èŠ‚ç‚¹å¯è¾¾æ­¥æ•°" />
 							</div>
 						</div>
 
 
 						<div class="row post-content-row">
-							<label class="post-content-row-title"> step3:ÉèÖÃ¹ıÂË²ã¼¶</label>
+							<label class="post-content-row-title"> step3:è®¾ç½®è¿‡æ»¤å±‚çº§</label>
 							<div class="form-group">
 								<label class="mycheckbox" onchange="showLevelPanel()"> <input
-									type="checkbox" id="levelCheck" name="levelCheck">ÉèÖÃ½ÚµãËùÔÚ²ã¼¶
+									type="checkbox" id="levelCheck" name="levelCheck">è®¾ç½®èŠ‚ç‚¹æ‰€åœ¨å±‚çº§
 								</label>
 							</div>
 							<div id="levelPanel" class="hidden">
 								<div class="form-group">
 									<input type="text" id="levels" name="levels"
-										class="form-control" placeholder="ÎÄ±¾Òª¹ıÂËµÄ²ã£¬·ÖºÅ·Ö¸ô">
+										class="form-control" placeholder="æ–‡æœ¬è¦è¿‡æ»¤çš„å±‚ï¼Œåˆ†å·åˆ†éš”">
 								</div>
 							</div>
 						</div>
 
 						<div class="row post-content-row">
-							<label class="post-content-row-title"> step4:Ìá½»²éÑ¯</label>
+							<label class="post-content-row-title"> step4:æäº¤æŸ¥è¯¢</label>
 							<div class="form-group">
 								<button type="button" onclick="submitQuery()"
-									class="btn btn-default">»æÍ¼</button>
+									class="btn btn-default">ç»˜å›¾</button>
 							</div>
 						</div>
 						<div class="row post-content-row">
-							<label class="post-content-row-title"> step5:Í¼ÄÚ¼ìË÷</label>
+							<label class="post-content-row-title"> step5:å›¾å†…æ£€ç´¢</label>
 							<div class="form-group">
 								<button type="button" onclick="showQueryPanel()"
-									class="btn btn-default">ÏÔÊ¾Í¼ÄÚ¼ìË÷>></button>
+									class="btn btn-default">æ˜¾ç¤ºå›¾å†…æ£€ç´¢>></button>
 							</div>
 						</div>
 						<div class="row post-content-row ">
 							<div id="queryPanel" style="display: none;">
-								<button id="reset" name="reset" class="btn btn-default">ÖØÖÃ</button>
+								<button id="reset" name="reset" class="btn btn-default">é‡ç½®</button>
 								<div id="search-wrapper">
 									<input type="text" class="form-control" id="search" autofocus
 										placeholder="Search In graph">
@@ -131,7 +131,7 @@ MP:0008347</textarea>
 					</div>
 				</div>
 				<div class="col-md-8 services-right">
-					<h3>²éÑ¯½á¹û</h3>
+					<h3>æŸ¥è¯¢ç»“æœ</h3>
 					<div>
 						<div id="cy"></div>
 					</div>
@@ -150,8 +150,8 @@ MP:0008347</textarea>
 				<p>
 					Copyright &copy; 2015.Company name All rights reserved.More
 					Templates <a href="http://www.cssmoban.com/" target="_blank"
-						title="Ä£°åÖ®¼Ò">Ä£°åÖ®¼Ò</a> - Collect from <a
-						href="http://www.cssmoban.com/" title="ÍøÒ³Ä£°å" target="_blank">ÍøÒ³Ä£°å</a>
+						title="æ¨¡æ¿ä¹‹å®¶">æ¨¡æ¿ä¹‹å®¶</a> - Collect from <a
+						href="http://www.cssmoban.com/" title="ç½‘é¡µæ¨¡æ¿" target="_blank">ç½‘é¡µæ¨¡æ¿</a>
 				</p>
 			</div>
 		</div>
@@ -161,7 +161,7 @@ MP:0008347</textarea>
 	<!--copy right end here-->
 	<script type="text/javascript">
 	
-	//Õ¹Ê¾ËÑËØÌáÊ¾µÄÄ£°å
+	//å±•ç¤ºæœç´ æç¤ºçš„æ¨¡æ¿
 	var infoTemplate = Handlebars.compile([
 	                                       '<div class="form-control">{{pheno_id}}-{{pheno_name}}</div>'
 	                              		].join(''));
@@ -170,7 +170,7 @@ MP:0008347</textarea>
 	var remote_cities = new Bloodhound({
 	    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
 	    queryTokenizer: Bloodhound.tokenizers.whitespace,
-	    // ÔÚÎÄ±¾¿òÊäÈë×Ö·ûÊ±²Å·¢ÆğÇëÇó
+	    // åœ¨æ–‡æœ¬æ¡†è¾“å…¥å­—ç¬¦æ—¶æ‰å‘èµ·è¯·æ±‚
 	    remote: 'autoComplete?query=%QUERY'
 	});
 
@@ -184,6 +184,10 @@ MP:0008347</textarea>
 		      suggestion: infoTemplate
 		}
 	});
+	
+	
+	
+
 	</script>
 </body>
 </html>

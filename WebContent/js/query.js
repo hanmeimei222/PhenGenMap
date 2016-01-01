@@ -22,6 +22,11 @@ function showLevelPanel()
 	}
 }
 
+function showQueryPanel()
+{
+	$("#queryPanel").toggle();
+}
+
 function submitQuery()
 {
 	//1.获取输入的MP列表

@@ -15,6 +15,7 @@ import com.model.PNode;
 public class PhenDaoImpl implements PhenDao{
 	//按节点查找:
 	//按照id查询单个节点全部信息
+	@Override
 	public PNode getSinglePNodeById(String id){
 		PNode result = new PNode();
 		result = GlobalData.allpnodes.get(id);
@@ -22,6 +23,7 @@ public class PhenDaoImpl implements PhenDao{
 	}
 
 	//按照name查询单个节点全部信息
+	@Override
 	public PNode getSinglePNodeByName(String name){
 		PNode result = new PNode();
 		String id = GlobalData.namemap.get(name);
@@ -30,6 +32,7 @@ public class PhenDaoImpl implements PhenDao{
 	}
 
 	//按照id/name查询单个节点全部信息
+	@Override
 	public PNode getSinglePNode(String query){
 		PNode pn = new PNode();
 		//按照id查询
@@ -63,6 +66,7 @@ public class PhenDaoImpl implements PhenDao{
 	}
 
 	//多个节点全部信息的查询，query以分号隔开
+	@Override
 	public Set<PNode> getMultiPNode(String [] query){
 		Set<PNode> result = new HashSet<PNode>();
 		for(int i=0;i<query.length;i++){
@@ -77,6 +81,7 @@ public class PhenDaoImpl implements PhenDao{
 
 	//横向查询：
 	//查询单层包含哪些节点
+	@Override
 	public Set<PNode> getPNodeBySingleLevel(String query){
 		Set<PNode> result = new HashSet<PNode>();
 		Map<PNode,Boolean>levelnodes = new HashMap<PNode,Boolean>();
@@ -87,6 +92,7 @@ public class PhenDaoImpl implements PhenDao{
 	}
 
 	//查询多层包含哪些节点的并集，多层用分号隔开，如query = "4;5;6"
+	@Override
 	public Map<String,Set<PNode>> getPNodeByMultiLevel1(String query){
 		Map<String,Set<PNode>> result = new HashMap<String,Set<PNode>>();
 		String[]temp=query.split(";");
@@ -100,6 +106,7 @@ public class PhenDaoImpl implements PhenDao{
 
 	//查询多层包含哪些节点的交集
 	//多层查询，例如：查找同时在第四层和第五层的点(交集)，输入的query以分号隔开"4;5"
+	@Override
 	public Set<PNode> getPNodeByMultiLevel2(String query){
 		Set<PNode> result = new HashSet<PNode>();
 
@@ -118,6 +125,7 @@ public class PhenDaoImpl implements PhenDao{
 
 	//纵向查询
 	//输入待查询节点id，输出以他为起点的所有前驱节点
+	@Override
 	public Set<PNode>getPreNodes(String[] ids){
 		Set<PNode> preNodes = new HashSet<PNode>();
 		for (String id : ids) {
@@ -126,6 +134,7 @@ public class PhenDaoImpl implements PhenDao{
 		return preNodes;
 	}
 	//输入待查询节点id，输出以他为起点的所有后继节点
+	@Override
 	public Set<PNode>getPostNodes(String[] ids){
 
 		Set<PNode> postNodes = new HashSet<PNode>();
@@ -167,6 +176,7 @@ public class PhenDaoImpl implements PhenDao{
 
 	//横纵结合查询
 	//输入单个节点id/name，找n步以内可达的节点集合
+	@Override
 	public Set<PNode> getNStepNode(String[] ids,int n){
 		Set<PNode>result = new HashSet<PNode>();
 		Set<PNode> currNodes = new HashSet<PNode>();
@@ -204,6 +214,7 @@ public class PhenDaoImpl implements PhenDao{
 
 	
 	//找到某个节点在某一层内的所有孩子节点
+	@Override
 	public Set<PNode> getPostNodesByLevel(String id,String level){
 		Set<PNode>result = getNodes(id,"Post");
 		Set<PNode>levelNodes = getPNodeBySingleLevel(level);
@@ -213,6 +224,7 @@ public class PhenDaoImpl implements PhenDao{
 	}
 
 	//找到某个节点在某一层内的所有父亲节点
+	@Override
 	public Set<PNode> getPreNodesByLevel(String id,String level){
 		Set<PNode>result = getNodes(id,"Pre");
 		Set<PNode>levelNodes  = getPNodeBySingleLevel(level);
@@ -223,6 +235,7 @@ public class PhenDaoImpl implements PhenDao{
 
 	//找两个不同层节点间的路径，通过level来区分起点终点
 	//从start找后继，一直到包含end节点
+	@Override
 	public Set<PNode> getContainsNodes(String start, String end){
 		Set<PNode>result = new HashSet<PNode>();
 

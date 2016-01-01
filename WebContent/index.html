@@ -60,7 +60,12 @@ body {
 						<div class="row post-content-row">
 							<label class="post-content-row-title">
 								step1:输入要查询的MP列表，一行一个</label>
-
+							<div class="form-group">
+								<div id="search-wrapper">
+									<input type="text" class="form-control" id="singlemp" autofocus
+										placeholder="Search In graph">
+								</div>
+							</div>
 							<div class="form-group">
 								<textarea id="mpList" name="mpList" class="form-control"
 									rows="3">MP:0008345
@@ -114,7 +119,7 @@ MP:0008347</textarea>
 							</div>
 						</div>
 						<div class="row post-content-row ">
-							<div id="queryPanel" style="display:none;">
+							<div id="queryPanel" style="display: none;">
 								<button id="reset" name="reset" class="btn btn-default">重置</button>
 								<div id="search-wrapper">
 									<input type="text" class="form-control" id="search" autofocus
@@ -154,5 +159,31 @@ MP:0008347</textarea>
 	<!--footer end here-->
 	<!--copy right start here-->
 	<!--copy right end here-->
+	<script type="text/javascript">
+	
+	//展示搜素提示的模板
+	var infoTemplate = Handlebars.compile([
+	                                       '<div class="form-control">{{pheno_id}}-{{pheno_name}}</div>'
+	                              		].join(''));
+	
+	
+	var remote_cities = new Bloodhound({
+	    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+	    queryTokenizer: Bloodhound.tokenizers.whitespace,
+	    // 在文本框输入字符时才发起请求
+	    remote: 'autoComplete?query=%QUERY'
+	});
+
+	remote_cities.initialize();
+
+	$('#singlemp').typeahead(null, {
+	    name: 'mp',
+	    displayKey: 'pheno_id',
+	    source: remote_cities.ttAdapter(),
+	    templates: {
+		      suggestion: infoTemplate
+		}
+	});
+	</script>
 </body>
 </html>

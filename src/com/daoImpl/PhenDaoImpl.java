@@ -1,5 +1,6 @@
 package com.daoImpl;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -261,4 +262,40 @@ public class PhenDaoImpl implements PhenDao{
 		return result;
 	}
 
+	@Override
+	public Set<PNode> getAutoCompleteNodes(String query) {
+		return getAutoCompleteNodes(query,10);
+	}
+	@Override
+	public Set<PNode> getAutoCompleteNodes(String query, int n) {
+		Set<PNode> set = new HashSet<PNode>();
+		Collection<PNode> nodes = GlobalData.allpnodes.values();
+		boolean isId = false;
+		if(query.startsWith("mp:"))
+		{
+			isId = true;
+		}
+		
+		for (PNode node : nodes) {
+			String key;
+			if(isId)
+			{
+				key = node.getPheno_id();
+			}
+			else
+			{
+				key = node.getPheno_name();
+			}
+			if(key.regionMatches(true, 0, query, 0, query.length()))
+			{
+				set.add(node);
+				if(set.size()>n)
+				{
+					break;
+				}
+			}
+		}
+
+		return set;
+	}
 }

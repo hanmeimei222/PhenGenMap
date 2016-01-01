@@ -1,6 +1,7 @@
 package com.serviceImpl;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.constant.PhenQueryType;
 import com.dao.PhenDao;
 import com.model.PNode;
+import com.model.cytoscape.CytoNode;
 import com.model.cytoscape.Graph;
 import com.service.QueryPhenService;
 import com.util.ModelTransferUtil;
@@ -61,29 +63,12 @@ public class QueryPhenServiceImpl implements QueryPhenService{
 		Graph g = ModelTransferUtil.pNode2graph(result,queryMap);
 		return g;
 	}
-	
-	
+
 	@Override
-	public Graph getNStepNode(String id, int n) {
-//		Set<PNode> set =  pheDao.getNStepNode(id, n);
-//		//将查询到的节点集合以Set<Line>的形式返回到controller
-//		return ModelTransferUtil.pNode2graph(set);
-		return null;
-	}
-	
-	@Override
-	public Graph getInterlevelsAndRoot(String id, String levels) {
+	public Set<PNode> aucoComplete(String query) {
 		// TODO Auto-generated method stub
-	
-//		Set<PNode> postNodes = pheDao.getPostNodes(id);
-//		Map<String,Set<PNode>> levelmap =pheDao.getPNodeByMultiLevel1(levels);
-//		Set<PNode> levelNodes = new HashSet<PNode>();
-//		for (Set<PNode> set : levelmap.values()) {
-//			levelNodes.addAll(set);
-//		}
-//		levelNodes.retainAll(postNodes);
-//		
-//		return ModelTransferUtil.pNode2graph(levelNodes);
-		return null;
+		Set<PNode> result =pheDao.getAutoCompleteNodes(query);
+		return result;
+//		return ModelTransferUtil.pNode2CytoNode(result);
 	}
 }

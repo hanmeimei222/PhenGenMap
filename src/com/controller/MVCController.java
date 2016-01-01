@@ -1,7 +1,9 @@
 package com.controller;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.constant.PhenQueryType;
+import com.model.PNode;
 import com.model.cytoscape.Graph;
 import com.service.QueryPhenService;
 
@@ -19,12 +22,6 @@ public class MVCController {
 	
 	@Autowired
 	QueryPhenService pService;
-	
-	@RequestMapping("/hello")
-	public String hello()
-	{
-		return "cytoscape";
-	}
 
 	@RequestMapping("/pheQuery")
 	@ResponseBody
@@ -50,21 +47,24 @@ public class MVCController {
 		param.put("step", step);
 		return pService.queryPhen(queryMap,type,param);
 	}
-	
+	/**
+	 * 根据用户输入完成自动补全
+	 * @param query
+	 * @return
+	 */
+	@RequestMapping("/autoComplete")
 	@ResponseBody
-	@RequestMapping("/getNStepNeighbor")
-	public Graph getNStepNeighbor(@RequestParam("mpoId") String mpoId,
-			@RequestParam("step") int step)
+	public Set<PNode> autoComplete(@RequestParam String query)
 	{
-		return pService.getNStepNode(mpoId, step);
-	}
-	
-	@ResponseBody
-	@RequestMapping("/getPostInLevels")
-	public Graph getPostInLevels(@RequestParam("mpoId") String mpoId,
-			@RequestParam("levels") String levels)
-	{
-		return pService.getInterlevelsAndRoot(mpoId,levels);
+		System.out.println(query);
+		if(null!=query && !"".equals(query))
+		{
+			return pService.aucoComplete(query.toLowerCase());
+		}
+		else
+		{
+			return new HashSet<PNode>();
+		}
 	}
 
 }

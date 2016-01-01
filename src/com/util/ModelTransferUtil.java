@@ -15,6 +15,15 @@ import com.model.cytoscape.Node;
 
 public class ModelTransferUtil {
 	
+	public static List<CytoNode> pNode2CytoNode(Set<PNode> set)
+	{
+		List<CytoNode> list= new ArrayList<CytoNode>();
+		for (PNode pNode : set) {
+			CytoNode cnode =new CytoNode(new Node(pNode.getPheno_id(), pNode.getPheno_name(),pNode.getPheno_level(),false));
+			list.add(cnode);
+		}
+		return list;
+	}
 	public static Graph pNode2graph(Set<PNode> set,Map<String,Boolean> queryInput)
 	{
 		
@@ -31,9 +40,12 @@ public class ModelTransferUtil {
 			//把所有节点加到nodes集合中
 			String pid = pNode.getPheno_id();
 			boolean isQuery = false;
-			if(queryInput.containsKey(pid))
+			if(queryInput!=null)
 			{
-				isQuery = true;
+				if(queryInput.containsKey(pid))
+				{
+					isQuery = true;
+				}
 			}
 			nodes.add(new CytoNode(new Node(pid, pNode.getPheno_name(),pNode.getPheno_level(),isQuery)));
 		}

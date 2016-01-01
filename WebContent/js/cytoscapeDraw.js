@@ -86,7 +86,6 @@ function cytoscapeDraw(data)
 	  {
 	    name: 'search-dataset',
 	    source: function( query, cb ){
-	    	
 	      function matches( str, q ){
 	        str = (str || '').toLowerCase();
 	        q = (q || '').toLowerCase();
@@ -132,7 +131,6 @@ function cytoscapeDraw(data)
 	    n.select();
 	    showNodeInfo( n );
 	  });
-
 }
 
 function highlight( node ){

@@ -6,7 +6,7 @@ public class GPGraph {
 
 	private Set<GNode> gnodes;
 	private Set<PNode> pnodes;
-	private Set<Edge> edges;
+	private Set<GPEdge> edges;
 	public Set<GNode> getGnodes() {
 		return gnodes;
 	}
@@ -19,10 +19,10 @@ public class GPGraph {
 	public void setPnodes(Set<PNode> pnodes) {
 		this.pnodes = pnodes;
 	}
-	public Set<Edge> getEdges() {
+	public Set<GPEdge> getEdges() {
 		return edges;
 	}
-	public void setEdges(Set<Edge> edges) {
+	public void setEdges(Set<GPEdge> edges) {
 		this.edges = edges;
 	}
 

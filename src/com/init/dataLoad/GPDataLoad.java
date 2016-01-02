@@ -7,10 +7,13 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.stereotype.Repository;
+
 import com.global.GlobalData;
 import com.model.GNode;
 import com.model.PNode;
 
+@Repository
 public class GPDataLoad {
 
 	public void readGPAssociation(String infile){
@@ -65,7 +68,7 @@ public class GPDataLoad {
 
 
 	public void loadGPData() {
-		String infile = "WebContent/data/inter_data/symbol_mp_mgi.txt";
+		String infile = GlobalData.PATH+"/data/inter_data/symbol_mp_mgi.txt";
 		
 		PhenoDataLoad pdl = new PhenoDataLoad();
 		pdl.loadPhenoData();

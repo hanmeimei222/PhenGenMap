@@ -1,7 +1,6 @@
 package com.serviceImpl;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Service;
 import com.constant.PhenQueryType;
 import com.dao.PhenDao;
 import com.model.PNode;
-import com.model.cytoscape.CytoNode;
 import com.model.cytoscape.Graph;
 import com.service.QueryPhenService;
 import com.util.ModelTransferUtil;

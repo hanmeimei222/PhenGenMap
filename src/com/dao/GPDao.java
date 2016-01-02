@@ -1,7 +1,12 @@
 package com.dao;
 
+import java.util.Set;
+
+import org.springframework.stereotype.Repository;
+
 import com.model.GPGraph;
 
+@Repository
 public interface GPDao {
 
 	/**
@@ -20,5 +25,5 @@ public interface GPDao {
 	 * 同时通过基因和表型查询
 	 * 输入表型id集合和基因symbol_name的集合，查询出他们之间存在的关联Edge,并返回查询结果GPGraph
 	 */
-	public GPGraph getAssoByPhenoGene(String[]pids,String[]symbols);
+	public GPGraph getAssoByPhenoGene(Set<String> pids,Set<String> symbols);
 }

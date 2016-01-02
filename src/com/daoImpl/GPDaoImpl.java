@@ -4,14 +4,16 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.springframework.stereotype.Repository;
+
 import com.dao.GPDao;
 import com.global.GlobalData;
-import com.model.Edge;
+import com.model.GPEdge;
 import com.model.GNode;
 import com.model.GPGraph;
 import com.model.PNode;
 
-
+@Repository
 public class GPDaoImpl implements GPDao{
 	/**
 	 * 从表型开始查询
@@ -21,7 +23,7 @@ public class GPDaoImpl implements GPDao{
 	public GPGraph getAssoByPheno(String []pids){
 		GPGraph graph = new GPGraph();
 		Set<PNode>pns = new HashSet<PNode>();
-		Set<Edge>edges = new HashSet<Edge>();
+		Set<GPEdge>edges = new HashSet<GPEdge>();
 		Set<GNode>gns = new HashSet<GNode>();
 
 		graph.setGnodes(gns);
@@ -38,7 +40,7 @@ public class GPDaoImpl implements GPDao{
 
 			//构建边集
 			for (GNode gn : tmpgns) {
-				Edge eg = new Edge();
+				GPEdge eg = new GPEdge();
 				eg.setSource(gn);
 				eg.setTarget(pn);
 				eg.setType("gplink");
@@ -57,7 +59,7 @@ public class GPDaoImpl implements GPDao{
 	public GPGraph getAssoByGene(String []symbols){
 		GPGraph graph = new GPGraph();
 		Set<PNode>pns = new HashSet<PNode>();
-		Set<Edge>edges = new HashSet<Edge>();
+		Set<GPEdge>edges = new HashSet<GPEdge>();
 		Set<GNode>gns = new HashSet<GNode>();
 
 		graph.setGnodes(gns);
@@ -74,7 +76,7 @@ public class GPDaoImpl implements GPDao{
 
 			//构建边集
 			for (PNode pn : tmppns) {
-				Edge eg = new Edge();
+				GPEdge eg = new GPEdge();
 				eg.setSource(gn);
 				eg.setTarget(pn);
 				eg.setType("gplink");
@@ -85,38 +87,51 @@ public class GPDaoImpl implements GPDao{
 	}
 
 	@Override
-	public GPGraph getAssoByPhenoGene(String []pids,String[]symbols){
+	public GPGraph getAssoByPhenoGene(Set<String> pids,Set<String> symbols){
 		GPGraph graph = new GPGraph();
 		Set<PNode>pns = new HashSet<PNode>();
-		Set<Edge>edges = new HashSet<Edge>();
+		Set<GPEdge>edges = new HashSet<GPEdge>();
 		Set<GNode>gns = new HashSet<GNode>();
 
 		graph.setGnodes(gns);
 		graph.setPnodes(pns);
 		graph.setEdges(edges);
 
-		for (int i=0;i<pids.length;i++) {
+		for (String pid : pids) {
 			//构建表型点集
-			PNode pn = GlobalData.allpnodes.get(pids[i]);
+			PNode pn = GlobalData.allpnodes.get(pid);
 			pns.add(pn);
 		}
-
-		for (int j=0;j<symbols.length;j++) {
+		for (String symble : symbols) {
 			//构建基因点集
-			GNode gn = GlobalData.allgnodes.get(symbols[j]);
+			GNode gn = GlobalData.allgnodes.get(symble);
 			gns.add(gn);
 			Map<PNode,Boolean>pmap = GlobalData.g_p_map.get(gn);
-			Set<PNode>tmppns = pmap.keySet();
-			for (PNode pNode : tmppns) {
-				//当前节点在我们关心的表型pns集合中
-				if(pns.contains(pNode)){
-					//构建边集
-					Edge eg = new Edge();
-					eg.setSource(gn);
-					eg.setTarget(pNode);
-					eg.setType("gplink");
-					edges.add(eg);
+			if(pmap!=null)
+			{
+				for (PNode pNode : pns) {
+					if(pmap.containsKey(pNode))
+					{
+						GPEdge eg = new GPEdge();
+						eg.setSource(gn);
+						eg.setTarget(pNode);
+						eg.setType("gplink");
+						edges.add(eg);
+					}
 				}
+				
+//				Set<PNode>tmppns = pmap.keySet();
+//				for (PNode pNode : tmppns) {
+//					//当前节点在我们关心的表型pns集合中
+//					if(pns.contains(pNode)){
+//						//构建边集
+//						GPEdge eg = new GPEdge();
+//						eg.setSource(gn);
+//						eg.setTarget(pNode);
+//						eg.setType("gplink");
+//						edges.add(eg);
+//					}
+//				}
 			}
 		}
 		return graph;
@@ -124,23 +139,23 @@ public class GPDaoImpl implements GPDao{
 
 
 
-//	//test function
-//	public static void main(String[] args) {
-//		GPDataLoad gpdl = new GPDataLoad();
-//		gpdl.loadGPData();
-//		//		List<String> pids = new ArrayList<String>();
-//		//		pids.add("MP:0011868");
-//		//		pids.add("MP:0011534");
-//		//		GPDaoImpl dao = new GPDaoImpl();
-//		//		GPGraph graph = dao.getAssoByPheno(pids);
-//		List<String>symbols = new ArrayList<String>();
-//		symbols.add("COL4A3");
-//		symbols.add("TRP63");
-//		GPDaoImpl dao = new GPDaoImpl();
-//		GPGraph graph = dao.getAssoByGene(symbols);
-//
-//		System.out.println();
-//
-//
-//	}
+	//	//test function
+	//	public static void main(String[] args) {
+	//		GPDataLoad gpdl = new GPDataLoad();
+	//		gpdl.loadGPData();
+	//		//		List<String> pids = new ArrayList<String>();
+	//		//		pids.add("MP:0011868");
+	//		//		pids.add("MP:0011534");
+	//		//		GPDaoImpl dao = new GPDaoImpl();
+	//		//		GPGraph graph = dao.getAssoByPheno(pids);
+	//		List<String>symbols = new ArrayList<String>();
+	//		symbols.add("COL4A3");
+	//		symbols.add("TRP63");
+	//		GPDaoImpl dao = new GPDaoImpl();
+	//		GPGraph graph = dao.getAssoByGene(symbols);
+	//
+	//		System.out.println();
+	//
+	//
+	//	}
 }

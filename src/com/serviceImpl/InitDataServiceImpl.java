@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.global.GlobalData;
+import com.init.dataLoad.GPDataLoad;
 import com.init.dataLoad.GeneDataLoad;
 import com.init.dataLoad.PhenoDataLoad;
 import com.service.InitDataService;
@@ -15,6 +16,9 @@ public class InitDataServiceImpl implements InitDataService{
 	private PhenoDataLoad phenLoad;
 	@Autowired
 	private GeneDataLoad geneLoad;
+	
+	@Autowired
+	private GPDataLoad gpLoad;
 
 	@Override
 	public void initData()	{
@@ -24,6 +28,7 @@ public class InitDataServiceImpl implements InitDataService{
 		phenLoad.loadPhenoData();
 		//初始化基因数据
 		geneLoad.loadGeneData();
-		//TODO：初始化基因-表型数据
+		//初始化基因-表型数据
+		gpLoad.loadGPData();
 	}
 }

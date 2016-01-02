@@ -23,5 +23,4 @@ public class Edge {
 		this.target = target;
 	}
 	
-	
 }

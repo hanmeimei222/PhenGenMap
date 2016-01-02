@@ -18,7 +18,7 @@ import com.service.QueryPhenService;
 
 @Controller
 @RequestMapping("/")
-public class MVCController {
+public class PhenoQueryController {
 	
 	@Autowired
 	QueryPhenService pService;

@@ -1,6 +1,6 @@
 package com.model;
 
-public class Edge {
+public class GPEdge {
 
 	private GNode source;
 	private PNode target;

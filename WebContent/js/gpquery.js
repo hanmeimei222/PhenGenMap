@@ -46,6 +46,8 @@ function submitGPQuery()
 	});
 
 }
+//数字
+var patrn=/^\d*$/; 
 
 function drawGPA(data){
 
@@ -60,26 +62,57 @@ function drawGPA(data){
 		        	selector: 'node',
 		        	css: {
 		        		'content': 'data(id)',
+		        		'font-size': 20,
 		        		'text-valign': 'center',
-		        		'text-halign': 'center'
+		        		'text-halign': 'center',
+		        		'background-color': function(ele){
+		        			
+		    				if(ele.data().queryInput)
+		    				{
+		    					return '#771';
+		    				}
+		    				else
+		    				{
+		    					return '#888';
+		    				}
+		    			}
 		        	}
 		        },
 		        {
 		        	selector: '$node > node',
 		        	css: {
 		        		'padding-top': '10px',
-		        		'padding-left': '10px',
-		        		'padding-bottom': '10px',
-		        		'padding-right': '10px',
+		        		'padding-left': '20px',
+		        		'padding-bottom': '20px',
+		        		'padding-right': '20px',
+		        		'font-size': 20,
 		        		'text-valign': 'top',
 		        		'text-halign': 'center',
-		        		'background-color': '#bbb'
+		        		'background-color':function(ele)
+		        		{
+		        			//gene 的父层节点
+		        			if(ele.data().id == 'gene')
+		        			{
+		        				return '#8FB8E6';
+		        			}
+		        			//phen的父层节点
+		        			if(ele.data().id == 'phen')
+		        			{
+		        				return '#7C8389';
+		        			}
+		        			if (patrn.test(ele.data().id)){
+		        				return '#EAC922';
+		        			}
+		        		}
 		        	}
 		        },
 		        {
 		        	selector: 'edge',
 		        	css: {
-		        		'target-arrow-shape': 'triangle'
+		        		'target-arrow-shape': 'triangle',
+		    			'target-arrow-color':'#9dbaea',
+		    			'width':3,
+		    			'line-color':'#9dbaea'
 		        	}
 		        },
 		        {

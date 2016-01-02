@@ -70,7 +70,7 @@ public class ModelTransferUtil {
 					cnode =new CytoNode(new Node(level,level,"phen",false));
 					nodes.add(cnode);
 				}
-				if(symbols.containsKey(pid))
+				if(pids.containsKey(pid))
 				{
 					isQuery = true;
 				}

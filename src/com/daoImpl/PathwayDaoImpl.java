@@ -79,6 +79,33 @@ public class PathwayDaoImpl implements PathwayDao{
 		return result;
 	}
 
+	
+	//返回全部pathways 
+	@Override
+	public Map<String, Map<String, Map<Pathway, Boolean>>> getAllPathways() {
+		return GlobalData.classmap;
+	}
+	
+	//返回class2-class1的map
+	@Override
+	public Map<String, String> getCls2cls1Map() {
+		return GlobalData.clsmap;
+	}
+	
+	//返回class2-pathways的map
+	@Override
+	public Map<String, Set<Pathway>> getCls2PathwayMap(){
+		Map<String, Set<Pathway>>result = new HashMap<String, Set<Pathway>>();
+		Set<String>cls2set = GlobalData.clsmap.keySet();
+		for (String cls2 : cls2set) {
+			String cls1 = GlobalData.clsmap.get(cls2);
+			Set<Pathway>pwset = GlobalData.classmap.get(cls1).get(cls2).keySet();
+			result.put(cls2, pwset);
+		}
+		return result;
+	}
+	
+	
 	//查询一级类别，输出该类下的子类，以及子类的相关pathways
 	@Override
 	public Map<String,Map<Pathway,Boolean>> getMainCatalog(String class1){
@@ -105,12 +132,12 @@ public class PathwayDaoImpl implements PathwayDao{
 		return class1;
 	}
 
-	//pathway二级类别查询,输出属于哪一个上级类别，以及包含哪些pathways
+	//pathway二级类别查询,输出包含哪些pathways
 	@Override
 	public Set<Pathway> getSubCatalog(String class2){
 		Set<Pathway>result = new HashSet<Pathway>();
-		String class1 = GlobalData.clsmap.get(class2);
-		result = GlobalData.classmap.get(class1).get(class2).keySet();
+		Map<String, Set<Pathway>> cls2map = getCls2PathwayMap();
+		result = cls2map.get(class2);
 		return result;
 	}
 
@@ -130,4 +157,8 @@ public class PathwayDaoImpl implements PathwayDao{
 		}
 		return result;
 	}
+
+	
+
+	
 }

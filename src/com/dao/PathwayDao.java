@@ -34,6 +34,23 @@ public interface PathwayDao {
 	 */
 	public Set<Pathway> getMultiPathway(String[] query);
 	
+	/**
+	 * @Description 返回全部pathways 
+	 * @return Map<String,Map<String,Map<Pathway,Boolean>>>
+	 */
+	public Map<String,Map<String,Map<Pathway,Boolean>>> getAllPathways();
+	
+	/**
+	 * @Description 返回class2-class1的map
+	 * @return Map<String,String>
+	 */
+	public Map<String,String> getCls2cls1Map();
+	
+	/**
+	 * 返回class2-pathways的map
+	 * @return
+	 */
+	public Map<String,  Set<Pathway>> getCls2PathwayMap();
 	
 	/**
 	 * 查询一级类别，输出该类下的子类，以及子类的相关pathways

@@ -1,5 +1,6 @@
 package com.serviceImpl;
 
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,28 +20,25 @@ public class QueryPathwayServiceImpl implements QueryPathwayService {
 	PathwayDao pwayDao;
 	
 	@Override
-	public Graph queryPathway(String[] ids, PathwayQueryType type) {
+	public Graph queryPathway(Map<String,Boolean> queryMap, PathwayQueryType type) {
 		Set<Pathway> result = null;
 		Graph g = new Graph();
+		String[] ids = queryMap.keySet().toArray(new String[1]);
 		switch (type) {
 		case SINGLE_WAYS:
 			result = pwayDao.getMultiPathway(ids);
-			g = ModelTransferUtil.sglpathways2graph(result);
+			g = ModelTransferUtil.sglpathways2graph(result,queryMap);
 			break;
 		case SINGLE_GENES:
 //			result = pwayDao.getPathwayByGene(ids);
 			break;
 		case ALL_PATHWAYS:
-			g = ModelTransferUtil.allpathways2graph();
+			Map<String,String>cls2_cls1 = pwayDao.getCls2cls1Map();
+			Map<String,Set<Pathway>>cls2map = pwayDao.getCls2PathwayMap();
+			g = ModelTransferUtil.allpathways2graph(cls2_cls1,cls2map);
 		default:
 			break;
 		}
-		
-		
-		
-		
-		
-		
 		return g;
 		
 	}

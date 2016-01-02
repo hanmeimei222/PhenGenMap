@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 =\=\=\=\=\=\=
 <<<<<<<=HEAD
 >>>>>>>=339dab3383205ceb916ed253147e9b7cb704f8eb
@@ -6,3 +7,14 @@ encoding//WebContent/g_p_association.jsp=UTF-8
 encoding//WebContent/hello.jsp=UTF-8
 encoding//WebContent/index.html=UTF-8
 encoding/<project>=UTF-8
+=======
+#Sat Jan 02 10:10:14 CST 2016
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=339dab3383205ceb916ed253147e9b7cb704f8eb
+eclipse.preferences.version=1
+encoding//WebContent/WEB-INF/view/hello.jsp=UTF-8
+encoding//WebContent/index.html=UTF-8
+encoding//WebContent/pathway.jsp=UTF-8
+encoding/<project>=UTF-8
+>>>>>>> 73f6b4ad400a11870169ed8e5a8194dced03d2bc

@@ -10,7 +10,17 @@ function cytoDrawPathway(data)
 		  style: cytoscape.stylesheet()
 		    .selector('node')
 		      .css({
-		        'content': 'data(id)'
+		        'content': 'data(id)',
+		        'background-color': function(ele){
+					if(ele.data().queryInput)
+					{
+						return '#771';
+					}
+					else
+					{
+						return '#888';
+					}
+				}
 		      })
 		    .selector('.eating')
 		      .css({
@@ -29,6 +39,7 @@ function cytoDrawPathway(data)
 		  
 		  layout: {
 		    name: 'breadthfirst',
+//			name: 'dagre',
 		    directed: true,
 		    padding: 10
 		  }
@@ -56,7 +67,7 @@ function cytoDrawPathway(data)
 		  }
 		        
 		  var delay = 0;
-		  var duration = 500;
+		  var duration = 100;
 		  for( var i = food.length - 1; i >= 0; i-- ){ (function(){
 		    var thisFood = food[i];
 		    var eater = thisFood.connectedEdges(function(){

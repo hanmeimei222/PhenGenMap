@@ -92,4 +92,10 @@ public interface PhenDao {
 	 */
 	public Set<PNode> getContainsNodes(String start, String end);
 	
+	/**
+	 * 实现自动补全，默认返回前10条结果
+	 */
+	public Set<PNode> getAutoCompleteNodes(String query,int n);
+
+	public Set<PNode> getAutoCompleteNodes(String query);
 }

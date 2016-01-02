@@ -1,5 +1,6 @@
 package com.daoImpl;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -65,7 +66,9 @@ public class PhenDaoImpl implements PhenDao{
 		}
 	}
 
-	//多个节点全部信息的查询，query以分号隔开
+
+	
+	//多个节点全部信息的查询
 	@Override
 	public Set<PNode> getMultiPNode(String [] query){
 		Set<PNode> result = new HashSet<PNode>();
@@ -152,12 +155,18 @@ public class PhenDaoImpl implements PhenDao{
 		Set<PNode> nextNodes = new HashSet<PNode>();
 
 		PNode node = GlobalData.allpnodes.get(id);
-
-		currNodes.add(node);
+		if(node!=null)
+		{
+			currNodes.add(node);
+		}
 		while(!currNodes.isEmpty()){
 			result.addAll(currNodes);
 
 			for (PNode pNode : currNodes) {
+				if(pNode==null)
+				{
+					System.out.println();
+				}
 				if(direction.equals("Pre")){
 					nextNodes.addAll(pNode.getFather().keySet());
 				}
@@ -166,8 +175,11 @@ public class PhenDaoImpl implements PhenDao{
 				}
 			}
 			currNodes.clear();
-			currNodes.addAll(nextNodes);
-			nextNodes.clear();
+			if(!nextNodes.isEmpty())
+			{
+				currNodes.addAll(nextNodes);
+				nextNodes.clear();
+			}
 		}
 		return result;
 	}
@@ -265,4 +277,40 @@ public class PhenDaoImpl implements PhenDao{
 		return result;
 	}
 
+	@Override
+	public Set<PNode> getAutoCompleteNodes(String query) {
+		return getAutoCompleteNodes(query,10);
+	}
+	@Override
+	public Set<PNode> getAutoCompleteNodes(String query, int n) {
+		Set<PNode> set = new HashSet<PNode>();
+		Collection<PNode> nodes = GlobalData.allpnodes.values();
+		boolean isId = false;
+		if(query.startsWith("mp:"))
+		{
+			isId = true;
+		}
+		
+		for (PNode node : nodes) {
+			String key;
+			if(isId)
+			{
+				key = node.getPheno_id();
+			}
+			else
+			{
+				key = node.getPheno_name();
+			}
+			if(key.regionMatches(true, 0, query, 0, query.length()))
+			{
+				set.add(node);
+				if(set.size()>n)
+				{
+					break;
+				}
+			}
+		}
+
+		return set;
+	}
 }

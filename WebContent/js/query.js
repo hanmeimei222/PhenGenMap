@@ -60,7 +60,7 @@ function submitQuery()
 $('#singlemp').typeahead(
 		{
 		    minLength: 2,
-		    highlight: true,
+		    highlight: true
 		  },
 		  {
 		    name: 'search-dataset',

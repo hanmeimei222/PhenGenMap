@@ -180,12 +180,12 @@ public class ModelTransferUtil {
 //		先构造class1和class2的节点和边，再嵌套构造class2和它的pathways之间的节点和边
 //		Map<String,Map<String,Map<Pathway,Boolean>>>
 		Set<String>class2set = cls2_cls1.keySet();
-		
 		for (String cls2 : class2set) {
 			
 			//构造cls1和cls2的节点和边
 			nodes.add(new CytoNode(new Node(cls2, cls2)));
 			String cls1 = cls2_cls1.get(cls2);
+			
 			nodes.add(new CytoNode(new Node(cls1, cls1)));
 			
 			Edge l = new Edge(cls1, cls2);

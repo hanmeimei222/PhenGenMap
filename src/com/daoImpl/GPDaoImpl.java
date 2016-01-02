@@ -20,7 +20,7 @@ public class GPDaoImpl implements GPDao{
 	 * 输入表型id集合，查出与它关联的GNode,相应Edge，返回查询结果的GPGraph
 	 */
 	@Override
-	public GPGraph getAssoByPheno(String []pids){
+	public GPGraph getAssoByPheno(Set<String>pids){
 		GPGraph graph = new GPGraph();
 		Set<PNode>pns = new HashSet<PNode>();
 		Set<GPEdge>edges = new HashSet<GPEdge>();
@@ -30,9 +30,9 @@ public class GPDaoImpl implements GPDao{
 		graph.setPnodes(pns);
 		graph.setEdges(edges);
 
-		for (int i=0; i<pids.length; i++) {
+		for (String pid : pids) {
 			//构建点集
-			PNode pn = GlobalData.allpnodes.get(pids[i]);
+			PNode pn = GlobalData.allpnodes.get(pid);
 			pns.add(pn);
 			Map<GNode,Boolean>gmap = GlobalData.p_g_map.get(pn);
 			Set<GNode>tmpgns = gmap.keySet();
@@ -40,6 +40,10 @@ public class GPDaoImpl implements GPDao{
 
 			//构建边集
 			for (GNode gn : tmpgns) {
+				if(gn == null)
+				{
+					continue;
+				}
 				GPEdge eg = new GPEdge();
 				eg.setSource(gn);
 				eg.setTarget(pn);
@@ -56,7 +60,7 @@ public class GPDaoImpl implements GPDao{
 	 * 输入基因symbol_name的集合，查出与它关联的PNode，相应的Edge，返回查询结果的GPGraph
 	 */
 	@Override
-	public GPGraph getAssoByGene(String []symbols){
+	public GPGraph getAssoByGene(Set<String>symbols){
 		GPGraph graph = new GPGraph();
 		Set<PNode>pns = new HashSet<PNode>();
 		Set<GPEdge>edges = new HashSet<GPEdge>();
@@ -66,9 +70,9 @@ public class GPDaoImpl implements GPDao{
 		graph.setPnodes(pns);
 		graph.setEdges(edges);
 
-		for(int i=0;i<symbols.length;i++){
+		for (String symbol : symbols) {
 			//构建点集
-			GNode gn = GlobalData.allgnodes.get(symbols[i]);
+			GNode gn = GlobalData.allgnodes.get(symbol);
 			gns.add(gn);
 			Map<PNode,Boolean>pmap = GlobalData.g_p_map.get(gn);
 			Set<PNode>tmppns = pmap.keySet();

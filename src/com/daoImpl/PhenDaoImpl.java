@@ -70,11 +70,11 @@ public class PhenDaoImpl implements PhenDao{
 	
 	//多个节点全部信息的查询
 	@Override
-	public Set<PNode> getMultiPNode(String [] query){
+	public Set<PNode> getMultiPNode(Set<String> query){
 		Set<PNode> result = new HashSet<PNode>();
-		for(int i=0;i<query.length;i++){
+		for (String pid : query) {
 			PNode pn = new PNode();
-			pn = getSinglePNode(query[i]);
+			pn = getSinglePNode(pid);
 			if(null!=pn){
 				result.add(pn);
 			}
@@ -129,7 +129,7 @@ public class PhenDaoImpl implements PhenDao{
 	//纵向查询
 	//输入待查询节点id，输出以他为起点的所有前驱节点
 	@Override
-	public Set<PNode>getPreNodes(String[] ids){
+	public Set<PNode>getPreNodes(Set<String> ids){
 		Set<PNode> preNodes = new HashSet<PNode>();
 		for (String id : ids) {
 			preNodes.addAll(getNodes(id,"Pre"));
@@ -138,7 +138,7 @@ public class PhenDaoImpl implements PhenDao{
 	}
 	//输入待查询节点id，输出以他为起点的所有后继节点
 	@Override
-	public Set<PNode>getPostNodes(String[] ids){
+	public Set<PNode>getPostNodes(Set<String> ids){
 
 		Set<PNode> postNodes = new HashSet<PNode>();
 		for (String id : ids) {
@@ -189,7 +189,7 @@ public class PhenDaoImpl implements PhenDao{
 	//横纵结合查询
 	//输入单个节点id/name，找n步以内可达的节点集合
 	@Override
-	public Set<PNode> getNStepNode(String[] ids,int n){
+	public Set<PNode> getNStepNode(Set<String> ids,int n){
 		Set<PNode>result = new HashSet<PNode>();
 		Set<PNode> currNodes = new HashSet<PNode>();
 		Set<PNode> nextNodes = new HashSet<PNode>();

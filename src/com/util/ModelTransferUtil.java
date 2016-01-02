@@ -35,44 +35,57 @@ public class ModelTransferUtil {
 		//在集合中额外添加一个phen节点表示所有表型的父类
 		cnode =new CytoNode(new Node("phen","phen",null,false));
 		nodes.add(cnode);
+		edges.add(new CytoEdge(new Edge("gene", "phen")));
 
 		Set<GNode>gNodes = gpGraph.getGnodes();
-		for (GNode gNode : gNodes) {
-			boolean isQuery = false;
-			String symbol = gNode.getSymbol_name();
-			if(symbols.containsKey(symbol))
-			{
-				isQuery = true;
+		if(gNodes!=null)
+		{
+			for (GNode gNode : gNodes) {
+				boolean isQuery = false;
+				if(gNode == null)
+				{
+					continue;
+				}
+				String symbol = gNode.getSymbol_name();
+				if(symbols.containsKey(symbol))
+				{
+					isQuery = true;
+				}
+				cnode =new CytoNode(new Node(gNode.getSymbol_name(), gNode.getId(),"gene",isQuery));
+				nodes.add(cnode);
 			}
-			cnode =new CytoNode(new Node(gNode.getSymbol_name(), gNode.getId(),"gene",isQuery));
-			nodes.add(cnode);
 		}
 		Set<PNode>pNodes = gpGraph.getPnodes();
 		//构造一个临时的map用于标记本次返回包含了多少层
-		Map<String,Boolean> isLevelContained = new HashMap<String, Boolean>();
-		for (PNode pNode : pNodes) {
-			boolean isQuery = false;
-			String pid = pNode.getPheno_id();
-			//为了简单，只取第一个level信息
-			String level = pNode.getPheno_level().split(",")[0];
-			if(!isLevelContained.containsKey(level))
-			{
-				//创建一个新的节点表示该level的父层
-				cnode =new CytoNode(new Node(level,level,"phen",false));
+		if(pNodes!=null){
+			Map<String,Boolean> isLevelContained = new HashMap<String, Boolean>();
+			for (PNode pNode : pNodes) {
+				boolean isQuery = false;
+				String pid = pNode.getPheno_id();
+				//为了简单，只取第一个level信息
+				String level = pNode.getPheno_level().split(",")[0];
+				if(!isLevelContained.containsKey(level))
+				{
+					//创建一个新的节点表示该level的父层
+					cnode =new CytoNode(new Node(level,level,"phen",false));
+					nodes.add(cnode);
+				}
+				if(symbols.containsKey(pid))
+				{
+					isQuery = true;
+				}
+				cnode =new CytoNode(new Node(pNode.getPheno_id(),pNode.getPheno_name(),level,isQuery));
 				nodes.add(cnode);
 			}
-			if(symbols.containsKey(pid))
-			{
-				isQuery = true;
-			}
-			cnode =new CytoNode(new Node(pNode.getPheno_id(),pNode.getPheno_name(),level,isQuery));
-			nodes.add(cnode);
 		}
-
 		Set<GPEdge>edge = gpGraph.getEdges();
-		for (GPEdge gpEdge : edge) {
-			Edge l = new Edge(gpEdge.getSource().getSymbol_name(), gpEdge.getTarget().getPheno_id());
-			edges.add(new CytoEdge(l));
+		if(edge!=null)
+		{
+			for (GPEdge gpEdge : edge) {
+
+				Edge l = new Edge(gpEdge.getSource().getSymbol_name(), gpEdge.getTarget().getPheno_id());
+				edges.add(new CytoEdge(l));
+			}
 		}
 		return g;
 	}

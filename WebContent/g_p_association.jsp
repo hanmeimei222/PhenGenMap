@@ -55,11 +55,20 @@ body {
 					<div>
 						<h3>查询计划</h3>
 						<div class="row post-content-row">
-							<label class="post-content-row-title"> step1:输入要查询的MP列表</label>
-							<div class="form-group">
+							<label class="post-content-row-title">请选择要查询的类型</label> <select
+								id="queryType" name="queryType" class="form-control"
+								onchange="showInputPanel()">
+								<option value="default">--请选择查询类型--</option>
+								<option value="inputMP">查询给定MP关联的基因</option>
+								<option value="inputGene">查询给定基因关联的MP</option>
+								<option value="inputBoth">查询给定MP和基因之间的关联</option>
+							</select>
+						</div>
+						<div class="row post-content-row">
+							<div class="form-group hidden" id="mpInputPanel">
 								<label class="post-content-row-title"> 输入批量MP：</label>
 								<textarea id="mpList" name="mpList" class="form-control"
-									rows="3">MP:0002098
+									rows="5">MP:0002098
 MP:0004576
 MP:0008160
 MP:0008161
@@ -69,37 +78,41 @@ MP:0001379
 MP:0003415
 </textarea>
 							</div>
-							<label class="post-content-row-title"> step2:输入要查询的Gene列表</label>
-							<div class="form-group">
+							<div class="form-group hidden" id="geneInputPanel">
 								<label class="post-content-row-title"> 输入批量MP：</label>
 								<textarea id="geneList" name="geneList" class="form-control"
-									rows="3">EDNRA
+									rows="5">EDNRA
 GLI3
 PAX3
 ADA</textarea>
 							</div>
-							<div class="row post-content-row">
-							<label class="post-content-row-title"> step4:提交查询</label>
+						</div>
+						<div class="row post-content-row">
+						<input type="checkbox" id="showMPA" name="showMPA"/>同时展示MP之间的关联
+						</div>
+						<div class="row post-content-row">
+							<label class="post-content-row-title">提交查询</label>
 							<div class="form-group">
 								<button type="button" onclick="submitGPQuery()"
 									class="btn btn-default">绘图</button>
 							</div>
 						</div>
-						</div>
 					</div>
 				</div>
-
-				<div class="col-md-8 services-right">
-					<h3>查询结果</h3>
-					<div>
-						<div id="gpcy"></div>
-					</div>
-				</div>
-				<div class="clearfix"></div>
 			</div>
-			<!-- services-main end here -->
 		</div>
-		<!-- container end here -->
+
+		<div class="col-md-8 services-right">
+			<h3>查询结果</h3>
+			<div>
+				<div id="gpcy"></div>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+	<!-- services-main end here -->
+	</div>
+	<!-- container end here -->
 	</div>
 	<!-- services end here -->
 	<!--footer start here-->

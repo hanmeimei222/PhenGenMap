@@ -32,7 +32,7 @@ public interface PhenDao {
 	/**
 	 * 多个节点全部信息的查询，query以分号隔开
 	 */
-	public  Set<PNode> getMultiPNode(String[] query);
+	public  Set<PNode> getMultiPNode(Set<String> query);
 	
 	/**
 	 * 横向查询：
@@ -58,12 +58,12 @@ public interface PhenDao {
 	 * 纵向查询
 	 * 输入待查询节点id，输出以他为起点的所有前驱节点
 	 */
-	public Set<PNode>getPreNodes(String[] ids);
+	public Set<PNode>getPreNodes(Set<String> ids);
 	
 	/**
 	 * 输入待查询节点id，输出以他为起点的所有后继节点
 	 */
-	public Set<PNode>getPostNodes(String[] ids);
+	public Set<PNode>getPostNodes(Set<String> ids);
 	
 	
 	
@@ -72,7 +72,7 @@ public interface PhenDao {
 	 * 横纵结合查询
 	 * 输入单个节点id/name，找n步以内可达的节点集合
 	 */
-	public Set<PNode> getNStepNode(String[] ids,int n);
+	public Set<PNode> getNStepNode(Set<String> ids,int n);
 	
 	
 	/**

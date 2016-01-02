@@ -27,7 +27,7 @@ public class QueryPhenServiceImpl implements QueryPhenService{
 
 		Set<PNode> result = null;
 		
-		String[]  ids = queryMap.keySet().toArray(new String[1]);
+		Set<String>  ids = queryMap.keySet();
 		switch (type) {
 		case SINGLE_NODES:
 			result = pheDao.getMultiPNode(ids);

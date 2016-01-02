@@ -25,29 +25,32 @@ public class GPQueryController {
 	@RequestMapping("/queryGPA")
 	@ResponseBody
 	public Graph getPGAssociation(@RequestParam("mpList") String mpoIds,
-			@RequestParam("geneList") String geneSymbols)
+			@RequestParam("geneList") String geneSymbols,@RequestParam("showMPA") boolean showMPA)
 	{
-
 		Map<String,Boolean> pids = new HashMap<String, Boolean>();
-		String[] mpArr =mpoIds.split("\n|\t");
+		if(mpoIds!=null && !mpoIds.equals(""))
+		{
+			String[] mpArr =mpoIds.split("\n|\t");
 
-		for (String str : mpArr) {
-			if(!"".equals(str))
-			{
-				pids.put(str.trim(),true);
+			for (String str : mpArr) {
+				if(!"".equals(str))
+				{
+					pids.put(str.trim(),true);
+				}
 			}
 		}
-
 		Map<String,Boolean> symbols = new HashMap<String, Boolean>();
-		String[] geneArr =geneSymbols.split("\n|\t");
+		if(geneSymbols!=null && !geneSymbols.equals(""))
+		{
+			String[] geneArr =geneSymbols.split("\n|\t");
 
-		for (String str : geneArr) {
-			if(!"".equals(str))
-			{
-				symbols.put(str.trim(),true);
+			for (String str : geneArr) {
+				if(!"".equals(str))
+				{
+					symbols.put(str.trim(),true);
+				}
 			}
 		}
-
-		return gpService.getAssoByPhenoGene(pids, symbols);
+		return gpService.getAssoByPhenoGene(pids, symbols,showMPA);
 	}
 }

@@ -9,6 +9,7 @@ var infoTemplate = Handlebars.compile([
                                        '<p class="ac-more"><i class="fa fa-external-link"></i> <a target="_blank" href="http://www.informatics.jax.org/searches/Phat.cgi?id={{id}}">More information</a></p>'
                                        ].join(''));
 
+var patrn=/^\d*$/; 
 function cytoscapeDraw(data)
 {
 	var cy = window.cy = cytoscape({
@@ -40,6 +41,32 @@ function cytoscapeDraw(data)
 			'width':3,
 			'line-color':'#9dbaea'
 		})
+		.selector('$node > node')
+    	.css({
+    		'padding-top': '10px',
+    		'padding-left': '20px',
+    		'padding-bottom': '20px',
+    		'padding-right': '20px',
+    		'font-size': 20,
+    		'text-valign': 'top',
+    		'text-halign': 'center',
+    		'background-color':function(ele)
+    		{
+    			//gene 的父层节点
+    			if(ele.data().id == 'gene')
+    			{
+    				return '#E9F1FC';
+    			}
+    			//phen的父层节点
+    			if(ele.data().id == 'phen')
+    			{
+    				return '#D3D7DD';
+    			}
+    			if (patrn.test(ele.data().id)){
+    				return '#CDD1D6';
+    			}
+    		}
+    	})
 		.selector('.highlighted')
 		.css({
 			'min-zoomed-font-size': 1,
@@ -193,3 +220,7 @@ function clear(){
 	});
 }
 
+function showQueryPanel()
+{
+	$("#queryPanel").toggle();
+}

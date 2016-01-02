@@ -8,7 +8,12 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 
+<script src="js/typeahead.bundle.js"></script>
+<script src="js/handlebars.min.js"></script>
+
 <script src="js/cytoscape/cytoscape.min.js"></script>
+
+<script src="js/cytoscapeDraw.js"></script>
 <script src="js/gpquery.js"></script>
 
 <script
@@ -24,7 +29,7 @@ body {
 	font-size: 14px;
 }
 
-#gpcy {
+#cy {
 	width: 90%;
 	height: 400px;
 }
@@ -97,6 +102,23 @@ ADA</textarea>
 									class="btn btn-default">绘图</button>
 							</div>
 						</div>
+						<div class="row post-content-row">
+							<label class="post-content-row-title"> step5:图内检索</label>
+							<div class="form-group">
+								<button type="button" onclick="showQueryPanel()"
+									class="btn btn-default">显示图内检索>></button>
+							</div>
+						</div>
+						<div class="row post-content-row ">
+							<div id="queryPanel" style="display: none;">
+								<button id="reset" name="reset" class="btn btn-default">重置</button>
+								<div id="search-wrapper">
+									<input type="text" class="form-control" id="search" autofocus
+										placeholder="Search In graph">
+								</div>
+								<div id="info"></div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -105,7 +127,7 @@ ADA</textarea>
 		<div class="col-md-8 services-right">
 			<h3>查询结果</h3>
 			<div>
-				<div id="gpcy"></div>
+				<div id="cy"></div>
 			</div>
 		</div>
 		<div class="clearfix"></div>

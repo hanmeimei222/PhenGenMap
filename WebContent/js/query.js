@@ -22,10 +22,6 @@ function showLevelPanel()
 	}
 }
 
-function showQueryPanel()
-{
-	$("#queryPanel").toggle();
-}
 
 function submitQuery()
 {
@@ -56,61 +52,4 @@ function submitQuery()
 		}
 	});
 }
-
-$('#singlemp').typeahead(
-		{
-		    minLength: 2,
-		    highlight: true
-		  },
-		  {
-		    name: 'search-dataset',
-		    source: function( query, cb ){
-		    	alert(query);
-		      function matches( str, q ){
-		        str = (str || '').toLowerCase();
-		        q = (q || '').toLowerCase();
-		        
-		        return str.match( q );
-		      }
-		      
-		      var fields = ['id', 'name'];
-
-		      function anyFieldMatches( n ){
-		        for( var i = 0; i < fields.length; i++ ){
-		          var f = fields[i];
-		          
-		          if( matches( n.data(f), query ) ){
-		            return true;
-		          }
-		        }
-		        return false;
-		      }
-		      
-		      function getData(n){
-		        var data = n.data();
-		        
-		        return data;
-		      }
-		      
-		      function sortByName(n1, n2){
-		        if( n1.data('id') < n2.data('id') ){
-		          return -1;
-		        } else if( n1.data('id') > n2.data('id') ){
-		          return 1;
-		        }
-		        return 0;
-		      }
-		      var res =  cy.nodes().stdFilter( anyFieldMatches ).sort( sortByName ).map( getData );
-		      cb( res );
-		    },
-		    templates: {
-		      suggestion: infoTemplate
-		    }
-		  }).on('typeahead:selected', function(e, entry, dataset){
-		    var n = cy.getElementById(entry.id);
-		    n.select();
-		    showNodeInfo( n );
-		  });
-
-
 

@@ -1,4 +1,11 @@
+<<<<<<< HEAD
+#Fri Jan 01 17:04:58 CST 2016
+eclipse.preferences.version=1
+encoding//WebContent/hello.jsp=UTF-8
+encoding/<project>=UTF-8
+=======
 eclipse.preferences.version=1
 encoding//WebContent/WEB-INF/view/hello.jsp=UTF-8
 encoding//WebContent/index.html=UTF-8
 encoding/<project>=UTF-8
+>>>>>>> 339dab3383205ceb916ed253147e9b7cb704f8eb

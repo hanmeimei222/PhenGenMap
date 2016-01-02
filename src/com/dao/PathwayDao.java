@@ -1,11 +1,13 @@
 package com.dao;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.springframework.stereotype.Repository;
+
 import com.model.Pathway;
 
+@Repository
 public interface PathwayDao {
 
 	/**
@@ -30,7 +32,7 @@ public interface PathwayDao {
 	/**
 	 * 多条pathway信息的查询，query以分号隔开
 	 */
-	public List<Pathway> getMultiPNode(String query);
+	public Set<Pathway> getMultiPathway(String[] query);
 	
 	
 	/**

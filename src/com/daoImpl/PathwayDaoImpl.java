@@ -1,21 +1,23 @@
 package com.daoImpl;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
+
+import org.springframework.stereotype.Repository;
 
 import com.dao.PathwayDao;
 import com.global.GlobalData;
 import com.model.GNode;
 import com.model.Pathway;
 
+@Repository
 public class PathwayDaoImpl implements PathwayDao{
 
 	//输入pathway id查询该条pathway具体信息
+	@Override
 	public Pathway getPathwayById(String id){
 		Pathway result = new Pathway();
 		result = GlobalData.allways.get(id);
@@ -23,6 +25,7 @@ public class PathwayDaoImpl implements PathwayDao{
 	} 
 
 	//输入pathway name 查询该条pathway
+	@Override
 	public Pathway getPathwayByName(String name){
 		Pathway result = new Pathway();
 		String id = GlobalData.pwnamemap.get(name);
@@ -31,6 +34,7 @@ public class PathwayDaoImpl implements PathwayDao{
 	}
 
 	//输入id或name 查询单条pathway
+	@Override
 	public Pathway getSinglePathway(String query){
 		Pathway result = new Pathway();
 		if(query.startsWith("mmu")){
@@ -61,12 +65,13 @@ public class PathwayDaoImpl implements PathwayDao{
 	}
 
 	//多条pathway信息的查询，query以分号隔开
-	public List<Pathway> getMultiPNode(String query){
-		List<Pathway> result = new ArrayList<Pathway>();
-		String []temp = query.split(";");
-		for(int i=0;i<temp.length;i++){
+	@Override
+	public Set<Pathway> getMultiPathway(String[] query){
+		Set<Pathway> result = new HashSet<Pathway>();
+		
+		for(int i=0;i<query.length;i++){
 			Pathway pw = new Pathway();
-			pw = getSinglePathway(temp[i]);
+			pw = getSinglePathway(query[i]);
 			if(null!=pw){
 				result.add(pw);
 			}
@@ -75,6 +80,7 @@ public class PathwayDaoImpl implements PathwayDao{
 	}
 
 	//查询一级类别，输出该类下的子类，以及子类的相关pathways
+	@Override
 	public Map<String,Map<Pathway,Boolean>> getMainCatalog(String class1){
 		Map<String,Map<Pathway,Boolean>>subcatalog = new HashMap<String, Map<Pathway,Boolean>>();
 
@@ -83,6 +89,7 @@ public class PathwayDaoImpl implements PathwayDao{
 	}
 
 	//输入一二级类别，查询具体pathways
+	@Override
 	public Set<Pathway> getPathway(String class1,String class2){
 		Set<Pathway>result = new HashSet<Pathway>();
 		Map<String,Map<Pathway,Boolean>>subcatalog =  GlobalData.classmap.get(class1);
@@ -92,12 +99,14 @@ public class PathwayDaoImpl implements PathwayDao{
 	}
 
 	//输入二级类别返回所属一级类别
+	@Override
 	public String getClass1ByClass2(String class2){
 		String class1 = GlobalData.clsmap.get(class2);
 		return class1;
 	}
 
 	//pathway二级类别查询,输出属于哪一个上级类别，以及包含哪些pathways
+	@Override
 	public Set<Pathway> getSubCatalog(String class2){
 		Set<Pathway>result = new HashSet<Pathway>();
 		String class1 = GlobalData.clsmap.get(class2);
@@ -106,7 +115,9 @@ public class PathwayDaoImpl implements PathwayDao{
 	}
 
 	//按基因查询，输入symbolname，查询包含它的所有pathways
+	@Override
 	public Set<Pathway> getPathwayByGene(String symbolname){
+		
 		Set<Pathway>result = new HashSet<Pathway>();
 		GNode gn = new GNode();
 		gn.setSymbol_name(symbolname);

@@ -32,6 +32,12 @@ public class Node {
 	public void setParent(String parent) {
 		this.parent = parent;
 	}
+	public Node(String id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
+	}
+	
 	public Node(String id, String name, boolean queryInput) {
 		super();
 		this.id = id;

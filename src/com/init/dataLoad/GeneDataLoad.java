@@ -7,10 +7,13 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.stereotype.Repository;
+
 import com.global.GlobalData;
 import com.model.GNode;
 import com.model.Pathway;
 
+@Repository
 public class GeneDataLoad {
 
 	//根据读入的一行新建一条pathway
@@ -102,7 +105,8 @@ public class GeneDataLoad {
 
 	//加载gene数据
 	public void loadGeneData() {
-		String infile = "WebContent/data/inter_data/mmu_pathway_id_name_class_symbols.txt";
+		String infile = GlobalData.PATH+"/data/inter_data/mmu_pathway_id_name_class_symbols.txt";
+//		String infile = "WebContent/data/inter_data/mmu_pathway_id_name_class_symbols.txt";
 		readPathway(infile);
 	}
 

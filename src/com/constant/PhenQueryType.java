@@ -13,6 +13,7 @@ public enum PhenQueryType {
 	
 	public static PhenQueryType getTypeByStr(String name)
 	{
+		//遍历所有枚举值
 		for (PhenQueryType it : PhenQueryType.values())
 		{
 			if (it.getType().equals(name)) {

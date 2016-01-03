@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dao.GPDao;
+import com.dao.PathwayDao;
 import com.dao.PhenDao;
 import com.model.GPGraph;
 import com.model.PNode;
+import com.model.Pathway;
 import com.model.cytoscape.Graph;
 import com.service.QueryGPService;
 import com.util.ModelTransferUtil;
@@ -24,9 +26,12 @@ public class QueryGPServiceImpl implements QueryGPService{
 	@Autowired
 	PhenDao pDao;
 	
+	@Autowired
+	PathwayDao pathwayDao;
+	
 	@Override
 	public Graph getAssoByPhenoGene(Map<String, Boolean> pids,
-			Map<String, Boolean> symbols,boolean showMPA) {
+			Map<String, Boolean> symbols,boolean showMPA,boolean showPathway) {
 
 		Graph result = null;
 		GPGraph graph = null;
@@ -49,7 +54,13 @@ public class QueryGPServiceImpl implements QueryGPService{
 			Graph pGraph = ModelTransferUtil.pNode2graph(pnodes, pids);
 			result.getEdges().addAll(pGraph.getEdges());
 		}
-
+		if(showPathway)
+		{
+			Set<Pathway> pathway = pathwayDao.getMultiPathway(symbols.keySet());
+			Graph pathwayGraph = ModelTransferUtil.sglpathways2graph(pathway, symbols);
+			result.getNodes().addAll(pathwayGraph.getNodes());
+			result.getEdges().addAll(pathwayGraph.getEdges());
+		}
 		return result;		
 	}
 }

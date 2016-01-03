@@ -32,7 +32,7 @@ public interface PathwayDao {
 	/**
 	 * 多条pathway信息的查询，query以分号隔开
 	 */
-	public Set<Pathway> getMultiPathway(String[] query);
+	public Set<Pathway> getMultiPathway(Set<String> query);
 	
 	/**
 	 * @Description 返回全部pathways 

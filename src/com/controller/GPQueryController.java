@@ -25,7 +25,9 @@ public class GPQueryController {
 	@RequestMapping("/queryGPA")
 	@ResponseBody
 	public Graph getPGAssociation(@RequestParam("mpList") String mpoIds,
-			@RequestParam("geneList") String geneSymbols,@RequestParam("showMPA") boolean showMPA)
+			@RequestParam("geneList") String geneSymbols,
+			@RequestParam("showMPA") boolean showMPA,
+			@RequestParam("showPathway") boolean showPathway)
 	{
 		Map<String,Boolean> pids = new HashMap<String, Boolean>();
 		if(mpoIds!=null && !mpoIds.equals(""))
@@ -51,6 +53,6 @@ public class GPQueryController {
 				}
 			}
 		}
-		return gpService.getAssoByPhenoGene(pids, symbols,showMPA);
+		return gpService.getAssoByPhenoGene(pids, symbols,showMPA,showPathway);
 	}
 }

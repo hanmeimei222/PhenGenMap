@@ -66,12 +66,12 @@ public class PathwayDaoImpl implements PathwayDao{
 
 	//多条pathway信息的查询，query以分号隔开
 	@Override
-	public Set<Pathway> getMultiPathway(String[] query){
+	public Set<Pathway> getMultiPathway(Set<String> query){
 		Set<Pathway> result = new HashSet<Pathway>();
 		
-		for(int i=0;i<query.length;i++){
+		for (String str : query) {
 			Pathway pw = new Pathway();
-			pw = getSinglePathway(query[i]);
+			pw = getSinglePathway(str);
 			if(null!=pw){
 				result.add(pw);
 			}

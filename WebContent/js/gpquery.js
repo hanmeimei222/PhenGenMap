@@ -22,6 +22,7 @@ function showInputPanel(){
 function submitGPQuery()
 {
 	var showMPA = $("#showMPA").is(":checked");
+	var showPathway = $("#showPathway").is(":checked");
 	var queryType = $("#queryType").val();
 	var mpList="";
 	var geneList="";
@@ -34,7 +35,7 @@ function submitGPQuery()
 		geneList= $("#geneList").val();
 	}
 
-	data = {"mpList":mpList,"geneList":geneList,"showMPA":showMPA};
+	data = {"mpList":mpList,"geneList":geneList,"showMPA":showMPA,"showPathway":showPathway};
 	$.ajax({
 		type : "post",
 		data : data,

@@ -141,7 +141,7 @@ public class ModelTransferUtil {
 		return g;
 	}
 
-	
+
 	public static Graph sglpathways2graph(Set<Pathway> set,Map<String,Boolean> queryInput){
 		Graph g = new Graph();
 		List<CytoNode> nodes = new ArrayList<CytoNode>();
@@ -149,23 +149,28 @@ public class ModelTransferUtil {
 		g.setEdges(edges);
 		g.setNodes(nodes);
 
-		for (Pathway pway : set)
+		if(set!=null)
 		{
-			String pwayid = pway.getPw_id();
+			CytoNode cnode =new CytoNode(new Node("pathway","pathway",null,false));
+			nodes.add(cnode);
 			
-			//把所有节点加到nodes集合中
-			boolean isQuery = false;
-			if(queryInput!=null)
+			for (Pathway pway : set)
 			{
-				if(queryInput.containsKey(pwayid))
+				String pwayid = pway.getPw_id();
+
+				//把所有节点加到nodes集合中
+				boolean isQuery = false;
+				if(queryInput!=null)
 				{
-					isQuery = true;
+					if(queryInput.containsKey(pwayid))
+					{
+						isQuery = true;
+					}
 				}
+				nodes.add(new CytoNode(new Node(pwayid, pway.getPw_name(),"pathway",isQuery)));
 			}
-			nodes.add(new CytoNode(new Node(pway.getPw_id(), pway.getPw_name(),isQuery)));
+
 		}
-
-
 		return g;
 	}
 
@@ -176,24 +181,24 @@ public class ModelTransferUtil {
 		g.setEdges(edges);
 		g.setNodes(nodes);
 
-		
-//		先构造class1和class2的节点和边，再嵌套构造class2和它的pathways之间的节点和边
-//		Map<String,Map<String,Map<Pathway,Boolean>>>
+
+		//		先构造class1和class2的节点和边，再嵌套构造class2和它的pathways之间的节点和边
+		//		Map<String,Map<String,Map<Pathway,Boolean>>>
 		Set<String>class2set = cls2_cls1.keySet();
 		for (String cls2 : class2set) {
-			
+
 			//构造cls1和cls2的节点和边
 			nodes.add(new CytoNode(new Node(cls2, cls2)));
 			String cls1 = cls2_cls1.get(cls2);
-			
+
 			nodes.add(new CytoNode(new Node(cls1, cls1)));
-			
+
 			Edge l = new Edge(cls1, cls2);
 			edges.add(new CytoEdge(l));
-			
+
 			//构造cls2和它的pathways之间的节点和边
 			Set<Pathway>pwset = cls2map.get(cls2);
-			
+
 			for (Pathway pathway : pwset) {
 				nodes.add(new CytoNode(new Node(pathway.getPw_id(), pathway.getPw_name())));
 				Edge e = new Edge(cls2, pathway.getPw_id());

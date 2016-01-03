@@ -94,6 +94,7 @@ ADA</textarea>
 						</div>
 						<div class="row post-content-row">
 						<input type="checkbox" id="showMPA" name="showMPA"/>同时展示MP之间的关联
+						<input type="checkbox" id="showPathway" name="showPathway"/>同时展示MP之间的关联
 						</div>
 						<div class="row post-content-row">
 							<label class="post-content-row-title">提交查询</label>

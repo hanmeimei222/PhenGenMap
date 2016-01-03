@@ -23,7 +23,7 @@ public class QueryPathwayServiceImpl implements QueryPathwayService {
 	public Graph queryPathway(Map<String,Boolean> queryMap, PathwayQueryType type) {
 		Set<Pathway> result = null;
 		Graph g = new Graph();
-		String[] ids = queryMap.keySet().toArray(new String[1]);
+		Set<String> ids = queryMap.keySet();
 		switch (type) {
 		case SINGLE_WAYS:
 			result = pwayDao.getMultiPathway(ids);

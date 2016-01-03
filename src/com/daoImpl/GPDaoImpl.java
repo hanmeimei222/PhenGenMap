@@ -44,10 +44,7 @@ public class GPDaoImpl implements GPDao{
 				{
 					continue;
 				}
-				GPEdge eg = new GPEdge();
-				eg.setSource(gn);
-				eg.setTarget(pn);
-				eg.setType("gplink");
+				GPEdge eg = new GPEdge(gn,pn,"gplink");
 				edges.add(eg);
 			}
 		}
@@ -80,10 +77,7 @@ public class GPDaoImpl implements GPDao{
 
 			//构建边集
 			for (PNode pn : tmppns) {
-				GPEdge eg = new GPEdge();
-				eg.setSource(gn);
-				eg.setTarget(pn);
-				eg.setType("gplink");
+				GPEdge eg = new GPEdge(gn,pn,"gplink");
 				edges.add(eg);
 			}
 		}
@@ -113,29 +107,13 @@ public class GPDaoImpl implements GPDao{
 			Map<PNode,Boolean>pmap = GlobalData.g_p_map.get(gn);
 			if(pmap!=null)
 			{
-				for (PNode pNode : pns) {
-					if(pmap.containsKey(pNode))
+				for (PNode pn : pns) {
+					if(pmap.containsKey(pn))
 					{
-						GPEdge eg = new GPEdge();
-						eg.setSource(gn);
-						eg.setTarget(pNode);
-						eg.setType("gplink");
+						GPEdge eg = new GPEdge(gn,pn,"gplink");
 						edges.add(eg);
 					}
 				}
-				
-//				Set<PNode>tmppns = pmap.keySet();
-//				for (PNode pNode : tmppns) {
-//					//当前节点在我们关心的表型pns集合中
-//					if(pns.contains(pNode)){
-//						//构建边集
-//						GPEdge eg = new GPEdge();
-//						eg.setSource(gn);
-//						eg.setTarget(pNode);
-//						eg.setType("gplink");
-//						edges.add(eg);
-//					}
-//				}
 			}
 		}
 		return graph;

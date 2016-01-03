@@ -23,6 +23,13 @@ public class GPEdge {
 	public void setType(String type) {
 		this.type = type;
 	}
+	public GPEdge(GNode source, PNode target, String type) {
+		super();
+		this.source = source;
+		this.target = target;
+		this.type = type;
+	}
+	
 	
 	
 }

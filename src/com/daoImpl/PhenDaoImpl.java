@@ -10,10 +10,26 @@ import org.springframework.stereotype.Repository;
 
 import com.dao.PhenDao;
 import com.global.GlobalData;
+import com.model.GNode;
 import com.model.PNode;
 
 @Repository
 public class PhenDaoImpl implements PhenDao{
+	
+	
+	
+	@Override
+	public Map<PNode,Map<GNode,Boolean>> getAssociatedGenes(Set<PNode> pNodes)
+	{
+		Map<PNode,Map<GNode,Boolean>> map = new HashMap<PNode, Map<GNode,Boolean>>();
+		for (PNode node : pNodes)
+		{
+			Map<GNode,Boolean>gmap = GlobalData.p_g_map.get(node);
+			map.put(node, gmap);
+		}
+		
+		return map;
+	}
 	//按节点查找:
 	//按照id查询单个节点全部信息
 	@Override

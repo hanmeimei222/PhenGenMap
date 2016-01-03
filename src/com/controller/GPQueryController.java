@@ -3,56 +3,55 @@ package com.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.constant.NodeType;
 import com.model.cytoscape.Graph;
-import com.service.QueryGPService;
+import com.service.QueryAssoService;
 
 @Controller
 public class GPQueryController {
 
 	@Autowired
-	QueryGPService gpService;
+	QueryAssoService gpService;
 
-	/**
-	 * 根据用户输入，查询给定的mpList和geneList及其之间的关联
-	 * @return
-	 */
-	@RequestMapping("/queryGPA")
+	
+	@RequestMapping("/queryAsso")
 	@ResponseBody
-	public Graph getPGAssociation(@RequestParam("mpList") String mpoIds,
-			@RequestParam("geneList") String geneSymbols,
-			@RequestParam("showMPA") boolean showMPA,
-			@RequestParam("showPathway") boolean showPathway)
+	public Graph queryAssiciationByPathway(HttpServletRequest request)
 	{
-		Map<String,Boolean> pids = new HashMap<String, Boolean>();
-		if(mpoIds!=null && !mpoIds.equals(""))
+		String queryType = request.getParameter("queryType");
+		String[]nodeType=queryType.split("_");
+		//解析出输入的节点集合及类型
+		Map<NodeType,Map<String,Boolean>> map = new HashMap<NodeType, Map<String,Boolean>>();
+		for (String type : nodeType)
 		{
-			String[] mpArr =mpoIds.split("\n|\t");
-
-			for (String str : mpArr) {
-				if(!"".equals(str))
+			if(!"".equals(type))
+			{
+				String param = request.getParameter("param["+type+"List]");
+				Map<String,Boolean> ids = new HashMap<String, Boolean>();
+				if(param!=null && !param.equals(""))
 				{
-					pids.put(str.trim(),true);
+					String[] arr =param.split("\n|\t");
+
+					for (String str : arr) {
+						if(!"".equals(str))
+						{
+							ids.put(str.trim(),true);
+						}
+					}
 				}
+				map.put(NodeType.getTypeByStr(type), ids);
 			}
 		}
-		Map<String,Boolean> symbols = new HashMap<String, Boolean>();
-		if(geneSymbols!=null && !geneSymbols.equals(""))
-		{
-			String[] geneArr =geneSymbols.split("\n|\t");
-
-			for (String str : geneArr) {
-				if(!"".equals(str))
-				{
-					symbols.put(str.trim(),true);
-				}
-			}
-		}
-		return gpService.getAssoByPhenoGene(pids, symbols,showMPA,showPathway);
+		//调用函数查询输入的节点，以及各种节点之间的关系
+		
+		
+		return gpService.getAsso(map) ;
 	}
 }

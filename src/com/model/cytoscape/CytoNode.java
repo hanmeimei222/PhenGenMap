@@ -14,6 +14,24 @@ public class CytoNode {
 		this.data = data;
 	}
 	
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return this.data.getId().hashCode();
+	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		CytoNode other =(CytoNode)obj;
+		if(other.data.getId().equals(this.data.getId()) && other.data.getName().equals(this.data.getName()))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+		
+	}
 	
 }

@@ -5,10 +5,18 @@ import java.util.Set;
 
 import org.springframework.stereotype.Repository;
 
+import com.model.GNode;
 import com.model.PNode;
 
 @Repository
 public interface PhenDao {
+	
+	/**
+	 * 根据给定的MP节点集合，返回各自关联的基因集合
+	 * @param pNodes
+	 * @return
+	 */
+	public Map<PNode,Map<GNode,Boolean>> getAssociatedGenes(Set<PNode> pNodes);
 	
 	/**
 	 * 按节点查找:

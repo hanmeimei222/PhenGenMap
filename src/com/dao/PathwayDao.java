@@ -10,6 +10,7 @@ import com.model.Pathway;
 @Repository
 public interface PathwayDao {
 
+	
 	/**
 	 * 输入pathway id查询该条pathway具体信息
 	 */
@@ -79,6 +80,6 @@ public interface PathwayDao {
 	/**
 	 * 按基因查询，输入symbolname，查询包含它的所有pathways
 	 */
-	public Set<Pathway> getPathwayByGene(String symbolname);
+	public Map<Pathway,Boolean> getPathwayByGene(String symbolname);
 	
 }

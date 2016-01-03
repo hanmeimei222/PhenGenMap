@@ -55,15 +55,19 @@ function cytoscapeDraw(data)
     			//gene 的父层节点
     			if(ele.data().id == 'gene')
     			{
-    				return '#E9F1FC';
+    				return '#F7E7E2';
     			}
     			//phen的父层节点
     			if(ele.data().id == 'phen')
     			{
     				return '#D3D7DD';
     			}
+    			if(ele.data().id == 'pathway')
+    			{
+    				return '#90B2DF';
+    			}
     			if (patrn.test(ele.data().id)){
-    				return '#CDD1D6';
+    				return '#EFD972';
     			}
     		}
     	})

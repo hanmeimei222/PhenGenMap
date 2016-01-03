@@ -60,16 +60,28 @@ body {
 					<div>
 						<h3>查询计划</h3>
 						<div class="row post-content-row">
-							<label class="post-content-row-title">请选择要查询的类型</label> <select
-								id="queryType" name="queryType" class="form-control"
-								onchange="showInputPanel()">
-								<option value="default">--请选择查询类型--</option>
-								<option value="inputMP">查询给定MP关联的基因</option>
-								<option value="inputGene">查询给定基因关联的MP</option>
-								<option value="inputBoth">查询给定MP和基因之间的关联</option>
-							</select>
+							<label class="post-content-row-title">请选择要输入的节点类型</label>
+							<div class="row post-content-row">
+								<input type="checkbox" id="chkGene" name="chkGene" />Gene<br> 
+								<input type="checkbox" id="chkMp" name="chkMp" />MPO<br> 
+								<input 	type="checkbox" id="chkPathway" name="chkPathway" />Pathway<br>
+							</div>
+							<div>
+							<div class="form-group">
+								<button type="button" onclick="showInputPanel()"
+									class="btn btn-default">下一步</button>
+							</div>
+							</div>
 						</div>
 						<div class="row post-content-row">
+							<div class="form-group hidden" id="geneInputPanel">
+								<label class="post-content-row-title"> 输入批量Gene：</label>
+								<textarea id="geneList" name="geneList" class="form-control"
+									rows="5">EDNRA
+GLI3
+PAX3
+ADA</textarea>
+							</div>
 							<div class="form-group hidden" id="mpInputPanel">
 								<label class="post-content-row-title"> 输入批量MP：</label>
 								<textarea id="mpList" name="mpList" class="form-control"
@@ -83,18 +95,12 @@ MP:0001379
 MP:0003415
 </textarea>
 							</div>
-							<div class="form-group hidden" id="geneInputPanel">
-								<label class="post-content-row-title"> 输入批量MP：</label>
-								<textarea id="geneList" name="geneList" class="form-control"
-									rows="5">EDNRA
-GLI3
-PAX3
-ADA</textarea>
+
+							<div class="form-group hidden" id="pathwayInputPanel">
+								<label class="post-content-row-title"> 输入批量Pathway：</label>
+								<textarea id="pathwayList" name="pathwayList"
+									class="form-control" rows="5"></textarea>
 							</div>
-						</div>
-						<div class="row post-content-row">
-						<input type="checkbox" id="showMPA" name="showMPA"/>同时展示MP之间的关联
-						<input type="checkbox" id="showPathway" name="showPathway"/>同时展示MP之间的关联
 						</div>
 						<div class="row post-content-row">
 							<label class="post-content-row-title">提交查询</label>

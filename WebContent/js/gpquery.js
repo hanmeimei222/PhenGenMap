@@ -1,48 +1,61 @@
 function showInputPanel(){
-	
-	var queryType = $("#queryType").val();
-	
-	if(queryType == 'inputMP')
+	if($("#chkGene").is(':checked'))
 	{
-		$("#mpInputPanel").attr('class','show');
-		$("#geneInputPanel").attr('class','hidden');
-	}
-	if(queryType == 'inputGene')
-	{
-		$("#mpInputPanel").attr('class','hidden');
 		$("#geneInputPanel").attr('class','show');
 	}
-	if(queryType == 'inputBoth')
+	else
+	{
+		$("#geneInputPanel").attr('class','hidden');
+	}
+	if($("#chkMp").is(":checked"))
 	{
 		$("#mpInputPanel").attr('class','show');
-		$("#geneInputPanel").attr('class','show');	
+	}
+	else
+	{
+		$("#mpInputPanel").attr('class','hidden');
+	}
+	if($("#chkPathway").is(":checked"))
+	{
+		$("#pathwayInputPanel").attr('class','show');
+	}
+	else
+	{
+		$("#pathwayInputPanel").attr('class','hidden');
 	}
 }
 
 function submitGPQuery()
 {
-	var showMPA = $("#showMPA").is(":checked");
-	var showPathway = $("#showPathway").is(":checked");
-	var queryType = $("#queryType").val();
 	var mpList="";
 	var geneList="";
-	if(queryType == 'inputBoth'||queryType == 'inputMP' )
-	{
-		mpList = $("#mpList").val();
-	}
-	if(queryType == 'inputBoth'|| queryType == 'inputGene')
+	var pathwayList="";
+	var queryType="";
+	
+	if($("#chkGene").is(':checked'))
 	{
 		geneList= $("#geneList").val();
+		queryType += 'gene_';
+	}
+	if($("#chkMp").is(":checked"))
+	{
+		mpList = $("#mpList").val();
+		queryType += 'mp_';
+	}
+	if($("#chkPathway").is(":checked"))
+	{
+		pathwayList = $("#pathwayList").val();
+		queryType += 'pathway_';
 	}
 
-	data = {"mpList":mpList,"geneList":geneList,"showMPA":showMPA,"showPathway":showPathway};
+	data = {"param":{"mpList":mpList,"geneList":geneList,"pathwayList":pathwayList},"queryType":queryType};
 	$.ajax({
 		type : "post",
 		data : data,
-		url : "queryGPA.do",
+		url : "queryAsso.do",
 		dataType : "json",
 		success : function(msg) {
-			 cytoscapeDraw(msg);
+			cytoscapeDraw(msg);
 		}
 	});
 }

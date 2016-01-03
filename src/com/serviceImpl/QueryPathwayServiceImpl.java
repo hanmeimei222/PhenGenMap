@@ -11,7 +11,6 @@ import com.dao.PathwayDao;
 import com.model.Pathway;
 import com.model.cytoscape.Graph;
 import com.service.QueryPathwayService;
-import com.util.ModelTransferUtil;
 
 @Service
 public class QueryPathwayServiceImpl implements QueryPathwayService {
@@ -27,7 +26,7 @@ public class QueryPathwayServiceImpl implements QueryPathwayService {
 		switch (type) {
 		case SINGLE_WAYS:
 			result = pwayDao.getMultiPathway(ids);
-			g = ModelTransferUtil.sglpathways2graph(result,queryMap);
+//			g = ModelTransferUtil.sglpathways2graph(result,queryMap);
 			break;
 		case SINGLE_GENES:
 //			result = pwayDao.getPathwayByGene(ids);
@@ -35,7 +34,7 @@ public class QueryPathwayServiceImpl implements QueryPathwayService {
 		case ALL_PATHWAYS:
 			Map<String,String>cls2_cls1 = pwayDao.getCls2cls1Map();
 			Map<String,Set<Pathway>>cls2map = pwayDao.getCls2PathwayMap();
-			g = ModelTransferUtil.allpathways2graph(cls2_cls1,cls2map);
+//			g = ModelTransferUtil.allpathways2graph(cls2_cls1,cls2map);
 		default:
 			break;
 		}

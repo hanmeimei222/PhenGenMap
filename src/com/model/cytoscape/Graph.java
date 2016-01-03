@@ -1,25 +1,20 @@
 package com.model.cytoscape;
 
-import java.util.List;
+import java.util.Set;
 
 public class Graph {
-	private List<CytoNode> nodes;
-	private List<CytoEdge> edges;
-	public List<CytoNode> getNodes() {
+	private Set<CytoNode> nodes;
+	private Set<CytoEdge> edges;
+	public Set<CytoNode> getNodes() {
 		return nodes;
 	}
-	public void setNodes(List<CytoNode> nodes) {
+	public void setNodes(Set<CytoNode> nodes) {
 		this.nodes = nodes;
 	}
-	public List<CytoEdge> getEdges() {
+	public Set<CytoEdge> getEdges() {
 		return edges;
 	}
-	public void setEdges(List<CytoEdge> edges) {
+	public void setEdges(Set<CytoEdge> edges) {
 		this.edges = edges;
 	}
-
-	
-	
-	
-
 }

@@ -143,16 +143,16 @@ public class PathwayDaoImpl implements PathwayDao{
 
 	//按基因查询，输入symbolname，查询包含它的所有pathways
 	@Override
-	public Set<Pathway> getPathwayByGene(String symbolname){
+	public Map<Pathway,Boolean> getPathwayByGene(String symbolname){
 		
-		Set<Pathway>result = new HashSet<Pathway>();
+		Map<Pathway,Boolean> result = new HashMap<Pathway,Boolean>();
 		GNode gn = new GNode();
 		gn.setSymbol_name(symbolname);
 		for (Entry<String, Pathway> entry : GlobalData.allways.entrySet()) {
 			Pathway pw = entry.getValue();
 			Map<GNode,Boolean>symbols = entry.getValue().getSymbols();
 			if(symbols!=null&&symbols.containsKey(gn)){
-			result.add(pw);	
+			result.put(pw,true);	
 			}
 		}
 		return result;

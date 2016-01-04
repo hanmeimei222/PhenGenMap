@@ -9,7 +9,25 @@ var infoTemplate = Handlebars.compile([
                                        '<p class="ac-more"><i class="fa fa-external-link"></i> <a target="_blank" href="http://www.informatics.jax.org/searches/Phat.cgi?id={{id}}">More information</a></p>'
                                        ].join(''));
 
-var patrn=/^\d*$/; 
+var patrn=/^\d*$/;
+//生成一组随机颜色
+var colormap={};
+for(var i=1;i<20;i++)
+{
+	colormap[i]=getRandomColor();
+}
+function getRandomColor() 
+{ 
+	var c = '#'; 
+	var cArray = ['0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F']; 
+	for(var i = 0; i < 6;i++) 
+	{ 
+		var cIndex = Math.round(Math.random()*15); 
+		c += cArray[cIndex]; 
+	} 
+	return c; 
+} 
+
 function cytoscapeDraw(data)
 {
 	var cy = window.cy = cytoscape({
@@ -39,38 +57,56 @@ function cytoscapeDraw(data)
 			'target-arrow-shape': 'triangle',
 			'target-arrow-color':'#9dbaea',
 			'width':3,
-			'line-color':'#9dbaea'
+			'line-color': function(ele){
+				var d = ele.data();
+				if(ele.data().edgeType == 'gplink')
+				{
+					return '#9dbaea';
+				}else if(ele.data().edgeType == 'pplink')
+				{
+					return '#1dbaea';
+				}
+				else if(ele.data().edgeType == 'gpathwaylink')
+				{
+					return '#fdbaea';
+				}
+				else
+				{
+					return "#00ff00";
+				}
+			}
 		})
 		.selector('$node > node')
-    	.css({
-    		'padding-top': '10px',
-    		'padding-left': '20px',
-    		'padding-bottom': '20px',
-    		'padding-right': '20px',
-    		'font-size': 20,
-    		'text-valign': 'top',
-    		'text-halign': 'center',
-    		'background-color':function(ele)
-    		{
-    			//gene 的父层节点
-    			if(ele.data().id == 'gene')
-    			{
-    				return '#F7E7E2';
-    			}
-    			//phen的父层节点
-    			if(ele.data().id == 'phen')
-    			{
-    				return '#D3D7DD';
-    			}
-    			if(ele.data().id == 'pathway')
-    			{
-    				return '#90B2DF';
-    			}
-    			if (patrn.test(ele.data().id)){
-    				return '#EFD972';
-    			}
-    		}
-    	})
+		.css({
+			'padding-top': '10px',
+			'padding-left': '20px',
+			'padding-bottom': '20px',
+			'padding-right': '20px',
+			'font-size': 20,
+			'text-valign': 'top',
+			'text-halign': 'center',
+			'background-color':function(ele)
+			{
+				//gene 的父层节点
+				if(ele.data().id == 'gene')
+				{
+					return '#F7E7E2';
+				}
+				//phen的父层节点
+				if(ele.data().id == 'phen')
+				{
+					return '#D3D7DD';
+				}
+				if(ele.data().id == 'pathway')
+				{
+					return '#90B2DF';
+				}
+				if (patrn.test(ele.data().id)){
+					return colormap[ele.data().id];
+					
+				}
+			}
+		})
 		.selector('.highlighted')
 		.css({
 			'min-zoomed-font-size': 1,
@@ -81,6 +117,10 @@ function cytoscapeDraw(data)
 		.css({
 			'opacity': 0.5,
 			'text-opacity': 0
+		})
+		.selector('.filtered')
+		.css({
+			'display': 'none'
 		}),
 
 		elements: data,
@@ -97,7 +137,7 @@ function cytoscapeDraw(data)
 
 	cy.on('unselect', 'node', function(e){
 		clear();
-		 hideNodeInfo();
+		hideNodeInfo();
 	});
 	$('#reset').on('click', function(){
 		cy.animate({
@@ -108,60 +148,91 @@ function cytoscapeDraw(data)
 			duration: layoutDuration
 		});
 	});
-	
-	$('#search').typeahead(
-	{
-	    minLength: 2,
-	    highlight: true,
-	  },
-	  {
-	    name: 'search-dataset',
-	    source: function( query, cb ){
-	      function matches( str, q ){
-	        str = (str || '').toLowerCase();
-	        q = (q || '').toLowerCase();
-	        
-	        return str.match( q );
-	      }
-	      
-	      var fields = ['id', 'name'];
 
-	      function anyFieldMatches( n ){
-	        for( var i = 0; i < fields.length; i++ ){
-	          var f = fields[i];
-	          
-	          if( matches( n.data(f), query ) ){
-	            return true;
-	          }
-	        }
-	        return false;
-	      }
-	      
-	      function getData(n){
-	        var data = n.data();
-	        
-	        return data;
-	      }
-	      
-	      function sortByName(n1, n2){
-	        if( n1.data('id') < n2.data('id') ){
-	          return -1;
-	        } else if( n1.data('id') > n2.data('id') ){
-	          return 1;
-	        }
-	        return 0;
-	      }
-	      var res =  cy.nodes().stdFilter( anyFieldMatches ).sort( sortByName ).map( getData );
-	      cb( res );
-	    },
-	    templates: {
-	      suggestion: infoTemplate
-	    }
-	  }).on('typeahead:selected', function(e, entry, dataset){
-	    var n = cy.getElementById(entry.id);
-	    n.select();
-	    showNodeInfo( n );
-	  });
+	$('#search').typeahead(
+			{
+				minLength: 2,
+				highlight: true,
+			},
+			{
+				name: 'search-dataset',
+				source: function( query, cb ){
+					function matches( str, q ){
+						str = (str || '').toLowerCase();
+						q = (q || '').toLowerCase();
+
+						return str.match( q );
+					}
+
+					var fields = ['id', 'name'];
+
+					function anyFieldMatches( n ){
+						for( var i = 0; i < fields.length; i++ ){
+							var f = fields[i];
+
+							if( matches( n.data(f), query ) ){
+								return true;
+							}
+						}
+						return false;
+					}
+
+					function getData(n){
+						var data = n.data();
+
+						return data;
+					}
+
+					function sortByName(n1, n2){
+						if( n1.data('id') < n2.data('id') ){
+							return -1;
+						} else if( n1.data('id') > n2.data('id') ){
+							return 1;
+						}
+						return 0;
+					}
+					var res =  cy.nodes().stdFilter( anyFieldMatches ).sort( sortByName ).map( getData );
+					cb( res );
+				},
+				templates: {
+					suggestion: infoTemplate
+				}
+			}).on('typeahead:selected', function(e, entry, dataset){
+				var n = cy.getElementById(entry.id);
+				n.select();
+				showNodeInfo( n );
+			});
+
+	//filter
+	$('#filters').on('click', 'input', function(){
+
+		var mp = $('#MP').is(':checked');
+		var gene = $('#GENE').is(':checked');
+		var pathway = $('#PATHWAY').is(':checked');
+
+		cy.batch(function(){
+
+			cy.nodes().forEach(function( n ){
+				var cType = n.data('nodeType');
+
+				n.removeClass('filtered');
+
+				var filter = function(){
+					n.addClass('filtered');
+				};
+
+				if( 
+						(cType === 'mp' && !mp)
+						|| (cType === 'gene' && !gene)
+						|| (cType === 'pathway' && !pathway)
+				){
+					filter();
+				}
+			});
+
+		});
+
+	});
 }
 
 function highlight( node ){
@@ -202,7 +273,7 @@ function highlight( node ){
 		} );
 
 	});
-	
+
 }
 
 

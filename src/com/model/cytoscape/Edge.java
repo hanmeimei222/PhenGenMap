@@ -3,7 +3,7 @@ package com.model.cytoscape;
 public class Edge {
 	private String source;
 	private String target;
-	private String type;
+	private String edgeType;
 
 	public String getSource() {
 		return source;
@@ -22,13 +22,12 @@ public class Edge {
 		super();
 		this.source = source;
 		this.target = target;
-		this.type = type;
+		this.edgeType = type;
 	}
-	public String getType() {
-		return type;
+	public String getEdgeType() {
+		return edgeType;
 	}
-	public void setType(String type) {
-		this.type = type;
+	public void setEdgeType(String edgeType) {
+		this.edgeType = edgeType;
 	}
-	
 }

@@ -29,7 +29,7 @@ body {
 
 #cy {
 	width: 90%;
-	height: 400px;
+	height: 800px;
 }
 </style>
 </head>
@@ -58,19 +58,16 @@ body {
 					<div>
 						<h3>查询计划</h3>
 						<div class="row post-content-row">
-							<label class="post-content-row-title">
-								step1:输入要查询的MP列表</label>
+							<label class="post-content-row-title"> step1:输入要查询的MP列表</label>
 							<div class="form-group">
-								<label class="post-content-row-title">
-								查询单个MP：</label>
+								<label class="post-content-row-title"> 查询单个MP：</label>
 								<div id="search-wrapper">
 									<input type="text" class="form-control" id="singlemp" autofocus
 										placeholder="Search In graph">
 								</div>
 							</div>
 							<div class="form-group">
-							<label class="post-content-row-title">
-								输入批量MP：</label>
+								<label class="post-content-row-title"> 输入批量MP：</label>
 								<textarea id="mpList" name="mpList" class="form-control"
 									rows="3">MP:0008345
 MP:0008347</textarea>
@@ -115,29 +112,32 @@ MP:0008347</textarea>
 									class="btn btn-default">绘图</button>
 							</div>
 						</div>
-						<div class="row post-content-row">
-							<label class="post-content-row-title"> step5:图内检索</label>
-							<div class="form-group">
-								<button type="button" onclick="showQueryPanel()"
-									class="btn btn-default">显示图内检索>></button>
-							</div>
-						</div>
-						<div class="row post-content-row ">
-							<div id="queryPanel" style="display: none;">
-								<button id="reset" name="reset" class="btn btn-default">重置</button>
-								<div id="search-wrapper">
-									<input type="text" class="form-control" id="search" autofocus
-										placeholder="Search In graph">
-								</div>
-								<div id="info"></div>
-							</div>
-						</div>
 					</div>
 				</div>
-				<div class="col-md-8 services-right">
+				<div class="col-md-8 services-middle">
 					<h3>查询结果</h3>
 					<div>
 						<div id="cy"></div>
+					</div>
+				</div>
+
+				<div class="col-md-2 services-right">
+					<div class="row post-content-row">
+						<label class="post-content-row-title"> step5:图内检索</label>
+						<div class="form-group">
+							<button type="button" onclick="showQueryPanel()"
+								class="btn btn-default">显示图内检索>></button>
+						</div>
+					</div>
+					<div class="row post-content-row ">
+						<div id="queryPanel" style="display: none;">
+							<button id="reset" name="reset" class="btn btn-default">重置</button>
+							<div id="search-wrapper">
+								<input type="text" class="form-control" id="search" autofocus
+									placeholder="Search In graph">
+							</div>
+							<div id="info"></div>
+						</div>
 					</div>
 				</div>
 				<div class="clearfix"></div>

@@ -7,6 +7,8 @@ public class Node {
 	//标志其属于哪一层
 	private String parent;
 	
+	private String nodeType;
+	
 	public String getId() {
 		return id;
 	}
@@ -38,16 +40,24 @@ public class Node {
 		this.name = name;
 	}
 	
-	public Node(String id, String name, boolean queryInput) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.queryInput = queryInput;
+	public String getNodeType() {
+		return nodeType;
 	}
-	public Node(String id, String name,  String parent,boolean queryInput) {
+	public void setNodeType(String nodeType) {
+		this.nodeType = nodeType;
+	}
+//	public Node(String id, String name,String nodeType, boolean queryInput) {
+//		super();
+//		this.id = id;
+//		this.name = name;
+//		this.nodeType = nodeType;
+//		this.queryInput = queryInput;
+//	}
+	public Node(String id, String name, String nodeType,String parent,boolean queryInput) {
 		super();
 		this.id = id;
 		this.name = name;
+		this.nodeType = nodeType;
 		this.queryInput = queryInput;
 		this.parent = parent;
 	}

@@ -168,6 +168,10 @@ public class QueryGPServiceImpl implements QueryAssoService{
 		for (PNode pn : mps) {
 			Map<GNode,Boolean> associatedGenes = mp_genes.get(pn);
 			for (GNode gn : genes) {
+				if(gn==null)
+				{
+					continue;
+				}
 				if(associatedGenes.containsKey(gn))
 				{
 					//构造一条边
@@ -179,7 +183,7 @@ public class QueryGPServiceImpl implements QueryAssoService{
 		//将gene节点加入到CytoNodes中
 		if(genes!=null)
 		{
-			CytoNode cnode =new CytoNode(new Node("gene","gene",null,false));
+			CytoNode cnode =new CytoNode(new Node("gene","gene","gene",null,false));
 			nodes.add(cnode);
 			
 			for (GNode gNode : genes) {
@@ -193,7 +197,7 @@ public class QueryGPServiceImpl implements QueryAssoService{
 				{
 					isQuery = true;
 				}
-				cnode =new CytoNode(new Node(gNode.getSymbol_name(), gNode.getId(),"gene",isQuery));
+				cnode =new CytoNode(new Node(gNode.getSymbol_name(), gNode.getId(),"gene","gene",isQuery));
 				nodes.add(cnode);
 			}
 		}
@@ -219,7 +223,7 @@ public class QueryGPServiceImpl implements QueryAssoService{
 		if(pathways!=null)
 		{
 
-			CytoNode cnode =new CytoNode(new Node("pathway","pathway",null,false));
+			CytoNode cnode =new CytoNode(new Node("pathway","pathway","pathway",null,false));
 			nodes.add(cnode);
 
 		}
@@ -231,7 +235,7 @@ public class QueryGPServiceImpl implements QueryAssoService{
 			{
 				queryInput = true;
 			}
-			CytoNode cnode =new CytoNode(new Node(pathwayId,pathway.getPw_name(),"pathway",queryInput));
+			CytoNode cnode =new CytoNode(new Node(pathwayId,pathway.getPw_name(),"pathway","pathway",queryInput));
 			nodes.add(cnode);
 
 			//构造pathway和基因的关联

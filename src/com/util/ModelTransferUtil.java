@@ -192,7 +192,11 @@ public class ModelTransferUtil {
 		return g;
 	}
 
-
+/**
+ * 使用d3.js绘出全体pathway的树形图
+ * @param allpathways
+ * @return
+ */
 	public static TreeNode allpathways2graph(Map<String, Map<String, Map<Pathway, Boolean>>> allpathways){
 		//构造根节点
 		Set<TreeNode> children = new HashSet<TreeNode>();
@@ -212,8 +216,9 @@ public class ModelTransferUtil {
 				cls1child.add(new TreeNode(class2,class2,cls2child));
 				Set<Pathway>pwset = class2map.get(class2).keySet();
 				for (Pathway pw : pwset) {
-//					Set<TreeNode>tn = new HashSet<TreeNode>();
+					
 					cls2child.add(new TreeNode(pw.getPw_id(),pw.getPw_name(),null));
+					
 				}
 			}
 		}

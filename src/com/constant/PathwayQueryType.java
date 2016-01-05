@@ -1,7 +1,7 @@
 package com.constant;
 
 public enum PathwayQueryType {
-	SINGLE_WAYS("sglways"),SINGLE_GENES("sglgenes"),ALL_PATHWAYS("allpathways"),UNDEFINED("undefined");
+	SINGLE_WAYS("sglways"),SINGLE_GENES("sglgenes"),UNDEFINED("undefined");
 	
 	private String type;
 

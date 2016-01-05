@@ -1,7 +1,9 @@
+var baseSvg;
 function d3DrawPathway(treeData){
 	// Get JSON data
-	treeJSON = d3.json("pwayQuery.do", function(error, treeData) {
+	treeJSON = d3.json("allPathway.do", function(error, treeData) {
 
+		
 	    // Calculate total nodes, max label length
 	    var totalNodes = 0;
 	    var maxLabelLength = 0;
@@ -102,6 +104,7 @@ function d3DrawPathway(treeData){
 	    // define the zoomListener which calls the zoom function on the "zoom" event constrained within the scaleExtents
 	    var zoomListener = d3.behavior.zoom().scaleExtent([0.1, 3]).on("zoom", zoom);
 
+
 	    function initiateDrag(d, domNode) {
 	        draggingNode = d;
 	        d3.select(domNode).select('.ghostCircle').attr('pointer-events', 'none');
@@ -145,7 +148,12 @@ function d3DrawPathway(treeData){
 	    }
 
 	    // define the baseSvg, attaching a class for styling and the zoomListener
-	    var baseSvg = d3.select("#tree-container").append("svg")
+	    if(baseSvg !=undefined)
+		{
+	    	baseSvg.remove();
+		}
+	    
+	   baseSvg = d3.select("#tree-container").append("svg")
 	        .attr("width", viewerWidth)
 	        .attr("height", viewerHeight)
 	        .attr("class", "overlay")
@@ -508,8 +516,9 @@ function d3DrawPathway(treeData){
 	            d.y0 = d.y;
 	        });
 	    }
-
+	    
 	    // Append a group which holds all nodes and which the zoom Listener can act upon.
+	    
 	    var svgGroup = baseSvg.append("g");
 
 	    // Define the root
@@ -524,108 +533,3 @@ function d3DrawPathway(treeData){
 	
 	
 }
-
-
-
-//function cytoDrawPathway(data)
-//{
-//
-//	var cy = cytoscape({
-//		container: document.getElementById('cy'),
-//
-//		boxSelectionEnabled: false,
-//		autounselectify: true,
-//
-//		style: cytoscape.stylesheet()
-//		.selector('node')
-//		.css({
-//			'content': 'data(id)',
-//			'background-color': function(ele){
-//				if(ele.data().queryInput)
-//				{
-//					return '#771';
-//				}
-//				else
-//				{
-//					return '#888';
-//				}
-//			}
-//		})
-//		.selector('.eating')
-//		.css({
-//			'border-color': 'red'
-//		})
-//		.selector('.eater')
-//		.css({
-//			'border-width': 9
-//		})
-//		.selector('edge')
-//		.css({
-//			'target-arrow-shape': 'triangle',
-//			'target-arrow-color':'#9dbaea',
-//			'width':3,
-//			'line-color':'#9dbaea'
-//		}),
-//
-//		elements:data,
-//
-//		layout: {
-//			name: 'cose',
-//			directed: true,
-//			padding: 10
-//		}
-//	}); // cy init
-//
-//	cy.on('tap', 'node', function(){
-//		var nodes = this;
-//		var tapped = nodes;
-//		var food = [];
-//
-//		nodes.addClass('eater');
-//
-//		for(;;){
-//			var connectedEdges = nodes.connectedEdges(function(){
-//				return !this.target().anySame( nodes );
-//			});
-//
-//			var connectedNodes = connectedEdges.targets();
-//
-//			Array.prototype.push.apply( food, connectedNodes );
-//
-//			nodes = connectedNodes;
-//
-//			if( nodes.empty() ){ break; }
-//		}
-//
-//		var delay = 0;
-//		var duration = 100;
-//		for( var i = food.length - 1; i >= 0; i-- ){ (function(){
-//			var thisFood = food[i];
-//			var eater = thisFood.connectedEdges(function(){
-//				return this.target().same(thisFood);
-//			}).source();
-//
-//			thisFood.delay( delay, function(){
-//				eater.addClass('eating');
-//			} ).animate({
-//				//position: eater.position(),
-//				css: {
-//					'width': 10,
-//					'height': 10,
-//					'border-width': 0,
-//					'opacity': 1
-//				}
-//			}, {
-//				duration: duration,
-//				complete: function(){
-//				var node=thisFood.remove();
-//					node.restore();
-//				}
-//			});
-//
-//			delay = duration;
-//		})(); } // for
-//
-//	}); // on tap
-//
-//}

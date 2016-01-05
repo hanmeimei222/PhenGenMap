@@ -252,7 +252,7 @@ public class QueryGPServiceImpl implements QueryAssoService{
 
 		if(genes!=null && pathways !=null)
 		{
-			edges.add(new CytoEdge(new Edge("gene", "phen","typelink")));
+			edges.add(new CytoEdge(new Edge("pathway", "gene","typelink")));
 		}
 
 		//构建一个父类的pathway节点

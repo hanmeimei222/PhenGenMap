@@ -1,21 +1,61 @@
-function submitPathwayQuery()
-{
-	//1.获取输入的pathway列表
-	var pwayList = $("#pwayList").val();
-//	var pwayList = "mmu00071";
-	//2.获取查询条件 
-	var queryType=$("#queryType").val();
-//	var queryType = "allpathways";
-	
-	queryData = {"pwayList":pwayList,"queryType":queryType};
+function showInputPanel(){
+	if($("#chkGene").is(':checked'))
+	{
+		$("#geneInputPanel").attr('class','show');
+	}
+	else
+	{
+		$("#geneInputPanel").attr('class','hidden');
+	}
+	if($("#chkPathway").is(":checked"))
+	{
+		$("#pathwayInputPanel").attr('class','show');
+	}
+	else
+	{
+		$("#pathwayInputPanel").attr('class','hidden');
+	}
+}
+
+
+function showAllPathway(){
 	$.ajax({
 		type : "post",
-		data : queryData,
-		url : "pwayQuery.do",
+		url : "allPathway.do",
 		dataType : "json",
 		success : function(msg) {
 			d3DrawPathway(msg);
-//			cytoDrawPathway(msg);
+		}
+	});
+}
+
+function submitPathwayQuery()
+{
+	var geneList="";
+	var pathwayList="";
+	var queryType="";
+	//获取查询类型 &&获取输入的pathway列表&&获取输入gene列表
+	if($("#chkGene").is(':checked'))
+	{
+		geneList= $("#geneList").val();
+		queryType += 'gene_';
+	}
+	if($("#chkPathway").is(":checked"))
+	{
+		pathwayList = $("#pathwayList").val();
+		queryType += 'pathway_';
+	}
+	
+	data = {"param":{"geneList":geneList,"pathwayList":pathwayList},"queryType":queryType};
+	$.ajax({
+		type : "post",
+		data : data,
+		url : "pwayQuery.do",
+		dataType : "json",
+		success : function(msg) {
+//			d3DrawPathway(msg);
+			cytoscapeDraw(msg);
+//			alert(JSON.stringify(msg));
 		}
 	});
 }

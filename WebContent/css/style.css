@@ -103,7 +103,7 @@ a {
 	-moz-transition: 0.5s all;
 	padding: 0;
 	padding: 0em 0em 0.3em 0em;
-	font-family: 'Cantata One', serif;
+	font-family: Arial,Verdana,Sans-serif;
 }
 .top-nav ul li a:hover{
 	color:#909090;

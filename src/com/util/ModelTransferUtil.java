@@ -139,9 +139,12 @@ public class ModelTransferUtil {
 		g.setEdges(edges);
 		g.setNodes(nodes);
 
-		CytoNode cnode =new CytoNode(new Node("phen","phen","mp",null,false));
-		nodes.add(cnode);
-
+		CytoNode cnode;
+		if(set!=null && set.size()!=0)
+		{
+			cnode =new CytoNode(new Node("phen","phen","mp",null,false));
+			nodes.add(cnode);
+		}
 		Map<String,PNode> mps = new HashMap<String,PNode>();
 		Map<String,Boolean> isLevelContained = new HashMap<String, Boolean>();
 

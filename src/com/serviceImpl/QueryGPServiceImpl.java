@@ -10,10 +10,12 @@ import org.springframework.stereotype.Service;
 import com.constant.NodeType;
 import com.dao.GPDao;
 import com.dao.GeneDao;
+import com.dao.PPIDao;
 import com.dao.PathwayDao;
 import com.dao.PhenDao;
 import com.model.GNode;
 import com.model.PNode;
+import com.model.PPINode;
 import com.model.Pathway;
 import com.model.cytoscape.CytoEdge;
 import com.model.cytoscape.CytoNode;
@@ -39,6 +41,9 @@ public class QueryGPServiceImpl implements QueryAssoService{
 	@Autowired
 	PathwayDao pathwayDao;
 
+	@Autowired
+	PPIDao ppiDao;
+
 	/**
 	 * 策略：1.如果未输入gene集合，用其他节点关联的gene先构造出基因集合
 	 * 2.在有了gene集合的情况下，对于未输入节点的类型，用gene关联的集合对其进行补充
@@ -49,6 +54,7 @@ public class QueryGPServiceImpl implements QueryAssoService{
 		Set<PNode> pNodes = null;
 		Set<GNode> gNodes = null;
 		Set<Pathway> pathways = null;
+		Set<PPINode> ppis = null;
 
 		for (NodeType type : map.keySet()) {
 			switch (type) {
@@ -63,6 +69,10 @@ public class QueryGPServiceImpl implements QueryAssoService{
 			case PATHWAY:
 				Set<String> pathwayIds = map.get(type).keySet();
 				pathways = pathwayDao.getMultiPathway(pathwayIds);
+				break;
+			case PPI:
+				Set<String> entrezIds = map.get(type).keySet();
+				ppis = ppiDao.getPPINodes(entrezIds);
 				break;
 			default:
 				break;
@@ -90,6 +100,13 @@ public class QueryGPServiceImpl implements QueryAssoService{
 					gNodes.addAll(pathway.getSymbols().keySet());
 				}
 			}
+			if(ppis!=null)
+			{
+				Map<PPINode, Map<GNode, Boolean>> genes = ppiDao.getConnectedGenes(ppis);
+				for ( Map<GNode, Boolean> connectedGenes : genes.values()) {
+					gNodes.addAll(connectedGenes.keySet());
+				}
+			}
 		}
 		//如果未输入表型，则返回输入基因关联的表型
 		if(pNodes == null)
@@ -103,7 +120,7 @@ public class QueryGPServiceImpl implements QueryAssoService{
 				pNodes.addAll(mpMap.keySet());
 			}
 		}
-		
+
 		//如果未输入pathway，则返回输入基因关联的pathway
 		if(pathways==null)
 		{
@@ -115,14 +132,26 @@ public class QueryGPServiceImpl implements QueryAssoService{
 			{
 				Set<GNode> genes= gene_pathways.keySet();
 				for (GNode gn : genes) {
-					
+
 					//构建一个关联
 					Map<Pathway,Boolean> pathwayMap = gene_pathways.get(gn);
 					pathways.addAll(pathwayMap.keySet());
 				}
 			}
 		}
-		
+
+		if(ppis ==null)
+		{
+			ppis = new HashSet<PPINode>();
+			Map<GNode,Map<PPINode,Boolean>> gene_ppis = gDao.getAssociatedPPI(gNodes);
+
+			Set<GNode> gnodes = gene_ppis.keySet();
+			for (GNode gNode : gnodes) {
+				Map<PPINode,Boolean> mpMap = gene_ppis.get(gNode);
+				ppis.addAll(mpMap.keySet());
+			}
+		}
+
 		//构建用户绘图的边
 		Graph g = new Graph();
 		Set<CytoNode> nodes = new HashSet<CytoNode>();
@@ -132,20 +161,27 @@ public class QueryGPServiceImpl implements QueryAssoService{
 
 		//构建mp之间的
 		Graph ppgraph = getAssoByPhenoPhen(pNodes,map.get(NodeType.MP));
-		
+
 		Graph gpgraph = getAssoByPhenoGene(gNodes, pNodes, map.get(NodeType.GENE), map.get(NodeType.MP));
-		
+
 		Graph pathwayGenegraph = getAssoByPathwayGene(gNodes, pathways, map.get(NodeType.PATHWAY));
 
+		Graph gppigraph = getAssoByPPIGene(gNodes, ppis, map.get(NodeType.GENE), map.get(NodeType.PPI));
+
+		Graph ppigraph = getAssoByPPI2PPI(ppis, map.get(NodeType.PPI));
 
 		nodes.addAll(ppgraph.getNodes());
 		nodes.addAll(gpgraph.getNodes());
 		nodes.addAll(pathwayGenegraph.getNodes());
-		
+		nodes.addAll(gppigraph.getNodes());
+		nodes.addAll(ppigraph.getNodes());
+
 		edges.addAll(ppgraph.getEdges());
 		edges.addAll(gpgraph.getEdges());
 		edges.addAll(pathwayGenegraph.getEdges());
-		
+		edges.addAll(gppigraph.getEdges());
+		edges.addAll(ppigraph.getEdges());
+
 		return g;
 
 	}
@@ -158,7 +194,7 @@ public class QueryGPServiceImpl implements QueryAssoService{
 		Set<CytoEdge> edges = new HashSet<CytoEdge>();
 		g.setEdges(edges);
 		g.setNodes(nodes);
-		
+
 		if(genes!=null && mps !=null)
 		{
 			edges.add(new CytoEdge(new Edge("gene", "phen","typelink")));
@@ -179,13 +215,13 @@ public class QueryGPServiceImpl implements QueryAssoService{
 				}
 			}
 		}
-		
+
 		//将gene节点加入到CytoNodes中
-		if(genes!=null)
+		if(genes!=null && genes.size()!=0)
 		{
 			CytoNode cnode =new CytoNode(new Node("gene","gene","gene",null,false));
 			nodes.add(cnode);
-			
+
 			for (GNode gNode : genes) {
 				boolean isQuery = false;
 				if(gNode == null)
@@ -201,7 +237,7 @@ public class QueryGPServiceImpl implements QueryAssoService{
 				nodes.add(cnode);
 			}
 		}
-		
+
 		return g;
 	}
 
@@ -213,14 +249,14 @@ public class QueryGPServiceImpl implements QueryAssoService{
 		Set<CytoEdge> edges = new HashSet<CytoEdge>();
 		g.setEdges(edges);
 		g.setNodes(nodes);
-		
+
 		if(genes!=null && pathways !=null)
 		{
 			edges.add(new CytoEdge(new Edge("gene", "phen","typelink")));
 		}
 
 		//构建一个父类的pathway节点
-		if(pathways!=null)
+		if(pathways!=null && pathways.size()!=0)
 		{
 
 			CytoNode cnode =new CytoNode(new Node("pathway","pathway","pathway",null,false));
@@ -257,4 +293,92 @@ public class QueryGPServiceImpl implements QueryAssoService{
 	{
 		return ModelTransferUtil.pNode2graph(pnodes,mpId);
 	}
+
+	/*
+	 * 构建ppi和ppi之间的关联
+	 */
+	public Graph getAssoByPPI2PPI(Set<PPINode> ppis,Map<String,Boolean> entrezIds)
+	{
+		Graph g = new Graph();
+		Set<CytoNode> nodes = new HashSet<CytoNode>();
+		Set<CytoEdge> edges = new HashSet<CytoEdge>();
+		g.setEdges(edges);
+		g.setNodes(nodes);
+
+		Map<PPINode,Map<PPINode,Boolean>> connectedMap = ppiDao.getConnectedPPI(ppis);
+
+		//构建一个父类的ppi节点
+		if(ppis!=null && ppis.size()!=0)
+		{
+			CytoNode cnode =new CytoNode(new Node("ppi","ppi","ppi",null,false));
+			nodes.add(cnode);
+		}
+		for (PPINode ppi : ppis) {
+			//构建pathway的节点
+			boolean queryInput = false;
+			String entrezId = ppi.getId();
+
+			if(entrezIds!=null && entrezIds.containsKey(entrezId))
+			{
+				queryInput = true;
+			}
+			CytoNode cnode =new CytoNode(new Node(entrezId,null,"ppi","ppi",queryInput));
+			nodes.add(cnode);
+
+			//构造ppi和ppi的关联
+			Map<PPINode,Boolean> map = connectedMap.get(ppi);
+			if(map == null)
+			{
+				continue;
+			}
+			for (PPINode other : map.keySet()) {
+				if(ppis.contains(other))
+				{
+					CytoEdge ppiEdge =new CytoEdge(new Edge(entrezId,other.getId(),"ppi2ppilink"));
+					edges.add(ppiEdge);
+				}
+			}
+
+		}
+
+		return g;
+	}
+
+
+	public Graph getAssoByPPIGene(Set<GNode> genes,Set<PPINode> ppi,Map<String,Boolean> symbols,Map<String,Boolean> entrezId)
+	{
+		Graph g = new Graph();
+		Set<CytoNode> nodes = new HashSet<CytoNode>();
+		Set<CytoEdge> edges = new HashSet<CytoEdge>();
+		g.setEdges(edges);
+		g.setNodes(nodes);
+
+		if(genes!=null && ppi !=null)
+		{
+			edges.add(new CytoEdge(new Edge("gene", "ppi","typelink")));
+		}
+
+		Map<PPINode,Map<GNode,Boolean>> mp_genes = ppiDao.getConnectedGenes(ppi);
+		for (PPINode n : ppi) {
+			Map<GNode,Boolean> associatedGenes = mp_genes.get(n);
+			if(associatedGenes == null)
+			{
+				continue;
+			}
+			for (GNode gn : genes) {
+				if(gn==null)
+				{
+					continue;
+				}
+				if(associatedGenes.containsKey(gn))
+				{
+					//构造一条边
+					edges.add(new CytoEdge(new Edge(gn.getSymbol_name(), n.getId(), "gppilink")));
+				}
+			}
+		}
+
+		return g;
+	}
+
 }

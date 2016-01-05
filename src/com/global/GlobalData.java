@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.model.GNode;
 import com.model.PNode;
+import com.model.PPINode;
 import com.model.Pathway;
 
 /**
@@ -28,6 +29,16 @@ public class GlobalData {
 	//g-p全局数据
 	public static Map<GNode, Map<PNode,Boolean>>g_p_map = new HashMap<GNode, Map<PNode,Boolean>>();
 	public static Map<PNode, Map<GNode,Boolean>>p_g_map = new HashMap<PNode, Map<GNode,Boolean>>();
+	
+	
+	//记录文件中包含的ppi的节点信息
+	public static Map<String, PPINode>allppis = new HashMap<String, PPINode>();
+	//ppi交互数据
+	public static Map<PPINode, Map<PPINode,Boolean>>ppi_ppi_map = new HashMap<PPINode, Map<PPINode,Boolean>>();
+	//g-ppi 关联数据
+	public static Map<GNode, Map<PPINode,Boolean>>gene_ppi_map = new HashMap<GNode, Map<PPINode,Boolean>>();
+	public static Map<PPINode, Map<GNode,Boolean>>ppi_gene_map = new HashMap<PPINode, Map<GNode,Boolean>>();
+	
 	
 	
 	//项目的数据路径

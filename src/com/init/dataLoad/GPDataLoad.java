@@ -26,7 +26,7 @@ public class GPDataLoad {
 				String []temp = line.split("\t");
 
 				//构造gene节点
-				String symbol_name = temp[0];
+				String symbol_name = temp[0].toUpperCase();
 				GNode gn = GlobalData.allgnodes.get(symbol_name);
 				
 

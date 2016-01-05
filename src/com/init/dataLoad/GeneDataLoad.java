@@ -38,8 +38,9 @@ public class GeneDataLoad {
 				//初始化GNode，暂时gene节点的id为空，后面再修改
 				for(int i=3; i<templine.length;i++){
 					GNode gn = new GNode();
-					gn.setSymbol_name(templine[i]);
-					GlobalData.allgnodes.put(templine[i], gn);
+					String symbol = templine[i].toUpperCase();
+					gn.setSymbol_name(symbol);
+					GlobalData.allgnodes.put(symbol, gn);
 					symbols.put(gn, true);
 				}
 			}

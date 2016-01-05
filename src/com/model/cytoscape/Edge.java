@@ -30,4 +30,27 @@ public class Edge {
 	public void setEdgeType(String edgeType) {
 		this.edgeType = edgeType;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		Edge other = (Edge)obj;
+		
+		if(other.source == this.source && other.target == this.target
+				|| other.source == this.target && other.target == this.source)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	@Override
+	public int hashCode() {
+		
+		return this.source.hashCode()+this.target.hashCode();
+	}
+	
+	
 }

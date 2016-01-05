@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.model.GNode;
 import com.model.PNode;
+import com.model.PPINode;
 import com.model.Pathway;
 
 @Repository
@@ -24,4 +25,12 @@ public interface GeneDao {
 	 * 根据输入的基因返回其关联的pathway列表
 	 */
 	public Map<GNode,Map<Pathway,Boolean>> getAssociatedPathway(Set<GNode> gNodes);
+	
+	/**
+	 * 根据输入的基因节点集合获取其各自关联的PPI集合
+	 * @param gNodes
+	 * @return
+	 */
+	public Map<GNode,Map<PPINode,Boolean>> getAssociatedPPI(Set<GNode> gNodes);
+
 }

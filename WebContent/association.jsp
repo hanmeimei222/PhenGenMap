@@ -19,8 +19,10 @@
 <script src="js/gpquery.js"></script>
 
 
-<script src="https://cdn.rawgit.com/cpettitt/dagre/v0.7.4/dist/dagre.min.js"></script>
-<script src="https://cdn.rawgit.com/cytoscape/cytoscape.js-dagre/1.1.2/cytoscape-dagre.js"></script>
+<script
+	src="https://cdn.rawgit.com/cpettitt/dagre/v0.7.4/dist/dagre.min.js"></script>
+<script
+	src="https://cdn.rawgit.com/cytoscape/cytoscape.js-dagre/1.1.2/cytoscape-dagre.js"></script>
 
 
 <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
@@ -68,6 +70,8 @@ body {
 								<input type="checkbox" id="chkGene" name="chkGene" />Gene<br>
 								<input type="checkbox" id="chkMp" name="chkMp" />MPO<br> <input
 									type="checkbox" id="chkPathway" name="chkPathway" />Pathway<br>
+								<input type="checkbox" id="chkPPI" name="chkPPI" />PPI<br>
+
 							</div>
 							<div>
 								<div class="form-group">
@@ -102,7 +106,13 @@ MP:0003415
 							<div class="form-group hidden" id="pathwayInputPanel">
 								<label class="post-content-row-title"> 输入批量Pathway：</label>
 								<textarea id="pathwayList" name="pathwayList"
-									class="form-control" rows="5"></textarea>
+									class="form-control" rows="5">mmu05216</textarea>
+							</div>
+							<div class="form-group hidden" id="ppiInputPanel">
+								<label class="post-content-row-title"> 输入批量PPI：</label>
+								<textarea id="ppiList" name="ppiList"
+									class="form-control" rows="5">4088
+22059</textarea>
 							</div>
 						</div>
 						<div class="row post-content-row">
@@ -128,6 +138,8 @@ MP:0003415
 								id="GENE" type="checkbox" checked></input><label for="semi-soft">GENE</label><br />
 							<input id="PATHWAY" type="checkbox" checked></input><label
 								for="na">PATHWAY</label><br />
+								<input id="PPI" type="checkbox" checked></input><label
+								for="na">PPI</label><br />
 							<hr />
 						</div>
 					</div>

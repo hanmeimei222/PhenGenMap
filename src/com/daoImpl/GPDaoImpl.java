@@ -69,7 +69,7 @@ public class GPDaoImpl implements GPDao{
 
 		for (String symbol : symbols) {
 			//构建点集
-			GNode gn = GlobalData.allgnodes.get(symbol);
+			GNode gn = GlobalData.allgnodes.get(symbol.toUpperCase());
 			gns.add(gn);
 			Map<PNode,Boolean>pmap = GlobalData.g_p_map.get(gn);
 			Set<PNode>tmppns = pmap.keySet();
@@ -102,7 +102,7 @@ public class GPDaoImpl implements GPDao{
 		}
 		for (String symble : symbols) {
 			//构建基因点集
-			GNode gn = GlobalData.allgnodes.get(symble);
+			GNode gn = GlobalData.allgnodes.get(symble.toUpperCase());
 			gns.add(gn);
 			Map<PNode,Boolean>pmap = GlobalData.g_p_map.get(gn);
 			if(pmap!=null)

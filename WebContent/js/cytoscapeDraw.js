@@ -70,6 +70,14 @@ function cytoscapeDraw(data)
 				{
 					return '#fdbaea';
 				}
+				else if(ele.data().edgeType == 'gppilink')
+				{
+					return '#aebd9c';
+				}
+				else if(ele.data().edgeType == 'ppi2ppilink')
+				{
+					return '#baaedf';
+				}
 				else
 				{
 					return "#00ff00";
@@ -101,9 +109,17 @@ function cytoscapeDraw(data)
 				{
 					return '#90B2DF';
 				}
+				if(ele.data().id == 'ppi')
+				{
+					return '#B290fD';
+				}
 				if (patrn.test(ele.data().id)){
 					return colormap[ele.data().id];
 					
+				}
+				else
+				{
+					return '#00ff00';
 				}
 			}
 		})
@@ -209,6 +225,7 @@ function cytoscapeDraw(data)
 		var mp = $('#MP').is(':checked');
 		var gene = $('#GENE').is(':checked');
 		var pathway = $('#PATHWAY').is(':checked');
+		var ppi = $('#PPI').is(':checked');
 
 		cy.batch(function(){
 
@@ -225,6 +242,7 @@ function cytoscapeDraw(data)
 						(cType === 'mp' && !mp)
 						|| (cType === 'gene' && !gene)
 						|| (cType === 'pathway' && !pathway)
+						|| (cType === 'ppi' && !ppi)
 				){
 					filter();
 				}

@@ -23,6 +23,14 @@ function showInputPanel(){
 	{
 		$("#pathwayInputPanel").attr('class','hidden');
 	}
+	if($("#chkPPI").is(":checked"))
+	{
+		$("#ppiInputPanel").attr('class','show');
+	}
+	else
+	{
+		$("#ppiInputPanel").attr('class','hidden');
+	}
 }
 
 function submitGPQuery()
@@ -30,6 +38,7 @@ function submitGPQuery()
 	var mpList="";
 	var geneList="";
 	var pathwayList="";
+	var ppiList ="";
 	var queryType="";
 	
 	if($("#chkGene").is(':checked'))
@@ -47,8 +56,13 @@ function submitGPQuery()
 		pathwayList = $("#pathwayList").val();
 		queryType += 'pathway_';
 	}
+	if($("#chkPPI").is(":checked"))
+	{
+		ppiList = $("#ppiList").val();
+		queryType += 'ppi_';
+	}
 
-	data = {"param":{"mpList":mpList,"geneList":geneList,"pathwayList":pathwayList},"queryType":queryType};
+	data = {"param":{"mpList":mpList,"geneList":geneList,"pathwayList":pathwayList,"ppiList":ppiList},"queryType":queryType};
 	$.ajax({
 		type : "post",
 		data : data,

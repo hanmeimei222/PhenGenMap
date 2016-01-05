@@ -13,6 +13,7 @@ import com.dao.PathwayDao;
 import com.global.GlobalData;
 import com.model.GNode;
 import com.model.PNode;
+import com.model.PPINode;
 import com.model.Pathway;
 
 @Repository
@@ -20,13 +21,28 @@ public final class GeneDaoImpl implements GeneDao{
 
 	@Autowired
 	PathwayDao pathwayDao;
+
+	@Override
+	public Map<GNode, Map<PPINode, Boolean>> getAssociatedPPI(Set<GNode> gNodes) {
+	
+		 Map<GNode, Map<PPINode, Boolean>> map = new HashMap<GNode, Map<PPINode,Boolean>>();
+			for (GNode gn : gNodes) {
+				Map<PPINode,Boolean>pmap = GlobalData.gene_ppi_map.get(gn);
+				if(pmap!=null)
+				{
+					map.put(gn, pmap);
+				}
+			}
+			
+			return map;
+	}
 	
 	@Override
 	public Set<GNode> getGnodesBySymbol(Set<String> symbols) {
 		// TODO Auto-generated method stub
 		Set<GNode> set = new HashSet<GNode>();
 		for (String string : symbols) {
-			GNode gn = GlobalData.allgnodes.get(string);
+			GNode gn = GlobalData.allgnodes.get(string.toUpperCase());
 			if(gn!=null)
 			{
 				set.add(gn);

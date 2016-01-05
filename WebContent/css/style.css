@@ -214,6 +214,10 @@ a {
 .services-left ul li a:hover {
   color: #ffb900;
 }
+.services-middle {
+  padding: 0px;
+
+}
 .services-right {
   padding: 0px;
 }

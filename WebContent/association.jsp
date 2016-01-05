@@ -5,21 +5,24 @@
 <head>
 <title>Home</title>
 
+
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 
 <script src="js/typeahead.bundle.js"></script>
 <script src="js/handlebars.min.js"></script>
 
+
 <script src="js/cytoscape/cytoscape.min.js"></script>
 
 <script src="js/cytoscapeDraw.js"></script>
 <script src="js/gpquery.js"></script>
 
-<script
-	src="https://cdn.rawgit.com/cpettitt/dagre/v0.7.4/dist/dagre.min.js"></script>
-<script
-	src="https://cdn.rawgit.com/cytoscape/cytoscape.js-dagre/1.1.2/cytoscape-dagre.js"></script>
+
+<script src="https://cdn.rawgit.com/cpettitt/dagre/v0.7.4/dist/dagre.min.js"></script>
+<script src="https://cdn.rawgit.com/cytoscape/cytoscape.js-dagre/1.1.2/cytoscape-dagre.js"></script>
+
+
 <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
 <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
 
@@ -62,15 +65,15 @@ body {
 						<div class="row post-content-row">
 							<label class="post-content-row-title">请选择要输入的节点类型</label>
 							<div class="row post-content-row">
-								<input type="checkbox" id="chkGene" name="chkGene" />Gene<br> 
-								<input type="checkbox" id="chkMp" name="chkMp" />MPO<br> 
-								<input 	type="checkbox" id="chkPathway" name="chkPathway" />Pathway<br>
+								<input type="checkbox" id="chkGene" name="chkGene" />Gene<br>
+								<input type="checkbox" id="chkMp" name="chkMp" />MPO<br> <input
+									type="checkbox" id="chkPathway" name="chkPathway" />Pathway<br>
 							</div>
 							<div>
-							<div class="form-group">
-								<button type="button" onclick="showInputPanel()"
-									class="btn btn-default">下一步</button>
-							</div>
+								<div class="form-group">
+									<button type="button" onclick="showInputPanel()"
+										class="btn btn-default">下一步</button>
+								</div>
 							</div>
 						</div>
 						<div class="row post-content-row">
@@ -109,39 +112,48 @@ MP:0003415
 									class="btn btn-default">绘图</button>
 							</div>
 						</div>
-						<div class="row post-content-row">
-							<label class="post-content-row-title"> step5:图内检索</label>
-							<div class="form-group">
-								<button type="button" onclick="showQueryPanel()"
-									class="btn btn-default">显示图内检索>></button>
-							</div>
+					</div>
+				</div>
+				<div class="col-md-8 services-middle">
+					<h3>查询结果</h3>
+					<div>
+						<div id="cy"></div>
+					</div>
+				</div>
+				<div class="col-md-2 services-right">
+					<div class="row post-content-row ">
+						<div id="filters">
+							<strong>节点类型</strong><br /> <input id="MP" type="checkbox"
+								checked></input><label for="soft">MP</label><br /> <input
+								id="GENE" type="checkbox" checked></input><label for="semi-soft">GENE</label><br />
+							<input id="PATHWAY" type="checkbox" checked></input><label
+								for="na">PATHWAY</label><br />
+							<hr />
 						</div>
-						<div class="row post-content-row ">
-							<div id="queryPanel" style="display: none;">
-								<button id="reset" name="reset" class="btn btn-default">重置</button>
-								<div id="search-wrapper">
-									<input type="text" class="form-control" id="search" autofocus
-										placeholder="Search In graph">
-								</div>
-								<div id="info"></div>
+					</div>
+					<div class="row post-content-row">
+						<label class="post-content-row-title"> 图内检索</label>
+						<div class="form-group">
+							<button type="button" onclick="showQueryPanel()"
+								class="btn btn-default">显示图内检索>></button>
+						</div>
+					</div>
+					<div class="row post-content-row ">
+						<div id="queryPanel" style="display: none;">
+							<button id="reset" name="reset" class="btn btn-default">重置</button>
+							<div id="search-wrapper">
+								<input type="text" class="form-control" id="search" autofocus
+									placeholder="Search In graph">
 							</div>
+							<div id="info"></div>
 						</div>
 					</div>
 				</div>
+				<div class="clearfix"></div>
 			</div>
+			<!-- services-main end here -->
 		</div>
-
-		<div class="col-md-8 services-right">
-			<h3>查询结果</h3>
-			<div>
-				<div id="cy"></div>
-			</div>
-		</div>
-		<div class="clearfix"></div>
-	</div>
-	<!-- services-main end here -->
-	</div>
-	<!-- container end here -->
+		<!-- container end here -->
 	</div>
 	<!-- services end here -->
 	<!--footer start here-->

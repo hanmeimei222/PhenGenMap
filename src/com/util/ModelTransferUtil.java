@@ -21,7 +21,7 @@ public class ModelTransferUtil {
 	{
 		Set<CytoNode> set= new HashSet<CytoNode>();
 		for (PNode pNode : pnodes) {
-			CytoNode cnode =new CytoNode(new Node(pNode.getPheno_id(), pNode.getPheno_name(),pNode.getPheno_level(),false));
+			CytoNode cnode =new CytoNode(new Node(pNode.getPheno_id(), pNode.getPheno_name(),"mp",pNode.getPheno_level(),false));
 			set.add(cnode);
 		}
 		return set;
@@ -75,10 +75,10 @@ public class ModelTransferUtil {
 		//		g.setEdges(edges);
 
 		//在集合中额外添加一个gene节点表示所有基因的父类
-		CytoNode cnode =new CytoNode(new Node("gene","gene",null,false));
+		CytoNode cnode =new CytoNode(new Node("gene","gene","gene",null,false));
 		nodes.add(cnode);
 		//在集合中额外添加一个phen节点表示所有表型的父类
-		cnode =new CytoNode(new Node("phen","phen",null,false));
+		cnode =new CytoNode(new Node("phen","phen","mp",null,false));
 		nodes.add(cnode);
 		//		
 
@@ -95,7 +95,7 @@ public class ModelTransferUtil {
 				{
 					isQuery = true;
 				}
-				cnode =new CytoNode(new Node(gNode.getSymbol_name(), gNode.getId(),"gene",isQuery));
+				cnode =new CytoNode(new Node(gNode.getSymbol_name(), gNode.getId(),"gene","gene",isQuery));
 				nodes.add(cnode);
 			}
 		}
@@ -110,14 +110,14 @@ public class ModelTransferUtil {
 				if(!isLevelContained.containsKey(level))
 				{
 					//创建一个新的节点表示该level的父层
-					cnode =new CytoNode(new Node(level,level,"phen",false));
+					cnode =new CytoNode(new Node(level,level,"mp","phen",false));
 					nodes.add(cnode);
 				}
 				if(pids!=null && pids.containsKey(pid))
 				{
 					isQuery = true;
 				}
-				cnode =new CytoNode(new Node(pNode.getPheno_id(),pNode.getPheno_name(),level,isQuery));
+				cnode =new CytoNode(new Node(pNode.getPheno_id(),pNode.getPheno_name(),"mp",level,isQuery));
 				nodes.add(cnode);
 			}
 		}
@@ -139,7 +139,7 @@ public class ModelTransferUtil {
 		g.setEdges(edges);
 		g.setNodes(nodes);
 
-		CytoNode cnode =new CytoNode(new Node("phen","phen",null,false));
+		CytoNode cnode =new CytoNode(new Node("phen","phen","mp",null,false));
 		nodes.add(cnode);
 
 		Map<String,PNode> mps = new HashMap<String,PNode>();
@@ -155,7 +155,7 @@ public class ModelTransferUtil {
 			if(!isLevelContained.containsKey(level))
 			{
 				//创建一个新的节点表示该level的父层
-				cnode =new CytoNode(new Node(level,level,"phen",false));
+				cnode =new CytoNode(new Node(level,level,"mp","phen",false));
 				nodes.add(cnode);
 			}
 
@@ -168,7 +168,7 @@ public class ModelTransferUtil {
 					isQuery = true;
 				}
 			}
-			nodes.add(new CytoNode(new Node(pid, pNode.getPheno_name(),level,isQuery)));
+			nodes.add(new CytoNode(new Node(pid, pNode.getPheno_name(),"mp",level,isQuery)));
 		}
 
 		Set<String> keys = mps.keySet();
@@ -180,7 +180,7 @@ public class ModelTransferUtil {
 				String fpid = father.getPheno_id();
 				if(keys.contains(fpid))
 				{
-					Edge l = new Edge(fpid, pid,"ppLink");
+					Edge l = new Edge(fpid, pid,"pplink");
 					edges.add(new CytoEdge(l));
 				}
 			}

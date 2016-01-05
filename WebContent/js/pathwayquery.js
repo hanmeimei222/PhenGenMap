@@ -7,14 +7,15 @@ function submitPathwayQuery()
 	var queryType=$("#queryType").val();
 //	var queryType = "allpathways";
 	
-	data = {"pwayList":pwayList,"queryType":queryType};
+	queryData = {"pwayList":pwayList,"queryType":queryType};
 	$.ajax({
 		type : "post",
-		data : data,
+		data : queryData,
 		url : "pwayQuery.do",
 		dataType : "json",
 		success : function(msg) {
-			cytoDrawPathway(msg);
+			d3DrawPathway(msg);
+//			cytoDrawPathway(msg);
 		}
 	});
 }

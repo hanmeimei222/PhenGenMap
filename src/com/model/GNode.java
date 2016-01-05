@@ -43,7 +43,17 @@ public class GNode
 			return false;
 		return true;
 	}
+
+	public GNode(String id, String symbolName) {
+		super();
+		this.id = id;
+		symbol_name = symbolName;
+	}
 	
+	public GNode()
+	{
+		
+	}
 	
 	
 	

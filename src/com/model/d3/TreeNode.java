@@ -1,13 +1,13 @@
 package com.model.d3;
 
-import java.util.Set;
+import java.util.List;
 
 
 public class TreeNode {
 
 	private String id;
 	private String name;
-	private Set<TreeNode>children;
+	private List<TreeNode>children;
 	public String getId() {
 		return id;
 	}
@@ -20,18 +20,23 @@ public class TreeNode {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Set<TreeNode> getChildren() {
+	public List<TreeNode> getChildren() {
 		return children;
 	}
-	public void setChildren(Set<TreeNode> children) {
+	public void setChildren(List<TreeNode> children) {
 		this.children = children;
 	}
 	
-	
-	public TreeNode() {
-		super();
+	public TreeNode()
+	{
+		
 	}
-	public TreeNode(String id, String name, Set<TreeNode> children) {
+	
+	public TreeNode(String name) {
+		super();
+		this.name = name;
+	}
+	public TreeNode(String id, String name, List<TreeNode> children) {
 		super();
 		this.id = id;
 		this.name = name;

@@ -1,9 +1,6 @@
 var baseSvg;
 function d3DrawPathway(treeData){
 	// Get JSON data
-	treeJSON = d3.json("allPathway.do", function(error, treeData) {
-
-		
 	    // Calculate total nodes, max label length
 	    var totalNodes = 0;
 	    var maxLabelLength = 0;
@@ -529,7 +526,4 @@ function d3DrawPathway(treeData){
 	    // Layout the tree initially and center on the root node.
 	    update(root);
 	    centerNode(root);
-	});
-	
-	
 }

@@ -1,7 +1,9 @@
 package com.util;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -199,20 +201,20 @@ public class ModelTransferUtil {
  */
 	public static TreeNode allpathways2graph(Map<String, Map<String, Map<Pathway, Boolean>>> allpathways){
 		//构造根节点
-		Set<TreeNode> children = new HashSet<TreeNode>();
+		List<TreeNode> children = new ArrayList<TreeNode>();
 		TreeNode root = new TreeNode("pathway","pathway",children);
 		
 		//六棵子树，逐个构造
 		Set<String>class1set = allpathways.keySet();
 		for (String class1 : class1set) {
 			//构造class1 的 treenode
-			Set<TreeNode>cls1child = new HashSet<TreeNode>();
+			List<TreeNode>cls1child = new ArrayList<TreeNode>();
 			children.add(new TreeNode(class1,class1,cls1child));
 			Map<String, Map<Pathway, Boolean>>class2map = allpathways.get(class1);
 			Set<String>class2set = class2map.keySet();
 
 			for (String class2 : class2set) {
-				Set<TreeNode>cls2child = new HashSet<TreeNode>();
+				List<TreeNode>cls2child = new ArrayList<TreeNode>();
 				cls1child.add(new TreeNode(class2,class2,cls2child));
 				Set<Pathway>pwset = class2map.get(class2).keySet();
 				for (Pathway pw : pwset) {

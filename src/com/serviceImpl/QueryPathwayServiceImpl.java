@@ -1,6 +1,8 @@
 package com.serviceImpl;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -17,6 +19,7 @@ import com.model.cytoscape.CytoNode;
 import com.model.cytoscape.Edge;
 import com.model.cytoscape.Graph;
 import com.model.cytoscape.Node;
+import com.model.d3.PathwayGraphAndTree;
 import com.model.d3.TreeNode;
 import com.service.QueryPathwayService;
 import com.util.ModelTransferUtil;
@@ -41,7 +44,7 @@ public class QueryPathwayServiceImpl implements QueryPathwayService {
 
 
 	@Override
-	public Graph getGenePathwayAsso(Map<NodeType, Map<String, Boolean>> map) {
+	public PathwayGraphAndTree getGenePathwayAsso(Map<NodeType, Map<String, Boolean>> map) {
 		Set<GNode> gNodes = null;
 		Set<Pathway> pathways = null;
 		for (NodeType type : map.keySet()) {
@@ -65,10 +68,11 @@ public class QueryPathwayServiceImpl implements QueryPathwayService {
 			gNodes = new HashSet<GNode>();
 			for (Pathway pathway : pathways) {
 				gNodes.addAll(pathway.getSymbols().keySet());
+
 			}
 		}
 
-		//如果未输入pathway，则返回输入基因关联的pathway
+		//如果pathway为空，则返回输入基因关联的pathway
 		if(pathways==null&&gNodes!=null)
 		{
 			pathways = new HashSet<Pathway>();
@@ -87,7 +91,7 @@ public class QueryPathwayServiceImpl implements QueryPathwayService {
 			}
 		}
 
-		//绘图，构建pathway指向gnode的边
+		//绘制pathway和gene之间的图，构建pathway指向gnode的边
 		Graph g = new Graph();
 		Set<CytoNode> nodes = new HashSet<CytoNode>();
 		Set<CytoEdge> edges = new HashSet<CytoEdge>();
@@ -115,21 +119,20 @@ public class QueryPathwayServiceImpl implements QueryPathwayService {
 				nodes.add(cnode);
 			}
 		}
-		
-		if(gNodes!=null && pathways !=null)
-		{
+
+		if(gNodes!=null && pathways !=null){
 			edges.add(new CytoEdge(new Edge("pathway", "gene","typelink")));
 		}
 
 		//构建一个父类的pathway节点
-		if(pathways!=null)
-		{
-
+		if(pathways!=null){
 			CytoNode cnode =new CytoNode(new Node("pathway","pathway","pathway",null,false));
 			nodes.add(cnode);
-
 		}
+		
+		Set<TreeNode> simPathway = new HashSet<TreeNode>();
 		for (Pathway pathway : pathways) {
+			
 			//构建pathway的节点
 			boolean queryInput = false;
 			String pathwayId = pathway.getPw_id();
@@ -151,36 +154,51 @@ public class QueryPathwayServiceImpl implements QueryPathwayService {
 				}
 
 			}
+			
+			TreeNode treenode = getRelatedPathway(pathway);
+			
+			simPathway.add(treenode);
+			
 		}
-		return g;
+		
+		PathwayGraphAndTree graphAndTree = new PathwayGraphAndTree(g, simPathway);
+		return graphAndTree;
 	}
 
+	
+	/**
+	 * 得到pathway与他相关的其他pathway的排序
+	 * @param Map<NodeType,Map<String,Boolean>>map
+	 * @return TreeNode
+	 */
+	private TreeNode getRelatedPathway(Pathway pathway){
+		TreeNode root = new TreeNode();
+		root.setName("root");
+		List<TreeNode>children = new ArrayList<TreeNode>();
+		root.setChildren(children);
+		
+		// 把当前pathway放进去作为第一个节点
+		TreeNode node = new TreeNode();
+		node.setName(pathway.getPw_name());
+		children.add(node);
 
-
-	//	@Override
-	//	public TreeNode queryPathway(Map<String,Boolean> queryMap, PathwayQueryType type) {
-	////		Set<Pathway> result = null;
-	////		Graph g = new Graph();
-	//		TreeNode pathwaytree = new TreeNode();
-	////		Set<String> ids = queryMap.keySet();
-	//		switch (type) {
-	//		case SINGLE_WAYS:
-	////			result = pwayDao.getMultiPathway(ids);
-	////			g = ModelTransferUtil.sglpathways2graph(result,queryMap);
-	//			break;
-	//		case SINGLE_GENES:
-	////			result = pwayDao.getPathwayByGene(ids);
-	//			break;
-	//		case ALL_PATHWAYS:
-	////			Map<String,String>cls2_cls1 = pwayDao.getCls2cls1Map();
-	////			Map<String,Set<Pathway>>cls2map = pwayDao.getCls2PathwayMap();
-	//			Map<String, Map<String, Map<Pathway, Boolean>>> allpathways = pwayDao.getAllPathways();
-	//			pathwaytree = ModelTransferUtil.allpathways2graph(allpathways);
-	//			
-	//		default:
-	//			break;
-	//		}
-	//		return pathwaytree;
-	//		
-	//	}
+		List<TreeNode>simPathway = new ArrayList<TreeNode>();
+		node.setChildren(simPathway);
+		
+		List<Pathway> list = pwayDao.getRelatedPathwayRank(pathway);
+		for (Pathway pathway2 : list) {
+			node = new TreeNode();
+			node.setName(pathway2.getPw_name());
+			simPathway.add(node);
+			
+			List<TreeNode> genes = new ArrayList<TreeNode>();
+			node.setChildren(genes);
+			Set<GNode> simGeneSet = pwayDao.getCommonSymbols(pathway, pathway2);
+			for (GNode gNode : simGeneSet) {
+				genes.add(new TreeNode(gNode.getSymbol_name()));
+			}
+		}
+		return root;
+	}
+	
 }

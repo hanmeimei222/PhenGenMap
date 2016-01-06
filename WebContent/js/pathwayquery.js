@@ -53,8 +53,8 @@ function submitPathwayQuery()
 		url : "pwayQuery.do",
 		dataType : "json",
 		success : function(msg) {
-//			d3DrawPathway(msg);
-			cytoscapeDraw(msg);
+			drawSimPathway(msg.treenode);
+			cytoscapeDraw(msg.graph);
 //			alert(JSON.stringify(msg));
 		}
 	});

@@ -1,7 +1,11 @@
 package com.daoImpl;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
@@ -155,6 +159,38 @@ public class PathwayDaoImpl implements PathwayDao{
 			result.put(pw,true);	
 			}
 		}
+		return result;
+	}
+
+	@Override
+	public Set<GNode> getCommonSymbols(Pathway pw1, Pathway pw2) {
+		Set<GNode>gn1 = pw1.getSymbols().keySet();
+		Set<GNode>gn2 = pw2.getSymbols().keySet();
+		gn1.retainAll(gn2);
+		return gn1;
+	}
+
+	@Override
+	//Map<Pathway,Map<Pathway,Integer>>
+	public List<Pathway> getRelatedPathwayRank(Pathway pw) {
+		//存放排序好的Pathway 的List作为结果返回
+		List<Pathway>result = new ArrayList<Pathway>();
+		Map<Pathway,Integer>related = GlobalData.relatedPathway.get(pw);
+		 //这里将related.entrySet()转换成list
+        List<Map.Entry<Pathway,Integer>> list = new ArrayList<Map.Entry<Pathway,Integer>>(related.entrySet());
+        //然后通过比较器来实现排序
+        Collections.sort(list,new Comparator<Map.Entry<Pathway,Integer>>() {
+            //降序排序
+            public int compare(Entry<Pathway,Integer> o1,
+                    Entry<Pathway,Integer> o2) {
+                return o2.getValue().compareTo(o1.getValue());
+            }
+            
+        });
+        for(Map.Entry<Pathway,Integer> map:list){ 
+        	//排序好的Pathway依次放入result
+        	result.add(map.getKey());
+       } 
 		return result;
 	}
 

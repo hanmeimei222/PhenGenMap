@@ -21,11 +21,15 @@ public class GlobalData {
 	
 	//基因全局数据
 	public static Map<String,GNode> allgnodes = new HashMap<String, GNode>();
+	
+	//pathway全局变量
 	public static Map<String,Pathway> allways = new HashMap<String,Pathway>();
 	public static Map<String,Map<String,Map<Pathway,Boolean>>> classmap = new HashMap<String, Map<String,Map<Pathway,Boolean>>>();
 	public static Map<String,String>pwnamemap = new HashMap<String,String>();
 	public static Map<String,String>clsmap = new HashMap<String, String>();
+	public static Map<Pathway,Map<Pathway,Integer>>relatedPathway = new HashMap<Pathway, Map<Pathway,Integer>>();
 
+	
 	//g-p全局数据
 	public static Map<GNode, Map<PNode,Boolean>>g_p_map = new HashMap<GNode, Map<PNode,Boolean>>();
 	public static Map<PNode, Map<GNode,Boolean>>p_g_map = new HashMap<PNode, Map<GNode,Boolean>>();

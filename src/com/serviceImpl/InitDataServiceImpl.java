@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.global.GlobalData;
 import com.init.dataLoad.GPDataLoad;
-import com.init.dataLoad.GeneDataLoad;
+import com.init.dataLoad.GenePathwayDataLoad;
 import com.init.dataLoad.GenePPIDataLoad;
 import com.init.dataLoad.PPIDataLoad;
 import com.init.dataLoad.PhenoDataLoad;
@@ -17,7 +17,7 @@ public class InitDataServiceImpl implements InitDataService{
 	@Autowired
 	private PhenoDataLoad phenLoad;
 	@Autowired
-	private GeneDataLoad geneLoad;
+	private GenePathwayDataLoad geneLoad;
 	
 	@Autowired
 	private GPDataLoad gpLoad;

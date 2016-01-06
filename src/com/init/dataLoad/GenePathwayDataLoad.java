@@ -5,7 +5,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.stereotype.Repository;
 
@@ -14,7 +16,7 @@ import com.model.GNode;
 import com.model.Pathway;
 
 @Repository
-public class GeneDataLoad {
+public class GenePathwayDataLoad {
 
 	//根据读入的一行新建一条pathway
 	public Pathway makeNodeByString(String str)
@@ -65,7 +67,7 @@ public class GeneDataLoad {
 				//构造Map<String,String>pwnamemap
 				String pw_name = pw.getPw_name();
 				GlobalData.pwnamemap.put(pw_name,pw_id);
-
+				
 				//构造Map<String,Map<String,Map<Pathway,Boolean>>> classmap
 				String class1 = pw.getClass_1();
 				String class2 = pw.getClass_2();
@@ -88,6 +90,34 @@ public class GeneDataLoad {
 					pwmap.put(pw, true);
 				}
 
+			}
+			
+			//构造Map<Pathway,Map<Pathway,Integer>>relatedPathway
+			Set<Pathway>allpathways = new HashSet<Pathway>();
+			Set<String>pids = GlobalData.allways.keySet();
+			for (String string : pids) {
+				allpathways.add(GlobalData.allways.get(string));
+			}
+			for (Pathway pathway : allpathways) {
+				
+				Map<Pathway,Integer>related = new HashMap<Pathway,Integer>();
+				GlobalData.relatedPathway.put(pathway, related);
+				
+				//构造Map<Pathway,Integer>related
+				Map<GNode,Boolean>gn = pathway.getSymbols();
+				if(gn==null){
+					continue;
+				}
+				Set<GNode>symbols = gn.keySet();
+				Set<Pathway>others = new HashSet<Pathway>();
+				for (Pathway otherpathway : others) {
+					Set<GNode>othersymbols = otherpathway.getSymbols().keySet();
+					//求交集
+					othersymbols.retainAll(symbols);
+					if(!othersymbols.isEmpty()){
+						related.put(otherpathway, othersymbols.size());
+					}
+				}
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

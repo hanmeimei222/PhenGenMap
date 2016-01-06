@@ -8,6 +8,7 @@ public class Pathway {
 	private String class_1;
 	private String class_2;
 	private Map<GNode,Boolean> symbols;
+	
 	public String getPw_id() {
 		return pw_id;
 	}
@@ -38,9 +39,5 @@ public class Pathway {
 	public void setSymbols(Map<GNode, Boolean> symbols) {
 		this.symbols = symbols;
 	}
-	
-	
-	
-	
 
 }

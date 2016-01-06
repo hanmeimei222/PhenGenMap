@@ -1,10 +1,12 @@
 package com.dao;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.springframework.stereotype.Repository;
 
+import com.model.GNode;
 import com.model.Pathway;
 
 @Repository
@@ -81,5 +83,20 @@ public interface PathwayDao {
 	 * 按基因查询，输入symbolname，查询包含它的所有pathways
 	 */
 	public Map<Pathway,Boolean> getPathwayByGene(String symbolname);
+	
+	/**
+	 * 查询当前pathway与其他pathway的关联度排序
+	 * @param pw
+	 * @return
+	 */
+	public List<Pathway> getRelatedPathwayRank(Pathway pw);
+	
+	/**
+	 * 查询两个pathway同时包含的symbols集合
+	 * @param pw1
+	 * @param pw2
+	 * @return
+	 */
+	public Set<GNode> getCommonSymbols(Pathway pw1,Pathway pw2);
 	
 }

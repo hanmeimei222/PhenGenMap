@@ -3,6 +3,30 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<style type="text/css">
+#mainBubble {
+	background: #fff;
+	border: solid 1px #ddd;
+	box-shadow: 0 0 4px rgba(0, 0, 0, 0);
+	font: 10px sans-serif;
+	height: 800px;
+	position: relative;
+	width: 80%;
+}
+
+#mainBubble svg {
+	left: 0;
+	position: absolute;
+	top: 0;
+}
+
+#mainBubble circle.topBubble {
+	fill: #aaa;
+	stroke: #666;
+	stroke-width: 1.5px;
+}
+</style>
+
 <title>pathway</title>
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
@@ -17,8 +41,8 @@
 
 <script src="js/pathwayquery.js"></script>
 <script src="js/cytoscapeDraw.js"></script>
-<script src="js/cytoscapeDrawPathway.js"></script>
-
+<script src="js/d3/DrawPathway.js"></script>
+<script src="js/d3/bubble.js"></script>	
 <script src="https://cdn.rawgit.com/cpettitt/dagre/v0.7.4/dist/dagre.min.js"></script>
 <script src="https://cdn.rawgit.com/cytoscape/cytoscape.js-dagre/1.1.2/cytoscape-dagre.js"></script>
 
@@ -160,7 +184,15 @@ mmu00603</textarea>
 <div id="tree-container"></div>
 
 <div id="cy"></div>
-					
+
+<div id="mainBubble" style="height: 618px;"><svg
+	class="mainBubbleSVG" width="882.436" height="618"> <text
+	id="bubbleItemNote" x="10" y="426.218" font-size="12"
+	dominant-baseline="middle" alignment-baseline="middle"
+	style="fill: rgb(136, 136, 136);">D3.js bubble menu developed by
+Shipeng Sun (sunsp.gis@gmail.com), Institute of Environment, University
+of Minnesota, and University of Springfield, Illinois. </text> </svg></div>
+				
 </div>
 <div class="clearfix"></div>
 </div>

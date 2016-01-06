@@ -73,7 +73,7 @@ public class GPDataLoad {
 		PhenoDataLoad pdl = new PhenoDataLoad();
 		pdl.loadPhenoData();
 		
-		GeneDataLoad gdl = new GeneDataLoad();
+		GenePathwayDataLoad gdl = new GenePathwayDataLoad();
 		gdl.loadGeneData();
 		
 		GPDataLoad gpdl = new GPDataLoad();

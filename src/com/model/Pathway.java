@@ -9,6 +9,11 @@ public class Pathway {
 	private String class_2;
 	private Map<GNode,Boolean> symbols;
 	
+//	
+//	public Pathway(String pwd)
+//	{
+//		
+//	}
 	public String getPw_id() {
 		return pw_id;
 	}

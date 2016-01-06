@@ -129,10 +129,10 @@ public class QueryPathwayServiceImpl implements QueryPathwayService {
 			CytoNode cnode =new CytoNode(new Node("pathway","pathway","pathway",null,false));
 			nodes.add(cnode);
 		}
-		
+
 		Set<TreeNode> simPathway = new HashSet<TreeNode>();
 		for (Pathway pathway : pathways) {
-			
+
 			//构建pathway的节点
 			boolean queryInput = false;
 			String pathwayId = pathway.getPw_id();
@@ -154,18 +154,18 @@ public class QueryPathwayServiceImpl implements QueryPathwayService {
 				}
 
 			}
-			
+
 			TreeNode treenode = getRelatedPathway(pathway);
-			
+
 			simPathway.add(treenode);
-			
+
 		}
-		
+
 		PathwayGraphAndTree graphAndTree = new PathwayGraphAndTree(g, simPathway);
 		return graphAndTree;
 	}
 
-	
+
 	/**
 	 * 得到pathway与他相关的其他pathway的排序
 	 * @param Map<NodeType,Map<String,Boolean>>map
@@ -173,32 +173,34 @@ public class QueryPathwayServiceImpl implements QueryPathwayService {
 	 */
 	private TreeNode getRelatedPathway(Pathway pathway){
 		TreeNode root = new TreeNode();
+		root.setId("root");
 		root.setName("root");
+
 		List<TreeNode>children = new ArrayList<TreeNode>();
 		root.setChildren(children);
-		
+
 		// 把当前pathway放进去作为第一个节点
-		TreeNode node = new TreeNode();
-		node.setName(pathway.getPw_name());
+		List<TreeNode> genes = new ArrayList<TreeNode>();
+		for (GNode gNode : pathway.getSymbols().keySet()) {
+			genes.add(new TreeNode(gNode.getSymbol_name()));
+		}
+		
+		TreeNode node = new TreeNode(pathway.getPw_id(),pathway.getPw_name(),genes);
+			
 		children.add(node);
 
-		List<TreeNode>simPathway = new ArrayList<TreeNode>();
-		node.setChildren(simPathway);
-		
 		List<Pathway> list = pwayDao.getRelatedPathwayRank(pathway);
 		for (Pathway pathway2 : list) {
-			node = new TreeNode();
-			node.setName(pathway2.getPw_name());
-			simPathway.add(node);
-			
-			List<TreeNode> genes = new ArrayList<TreeNode>();
-			node.setChildren(genes);
+			genes = new ArrayList<TreeNode>();
 			Set<GNode> simGeneSet = pwayDao.getCommonSymbols(pathway, pathway2);
 			for (GNode gNode : simGeneSet) {
 				genes.add(new TreeNode(gNode.getSymbol_name()));
 			}
+			node = new TreeNode(pathway2.getPw_id(),pathway2.getPw_name(),genes);
+			children.add(node);
+
 		}
 		return root;
 	}
-	
+
 }

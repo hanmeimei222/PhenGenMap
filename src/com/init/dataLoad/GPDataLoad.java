@@ -70,12 +70,6 @@ public class GPDataLoad {
 	public void loadGPData() {
 		String infile = GlobalData.PATH+"/data/inter_data/symbol_mp_mgi.txt";
 		
-		PhenoDataLoad pdl = new PhenoDataLoad();
-		pdl.loadPhenoData();
-		
-		GenePathwayDataLoad gdl = new GenePathwayDataLoad();
-		gdl.loadGeneData();
-		
 		GPDataLoad gpdl = new GPDataLoad();
 		gpdl.readGPAssociation(infile);
 		System.out.println();

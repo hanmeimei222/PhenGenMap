@@ -1,14 +1,15 @@
 package com.daoImpl;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import org.springframework.stereotype.Repository;
 
@@ -23,24 +24,24 @@ public class PathwayDaoImpl implements PathwayDao{
 	//输入pathway id查询该条pathway具体信息
 	@Override
 	public Pathway getPathwayById(String id){
-		Pathway result = new Pathway();
-		result = GlobalData.allways.get(id);
+		//Pathway result = new Pathway();
+		Pathway result = GlobalData.allways.get(id);
 		return result;
 	} 
 
 	//输入pathway name 查询该条pathway
 	@Override
 	public Pathway getPathwayByName(String name){
-		Pathway result = new Pathway();
+		//Pathway result = new Pathway();
 		String id = GlobalData.pwnamemap.get(name);
-		result = GlobalData.allways.get(id);
+		Pathway result = GlobalData.allways.get(id);
 		return result;
 	}
 
 	//输入id或name 查询单条pathway
 	@Override
 	public Pathway getSinglePathway(String query){
-		Pathway result = new Pathway();
+		Pathway result;// = new Pathway();
 		if(query.startsWith("mmu")){
 			result = getPathwayById(query);
 			if(result!=null){
@@ -72,10 +73,10 @@ public class PathwayDaoImpl implements PathwayDao{
 	@Override
 	public Set<Pathway> getMultiPathway(Set<String> query){
 		Set<Pathway> result = new HashSet<Pathway>();
-		
+
 		for (String str : query) {
-			Pathway pw = new Pathway();
-			pw = getSinglePathway(str);
+//			Pathway pw = new Pathway();
+			Pathway	pw = getSinglePathway(str);
 			if(null!=pw){
 				result.add(pw);
 			}
@@ -83,19 +84,19 @@ public class PathwayDaoImpl implements PathwayDao{
 		return result;
 	}
 
-	
+
 	//返回全部pathways 
 	@Override
 	public Map<String, Map<String, Map<Pathway, Boolean>>> getAllPathways() {
 		return GlobalData.classmap;
 	}
-	
+
 	//返回class2-class1的map
 	@Override
 	public Map<String, String> getCls2cls1Map() {
 		return GlobalData.clsmap;
 	}
-	
+
 	//返回class2-pathways的map
 	@Override
 	public Map<String, Set<Pathway>> getCls2PathwayMap(){
@@ -108,8 +109,8 @@ public class PathwayDaoImpl implements PathwayDao{
 		}
 		return result;
 	}
-	
-	
+
+
 	//查询一级类别，输出该类下的子类，以及子类的相关pathways
 	@Override
 	public Map<String,Map<Pathway,Boolean>> getMainCatalog(String class1){
@@ -148,7 +149,7 @@ public class PathwayDaoImpl implements PathwayDao{
 	//按基因查询，输入symbolname，查询包含它的所有pathways
 	@Override
 	public Map<Pathway,Boolean> getPathwayByGene(String symbolname){
-		
+
 		Map<Pathway,Boolean> result = new HashMap<Pathway,Boolean>();
 		GNode gn = new GNode();
 		gn.setSymbol_name(symbolname);
@@ -156,7 +157,7 @@ public class PathwayDaoImpl implements PathwayDao{
 			Pathway pw = entry.getValue();
 			Map<GNode,Boolean>symbols = entry.getValue().getSymbols();
 			if(symbols!=null&&symbols.containsKey(gn)){
-			result.put(pw,true);	
+				result.put(pw,true);	
 			}
 		}
 		return result;
@@ -166,8 +167,12 @@ public class PathwayDaoImpl implements PathwayDao{
 	public Set<GNode> getCommonSymbols(Pathway pw1, Pathway pw2) {
 		Set<GNode>gn1 = pw1.getSymbols().keySet();
 		Set<GNode>gn2 = pw2.getSymbols().keySet();
-		gn1.retainAll(gn2);
-		return gn1;
+		Set<GNode>result = new HashSet<GNode>();
+		for (GNode gNode : gn1) {
+			result.add(gNode);
+		}
+		result.retainAll(gn2);
+		return result;
 	}
 
 	@Override
@@ -176,25 +181,49 @@ public class PathwayDaoImpl implements PathwayDao{
 		//存放排序好的Pathway 的List作为结果返回
 		List<Pathway>result = new ArrayList<Pathway>();
 		Map<Pathway,Integer>related = GlobalData.relatedPathway.get(pw);
-		 //这里将related.entrySet()转换成list
-        List<Map.Entry<Pathway,Integer>> list = new ArrayList<Map.Entry<Pathway,Integer>>(related.entrySet());
-        //然后通过比较器来实现排序
-        Collections.sort(list,new Comparator<Map.Entry<Pathway,Integer>>() {
-            //降序排序
-            public int compare(Entry<Pathway,Integer> o1,
-                    Entry<Pathway,Integer> o2) {
-                return o2.getValue().compareTo(o1.getValue());
-            }
-            
-        });
-        for(Map.Entry<Pathway,Integer> map:list){ 
-        	//排序好的Pathway依次放入result
-        	result.add(map.getKey());
-       } 
+		//第一次查询时进行计算，并进行缓存
+		if(related == null)
+		{
+			related = new HashMap<Pathway,Integer>();
+			Collection<Pathway> allpathways = GlobalData.allways.values();
+			Set<GNode> thisPathwayGenes = pw.getSymbols().keySet();
+			//			对于每一个其他pathway，计算与当前pathway的交集，并将对应的pathway,num存储到related中
+			for (Pathway pathway : allpathways)
+			{
+				if(pathway==null||pathway == pw || pathway.getSymbols()==null)
+				{
+					continue;
+				}
+
+				Set<GNode> otherPathwayGenes = pathway.getSymbols().keySet();
+				
+				for (GNode gNode : otherPathwayGenes) {
+					System.out.println(thisPathwayGenes.contains(gNode));
+				}
+				//取交集
+				otherPathwayGenes.retainAll(thisPathwayGenes);
+				if(!otherPathwayGenes.isEmpty()){
+					related.put(pathway, otherPathwayGenes.size());
+				}
+			}
+		}
+		
+		//		对related进行排序，返回前5个pathway
+		List<Entry<Pathway,Integer>> list =  new ArrayList<Entry<Pathway,Integer>>(related.entrySet());
+		Collections.sort(list, new Comparator<Map.Entry<Pathway, Integer>>() {			
+			public int compare(Map.Entry<Pathway, Integer> o1,			
+					Map.Entry<Pathway, Integer> o2) {				
+				return (o2.getValue() - o1.getValue());				
+			}
+		});
+
+		for (Entry<Pathway, Integer> map : list) {
+			result.add(map.getKey());
+		}
+		if(result.size()>5)
+		{
+			result = result.subList(0, 5);
+		}
 		return result;
 	}
-
-	
-
-	
 }

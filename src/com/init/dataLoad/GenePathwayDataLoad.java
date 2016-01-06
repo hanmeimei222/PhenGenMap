@@ -5,9 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 import org.springframework.stereotype.Repository;
 
@@ -25,7 +23,10 @@ public class GenePathwayDataLoad {
 		Pathway pw = new Pathway();
 
 		Map<GNode,Boolean>symbols = new HashMap<GNode,Boolean>();
-
+		if(templine[0].equals("mmu00601"))
+		{
+			System.out.println();
+		}
 		pw.setPw_id(templine[0]);
 		pw.setPw_name(templine[1].substring(0,templine[1].length()-23));
 		if(templine.length>2){
@@ -39,10 +40,15 @@ public class GenePathwayDataLoad {
 			if(templine.length>3){
 				//初始化GNode，暂时gene节点的id为空，后面再修改
 				for(int i=3; i<templine.length;i++){
-					GNode gn = new GNode();
 					String symbol = templine[i].toUpperCase();
-					gn.setSymbol_name(symbol);
-					GlobalData.allgnodes.put(symbol, gn);
+					GNode gn = GlobalData.allgnodes.get(symbol);
+					if(gn == null)
+					{
+						gn = new GNode();
+						gn.setSymbol_name(symbol);
+						GlobalData.allgnodes.put(symbol, gn);
+					}
+
 					symbols.put(gn, true);
 				}
 			}
@@ -67,11 +73,11 @@ public class GenePathwayDataLoad {
 				//构造Map<String,String>pwnamemap
 				String pw_name = pw.getPw_name();
 				GlobalData.pwnamemap.put(pw_name,pw_id);
-				
+
 				//构造Map<String,Map<String,Map<Pathway,Boolean>>> classmap
 				String class1 = pw.getClass_1();
 				String class2 = pw.getClass_2();
-				
+
 
 				if(class1!=null &&class2!=null){
 					GlobalData.clsmap.put(class2, class1);
@@ -91,34 +97,37 @@ public class GenePathwayDataLoad {
 				}
 
 			}
-			
+
 			//构造Map<Pathway,Map<Pathway,Integer>>relatedPathway
-			Set<Pathway>allpathways = new HashSet<Pathway>();
-			Set<String>pids = GlobalData.allways.keySet();
-			for (String string : pids) {
-				allpathways.add(GlobalData.allways.get(string));
-			}
-			for (Pathway pathway : allpathways) {
-				
-				Map<Pathway,Integer>related = new HashMap<Pathway,Integer>();
-				GlobalData.relatedPathway.put(pathway, related);
-				
-				//构造Map<Pathway,Integer>related
-				Map<GNode,Boolean>gn = pathway.getSymbols();
-				if(gn==null){
-					continue;
-				}
-				Set<GNode>symbols = gn.keySet();
-				Set<Pathway>others = new HashSet<Pathway>();
-				for (Pathway otherpathway : others) {
-					Set<GNode>othersymbols = otherpathway.getSymbols().keySet();
-					//求交集
-					othersymbols.retainAll(symbols);
-					if(!othersymbols.isEmpty()){
-						related.put(otherpathway, othersymbols.size());
-					}
-				}
-			}
+			//			Set<Pathway>allpathways = new HashSet<Pathway>();
+			//			Set<String>pids = GlobalData.allways.keySet();
+			//			for (String string : pids) {
+			//				allpathways.add(GlobalData.allways.get(string));
+			//			}
+			//			for (Pathway pathway : allpathways) {
+			//				
+			//				Map<Pathway,Integer>related = new HashMap<Pathway,Integer>();
+			//				GlobalData.relatedPathway.put(pathway, related);
+			//				
+			//				//构造Map<Pathway,Integer>related
+			//				Map<GNode,Boolean>gn = pathway.getSymbols();
+			//				if(gn==null){
+			//					continue;
+			//				}
+			//				Set<GNode>symbols = gn.keySet();
+			//				for (Pathway otherpathway : allpathways) {
+			//					if(otherpathway == null ||otherpathway == pathway)
+			//					{
+			//						continue;
+			//					}
+			//					Set<GNode>othersymbols = otherpathway.getSymbols().keySet();
+			//					//求交集
+			//					othersymbols.retainAll(symbols);
+			//					if(!othersymbols.isEmpty()){
+			//						related.put(otherpathway, othersymbols.size());
+			//					}
+			//				}
+			//			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -137,7 +146,7 @@ public class GenePathwayDataLoad {
 	//加载gene数据
 	public void loadGeneData() {
 		String infile = GlobalData.PATH+"/data/inter_data/mmu_pathway_id_name_class_symbols.txt";
-//		String infile = "WebContent/data/inter_data/mmu_pathway_id_name_class_symbols.txt";
+		//		String infile = "WebContent/data/inter_data/mmu_pathway_id_name_class_symbols.txt";
 		readPathway(infile);
 	}
 

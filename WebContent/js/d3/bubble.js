@@ -1,19 +1,26 @@
-function drawSimPathway(root)
+function drawSimPathway(root,mmuid)
 {
 	var w = window.innerWidth*0.68*0.95;
 	var h = Math.ceil(w*0.7);
 	var oR = 0;
 	var nTop = 0;
-
-	var svgContainer = d3.select("#mainBubble")
-	.style("height", h+"px");
-
-	var svg = d3.select("#mainBubble").append("svg")
+	
+	var childDiv = $('<div id="'+ mmuid +'" style="height: 618px;">');
+	
+	//用jquery插入一个div
+	$("#services-main").append(childDiv);
+	
+	var svgContainer = d3.select("#"+mmuid).style("height", h+"px");
+	
+	var svg = d3.select('#'+mmuid)
+	.append("svg")
 	.attr("class", "mainBubbleSVG")
 	.attr("width", w)
 	.attr("height",h)
 	.on("mouseleave", function() {return resetBubbles();});
 
+	
+	
 	var mainNote = svg.append("text")
 	.attr("id", "bubbleItemNote")
 	.attr("x", 10)
@@ -24,9 +31,6 @@ function drawSimPathway(root)
 	.style("fill", "#888888")
 	.text(function(d) {return "D3.js bubble menu developed by Shipeng Sun (sunsp.gis@gmail.com), Institute of Environment, University of Minnesota, and University of Springfield, Illinois.";});   
 
-
-
-	console.log(error);
 
 	var bubbleObj = svg.selectAll(".topBubble")
 	.data(root.children)
@@ -62,7 +66,7 @@ function drawSimPathway(root)
 	.attr("text-anchor", "middle")
 	.attr("dominant-baseline", "middle")
 	.attr("alignment-baseline", "middle")
-	.text(function(d) {return d.name})      
+	.text(function(d) {return d.id})      
 	.on("mouseover", function(d,i) {return activateBubble(d,i);});
 
 
@@ -118,7 +122,7 @@ function drawSimPathway(root)
 	}
 
 
-	resetBubbles = function () {
+function resetBubbles() {
 		w = window.innerWidth*0.68*0.95;
 		oR = w/(1+3*nTop);
 

@@ -21,27 +21,17 @@ public class GNode
 	}
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((symbol_name == null) ? 0 : symbol_name.hashCode());
-		return result;
+		return symbol_name.hashCode();
 	}
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
+		
 		GNode other = (GNode) obj;
-		if (symbol_name == null) {
-			if (other.symbol_name != null)
-				return false;
-		} else if (!symbol_name.equals(other.symbol_name))
-			return false;
-		return true;
+		if (symbol_name.equals(other.symbol_name))
+		{
+			return true;
+		}
+		return false;
 	}
 
 	public GNode(String id, String symbolName) {

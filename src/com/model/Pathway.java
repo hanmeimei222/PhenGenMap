@@ -9,11 +9,6 @@ public class Pathway {
 	private String class_2;
 	private Map<GNode,Boolean> symbols;
 	
-//	
-//	public Pathway(String pwd)
-//	{
-//		
-//	}
 	public String getPw_id() {
 		return pw_id;
 	}
@@ -45,4 +40,21 @@ public class Pathway {
 		this.symbols = symbols;
 	}
 
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return this.pw_id.hashCode();
+	}
+	@Override
+	public boolean equals(Object obj) {
+		Pathway other = (Pathway)obj;
+		if(other!=null && other.getPw_id().equals(this.pw_id))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 }

@@ -186,7 +186,6 @@ public class PathwayDaoImpl implements PathwayDao{
 		{
 			related = new HashMap<Pathway,Integer>();
 			Collection<Pathway> allpathways = GlobalData.allways.values();
-			Set<GNode> thisPathwayGenes = pw.getSymbols().keySet();
 			//			对于每一个其他pathway，计算与当前pathway的交集，并将对应的pathway,num存储到related中
 			for (Pathway pathway : allpathways)
 			{
@@ -194,16 +193,11 @@ public class PathwayDaoImpl implements PathwayDao{
 				{
 					continue;
 				}
-
-				Set<GNode> otherPathwayGenes = pathway.getSymbols().keySet();
-				
-				for (GNode gNode : otherPathwayGenes) {
-					System.out.println(thisPathwayGenes.contains(gNode));
-				}
-				//取交集
-				otherPathwayGenes.retainAll(thisPathwayGenes);
-				if(!otherPathwayGenes.isEmpty()){
-					related.put(pathway, otherPathwayGenes.size());
+			//取交集
+				Set<GNode> intersectGene = getCommonSymbols(pw,pathway);
+	
+				if(!intersectGene.isEmpty()){
+					related.put(pathway, intersectGene.size());
 				}
 			}
 		}

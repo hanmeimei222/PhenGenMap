@@ -1,4 +1,53 @@
-var phenData;
+function drawGraph()
+{
+	var checkedPhenoList=new Array();
+	var checkedPathwayList = new Array();
+	var flag = false;
+	for(var level=1;level<4;level++)
+	{
+
+		var chks = document.getElementsByName("level"+level+"phen_chk");
+		var pathway_chks = document.getElementsByName(level+"_pathway_chk");
+		for(var i=0;i<chks.length;i++)
+		{
+			if(chks[i].checked)
+			{
+				checkedPhenoList.push(chks[i].id);
+				flag = true;
+			} 
+		}
+//		for(var i=0;i<pathway_chks;i++)
+//		{
+//		if(pathway_chks[i].checked)
+//		{
+//		checkedPathwayList.push(pathway_chks[i].id);
+//		flag = true;
+//		} 
+//		}
+	}
+	if(!flag)
+	{
+		return
+	}
+
+	var phenList=checkedPhenoList.join("\t");
+
+	var pathwayList = checkedPathwayList.join("\t");
+	var geneList = [];
+	var ppiList = [];
+	data = {"param":{"mpList":phenList,"geneList":geneList,"pathwayList":pathwayList,"ppiList":ppiList},"queryType":'mp_'};
+	$.ajax({
+		type : "post",
+		data : data,
+		url : "queryGlobalAsso.do",
+		dataType : "json",
+		success : function(msg) {
+			cytoscapeDraw(msg);
+		}
+	});
+
+}
+
 function initClassInfo()
 {
 	$.ajax({
@@ -15,7 +64,6 @@ function initClassInfo()
 
 function getPhenInfo(mpId,level)
 {
-	
 	var chks = document.getElementsByName("level"+level+"phen_chk");
 	if(level>0)
 	{
@@ -29,7 +77,7 @@ function getPhenInfo(mpId,level)
 			}
 		}
 	}
-	
+
 	$.ajax({
 		type : "post",
 		data:{"fatherId":mpId},
@@ -62,7 +110,7 @@ function showPhenInfo(msg,level)
 			$("#"+divId).append(chkInfo);
 		});
 		$("#"+divId).append('<hr>');
-	});
+			});
 }
 
 function initPathwayInfo(pathwayInfo)
@@ -70,7 +118,7 @@ function initPathwayInfo(pathwayInfo)
 	$(pathwayInfo.children).each(function(i,val) 
 			{
 		var info = JSON.stringify(val);
-		var chkInfo = '<input type="checkbox" name="first_class_chk" id=\''
+		var chkInfo = '<input type="checkbox" name="1_pathway_chk" id=\''
 			+info+'\' name="chkGene" value="'+
 			val.name+'" onclick="showSecondLevel()"/>'
 			+ val.name+' <br>';
@@ -80,7 +128,7 @@ function initPathwayInfo(pathwayInfo)
 
 function showSecondLevel()
 {
-	var chks = document.getElementsByName("first_class_chk");
+	var chks = document.getElementsByName("1_pathway_chk");
 	$("#pathway_second_class").empty();
 	for(var i=0;i<chks.length;i++)
 	{
@@ -91,7 +139,7 @@ function showSecondLevel()
 			$(data.children).each(function(i,child)
 					{
 				var info = JSON.stringify(child);
-				var chkInfo = '<input type="checkbox" name="second_class_chk"  id=\''
+				var chkInfo = '<input type="checkbox" name="2_pathway_chk"  id=\''
 					+ info+'\' name="chkGene" value="'
 					+ child.name+'" onclick="showPathwayLevel(\''
 					+child.name+'\')"/>'
@@ -108,7 +156,7 @@ function showSecondLevel()
 function showPathwayLevel()
 {
 	$("#pathway_name").empty();
-	var chks = document.getElementsByName("second_class_chk");
+	var chks = document.getElementsByName("2_pathway_chk");
 	for(var i=0;i<chks.length;i++)
 	{
 		if(chks[i].checked)
@@ -117,7 +165,7 @@ function showPathwayLevel()
 			$("#pathway_name").append('<h4>'+chks[i].value +'</h4>');
 			$(data.children).each(function(i,child)
 					{
-				var chkInfo = '<input type="checkbox" name="second_class_chk" id='
+				var chkInfo = '<input type="checkbox" name="3_pathway_chk" id='
 					+ child.name+' name="chkGene"/>'
 					+ child.name+' <br>';
 				$("#pathway_name").append(chkInfo);

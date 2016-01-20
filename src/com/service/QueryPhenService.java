@@ -32,4 +32,11 @@ public interface QueryPhenService {
 	 * @return
 	 */
 	public Set<PNode> getPhenInfo(Map<String,Boolean> queryMap);
+	
+	/**
+	 * 全局查询关联时，扩展mp节点为其子孙
+	 * @param queryMap
+	 * @return
+	 */
+	public Set<PNode> expandPhens(Map<String,Boolean> queryMap);
 }

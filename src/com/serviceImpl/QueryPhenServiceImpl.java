@@ -20,6 +20,13 @@ public class QueryPhenServiceImpl implements QueryPhenService{
 	@Autowired
 	PhenDao pheDao;
 	
+	
+	@Override
+	public Set<PNode> expandPhens(Map<String, Boolean> queryMap) {
+		// TODO Auto-generated method stub
+		Set<PNode>result = pheDao.getPostNodes(queryMap.keySet());
+		return result;
+	}
 	@Override
 	public Set<PNode> getPhenInfo(Map<String,Boolean> queryMap) {
 		Set<String>  ids = queryMap.keySet();

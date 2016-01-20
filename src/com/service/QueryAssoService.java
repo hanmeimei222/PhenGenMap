@@ -16,4 +16,6 @@ public interface QueryAssoService {
 	 * @return
 	 */
 	public Graph getAsso(Map<NodeType,Map<String,Boolean>> map);
+	
+	public Graph getGlobalAsso(Map<NodeType,Map<String,Boolean>> map);
 }

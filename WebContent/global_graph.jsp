@@ -37,7 +37,7 @@ body {
 
 #cy {
 	width: 90%;
-	height: 400px;
+	height: 600px;
 }
 </style>
 </head>
@@ -62,6 +62,37 @@ body {
 	<div class="services">
 		<div class="mycontainer">
 			<div class="services-main ">
+				
+				<div class="row">
+					<div class="col-md-6 services-left">
+						<div>
+						<div class="row">
+							<h3>Pathway过滤</h3>
+							</div>
+							<div class="row post-content-row">
+								<div class="col-md-4 services-left" id="pathway_first_class">
+								</div>
+								<div class="col-md-4 services-left" id="pathway_second_class">
+								</div>
+								<div class="col-md-4 service-left" id="pathway_name"></div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-6 services-right">
+						<div>
+							<div class="row">
+								<h3 style="float: right">MPO过滤</h3>
+							</div>
+							<div class="row post-content-row">
+								<div class="col-md-4 service-left" id="phen_3_class"></div>
+								<div class="col-md-4 services-left" id="phen_2_class"></div>
+								<div class="col-md-4 services-left" id="phen_1_class"></div>
+
+							</div>
+						</div>
+					</div>
+				</div>
 				<div class="row">
 					<div class="col-md-2 services-left"></div>
 					<div class="col-md-8 services-middle">
@@ -80,40 +111,12 @@ body {
 							</div>
 						</div>
 					</div>
-					<div class="col-md-2 services-right"></div>
-				</div>
-				<div class="row">
-					<div class="col-md-6 services-left">
-						<div>
-							<h3>Pathway过滤</h3>
-							<div class="row post-content-row">
-								<div class="col-md-4 services-left" id="pathway_first_class">
-
-								</div>
-								<div class="col-md-4 services-left" id="pathway_second_class">
-								</div>
-								<div class="col-md-4 service-left" id="pathway_name"></div>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-6 services-right">
-						<div>
-							<h3>MPO过滤</h3>
-							<div class="row post-content-row">
-
-								<div class="col-md-4 service-left" id="phen_3_class"></div>
-								<div class="col-md-4 services-left" id="phen_2_class">
-								</div>
-								<div class="col-md-4 services-left" id="phen_1_class">
-								</div>
-
-							</div>
-						</div>
+					<div class="col-md-2 services-right">
+					<button type="button" onclick="drawGraph()">画图</button>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-8 services-left">
+					<div class="col-md-12 services-left">
 						<div>
 							<h3>查询结果</h3>
 							<div class="row post-content-row">

@@ -44,6 +44,149 @@ public class QueryGPServiceImpl implements QueryAssoService{
 	@Autowired
 	PPIDao ppiDao;
 
+	@Override
+	public Graph getGlobalAsso(Map<NodeType, Map<String, Boolean>> map) {
+		
+		Set<PNode> pNodes = null;
+		Set<GNode> gNodes = null;
+		Set<Pathway> pathways = null;
+		Set<PPINode> ppis = null;
+
+		for (NodeType type : map.keySet()) {
+			switch (type) {
+			case MP:
+				Set<String> mpIds=map.get(type).keySet();
+				pNodes= pDao.getMultiPNode(mpIds);
+				Set<PNode>result = pDao.getPostNodes(mpIds);
+				pNodes.addAll(result);
+				break;
+			case GENE:
+				Set<String> symbols = map.get(type).keySet();
+				gNodes= gDao.getGnodesBySymbol(symbols);
+				break;
+			case PATHWAY:
+				Set<String> pathwayIds = map.get(type).keySet();
+				pathways = pathwayDao.getMultiPathway(pathwayIds);
+				break;
+			case PPI:
+				Set<String> entrezIds = map.get(type).keySet();
+				ppis = ppiDao.getPPINodes(entrezIds);
+				break;
+			default:
+				break;
+			}
+		}
+		// 如果gene为空 根据其他节点来构造gene节点集合,取各自关联的gene的并集
+		if(gNodes == null)
+		{
+			gNodes = new HashSet<GNode>();
+			if(pNodes!=null)
+			{
+				//找到输入的mp关联的基因，
+				Map<PNode,Map<GNode,Boolean>> mp_genes = pDao.getAssociatedGenes(pNodes);
+				Set<PNode> pnodes = mp_genes.keySet();
+
+				for (PNode pNode : pnodes) {
+					Map<GNode,Boolean> geneMap = mp_genes.get(pNode);
+					if(geneMap!=null)
+					{
+						gNodes.addAll(geneMap.keySet());
+					}
+				}
+			}
+
+			if(pathways!=null)
+			{
+				for (Pathway pathway : pathways) {
+					gNodes.addAll(pathway.getSymbols().keySet());
+				}
+			}
+			if(ppis!=null)
+			{
+				Map<PPINode, Map<GNode, Boolean>> genes = ppiDao.getConnectedGenes(ppis);
+				for ( Map<GNode, Boolean> connectedGenes : genes.values()) {
+					gNodes.addAll(connectedGenes.keySet());
+				}
+			}
+		}
+		//如果未输入表型，则返回输入基因关联的表型
+		if(pNodes == null)
+		{
+			pNodes = new HashSet<PNode>();
+			Map<GNode,Map<PNode,Boolean>> gene_mps = gDao.getAssociatedMP(gNodes);
+
+			Set<GNode> gnodes = gene_mps.keySet();
+			for (GNode gNode : gnodes) {
+				Map<PNode,Boolean> mpMap = gene_mps.get(gNode);
+				pNodes.addAll(mpMap.keySet());
+			}
+		}
+
+		//如果未输入pathway，则返回输入基因关联的pathway
+		if(pathways==null)
+		{
+			pathways = new HashSet<Pathway>();
+			//			用基因集合查相关的pathway
+			Map<GNode,Map<Pathway,Boolean>> gene_pathways = gDao.getAssociatedPathway(gNodes);
+
+			if(gene_pathways!=null)
+			{
+				Set<GNode> genes= gene_pathways.keySet();
+				for (GNode gn : genes) {
+
+					//构建一个关联
+					Map<Pathway,Boolean> pathwayMap = gene_pathways.get(gn);
+					pathways.addAll(pathwayMap.keySet());
+				}
+			}
+		}
+
+		if(ppis ==null)
+		{
+			ppis = new HashSet<PPINode>();
+			Map<GNode,Map<PPINode,Boolean>> gene_ppis = gDao.getAssociatedPPI(gNodes);
+
+			Set<GNode> gnodes = gene_ppis.keySet();
+			for (GNode gNode : gnodes) {
+				Map<PPINode,Boolean> mpMap = gene_ppis.get(gNode);
+				ppis.addAll(mpMap.keySet());
+			}
+		}
+
+		//构建用户绘图的边
+		Graph g = new Graph();
+		Set<CytoNode> nodes = new HashSet<CytoNode>();
+		Set<CytoEdge> edges = new HashSet<CytoEdge>();
+		g.setNodes(nodes);
+		g.setEdges(edges);
+
+		//构建mp之间的
+		Graph ppgraph = getAssoByPhenoPhen(pNodes,map.get(NodeType.MP));
+
+		Graph gpgraph = getAssoByPhenoGene(gNodes, pNodes, map.get(NodeType.GENE), map.get(NodeType.MP));
+
+		Graph pathwayGenegraph = getAssoByPathwayGene(gNodes, pathways, map.get(NodeType.PATHWAY));
+
+		Graph gppigraph = getAssoByPPIGene(gNodes, ppis, map.get(NodeType.GENE), map.get(NodeType.PPI));
+
+		Graph ppigraph = getAssoByPPI2PPI(ppis, map.get(NodeType.PPI));
+
+		nodes.addAll(ppgraph.getNodes());
+		nodes.addAll(gpgraph.getNodes());
+		nodes.addAll(pathwayGenegraph.getNodes());
+		nodes.addAll(gppigraph.getNodes());
+		nodes.addAll(ppigraph.getNodes());
+
+		edges.addAll(ppgraph.getEdges());
+		edges.addAll(gpgraph.getEdges());
+		edges.addAll(pathwayGenegraph.getEdges());
+		edges.addAll(gppigraph.getEdges());
+		edges.addAll(ppigraph.getEdges());
+
+		return g;
+		
+	}
+	
 	/**
 	 * 策略：1.如果未输入gene集合，用其他节点关联的gene先构造出基因集合
 	 * 2.在有了gene集合的情况下，对于未输入节点的类型，用gene关联的集合对其进行补充
@@ -203,6 +346,10 @@ public class QueryGPServiceImpl implements QueryAssoService{
 		Map<PNode,Map<GNode,Boolean>> mp_genes = pDao.getAssociatedGenes(mps);
 		for (PNode pn : mps) {
 			Map<GNode,Boolean> associatedGenes = mp_genes.get(pn);
+			if(associatedGenes==null)
+			{
+				continue;
+			}
 			for (GNode gn : genes) {
 				if(gn==null)
 				{

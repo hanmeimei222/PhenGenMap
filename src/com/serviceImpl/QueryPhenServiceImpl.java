@@ -20,6 +20,13 @@ public class QueryPhenServiceImpl implements QueryPhenService{
 	@Autowired
 	PhenDao pheDao;
 	
+	@Override
+	public Set<PNode> getPhenInfo(Map<String,Boolean> queryMap) {
+		Set<String>  ids = queryMap.keySet();
+		Set<PNode> result = pheDao.getMultiPNode(ids);
+
+		return result;
+	}
 	
 	@Override
 	public Graph queryPhen(Map<String,Boolean> queryMap, PhenQueryType type,

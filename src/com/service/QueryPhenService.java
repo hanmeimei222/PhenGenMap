@@ -25,4 +25,11 @@ public interface QueryPhenService {
 	 * 表型本体查询时自动补全
 	 */
 	public Set<PNode> aucoComplete(String query);
+	
+	/**
+	 * 用于初始化页面的mp信息
+	 * @param phenId
+	 * @return
+	 */
+	public Set<PNode> getPhenInfo(Map<String,Boolean> queryMap);
 }

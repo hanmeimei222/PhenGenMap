@@ -2,7 +2,6 @@ package com.controller;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.constant.NodeType;
-import com.model.PNode;
 import com.model.cytoscape.Graph;
 import com.service.QueryAssoService;
 import com.service.QueryPhenService;

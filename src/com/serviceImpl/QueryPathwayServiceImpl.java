@@ -35,6 +35,38 @@ public class QueryPathwayServiceImpl implements QueryPathwayService {
 
 
 	@Override
+	public Set<Pathway> queryPathway(Map<String,Boolean> info, int level) {
+		//输入的是pathway的id
+		Set<Pathway> set = new HashSet<Pathway>();
+		if(level==3)
+		{
+			return pwayDao.getMultiPathway(info.keySet());
+		}
+		//输入的是pathway的第二类别
+		if(level==2)
+		{
+			return pwayDao.getSubCatalog(info);
+		}
+		//输入的是pathway的第一类别
+		else if(level == 1)
+		{
+			//TODO:还没实现，缺少一个根据一级类别获取所有pathway的函数
+//			Map<String,Map<Pathway,Boolean>> map =  pwayDao.getMainCatalog(info);
+//			Set<String> categorys = map.keySet();
+//			for (String string : categorys) {
+//				set.addAll(map.get(string).keySet());
+//			}
+			return set;
+		}
+		// 返回所有pathway
+		else if(level ==-1)
+		{
+			return pwayDao.getPathwaySet();
+		}
+		return set;
+	}
+
+	@Override
 	public TreeNode allPathway(){
 		TreeNode pathwaytree = new TreeNode();
 		Map<String, Map<String, Map<Pathway, Boolean>>> allpathways = pwayDao.getAllPathways();
@@ -184,9 +216,9 @@ public class QueryPathwayServiceImpl implements QueryPathwayService {
 		for (GNode gNode : pathway.getSymbols().keySet()) {
 			genes.add(new TreeNode(gNode.getSymbol_name()));
 		}
-		
+
 		TreeNode node = new TreeNode(pathway.getPw_id(),pathway.getPw_name(),genes);
-			
+
 		children.add(node);
 
 		List<Pathway> list = pwayDao.getRelatedPathwayRank(pathway);

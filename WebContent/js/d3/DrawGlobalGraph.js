@@ -1,6 +1,7 @@
 function drawGlobalGraph(str)
 {
-	$("#global_graph").empty();
+	$("#graph").empty();
+	$("#graph").append('<global_graph></global_graph>');
 	width=800;
 	height = 800;
 	var color = d3.scale.category20();
@@ -15,7 +16,7 @@ function drawGlobalGraph(str)
 	.attr("class", "link").style("stroke-width",2).style("stroke",
 		function(d)
 		{ 
-			if(d.type == 'gplink')
+			if(d.class_id == 'gplink')
 			{
 				return "#00ff00";
 			}
@@ -40,7 +41,11 @@ function drawGlobalGraph(str)
 		case "mp": 
 			return "#0000ff";
 		case "gene":
-			return "#ff0000";					
+			return "#ff0000";
+		case "ppi":
+			return "#00ff00";
+		case "pathway":
+			return "#0f0f0f";
 		}
 			}).call(force0.drag);
 	node.append("title").text(function(d) 

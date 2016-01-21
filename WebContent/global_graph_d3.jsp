@@ -57,8 +57,8 @@
 						<div>
 							<h4>查询结果</h4>
 							<div class="row post-content-row">
-								<div>
-									<global_graph></global_graph>
+								<div id="graph">
+									
 								</div>
 							</div>
 						</div>

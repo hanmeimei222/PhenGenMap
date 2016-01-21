@@ -1,10 +1,13 @@
 package com.service;
 
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
 import com.constant.NodeType;
+import com.model.PNode;
+import com.model.Pathway;
 import com.model.cytoscape.Graph;
 import com.model.d3.D3Graph;
 
@@ -19,4 +22,5 @@ public interface QueryAssoService {
 	public Graph getAsso(Map<NodeType,Map<String,Boolean>> map);
 	
 	public D3Graph getGlobalAsso();
+	public D3Graph getGlobalAsso(Set<PNode> phenNodes,Set<Pathway> pathways );
 }

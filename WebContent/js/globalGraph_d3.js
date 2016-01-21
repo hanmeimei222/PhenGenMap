@@ -1,14 +1,56 @@
 function drawGraph()
 {
+	//获取选中的类别
+	var pheList = new Array();
+	var phe_chks = document.getElementsByName("level1phen_chk");
+	for(var i=0;i<phe_chks.length;i++)
+	{
+		if(phe_chks[i].checked)
+		{
+			pheList.push(phe_chks[i].id);
+		}
+	}
+	
+	selected_pathway = getSelectedPathway();
+	data = {"phenList":pheList.join("\t"),"pathwayList":selected_pathway.pathwayList,"level":selected_pathway.level};
 	$.ajax({
 		type : "post",
 		data : data,
 		url : "queryGlobalAsso.do",
 		dataType : "json",
 		success : function(msg) {
-			
+			drawGlobalGraph(msg);
 		}
 	});
+}
+
+function getSelectedPathway()
+{
+	//从最底层开始找，选择最精确的勾选，作为查询输入
+	selected_list= new Array();
+	var i=3;
+
+	for(;i>0;i--)
+	{
+		var pathway_chks = document.getElementsByName(i+"_pathway_chk");
+		for(var j=0;j<pathway_chks.length;j++)
+		{
+			if(pathway_chks[j].checked)
+			{
+				selected_list.push(pathway_chks[j].value);
+			}
+		}
+		if(selected_list.length>0)
+		{
+			break;
+		}
+	}
+	if(selected_list.length==0)
+	{
+		i=-1;
+	}
+	return {"pathwayList":selected_list.join("\t"),"level":i};
+
 }
 
 function initClassInfo()
@@ -23,14 +65,14 @@ function initClassInfo()
 	});
 
 	getPhenInfo("MP:0000001",0);
-	getGlobalAsso();
+//	getGlobalAsso();
 } 
 
 function getGlobalAsso()
 {
 	$.ajax({
 		type : "get",
-		url : "	queryGlobalAsso.do",
+		url : "	queryAllAsso.do",
 		dataType : "json",
 		success : function(msg){
 			//用d3来画
@@ -94,8 +136,8 @@ function initPathwayInfo(pathwayInfo)
 			{
 		var info = JSON.stringify(val);
 		var chkInfo = '<input type="checkbox" onclick="showSecondLevel()" name="1_pathway_chk" id=\''
-			+info+'\' name="chkGene" value="'+
-			val.name+'" />'
+			+info+'\' value="'+
+			val.id+'" />'
 			+ val.name+' <br>';
 		$("#pathway_first_class").append(chkInfo);
 			});
@@ -117,8 +159,8 @@ function showSecondLevel()
 					{
 				var info = JSON.stringify(child);
 				var chkInfo = '<input type="checkbox" name="2_pathway_chk"  id=\''
-					+ info+'\' name="chkGene" value="'
-					+ child.name+'" onclick="showPathwayLevel(\''
+					+ info+'\' value="'
+					+ child.id+'" onclick="showPathwayLevel(\''
 					+child.name+'\')"/>'
 					+ child.name+' <br>';
 				$("#pathway_second_class").append(chkInfo);
@@ -146,8 +188,8 @@ function showPathwayLevel()
 			$("#pathway_name").append('<h5>'+chks[i].value +'</h5>');
 			$(data.children).each(function(i,child)
 					{
-				var chkInfo = '<input type="checkbox" name="3_pathway_chk" id='
-					+ child.name+' name="chkGene"/>'
+				var chkInfo = '<input type="checkbox" name="3_pathway_chk" value='
+					+ child.id+' />'
 					+ child.name+' <br>';
 				$("#pathway_name").append(chkInfo);
 					});

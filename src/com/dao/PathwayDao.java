@@ -33,7 +33,7 @@ public interface PathwayDao {
 	
 	
 	/**
-	 * 多条pathway信息的查询，query以分号隔开
+	 * 多条pathway信息的查询
 	 */
 	public Set<Pathway> getMultiPathway(Set<String> query);
 	
@@ -78,7 +78,7 @@ public interface PathwayDao {
 	 * @param class2
 	 * @return
 	 */
-	public Set<Pathway> getSubCatalog(String class2);
+	public Set<Pathway> getSubCatalog(Map<String,Boolean> class2);
 	
 	/**
 	 * 按基因查询，输入symbolname，查询包含它的所有pathways

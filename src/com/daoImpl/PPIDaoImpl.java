@@ -15,6 +15,14 @@ import com.model.PPINode;
 @Repository
 public class PPIDaoImpl implements PPIDao{
 
+	
+	@Override
+	public Set<PPINode> getAllPPIs() {
+		Set<PPINode> result = new HashSet<PPINode>();
+		result.addAll(GlobalData.allppis.values());
+		return result;
+	}
+	
 	@Override
 	public Map<PPINode, Map<GNode, Boolean>> getConnectedGenes(
 			Set<PPINode> nodes) {

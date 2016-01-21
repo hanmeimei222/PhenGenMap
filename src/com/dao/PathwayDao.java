@@ -43,6 +43,7 @@ public interface PathwayDao {
 	 */
 	public Map<String,Map<String,Map<Pathway,Boolean>>> getAllPathways();
 	
+	public Set<Pathway> getPathwaySet();
 	/**
 	 * @Description 返回class2-class1的map
 	 * @return Map<String,String>

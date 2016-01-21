@@ -15,9 +15,60 @@ import com.model.cytoscape.CytoNode;
 import com.model.cytoscape.Edge;
 import com.model.cytoscape.Graph;
 import com.model.cytoscape.Node;
+import com.model.d3.D3Graph;
+import com.model.d3.Links;
 import com.model.d3.TreeNode;
 
 public class ModelTransferUtil {
+
+
+	public static D3Graph cytoGraph2D3Graph(Graph g)
+	{
+		D3Graph d3g = new D3Graph();
+		List<Links> links = new ArrayList<Links>(0);
+		List<com.model.d3.Node> nodes = new ArrayList<com.model.d3.Node>();
+		d3g.setNodes(nodes);
+		d3g.setLinks(links);
+		//记录节点的顺序
+		Map<String,Integer> filterMap = new HashMap<String, Integer>();
+		Set<CytoNode> cyNodes = g.getNodes();
+		int count =0;
+		for (CytoNode n : cyNodes) {
+			String id = n.getData().getId();
+
+			String name = n.getData().getName();
+			String type= n.getData().getNodeType();
+			com.model.d3.Node node = new com.model.d3.Node(id, name, type,type);
+			nodes.add(node);
+			filterMap.put(id, count++);
+		}
+		Set<CytoEdge> cyedges = g.getEdges();
+		for (CytoEdge edge : cyedges) {
+			String source =edge.getData().getSource();
+			String target = edge.getData().getTarget();
+			String type = edge.getData().getEdgeType();
+			if(source!=null && target!=null)
+			{
+				int sourceid = -1;
+				if(filterMap.containsKey(source))
+				{
+					sourceid = filterMap.get(source);
+				}
+				int targetid = -1;
+				if(filterMap.containsKey(target))
+				{
+					targetid = filterMap.get(target);
+				}
+				if(targetid!=-1)
+				{
+					Links l = new Links(sourceid, targetid, 0, type);
+					links.add(l);
+				}
+			}
+		}
+
+		return d3g;
+	}
 
 	public static Set<CytoNode> pNode2CytoNode(Set<PNode> pnodes)
 	{
@@ -194,16 +245,16 @@ public class ModelTransferUtil {
 		return g;
 	}
 
-/**
- * 使用d3.js绘出全体pathway的树形图
- * @param allpathways
- * @return
- */
+	/**
+	 * 使用d3.js绘出全体pathway的树形图
+	 * @param allpathways
+	 * @return
+	 */
 	public static TreeNode allpathways2graph(Map<String, Map<String, Map<Pathway, Boolean>>> allpathways){
 		//构造根节点
 		List<TreeNode> children = new ArrayList<TreeNode>();
 		TreeNode root = new TreeNode("pathway","pathway",children);
-		
+
 		//六棵子树，逐个构造
 		Set<String>class1set = allpathways.keySet();
 		for (String class1 : class1set) {
@@ -218,9 +269,9 @@ public class ModelTransferUtil {
 				cls1child.add(new TreeNode(class2,class2,cls2child));
 				Set<Pathway>pwset = class2map.get(class2).keySet();
 				for (Pathway pw : pwset) {
-					
+
 					cls2child.add(new TreeNode(pw.getPw_id(),pw.getPw_name(),null));
-					
+
 				}
 			}
 		}

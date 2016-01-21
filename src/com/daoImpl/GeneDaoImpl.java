@@ -22,6 +22,16 @@ public final class GeneDaoImpl implements GeneDao{
 	@Autowired
 	PathwayDao pathwayDao;
 
+	
+	@Override
+	public Set<GNode> getAllGenes() {
+		
+		Set<GNode> result = new HashSet<GNode>();
+		result.addAll(GlobalData.allgnodes.values());
+		
+		return result;
+	}
+	
 	@Override
 	public Map<GNode, Map<PPINode, Boolean>> getAssociatedPPI(Set<GNode> gNodes) {
 	

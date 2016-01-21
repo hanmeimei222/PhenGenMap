@@ -32,5 +32,7 @@ public interface GeneDao {
 	 * @return
 	 */
 	public Map<GNode,Map<PPINode,Boolean>> getAssociatedPPI(Set<GNode> gNodes);
+	
+	public Set<GNode> getAllGenes();
 
 }

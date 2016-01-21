@@ -16,7 +16,12 @@ import com.model.PNode;
 @Repository
 public class PhenDaoImpl implements PhenDao{
 	
-	
+	@Override
+	public Set<PNode> getAllPhens() {
+		Set<PNode> result = new HashSet<PNode>();
+		result.addAll(GlobalData.allpnodes.values());
+		return result;
+	}
 	
 	@Override
 	public Map<PNode,Map<GNode,Boolean>> getAssociatedGenes(Set<PNode> pNodes)

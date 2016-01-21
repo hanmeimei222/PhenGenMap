@@ -24,4 +24,6 @@ public interface PPIDao {
 	public Map<PPINode,Map<PPINode,Boolean>> getConnectedPPI(Set<PPINode> nodes);
 	
 	public Map<PPINode,Map<GNode,Boolean>> getConnectedGenes(Set<PPINode> nodes);
+	
+	public Set<PPINode> getAllPPIs();
 }

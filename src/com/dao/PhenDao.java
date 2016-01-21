@@ -106,4 +106,10 @@ public interface PhenDao {
 	public Set<PNode> getAutoCompleteNodes(String query,int n);
 
 	public Set<PNode> getAutoCompleteNodes(String query);
+	
+	
+	/**
+	 * 返回所有的mp节点
+	 */
+	public Set<PNode> getAllPhens();
 }

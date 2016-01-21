@@ -21,6 +21,13 @@ import com.model.Pathway;
 @Repository
 public class PathwayDaoImpl implements PathwayDao{
 
+
+	@Override
+	public Set<Pathway> getPathwaySet() {
+		Set<Pathway> result = new HashSet<Pathway>();
+		result.addAll(GlobalData.allways.values());
+		return result;
+	}
 	//输入pathway id查询该条pathway具体信息
 	@Override
 	public Pathway getPathwayById(String id){

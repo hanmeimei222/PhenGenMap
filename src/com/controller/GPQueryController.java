@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.constant.NodeType;
 import com.model.cytoscape.Graph;
+import com.model.d3.D3Graph;
 import com.service.QueryAssoService;
 import com.service.QueryPhenService;
 
@@ -61,34 +62,9 @@ public class GPQueryController {
 	
 	@RequestMapping("/queryGlobalAsso")
 	@ResponseBody
-	public Graph queryGlobalAssiciation(HttpServletRequest request)
+	public D3Graph queryGlobalAssiciation()
 	{
-		String queryType = request.getParameter("queryType");
-		String[]nodeType=queryType.split("_");
-		//解析出输入的节点集合及类型
-		Map<NodeType,Map<String,Boolean>> map = new HashMap<NodeType, Map<String,Boolean>>();
-		for (String type : nodeType)
-		{
-			if(!"".equals(type))
-			{
-				String param = request.getParameter("param["+type+"List]");
-				Map<String,Boolean> ids = new HashMap<String, Boolean>();
-				if(param!=null && !param.equals(""))
-				{
-					String[] arr =param.split("\n|\t");
-
-					for (String str : arr) {
-						if(!"".equals(str))
-						{
-							ids.put(str.trim(),true);
-						}
-					}
-				}
-				map.put(NodeType.getTypeByStr(type), ids);
-			}
-		}
 		//调用函数查询输入的节点，以及各种节点之间的关系
-	
-		return gpService.getGlobalAsso(map) ;
+		return gpService.getGlobalAsso() ;
 	}
 }

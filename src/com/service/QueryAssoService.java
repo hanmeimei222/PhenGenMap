@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.constant.NodeType;
 import com.model.cytoscape.Graph;
+import com.model.d3.D3Graph;
 
 @Service
 public interface QueryAssoService {
@@ -17,5 +18,5 @@ public interface QueryAssoService {
 	 */
 	public Graph getAsso(Map<NodeType,Map<String,Boolean>> map);
 	
-	public Graph getGlobalAsso(Map<NodeType,Map<String,Boolean>> map);
+	public D3Graph getGlobalAsso();
 }

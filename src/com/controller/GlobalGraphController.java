@@ -22,7 +22,7 @@ public class GlobalGraphController {
 	QueryPathwayService pathwayService;
 	@Autowired
 	QueryPhenService phenService;
-
+	
 	@RequestMapping("/initPathwayClassInfo.do")
 	@ResponseBody
 	public  TreeNode getPathwayClassInfo()

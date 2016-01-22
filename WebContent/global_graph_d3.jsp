@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>Home</title>
+<title>Global_graph_d3</title>
 
 
 <script src="js/jquery.min.js"></script>
@@ -88,7 +88,7 @@
 					<div class="col-md-2 services-right">
 						<div>
 							<div class="row">
-								<span style="float: right">Pathway过滤</span>
+								<span style="float: right">Phenotype过滤</span>
 								<button type="button" onclick="drawGraph()">画图</button>
 							</div>
 							<div class="row post-content-row">

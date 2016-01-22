@@ -31,7 +31,7 @@ public class InitDataServiceImpl implements InitDataService{
 	@Override
 	public void initData(){
 		//获取服务器绝对路径
-		GlobalData.PATH = System.getProperty("search.root");
+		GlobalData.PATH = System.getProperty("search.root")+"/";
 		//初始化表型数据
 		phenLoad.loadPhenoData();
 		//初始化基因数据

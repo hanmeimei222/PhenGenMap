@@ -78,6 +78,7 @@
 						</div>
 						<div>
 							<h4>查询结果</h4>
+							<h5 style="float:right"><a id="download" href="#">点击下载</a></h5>
 							<div class="row post-content-row">
 								<div id="graph"></div>
 							</div>

@@ -59,7 +59,12 @@ function drawGraph()
 		url : "queryGlobalAsso.do",
 		dataType : "json",
 		success : function(msg) {
-			drawGlobalGraph(msg);
+			drawGlobalGraph(msg.data);
+			if(msg.path!="")
+			{
+				$("#download").attr("href",msg.path);
+
+			}
 		}
 	});
 }

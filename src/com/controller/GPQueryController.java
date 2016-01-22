@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,6 +21,7 @@ import com.model.d3.D3Graph;
 import com.service.QueryAssoService;
 import com.service.QueryPathwayService;
 import com.service.QueryPhenService;
+import com.util.WriteResult2File;
 
 @Controller
 public class GPQueryController {
@@ -77,7 +79,7 @@ public class GPQueryController {
 	
 	@RequestMapping("/queryGlobalAsso")
 	@ResponseBody
-	public D3Graph queryAssiciation(@RequestParam("phenList")String phenList,
+	public ModelMap queryAssiciation(@RequestParam("phenList")String phenList,
 			@RequestParam("pathwayList")String pathwayList,
 			@RequestParam("level")int level,
 			@RequestParam("selected_type") String selected_type)
@@ -104,6 +106,10 @@ public class GPQueryController {
 		Map<String,Set<Pathway>> pathways =  pathwayService.queryPathway(pathwayInfos, level);
 		
 		D3Graph graph = gpService.getGlobalAsso(phenNodes,pathways,selected_type);
-		return graph;
+		String filename = WriteResult2File.write2File(graph);
+		ModelMap map = new ModelMap();
+		map.put("data", graph);
+		map.put("path", filename);
+		return map;
 	}
 }

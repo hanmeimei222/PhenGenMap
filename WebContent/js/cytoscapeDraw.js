@@ -313,7 +313,3 @@ function clear(){
 	});
 }
 
-function showQueryPanel()
-{
-	$("#queryPanel").toggle();
-}

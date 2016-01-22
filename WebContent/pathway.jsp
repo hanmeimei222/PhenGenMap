@@ -25,37 +25,6 @@
 	stroke: #666;
 	stroke-width: 1.5px;
 }
-</style>
-
-<title>pathway</title>
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-
-<script src="js/d3/d3.v3.min.js"></script>
-
-<script src="js/typeahead.bundle.js"></script>
-<script src="js/handlebars.min.js"></script>
-
-
-<script src="js/cytoscape/cytoscape.min.js"></script>
-
-<script src="js/pathwayquery.js"></script>
-<script src="js/cytoscapeDraw.js"></script>
-<script src="js/d3/DrawPathway.js"></script>
-<script src="js/d3/bubble.js"></script>
-<script
-	src="https://cdn.rawgit.com/cpettitt/dagre/v0.7.4/dist/dagre.min.js"></script>
-<script
-	src="https://cdn.rawgit.com/cytoscape/cytoscape.js-dagre/1.1.2/cytoscape-dagre.js"></script>
-
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
-
-<style type="text/css">
-body {
-	font-family: helvetica;
-	font-size: 14px;
-}
 
 #cy {
 	width: 90%;
@@ -102,26 +71,28 @@ body {
 }
 </style>
 
+<title>pathway</title>
+
+<script src="js/d3/d3.v3.min.js"></script>
+
+<script src="js/typeahead.bundle.js"></script>
+<script src="js/handlebars.min.js"></script>
+
+<script src="js/cytoscape/cytoscape.min.js"></script>
+
+<script src="js/pathwayquery.js"></script>
+<script src="js/cytoscapeDraw.js"></script>
+<script src="js/d3/DrawPathway.js"></script>
+<script src="js/d3/bubble.js"></script>
+<script
+	src="https://cdn.rawgit.com/cpettitt/dagre/v0.7.4/dist/dagre.min.js"></script>
+<script
+	src="https://cdn.rawgit.com/cytoscape/cytoscape.js-dagre/1.1.2/cytoscape-dagre.js"></script>
 
 </head>
 <body>
 
-	<div class="header-home">
-		<div class="fixed-header">
-			<div class="top-nav">
-				<span class="menu"> </span>
-				<ul>
-					<li class="active"><a href="index.html">Home</a></li>
-					<li><a href="about.html">About</a></li>
-					<li><a href="advice.html">Adviceses</a></li>
-					<li><a href="blog.html">Blog</a></li>
-					<li><a href="contact.html">contact</a></li>
-				</ul>
-			</div>
-			<div class="clearfix"></div>
-		</div>
-	</div>
-	<!--banner end here-->
+	<jsp:include page="header.jsp"></jsp:include>
 	<!--services start here-->
 	<div class="services">
 		<div class="mycontainer">
@@ -131,13 +102,13 @@ body {
 					<div>
 						<h3>查询计划</h3>
 
-						<div class="row post-content-row">
+						<div class=" post-content-row">
 							<label class="post-content-row-title">step1：查看全体pathway信息</label>
 							<button type="button" onclick="showAllPathway()"
 								class="btn btn-default">查看</button>
 						</div>
 
-						<div class="row post-content-row">
+						<div class=" post-content-row">
 							<label class="post-content-row-title">step2:请选择查询类型</label>
 
 							<div class="row post-content-row">
@@ -185,7 +156,7 @@ mmu00603</textarea>
 					</div>
 				</div>
 
-				<div class="col-md-8 services-right">
+				<div class="col-md-8 services-middle">
 					<h3>查询结果</h3>
 					<div id="tree-container"></div>
 
@@ -193,7 +164,6 @@ mmu00603</textarea>
 
 				</div>
 				<div class="clearfix"></div>
-				
 			</div>
 			<!-- services-main end here -->
 		</div>
@@ -202,18 +172,7 @@ mmu00603</textarea>
 	<!-- services end here -->
 
 	<!--footer start here-->
-	<div class="footer">
-		<div class="container">
-			<div class="copyrigyht">
-				<p>
-					Copyright &copy; 2015.Company name All rights reserved.More
-					Templates <a href="http://www.cssmoban.com/" target="_blank"
-						title="模板之家">模板之家</a> - Collect from <a
-						href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>
-				</p>
-			</div>
-		</div>
-	</div>
+	<jsp:include page="footer.jsp"></jsp:include>
 	<!--footer end here-->
 
 </body>

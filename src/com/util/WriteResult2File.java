@@ -67,6 +67,10 @@ public class WriteResult2File {
 			for (Links links : list) {
 				int source = links.getSource();
 				int target = links.getTarget();
+				if(source<0 || target<0)
+				{
+					continue;
+				}
 				Node start = nodes.get(source);
 				Node end = nodes.get(target);
 				String startNode = start.getType()+"\t"+ start.getGroup()+"\t"+start.getId()+"\t"+start.getName();

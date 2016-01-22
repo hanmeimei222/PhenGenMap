@@ -1,8 +1,8 @@
 function drawGlobalGraph(str)
 {
 	//绘制图例
-	$("#graph").empty();
-	$("#graph").append('<global_graph></global_graph>');
+	$("#cy").empty();
+	$("#cy").append('<global_graph></global_graph>');
 	width=800;
 	height = 800;
 	var color = d3.scale.category20();

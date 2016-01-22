@@ -67,7 +67,6 @@ public class GPQueryController {
 	}
 	
 	
-	//data = {"phenList":pheList.join("\t"),"pathwayList":selected_pathway.pathwayList,"level":selected_pathway.level};
 	@RequestMapping("/queryAllAsso")
 	@ResponseBody
 	public D3Graph getAllGPAssociation()
@@ -80,7 +79,8 @@ public class GPQueryController {
 	@ResponseBody
 	public D3Graph queryAssiciation(@RequestParam("phenList")String phenList,
 			@RequestParam("pathwayList")String pathwayList,
-			@RequestParam("level")int level)
+			@RequestParam("level")int level,
+			@RequestParam("selected_type") String selected_type)
 	{
 		String[] arr = phenList.split("\t");
 		Map<String,Boolean> ids = new HashMap<String, Boolean>();
@@ -103,7 +103,7 @@ public class GPQueryController {
 		
 		Map<String,Set<Pathway>> pathways =  pathwayService.queryPathway(pathwayInfos, level);
 		
-		D3Graph graph = gpService.getGlobalAsso(phenNodes,pathways);
+		D3Graph graph = gpService.getGlobalAsso(phenNodes,pathways,selected_type);
 		return graph;
 	}
 }

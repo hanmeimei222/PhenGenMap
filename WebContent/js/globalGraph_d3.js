@@ -1,3 +1,42 @@
+function selectAllEdge()
+{
+	var chk = document.getElementById("chkEdge");
+	var subchk = document.getElementsByName("chkEdgeType");
+	if(chk.checked)
+	{
+		for(var i=0;i<subchk.length;i++)
+		{
+			subchk[i].checked = true;
+		}
+	}
+	else
+	{
+		for(var i=0;i<subchk.length;i++)
+		{
+			subchk[i].checked = false;
+		}
+	}
+}
+
+function getselectType()
+{
+	var type = [];
+
+	var subchk = document.getElementsByName("chkEdgeType");
+
+	for(var i=0;i<subchk.length;i++)
+	{
+		if(subchk[i].checked)
+		{
+			type.push(1);
+		}
+		else
+		{
+			type.push(0);
+		}
+	}
+	return type.join("");
+}
 function drawGraph()
 {
 	//获取选中的类别
@@ -10,9 +49,10 @@ function drawGraph()
 			pheList.push(phe_chks[i].id);
 		}
 	}
-	
+
 	selected_pathway = getSelectedPathway();
-	data = {"phenList":pheList.join("\t"),"pathwayList":selected_pathway.pathwayList,"level":selected_pathway.level};
+	selected_type = getselectType();
+	data = {"phenList":pheList.join("\t"),"pathwayList":selected_pathway.pathwayList,"level":selected_pathway.level,"selected_type":selected_type};
 	$.ajax({
 		type : "post",
 		data : data,
@@ -177,7 +217,7 @@ function showPathwayLevel()
 	$("#pathway_first_class").removeClass().addClass('col-md-1 services-left-pathway opacity25');
 	$("#pathway_second_class").removeClass().addClass('col-md-1 services-left-pathway opacity25');
 	$("#pathway_name").removeClass().addClass('col-md-8 services-left-pathway');
-	
+
 	$("#pathway_name").empty();
 	var chks = document.getElementsByName("2_pathway_chk");
 	for(var i=0;i<chks.length;i++)

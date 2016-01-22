@@ -41,12 +41,12 @@
 					<div class="col-md-2 services-left">
 						<div>
 							<div class="row">
-								<span>Pathway过滤	</span>
+								<span>Pathway过滤 </span>
 								<button type="button" style="float: right" onclick="drawGraph()">画图</button>
 							</div>
 							<div class="row post-content-row">
-								<div class="col-md-12 services-left-pathway" id="pathway_first_class">
-								</div>
+								<div class="col-md-12 services-left-pathway"
+									id="pathway_first_class"></div>
 								<div class=" services-left-pathway" id="pathway_second_class"></div>
 								<div class="services-left-pathway" id="pathway_name"></div>
 							</div>
@@ -54,11 +54,33 @@
 					</div>
 
 					<div class="col-md-8 services-middle">
+						<div class="row">
+							<div class="col-md-2">
+								<h5>显示边的类型</h5>
+							</div>
+							<div class="col-md-2">
+								<input type="checkbox"  id="chkEdge" name="chkAll" onchange="selectAllEdge()" />全选
+							</div>
+							<div class="col-md-2">
+								<input type="checkbox" id="e1" name="chkEdgeType" />Gene-PPI
+							</div>
+							<div class="col-md-2">
+								<input type="checkbox" id="e2" name="chkEdgeType" checked />Gene-MP
+							</div>
+							<div class="col-md-2">
+								<input type="checkbox" id="e3" name="chkEdgeType" />Gene-Pathway
+							</div>
+							<div class="col-md-2">
+								<input type="checkbox" id="e4" name="chkEdgeType" />MP-MP
+							</div>
+							<div class="col-md-2">
+								<input type="checkbox" id="e5" name="chkEdgeType" />PPI-PPI
+							</div>
+						</div>
 						<div>
 							<h4>查询结果</h4>
 							<div class="row post-content-row">
-								<div id="graph">
-								</div>
+								<div id="graph"></div>
 							</div>
 						</div>
 					</div>

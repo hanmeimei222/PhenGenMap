@@ -8,7 +8,6 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.constant.GroupMapping;
 import com.constant.NodeType;
 import com.dao.GPDao;
 import com.dao.GeneDao;
@@ -49,8 +48,9 @@ public class QueryGPServiceImpl implements QueryAssoService{
 
 
 	@Override
-	public D3Graph getGlobalAsso(Map<String,Set<PNode>> phenNodes,Map<String,Set<Pathway>> queryPathways) {
+	public D3Graph getGlobalAsso(Map<String,Set<PNode>> phenNodes,Map<String,Set<Pathway>> queryPathways,String selected_type) {
 		
+		//MP节点
 		Set<PNode> pNodes = new HashSet<PNode>();
 		Set<String> ancesstors = phenNodes.keySet();
 		for (String anc : ancesstors) {
@@ -60,9 +60,8 @@ public class QueryGPServiceImpl implements QueryAssoService{
 				pNodes.add(n);
 			}
 		}
-
+		//gene节点
 		Set<GNode> gNodes = new HashSet<GNode>();
-	
 		Set<String> pathwayClass = queryPathways.keySet();
 		for (String cla : pathwayClass) {
 			Set<Pathway> ps = queryPathways.get(cla);
@@ -82,6 +81,24 @@ public class QueryGPServiceImpl implements QueryAssoService{
 			}
 		}
 		
+		//ppi节点
+		Set<PPINode>ppis = new HashSet<PPINode>();
+		Map<GNode,Map<PPINode,Boolean>> gene_ppis = gDao.getAssociatedPPI(gNodes);
+		Set<GNode> gnodes = gene_ppis.keySet();
+		for (GNode gNode : gnodes) {
+			Map<PPINode,Boolean> mpMap = gene_ppis.get(gNode);
+			ppis.addAll(mpMap.keySet());
+		}
+		
+		//pathway节点
+		Set<String> pathwayInput=queryPathways.keySet();
+		Set<Pathway>pathways = new HashSet<Pathway>();
+		for (String p : pathwayInput) {
+			pathways.addAll(queryPathways.get(p));
+		}
+			
+
+		
 		
 		//构建用户绘图的边
 		Graph g = new Graph();
@@ -90,30 +107,79 @@ public class QueryGPServiceImpl implements QueryAssoService{
 		g.setNodes(nodes);
 		g.setEdges(edges);
 
-		//构建mp之间的
-		Graph ppgraph = getAssoByPhenoPhen(pNodes,new HashMap<String, Boolean>());
-		//
-		Graph gpgraph = getAssoByPhenoGene(gNodes, pNodes,new HashMap<String, Boolean>(),new HashMap<String, Boolean>());
-		//
-		//		Graph pathwayGenegraph = getAssoByPathwayGene(gNodes, pathways, new HashMap<String, Boolean>());
-		//
-		//		Graph gppigraph = getAssoByPPIGene(gNodes, ppis,new HashMap<String, Boolean>(), new HashMap<String, Boolean>());
-		//
-		//		Graph ppigraph = getAssoByPPI2PPI(ppis, new HashMap<String, Boolean>());
-
-		nodes.addAll(ppgraph.getNodes());
-		nodes.addAll(gpgraph.getNodes());
-		//		nodes.addAll(pathwayGenegraph.getNodes());
-		//		nodes.addAll(gppigraph.getNodes());
-		//		nodes.addAll(ppigraph.getNodes());
-
-		edges.addAll(ppgraph.getEdges());
-		edges.addAll(gpgraph.getEdges());
-		//		edges.addAll(pathwayGenegraph.getEdges());
-		//		edges.addAll(gppigraph.getEdges());
-		//		edges.addAll(ppigraph.getEdges());
-
-
+		
+		//g-ppi(16),g-mp(8),g-pathway(4),mp-mp(2),ppi-ppi(1)
+		int type = Integer.parseInt(selected_type,2);
+		
+		
+		//基因表型关联和基因节点
+		Graph gpgraph = null;
+		//基因-pathway关联和pathway节点
+		Graph pathwayGenegraph = null;
+		//mp-mp关联和mp节点
+		Graph ppgraph = null;
+		//基因-ppi关联
+		Graph gppigraph =null;
+		//ppi-ppi关联和ppi节点
+		Graph ppigraph =null;
+		//要包含基因节点
+		if((type&16)>0||(type&8)>0||(type&4)>0)
+		{
+			gpgraph = getAssoByPhenoGene(gNodes, pNodes,new HashMap<String, Boolean>(),new HashMap<String, Boolean>());
+			//gene节点
+			nodes.addAll(gpgraph.getNodes());
+			
+			//pathway-gene
+			if((type&4)>0)
+			{
+				pathwayGenegraph = getAssoByPathwayGene(gNodes, pathways, new HashMap<String, Boolean>());
+				nodes.addAll(pathwayGenegraph.getNodes());
+				edges.addAll(pathwayGenegraph.getEdges());
+			}
+			//mp-gene
+			if((type&8)>0)
+			{
+				ppgraph = getAssoByPhenoPhen(pNodes,new HashMap<String, Boolean>());
+				nodes.addAll(ppgraph.getNodes());
+				//表型基因关联节点
+				edges.addAll(gpgraph.getEdges());
+			}
+			//ppi-gene
+			if((type&16)>0)
+			{
+				gppigraph = getAssoByPPIGene(gNodes, ppis,new HashMap<String, Boolean>(), new HashMap<String, Boolean>());
+				//gene-ppi的关联
+				edges.addAll(gppigraph.getEdges());
+				ppigraph = getAssoByPPI2PPI(ppis, new HashMap<String, Boolean>());
+				//ppi的node
+				nodes.addAll(ppigraph.getNodes());
+			}
+		}
+		//mp-mp
+		if((type&2)>0)
+		{
+			//构建mp之间的
+			if(ppgraph==null)
+			{
+				ppgraph = getAssoByPhenoPhen(pNodes,new HashMap<String, Boolean>());
+				nodes.addAll(ppgraph.getNodes());
+			}
+			//表型关联
+			edges.addAll(ppgraph.getEdges());
+		}
+		//ppi-ppi
+		if((type&1)>0)
+		{
+			//构建ppi-ppi之间的
+			if(ppigraph==null)
+			{
+				ppigraph = getAssoByPPI2PPI(ppis, new HashMap<String, Boolean>());
+			nodes.addAll(ppigraph.getNodes());
+			}
+			//ppi之间的关联
+			edges.addAll(ppigraph.getEdges());
+		}
+		
 		D3Graph d3g = ModelTransferUtil.cytoGraph2D3Graph(g);
 		return d3g;
 	}

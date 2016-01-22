@@ -30,6 +30,10 @@ function drawGlobalGraph(str)
 			return"4";
 		case "gene":
 			return"3";
+		case "pathway":
+			return "5";
+		case "ppi":
+			return "6";
 		}
 	}
 	).style("fill",

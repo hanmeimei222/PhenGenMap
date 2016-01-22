@@ -54,12 +54,11 @@
 					</div>
 
 					<div class="col-md-8 services-middle">
-						<div class="row">
+						<div>
+							<h4>显示边的类型</h4>
 							<div class="col-md-2">
-								<h5>显示边的类型</h5>
-							</div>
-							<div class="col-md-2">
-								<input type="checkbox"  id="chkEdge" name="chkAll" onchange="selectAllEdge()" />全选
+								<input type="checkbox" id="chkEdge" name="chkAll"
+									onchange="selectAllEdge()" />全选
 							</div>
 							<div class="col-md-2">
 								<input type="checkbox" id="e1" name="chkEdgeType" />Gene-PPI
@@ -88,7 +87,7 @@
 					<div class="col-md-2 services-right">
 						<div>
 							<div class="row">
-								<span style="float: right">Pathway过滤</span>
+								<span style="float: right">MP过滤</span>
 								<button type="button" onclick="drawGraph()">画图</button>
 							</div>
 							<div class="row post-content-row">

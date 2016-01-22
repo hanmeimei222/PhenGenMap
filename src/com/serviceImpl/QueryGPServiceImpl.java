@@ -96,9 +96,7 @@ public class QueryGPServiceImpl implements QueryAssoService{
 		for (String p : pathwayInput) {
 			pathways.addAll(queryPathways.get(p));
 		}
-			
 
-		
 		
 		//构建用户绘图的边
 		Graph g = new Graph();
@@ -447,7 +445,7 @@ public class QueryGPServiceImpl implements QueryAssoService{
 		//构建一个父类的pathway节点
 		if(pathways!=null && pathways.size()!=0)
 		{
-
+			
 			CytoNode cnode =new CytoNode(new Node("pathway","pathway","pathway",null,false));
 			nodes.add(cnode);
 
@@ -460,7 +458,9 @@ public class QueryGPServiceImpl implements QueryAssoService{
 			{
 				queryInput = true;
 			}
-			CytoNode cnode =new CytoNode(new Node(pathwayId,pathway.getPw_name(),"pathway","pathway",queryInput));
+			Node n =new Node(pathwayId,pathway.getPw_name(),"pathway","pathway",queryInput);
+			n.setGroup(pathway.getClass_1());
+			CytoNode cnode =new CytoNode(n);
 			nodes.add(cnode);
 
 			//构造pathway和基因的关联
@@ -511,7 +511,9 @@ public class QueryGPServiceImpl implements QueryAssoService{
 			{
 				queryInput = true;
 			}
-			CytoNode cnode =new CytoNode(new Node(entrezId,null,"ppi","ppi",queryInput));
+			Node n =new Node(entrezId,entrezId,"ppi","ppi",queryInput);
+			n.setGroup("ppi");
+			CytoNode cnode =new CytoNode(n);
 			nodes.add(cnode);
 
 			//构造ppi和ppi的关联

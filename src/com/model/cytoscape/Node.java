@@ -4,6 +4,7 @@ public class Node {
 	private String id;
 	private String name;
 	private boolean queryInput;
+	
 	//标志其属于哪一层
 	private String parent;
 	
@@ -54,13 +55,7 @@ public class Node {
 	public void setNodeType(String nodeType) {
 		this.nodeType = nodeType;
 	}
-//	public Node(String id, String name,String nodeType, boolean queryInput) {
-//		super();
-//		this.id = id;
-//		this.name = name;
-//		this.nodeType = nodeType;
-//		this.queryInput = queryInput;
-//	}
+
 	public Node(String id, String name, String nodeType,String parent,boolean queryInput) {
 		super();
 		this.id = id;

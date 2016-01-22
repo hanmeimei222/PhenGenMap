@@ -19,5 +19,5 @@ public interface QueryPathwayService {
 	/**
 	 * 根据输入的level和pathway name/id查询pathway的信息
 	 */
-	public Set<Pathway> queryPathway(Map<String,Boolean> info,int level);
+	public Map<String,Set<Pathway>> queryPathway(Map<String,Boolean> info,int level);
 }

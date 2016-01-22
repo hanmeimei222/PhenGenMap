@@ -45,20 +45,19 @@
 								<button type="button" style="float: right" onclick="drawGraph()">画图</button>
 							</div>
 							<div class="row post-content-row">
-								<div class="col-md-12 services-left" id="pathway_first_class">
+								<div class="col-md-12 services-left-pathway" id="pathway_first_class">
 								</div>
-								<div class=" services-left" id="pathway_second_class"></div>
-								<div class="service-left" id="pathway_name"></div>
+								<div class=" services-left-pathway" id="pathway_second_class"></div>
+								<div class="services-left-pathway" id="pathway_name"></div>
 							</div>
 						</div>
 					</div>
 
-					<div class="col-md-8 services-left">
+					<div class="col-md-8 services-middle">
 						<div>
 							<h4>查询结果</h4>
 							<div class="row post-content-row">
 								<div id="graph">
-									
 								</div>
 							</div>
 						</div>

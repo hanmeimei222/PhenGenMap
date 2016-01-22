@@ -99,9 +99,9 @@ public class GPQueryController {
 				pathwayInfos.put(str.trim(),true);
 			}
 		}
-		Set<PNode> phenNodes = phenService.expandPhens(ids);
+		Map<String,Set<PNode>> phenNodes = phenService.expandPhens(ids);
 		
-		Set<Pathway> pathways =  pathwayService.queryPathway(pathwayInfos, level);
+		Map<String,Set<Pathway>> pathways =  pathwayService.queryPathway(pathwayInfos, level);
 		
 		D3Graph graph = gpService.getGlobalAsso(phenNodes,pathways);
 		return graph;

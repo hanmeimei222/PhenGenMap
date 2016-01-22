@@ -8,6 +8,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.constant.GroupMapping;
 import com.constant.NodeType;
 import com.dao.GPDao;
 import com.dao.GeneDao;
@@ -48,24 +49,40 @@ public class QueryGPServiceImpl implements QueryAssoService{
 
 
 	@Override
-	public D3Graph getGlobalAsso(Set<PNode> phenNodes, Set<Pathway> pathwaysNodes) {
-
-		Set<PNode> pNodes = phenNodes;
-		Set<Pathway>pathways = pathwaysNodes;
-		Set<GNode> gNodes = null;
-		gNodes = new HashSet<GNode>();
-
-		if(pathways!=null)
-		{
-			for (Pathway pathway : pathways) {
-				Map<GNode, Boolean> symbols = pathway.getSymbols();
-				if(symbols!=null)
-				{
-					gNodes.addAll(symbols.keySet());
-				}
+	public D3Graph getGlobalAsso(Map<String,Set<PNode>> phenNodes,Map<String,Set<Pathway>> queryPathways) {
+		
+		Set<PNode> pNodes = new HashSet<PNode>();
+		Set<String> ancesstors = phenNodes.keySet();
+		for (String anc : ancesstors) {
+			Set<PNode> nodes= phenNodes.get(anc);
+			for (PNode n : nodes) {
+				n.setGroup(anc);
+				pNodes.add(n);
 			}
 		}
 
+		Set<GNode> gNodes = new HashSet<GNode>();
+	
+		Set<String> pathwayClass = queryPathways.keySet();
+		for (String cla : pathwayClass) {
+			Set<Pathway> ps = queryPathways.get(cla);
+			if(ps!=null)
+			{
+				for (Pathway pathway : ps) {
+					Map<GNode, Boolean> symbols = pathway.getSymbols();
+					if(symbols!=null)
+					{
+						Set<GNode> genes = symbols.keySet();
+						for (GNode g : genes) {
+							g.setGroup(cla);
+							gNodes.add(g);
+						}
+					}
+				}
+			}
+		}
+		
+		
 		//构建用户绘图的边
 		Graph g = new Graph();
 		Set<CytoNode> nodes = new HashSet<CytoNode>();
@@ -337,7 +354,9 @@ public class QueryGPServiceImpl implements QueryAssoService{
 				{
 					isQuery = true;
 				}
-				cnode =new CytoNode(new Node(gNode.getSymbol_name(), gNode.getId(),"gene","gene",isQuery));
+				Node n = new Node(gNode.getSymbol_name(), gNode.getId(),"gene","gene",isQuery);
+				n.setGroup(gNode.getGroup());
+				cnode =new CytoNode(n);
 				nodes.add(cnode);
 			}
 		}

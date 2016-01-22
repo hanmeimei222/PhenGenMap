@@ -38,7 +38,7 @@ public class ModelTransferUtil {
 
 			String name = n.getData().getName();
 			String type= n.getData().getNodeType();
-			com.model.d3.Node node = new com.model.d3.Node(id, name, type,type);
+			com.model.d3.Node node = new com.model.d3.Node(id, name, n.getData().getGroup(),type);
 			nodes.add(node);
 			filterMap.put(id, count++);
 		}
@@ -211,7 +211,9 @@ public class ModelTransferUtil {
 			if(!isLevelContained.containsKey(level))
 			{
 				//创建一个新的节点表示该level的父层
-				cnode =new CytoNode(new Node(level,level,"mp","phen",false));
+				Node n = new Node(level,level,"mp","phen",false);
+				n.setGroup(pNode.getGroup());
+				cnode =new CytoNode(n);
 				nodes.add(cnode);
 			}
 
@@ -224,7 +226,9 @@ public class ModelTransferUtil {
 					isQuery = true;
 				}
 			}
-			nodes.add(new CytoNode(new Node(pid, pNode.getPheno_name(),"mp",level,isQuery)));
+			Node n = new Node(pid, pNode.getPheno_name(),"mp",level,isQuery);
+			n.setGroup(pNode.getGroup());
+			nodes.add(new CytoNode(n));
 		}
 
 		Set<String> keys = mps.keySet();

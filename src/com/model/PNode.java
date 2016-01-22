@@ -11,6 +11,15 @@ public class PNode {
 	private String pheno_level;
 	private Map<PNode,Boolean> father;
 	private Map<PNode,Boolean> son;
+
+	private String group;
+
+	public String getGroup() {
+		return group;
+	}
+	public void setGroup(String group) {
+		this.group = group;
+	}
 	public String getPheno_id() {
 		return pheno_id;
 	}

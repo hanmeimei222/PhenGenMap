@@ -78,7 +78,7 @@ public interface PathwayDao {
 	 * @param class2
 	 * @return
 	 */
-	public Set<Pathway> getSubCatalog(Map<String,Boolean> class2);
+	public Set<Pathway> getSubCatalog(Set<String> class2);
 	
 	/**
 	 * 按基因查询，输入symbolname，查询包含它的所有pathways

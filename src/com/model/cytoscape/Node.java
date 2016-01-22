@@ -9,6 +9,14 @@ public class Node {
 	
 	private String nodeType;
 	
+	private String group;
+	
+	public String getGroup() {
+		return group;
+	}
+	public void setGroup(String group) {
+		this.group = group;
+	}
 	public String getId() {
 		return id;
 	}

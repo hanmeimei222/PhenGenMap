@@ -1,5 +1,6 @@
 function drawGlobalGraph(str)
 {
+	//绘制图例
 	$("#graph").empty();
 	$("#graph").append('<global_graph></global_graph>');
 	width=800;
@@ -16,15 +17,13 @@ function drawGlobalGraph(str)
 	.attr("class", "link").style("stroke-width",2).style("stroke",
 		function(d)
 		{ 
-			if(d.class_id == 'gplink')
-			{
-				return "#00ff00";
-			}
+			return color(d.class_id);
 		}
 	);
 
 	var node = svg0.selectAll(".node").data(graph.nodes).enter().append("circle").attr("class", "node").attr("r",
 			function(d){
+
 		switch(d.type)
 		{
 		case "mp":
@@ -36,17 +35,9 @@ function drawGlobalGraph(str)
 	).style("fill",
 			function(d)
 			{
-		switch(d.type)
-		{
-		case "mp": 
-			return "#0000ff";
-		case "gene":
-			return "#ff0000";
-		case "ppi":
-			return "#00ff00";
-		case "pathway":
-			return "#0f0f0f";
-		}
+		
+		return color(d.group);
+
 			}).call(force0.drag);
 	node.append("title").text(function(d) 
 			{

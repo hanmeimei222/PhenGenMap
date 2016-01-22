@@ -1,5 +1,6 @@
 package com.serviceImpl;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -22,10 +23,17 @@ public class QueryPhenServiceImpl implements QueryPhenService{
 	
 	
 	@Override
-	public Set<PNode> expandPhens(Map<String, Boolean> queryMap) {
-		// TODO Auto-generated method stub
-		Set<PNode>result = pheDao.getPostNodes(queryMap.keySet());
-		return result;
+	public Map<String,Set<PNode>> expandPhens(Map<String, Boolean> queryMap) {
+
+		Map<String,Set<PNode>> map =new HashMap<String, Set<PNode>>();
+		Set<String> query = queryMap.keySet();
+		for (String q : query) {
+			Set<String> param = new HashSet<String>();
+			param.add(q);
+			Set<PNode>result = pheDao.getPostNodes(param);
+			map.put(q, result);
+		}
+		return map;
 	}
 	@Override
 	public Set<PNode> getPhenInfo(Map<String,Boolean> queryMap) {

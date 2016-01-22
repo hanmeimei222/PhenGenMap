@@ -145,8 +145,8 @@ function initPathwayInfo(pathwayInfo)
 
 function showSecondLevel()
 {
-	$("#pathway_first_class").removeClass().addClass('col-md-1 services-left opacity25');
-	$("#pathway_second_class").removeClass().addClass('col-md-10 services-left');
+	$("#pathway_first_class").removeClass().addClass('col-md-1 services-left-pathway opacity25');
+	$("#pathway_second_class").removeClass().addClass('col-md-10 services-left-pathway');
 	var chks = document.getElementsByName("1_pathway_chk");
 	$("#pathway_second_class").empty();
 	for(var i=0;i<chks.length;i++)
@@ -174,9 +174,9 @@ function showSecondLevel()
 
 function showPathwayLevel()
 {
-	$("#pathway_first_class").removeClass().addClass('col-md-1 services-left opacity25');
-	$("#pathway_second_class").removeClass().addClass('col-md-1 services-left opacity25');
-	$("#pathway_name").removeClass().addClass('col-md-8 services-left');
+	$("#pathway_first_class").removeClass().addClass('col-md-1 services-left-pathway opacity25');
+	$("#pathway_second_class").removeClass().addClass('col-md-1 services-left-pathway opacity25');
+	$("#pathway_name").removeClass().addClass('col-md-8 services-left-pathway');
 	
 	$("#pathway_name").empty();
 	var chks = document.getElementsByName("2_pathway_chk");

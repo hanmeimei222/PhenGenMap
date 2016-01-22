@@ -38,5 +38,5 @@ public interface QueryPhenService {
 	 * @param queryMap
 	 * @return
 	 */
-	public Set<PNode> expandPhens(Map<String,Boolean> queryMap);
+	public  Map<String,Set<PNode>> expandPhens(Map<String,Boolean> queryMap);
 }

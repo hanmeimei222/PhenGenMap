@@ -1,6 +1,7 @@
 package com.serviceImpl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -35,17 +36,26 @@ public class QueryPathwayServiceImpl implements QueryPathwayService {
 
 
 	@Override
-	public Set<Pathway> queryPathway(Map<String,Boolean> info, int level) {
+	public Map<String,Set<Pathway>> queryPathway(Map<String,Boolean> info, int level) {
 		//输入的是pathway的id
-		Set<Pathway> set = new HashSet<Pathway>();
+		Map<String,Set<Pathway>> result = new HashMap<String, Set<Pathway>>();
+		Set<String> ids = info.keySet();
 		if(level==3)
 		{
-			return pwayDao.getMultiPathway(info.keySet());
+			for (String id : ids) {
+				Set<String> set = new HashSet<String>();
+				set.add(id);
+				result.put(id,pwayDao.getMultiPathway(set));
+			}
 		}
 		//输入的是pathway的第二类别
-		if(level==2)
-		{
-			return pwayDao.getSubCatalog(info);
+		else if(level==2)
+		{	
+			for (String id : ids) {
+				Set<String> set = new HashSet<String>();
+				set.add(id);
+				result.put(id,pwayDao.getSubCatalog(set));
+			}
 		}
 		//输入的是pathway的第一类别
 		else if(level == 1)
@@ -56,14 +66,13 @@ public class QueryPathwayServiceImpl implements QueryPathwayService {
 //			for (String string : categorys) {
 //				set.addAll(map.get(string).keySet());
 //			}
-			return set;
 		}
-		// 返回所有pathway
+		// 返回所有pathway,按二级类别返回
 		else if(level ==-1)
 		{
-			return pwayDao.getPathwaySet();
+			result=pwayDao.getCls2PathwayMap();
 		}
-		return set;
+		return result;
 	}
 
 	@Override

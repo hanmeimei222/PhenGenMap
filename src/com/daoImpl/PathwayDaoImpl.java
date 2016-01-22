@@ -145,10 +145,10 @@ public class PathwayDaoImpl implements PathwayDao{
 
 	//pathway二级类别查询,输出包含哪些pathways
 	@Override
-	public Set<Pathway> getSubCatalog(Map<String,Boolean> class2){
+	public Set<Pathway> getSubCatalog(Set<String> class2){
 		Set<Pathway>result = new HashSet<Pathway>();
 		Map<String, Set<Pathway>> cls2map = getCls2PathwayMap();
-		for (String cls2 : class2.keySet()) {
+		for (String cls2 : class2) {
 			result.addAll(cls2map.get(cls2));
 		}
 		return result;

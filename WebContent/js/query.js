@@ -48,7 +48,11 @@ function submitQuery()
 		url : "pheQuery.do",
 		dataType : "json",
 		success : function(msg) {
-			cytoscapeDraw(msg);
+			cytoscapeDraw(msg.data);
+			if(msg.path!="")
+			{
+				$("#download").attr("href",msg.path);
+			}
 		}
 	});
 }

@@ -28,7 +28,7 @@ public class WriteResult2File {
 		{
 			out= new BufferedWriter(new FileWriter(new File(filePath)));
 			Set<CytoEdge> list =g.getEdges();
-			String title = "Atype\tA\tB\n";
+			String title = "Link Type\tA\tB\n";
 			out.write(title);
 			for (CytoEdge links : list) {
 				String source = links.getData().getSource();

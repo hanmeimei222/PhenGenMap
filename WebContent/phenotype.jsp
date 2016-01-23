@@ -75,6 +75,7 @@ MP:0008347</textarea>
 				</div>
 				<div class="col-md-8 services-middle">
 					<h3>查询结果</h3>
+					<h5  style="float:right"><a id="download" href="#">点击下载</a></h5>
 					<div>
 						<div id="cy"></div>
 					</div>

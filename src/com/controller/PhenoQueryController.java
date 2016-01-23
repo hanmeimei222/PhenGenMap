@@ -24,31 +24,6 @@ public class PhenoQueryController {
 	
 	@Autowired
 	QueryPhenService pService;
-
-//	@RequestMapping("/pheQuery")
-//	@ResponseBody
-//	public Graph pheQuery(@RequestParam("mpList") String mpoId,
-//			@RequestParam("queryType") String queryType,
-//			@RequestParam("levels")String levels,
-//			@RequestParam("step") String step)
-//	{
-//		Map<String,Boolean> queryMap = new HashMap<String, Boolean>();
-//		
-//		String[] mpArr =mpoId.split("\n|\t");
-//		
-//		for (String str : mpArr) {
-//			if(!"".equals(str))
-//			{
-//				queryMap.put(str.trim(),true);
-//			}
-//		}
-//		PhenQueryType type = PhenQueryType.getTypeByStr(queryType);
-//		
-//		Map<String,String>param = new HashMap<String, String>();
-//		param.put("levels", levels);
-//		param.put("step", step);
-//		return pService.queryPhen(queryMap,type,param);
-//	}
 	
 	@RequestMapping("/pheQuery")
 	@ResponseBody

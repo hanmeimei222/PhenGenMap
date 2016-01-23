@@ -61,6 +61,14 @@ public class QueryPathwayServiceImpl implements QueryPathwayService {
 		else if(level == 1)
 		{
 			//TODO:还没实现，缺少一个根据一级类别获取所有pathway的函数
+			for (String id : ids) {
+				Set<String>set = new HashSet<String>();
+				set.add(id);
+				result.put(id,pwayDao.getMainCatalog(set));
+			}
+			
+			
+			
 //			Map<String,Map<Pathway,Boolean>> map =  pwayDao.getMainCatalog(info);
 //			Set<String> categorys = map.keySet();
 //			for (String string : categorys) {

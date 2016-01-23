@@ -18,7 +18,7 @@
 				<div class="row">
 					<div class="col-md-10 services-middle">
 						<div class="post-content-row">
-
+<span style="text-align: center;"><h4>CBG汇总区</h4></span>
 							<table class="cbgsumtable" border="1">
 
 								<tr style="text-align: center;">
@@ -58,10 +58,10 @@
 											onclick="clickData('${res.node.pheno_id }','0_1')">${res.step1[0]}</a>
 										</td>
 										<td><a href="#cy"
-											onclick="clickData('${res.node.pheno_id }','1_1')">${res.step1[0]}</a>
+											onclick="clickData('${res.node.pheno_id }','1_1')">${res.step1[1]}</a>
 										</td>
 										<td><a href="#cy"
-											onclick="clickData('${res.node.pheno_id }','1_1')">${res.step1[0]}</a>
+											onclick="clickData('${res.node.pheno_id }','1_1')">${res.step1[2]}</a>
 										</td>
 
 										<td><a href="#cy"
@@ -120,7 +120,11 @@
 						</div>
 					</div>
 				</div>
-				<div id="cy"></div>
+				<div class="row" >
+					<span style="text-align: center;"><h4>CBG展示区</h4></span>
+					<div class="col-md-10" id="cy"></div>
+					<div class="col-md-2"></div>
+				</div>
 				<div>
 					<img alt="Top_arrow" class="top_arrow" id="top_arrow"
 						src="images/top.png">

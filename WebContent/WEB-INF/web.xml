@@ -6,6 +6,17 @@
     <welcome-file>index.htm</welcome-file>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
+  
+  <jsp-config>
+		<taglib>
+			<taglib-uri>http://java.sun.com/jstl/core</taglib-uri>
+			<taglib-location>/WEB-INF/tld/c.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>http://java.sun.com/jstl/x</taglib-uri>
+			<taglib-location>/WEB-INF/tld/x.tld</taglib-location>
+		</taglib>
+	</jsp-config>
   <servlet>
     <servlet-name>springmvc</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>

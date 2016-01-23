@@ -1,8 +1,11 @@
 package com.global;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import com.model.CBG;
 import com.model.GNode;
 import com.model.PNode;
 import com.model.PPINode;
@@ -44,6 +47,11 @@ public class GlobalData {
 	public static Map<PPINode, Map<GNode,Boolean>>ppi_gene_map = new HashMap<PPINode, Map<GNode,Boolean>>();
 	
 	
+	
+	//cbg数据信息
+	public static List<CBG> cbgSummary = new ArrayList<CBG>();
+	
+	public static Map<String,List<String>> cbgDetail = new HashMap<String, List<String>>();
 	
 	//项目的数据路径
 	public static String PATH="";

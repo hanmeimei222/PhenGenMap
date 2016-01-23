@@ -31,7 +31,7 @@
 								class="glyphicon glyphicon-list-alt"> </i>AssoSearch</a></li>
 						<li><a href="globalGraph.jsp" id="5" onclick="changeActive('5')"><i
 								class="glyphicon glyphicon-list-alt"> </i>GlobalAsso</a></li>
-						<li><a href="#" id="6" onclick="changeActive('6')"><i class="glyphicon glyphicon-envelope">
+						<li><a href="summary.do" id="6" onclick="changeActive('6')"><i class="glyphicon glyphicon-envelope">
 							</i>CBGAnalysis</a></li>
 					</ul>
 				</div>

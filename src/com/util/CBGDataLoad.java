@@ -15,18 +15,57 @@ import com.model.CBG;
 public class CBGDataLoad {
 
 	private static String cbgPath = GlobalData.PATH+"data/cbg/";
-	
+	/**
+	 * 读取cbg中gene的编号和symbol的对应关系
+	 * @return
+	 */
+	public static Map<String,String> loadMgiIdxSymbol()
+	{
+		BufferedReader in = null;
+		Map<String,String> map =new HashMap<String, String>();
+		try{
+			in= new BufferedReader(new FileReader(new File(cbgPath+"mgi_id_name.txt")));
+
+			String line="";
+			int count=1;
+			while(null!=(line=in.readLine()))
+			{
+				String[]temp=line.split("\t");
+				String symbol=temp[1].toUpperCase();
+				map.put(String.valueOf(count), symbol);
+				count++;
+			}
+
+		}catch(IOException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			try {
+				in.close();
+			} catch (IOException e) {
+			}
+		}
+		return map;
+		
+	}
 	
 	public static Map<String,List<String>> loadCBGDetail(String fname)
 	{
 		int id = Integer.parseInt(fname.split(":")[1]);
 		Map<String,List<String>>map=new HashMap<String,List<String>>();
 		BufferedReader in = null;
+		
+		//第一次使用时，如果未加载，则加载该数据
+		if(GlobalData.mgiIdxSymbolMapping.size()==0)
+		{
+			GlobalData.mgiIdxSymbolMapping = loadMgiIdxSymbol();
+		}
 		try{
 			in= new BufferedReader(new FileReader(new File(cbgPath+"cbgdetail/"+id+".txt")));
 
 			String line="";
-			
 			
 			StringBuffer buf = new StringBuffer();
 			while(null!=(line=in.readLine()))

@@ -26,7 +26,6 @@ function drwcytoCBG(data)
 		container: document.getElementById('cy'),
 		layout: { 
 			name: 'dagre',
-			directed:true,
 			padding:layoutPadding
 		},
 		style: cytoscape.stylesheet()

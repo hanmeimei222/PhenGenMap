@@ -5,7 +5,7 @@
 <html>
 <head>
 <title>GlobalGraph</title>
-
+<link rel="stylesheet" type="text/css" href="css/back_to_top.css">
 </head>
 <body onload='getPhenInfo("MP:0000001",0)'>
 	<jsp:include page="header.jsp"></jsp:include>
@@ -86,7 +86,7 @@
 										<td><a href="#cy"
 											onclick="clickData('${res.node.pheno_id }','1_3')">${res.step3[1]}</a>
 										</td>
-										<td><a href="j#cy"
+										<td><a href="#cy"
 											onclick="clickData('${res.node.pheno_id }','2_3')">${res.step3[2]}</a>
 										</td>
 										<td><a href="#cy"
@@ -121,6 +121,10 @@
 					</div>
 				</div>
 				<div id="cy"></div>
+				<div>
+					<img alt="Top_arrow" class="top_arrow" id="top_arrow"
+						src="images/top.png">
+				</div>
 				<div class="clearfix"></div>
 			</div>
 			<!-- services-main end here -->
@@ -133,6 +137,7 @@
 	<!--footer end here-->
 </body>
 <script src="js/globalGraph_d3.js"></script>
+<script type="text/javascript" src="js/back_to_top.js"></script>
 <script src="js/cbg.js"></script>
 <script src="js/cytoscape/cytoscape.min.js"></script>
 <script src="js/cytoscape/jquery.cytoscape.js-panzoom.js"></script>

@@ -112,10 +112,14 @@ public class CBGServiceImpl implements CBGService{
 				CytoEdge edge = new CytoEdge(e);
 				edges.add(edge);
 			}
-			
-			Edge e = new Edge(ns[geneNum+2-1], ns[geneNum+2], "gplink");
-			CytoEdge edge = new CytoEdge(e);
-			edges.add(edge);
+			Edge e = null;
+			CytoEdge edge = null;
+			if(geneNum>0 && mpNum>0)
+			{
+				e = new Edge(ns[geneNum+2-1], ns[geneNum+2], "gplink");
+				edge = new CytoEdge(e);
+				edges.add(edge);
+			}
 			//构造mp间的边
 			for(int i=geneNum+2;i<totalNodes-1;i++)
 			{

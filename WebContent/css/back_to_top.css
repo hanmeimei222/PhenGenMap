@@ -1,0 +1,16 @@
+.top_arrow {
+border: 0 none;
+bottom: 150px;
+cursor: pointer;
+display: block;
+height: auto;
+margin: 0;
+opacity: 0.5;
+padding: 0;
+position: fixed;
+right: 80px;
+width: 35px;
+z-index: 2147483647;
+opacity: 0.4;  
+}
+

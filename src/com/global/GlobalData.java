@@ -55,6 +55,8 @@ public class GlobalData {
 	//存储cbg中基因行号和基因symbol的对应关系
 	public static Map<String,String> mgiIdxSymbolMapping = new HashMap<String, String>();
 	
+	//存储数据版本信息
+	public static List<String> dataVersions = new ArrayList<String>();
 	//项目的数据路径
 	public static String PATH="";
 

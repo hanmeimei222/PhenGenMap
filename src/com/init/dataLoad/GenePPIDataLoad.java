@@ -17,8 +17,8 @@ import com.model.PPINode;
 public class GenePPIDataLoad {
 
 	//加载gene数据
-	public void loadGeneEntrezMapping() {
-		String infile = GlobalData.PATH+"/data/input_data/MGI_Gene_Model_Coord.rpt.txt";
+	public void loadGeneEntrezMapping(String version) {
+		String infile = GlobalData.PATH+"/data/input_data/"+version+"/MGI_Gene_Model_Coord.rpt.txt";
 		readGeneCorrdFile(infile);
 	}
 

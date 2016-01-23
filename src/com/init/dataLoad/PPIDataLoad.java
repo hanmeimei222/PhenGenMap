@@ -15,8 +15,8 @@ import com.model.PPINode;
 @Repository
 public class PPIDataLoad {
 	//加载gene数据
-		public void loadPPIInteraction() {
-			String infile = GlobalData.PATH+"/data/input_data/BIOGRID-ORGANISM-Mus_musculus-3.2.113.tab2.txt";
+		public void loadPPIInteraction(String version) {
+			String infile = GlobalData.PATH+"/data/input_data/"+version+"/BIOGRID-ORGANISM-Mus_musculus-3.2.113.tab2.txt";
 			readBIOGRIDFile(infile);
 		}
 

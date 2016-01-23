@@ -67,8 +67,8 @@ public class GPDataLoad {
 	}
 
 
-	public void loadGPData() {
-		String infile = GlobalData.PATH+"/data/inter_data/symbol_mp_mgi.txt";
+	public void loadGPData(String version ) {
+		String infile = GlobalData.PATH+"/data/inter_data/"+version+"/symbol_mp_mgi.txt";
 		
 		GPDataLoad gpdl = new GPDataLoad();
 		gpdl.readGPAssociation(infile);

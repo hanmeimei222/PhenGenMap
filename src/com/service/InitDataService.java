@@ -11,4 +11,5 @@ import org.springframework.stereotype.Service;
 @Service
 public interface InitDataService {
 	public void initData();
+	public boolean loadData(String version);
 }

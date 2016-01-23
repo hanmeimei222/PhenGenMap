@@ -144,8 +144,8 @@ public class GenePathwayDataLoad {
 	}
 
 	//加载gene数据
-	public void loadGeneData() {
-		String infile = GlobalData.PATH+"/data/inter_data/mmu_pathway_id_name_class_symbols.txt";
+	public void loadGeneData(String version) {
+		String infile = GlobalData.PATH+"/data/inter_data/"+version+"/mmu_pathway_id_name_class_symbols.txt";
 		//		String infile = "WebContent/data/inter_data/mmu_pathway_id_name_class_symbols.txt";
 		readPathway(infile);
 	}

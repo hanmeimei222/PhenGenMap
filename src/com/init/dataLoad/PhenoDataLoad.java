@@ -132,9 +132,9 @@ public class PhenoDataLoad {
 	}
 	
 	//加载表型数据
-	public void loadPhenoData() {
+	public void loadPhenoData(String version) {
 		
-		String infile = GlobalData.PATH+"/data/inter_data/phen_info.txt";
+		String infile = GlobalData.PATH+"/data/inter_data/"+version+"/phen_info.txt";
 //		String infile = "WebContent/data/inter_data/phen_info.txt";
 		//读取所有节点，只一次
 		readPNodes(infile);

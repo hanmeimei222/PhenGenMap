@@ -59,5 +59,6 @@ public class GlobalData {
 	public static List<String> dataVersions = new ArrayList<String>();
 	//项目的数据路径
 	public static String PATH="";
+	public static String curVersion="";
 
 }

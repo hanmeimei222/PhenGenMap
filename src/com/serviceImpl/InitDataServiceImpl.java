@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.global.GlobalData;
 import com.init.dataLoad.GPDataLoad;
-import com.init.dataLoad.GenePathwayDataLoad;
 import com.init.dataLoad.GenePPIDataLoad;
+import com.init.dataLoad.GenePathwayDataLoad;
 import com.init.dataLoad.PPIDataLoad;
 import com.init.dataLoad.PhenoDataLoad;
 import com.service.InitDataService;
@@ -40,7 +40,9 @@ public class InitDataServiceImpl implements InitDataService{
 
 		GlobalData.dataVersions.addAll(getDataVersion(GlobalData.PATH+"/data/inter_data"));
 
+		
 		String latestVersion = GlobalData.dataVersions.get(GlobalData.dataVersions.size()-1);
+		GlobalData.curVersion=latestVersion;
 		loadData(latestVersion);
 	}
 
@@ -52,6 +54,8 @@ public class InitDataServiceImpl implements InitDataService{
 	public boolean loadData(String version)
 	{
 		try{
+			//清理原来的数据
+			cleanOldData();
 			//初始化表型数据
 			phenLoad.loadPhenoData(version);
 			//初始化基因数据
@@ -62,6 +66,8 @@ public class InitDataServiceImpl implements InitDataService{
 			ppiLoad.loadPPIInteraction(version);
 			//初始化genePPI关联数据
 			genePPILoad.loadGeneEntrezMapping(version);
+			
+			GlobalData.curVersion=version;
 			return true;
 		}
 		catch(Exception e)
@@ -83,5 +89,38 @@ public class InitDataServiceImpl implements InitDataService{
 			}
 		}
 		return dataVersion;
+	}
+	
+	
+	private void cleanOldData()
+	{
+		//将globalData中存储的数据都清理掉;
+		GlobalData.allpnodes.clear();
+		GlobalData.levelmap.clear();
+		GlobalData.namemap.clear();
+		
+		//基因全局数据
+		GlobalData.allgnodes.clear();
+		
+		//pathway全局变量
+		GlobalData.allways.clear();
+		GlobalData.classmap.clear();
+		GlobalData.pwnamemap.clear();
+		GlobalData.clsmap .clear();
+		GlobalData.relatedPathway .clear();
+
+		
+		//g-p全局数据
+		GlobalData.g_p_map.clear();
+		GlobalData.p_g_map.clear();
+		
+		
+		//记录文件中包含的ppi的节点信息
+		GlobalData.allppis.clear();
+		//ppi交互数据
+		GlobalData.ppi_ppi_map.clear();
+		//g-ppi 关联数据
+		GlobalData.gene_ppi_map.clear();
+		GlobalData.ppi_gene_map.clear();
 	}
 }

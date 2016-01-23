@@ -5,11 +5,11 @@ function initDataVersion()
 		url : "init.do",
 		dataType : "json",
 		success : function(msg) {
-			$.each(msg,function(i,version)
+			$.each(msg.versions,function(i,version)
 			{
 				$("#dataVersion").append('<option value='+version+'>'+version+'</option>');
 			});
-			$("#curVersion").html(msg[msg.length-1]);
+			$("#curVersion").html(msg.curVersion);
 		}
 	});
 }

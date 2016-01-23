@@ -44,6 +44,7 @@ public interface PathwayDao {
 	public Map<String,Map<String,Map<Pathway,Boolean>>> getAllPathways();
 	
 	public Set<Pathway> getPathwaySet();
+	
 	/**
 	 * @Description 返回class2-class1的map
 	 * @return Map<String,String>
@@ -57,9 +58,9 @@ public interface PathwayDao {
 	public Map<String,  Set<Pathway>> getCls2PathwayMap();
 	
 	/**
-	 * 查询一级类别，输出该类下的子类，以及子类的相关pathways
+	 * 查询一级类别，输出该类下相关pathways
 	 */
-	public Map<String,Map<Pathway,Boolean>> getMainCatalog(String class1);
+	public Set<Pathway> getMainCatalog(Set<String> class1);
 	
 	
 	/**

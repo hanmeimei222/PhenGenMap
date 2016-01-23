@@ -57,15 +57,15 @@ public class QueryPathwayServiceImpl implements QueryPathwayService {
 				result.put(id,pwayDao.getSubCatalog(set));
 			}
 		}
-		//输入的是pathway的第一类别
+		//输入的是pathway的第一类别,根据一级类别获取所有pathway
 		else if(level == 1)
 		{
-			//TODO:还没实现，缺少一个根据一级类别获取所有pathway的函数
-//			Map<String,Map<Pathway,Boolean>> map =  pwayDao.getMainCatalog(info);
-//			Set<String> categorys = map.keySet();
-//			for (String string : categorys) {
-//				set.addAll(map.get(string).keySet());
-//			}
+			for(String id : ids) {
+				Set<String>set = new HashSet<String>();
+				set.add(id);
+				result.put(id,pwayDao.getMainCatalog(set));
+			}
+
 		}
 		// 返回所有pathway,按二级类别返回
 		else if(level ==-1)

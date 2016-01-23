@@ -118,14 +118,6 @@ public class PathwayDaoImpl implements PathwayDao{
 	}
 
 
-	//查询一级类别，输出该类下的子类，以及子类的相关pathways
-	@Override
-	public Map<String,Map<Pathway,Boolean>> getMainCatalog(String class1){
-		
-		Map<String,Map<Pathway,Boolean>>subcatalog = GlobalData.classmap.get(class1);
-		return subcatalog;
-	}
-
 	//输入一二级类别，查询具体pathways
 	@Override
 	public Set<Pathway> getPathway(String class1,String class2){
@@ -154,6 +146,21 @@ public class PathwayDaoImpl implements PathwayDao{
 		return result;
 	}
 
+	//查询一级类别，输出该类下的子类，以及子类的相关pathways
+	@Override
+	public Set<Pathway> getMainCatalog(Set<String> class1){
+		Set<Pathway>result = new HashSet<Pathway>();
+		
+		for (String cls1 : class1) {
+			Map<String,Map<Pathway,Boolean>>subcatalog = GlobalData.classmap.get(cls1);
+			Set<String>class2 = subcatalog.keySet();
+			Set<Pathway>rs = getSubCatalog(class2);
+			result.addAll(rs);
+		}
+		return result;
+	}
+	
+	
 	//按基因查询，输入symbolname，查询包含它的所有pathways
 	@Override
 	public Map<Pathway,Boolean> getPathwayByGene(String symbolname){

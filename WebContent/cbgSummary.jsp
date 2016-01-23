@@ -55,52 +55,51 @@
 										</td>
 
 										<td><a href="javascript:void(0)"
-											onclick="clickData(${res.node.pheno_name},'${res.node.pheno_name }','0_1',this)">${res.step1[0]}</a>
+											onclick="clickData('${res.node.pheno_id }','0_1')">${res.step1[0]}</a>
 										</td>
 										<td><a href="javascript:void(0)"
-											onclick="clickData(${res.node.pheno_name},'${res.node.pheno_name }','1_1',this)">${res.step1[0]}</a>
+											onclick="clickData('${res.node.pheno_id }','1_1')">${res.step1[0]}</a>
 										</td>
 										<td><a href="javascript:void(0)"
-											onclick="clickData(${res.node.pheno_name},'${res.node.pheno_name }','1_1',this)">${res.step1[0]}</a>
+											onclick="clickData('${res.node.pheno_id }','1_1')">${res.step1[0]}</a>
+										</td>
+
+										<td><a href="javascript:void(0)"
+											onclick="clickData('${res.node.pheno_id }','0_2')">${res.step2[0]}</a>
+										</td>
+										<td><a href="javascript:void(0)"
+											onclick="clickData('${res.node.pheno_id }','1_2')">${res.step2[1]}</a>
+										</td>
+										<td><a href="javascript:void(0)"
+											onclick="clickData('${res.node.pheno_id }','2_2')">${res.step2[2]}</a>
+										</td>
+										<td><a href="javascript:void(0)"
+											onclick="clickData('${res.node.pheno_id }','2_1')">${res.step2[3]}</a>
+										</td>
+										<td><a href="javascript:void(0)"
+											onclick="clickData('${res.node.pheno_id }','2_0')">${res.step2[4]}</a>
 										</td>
 
 										<td><a href="javascript:void(0)"
-											onclick="clickData(${res.node.pheno_name},'${res.node.pheno_name }','0_2',this)">${res.step2[0]}</a>
+											onclick="clickData('${res.node.pheno_id }','0_3')">${res.step3[0]}</a>
 										</td>
 										<td><a href="javascript:void(0)"
-											onclick="clickData(${res.node.pheno_name},'${res.node.pheno_name }','1_2',this)">${res.step2[1]}</a>
+											onclick="clickData('${res.node.pheno_id }','1_3')">${res.step3[1]}</a>
 										</td>
 										<td><a href="javascript:void(0)"
-											onclick="clickData(${res.node.pheno_name},'${res.node.pheno_name }','2_2',this)">${res.step2[2]}</a>
+											onclick="clickData('${res.node.pheno_id }','2_3')">${res.step3[2]}</a>
 										</td>
 										<td><a href="javascript:void(0)"
-											onclick="clickData(${res.node.pheno_name},'${res.node.pheno_name }','2_1',this)">${res.step2[3]}</a>
+											onclick="clickData('${res.node.pheno_id }','3_3')">${res.step3[3]}</a>
 										</td>
 										<td><a href="javascript:void(0)"
-											onclick="clickData(${res.node.pheno_name},'${res.node.pheno_name }','2_0',this)">${res.step2[4]}</a>
-										</td>
-
-
-										<td><a href="javascript:void(0)"
-											onclick="clickData(${res.node.pheno_name},'${res.node.pheno_name }','0_3',this)">${res.step3[0]}</a>
+											onclick="clickData('${res.node.pheno_id }','3_2')">${res.step3[4]}</a>
 										</td>
 										<td><a href="javascript:void(0)"
-											onclick="clickData(${res.node.pheno_name},'${res.node.pheno_name }','1_3',this)">${res.step3[1]}</a>
+											onclick="clickData('${res.node.pheno_id }','3_1')">${res.step3[5]}</a>
 										</td>
 										<td><a href="javascript:void(0)"
-											onclick="clickData(${res.node.pheno_name},'${res.node.pheno_name }','2_3',this)">${res.step3[2]}</a>
-										</td>
-										<td><a href="javascript:void(0)"
-											onclick="clickData(${res.node.pheno_name},'${res.node.pheno_name }','3_3',this)">${res.step3[3]}</a>
-										</td>
-										<td><a href="javascript:void(0)"
-											onclick="clickData(${res.node.pheno_name},'${res.node.pheno_name }','3_2',this)">${res.step3[4]}</a>
-										</td>
-										<td><a href="javascript:void(0)"
-											onclick="clickData(${res.node.pheno_name},'${res.node.pheno_name }','3_1',this)">${res.step3[5]}</a>
-										</td>
-										<td><a href="javascript:void(0)"
-											onclick="clickData(${res.node.pheno_name},'${res.node.pheno_name }','3_0',this)">${res.step3[6]}</a>
+											onclick="clickData('${res.node.pheno_id }','3_0')">${res.step3[6]}</a>
 										</td>
 										<td>${res.association }</td>
 										<td>${res.pheno }</td>
@@ -121,6 +120,7 @@
 						</div>
 					</div>
 				</div>
+				<div id="cy"></div>
 				<div class="clearfix"></div>
 			</div>
 			<!-- services-main end here -->
@@ -133,5 +133,13 @@
 	<!--footer end here-->
 </body>
 <script src="js/globalGraph_d3.js"></script>
+<script src="js/cbg.js"></script>
+<script src="js/cytoscape/cytoscape.min.js"></script>
+<script src="js/cytoscape/jquery.cytoscape.js-panzoom.js"></script>
+
+<script
+	src="https://cdn.rawgit.com/cpettitt/dagre/v0.7.4/dist/dagre.min.js"></script>
+<script
+	src="https://cdn.rawgit.com/cytoscape/cytoscape.js-dagre/1.1.2/cytoscape-dagre.js"></script>
 
 </html>

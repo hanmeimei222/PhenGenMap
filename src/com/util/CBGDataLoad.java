@@ -19,10 +19,11 @@ public class CBGDataLoad {
 	
 	public static Map<String,List<String>> loadCBGDetail(String fname)
 	{
+		int id = Integer.parseInt(fname.split(":")[1]);
 		Map<String,List<String>>map=new HashMap<String,List<String>>();
 		BufferedReader in = null;
 		try{
-			in= new BufferedReader(new FileReader(new File(cbgPath+fname+".txt")));
+			in= new BufferedReader(new FileReader(new File(cbgPath+"cbgdetail/"+id+".txt")));
 
 			String line="";
 			

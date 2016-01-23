@@ -1,17 +1,17 @@
 package com.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.model.CBG;
+import com.model.cytoscape.Graph;
 import com.service.CBGService;
 
 @Controller
@@ -31,19 +31,13 @@ public class CBGController {
 	}
 	
 	
-	@RequestMapping("/cbg/detail")
-	public Map<String,List<String>> getCBGDetail(@RequestParam("query")String query)
+	@RequestMapping("/detail")
+	@ResponseBody
+	public List<Graph> getCBGDetail(@RequestParam("id")String id,
+			@RequestParam("type")String type)
 	{
-		String[] arr = query.split("\t");
-		Map<String,Boolean> ids = new HashMap<String, Boolean>();
-		for (String str : arr) {
-			if(!"".equals(str))
-			{
-				ids.put(str.trim(),true);
-			}
-		}
-		
-		return cbgService.getSelectedCBGDetail(ids);
+		List<Graph> result=cbgService.getSelectedCBGDetail(id,type);
+		return result;
 	}
 	
 }

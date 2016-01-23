@@ -20,7 +20,19 @@ import com.model.d3.Links;
 import com.model.d3.TreeNode;
 
 public class ModelTransferUtil {
-
+	
+//	public static PNode mappingPNode(String id)
+//	{
+//		return GlobalData.allpnodes.get(id);
+//	}
+//	
+//	public static GNode mappingGNode(String id)
+//	{
+//		//TODO:映射
+//		GNode g = new GNode(id,id);
+//		
+//		return g;
+//	}
 
 	public static D3Graph cytoGraph2D3Graph(Graph g)
 	{

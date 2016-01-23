@@ -1,11 +1,11 @@
 package com.service;
 
 import java.util.List;
-import java.util.Map;
 
 import com.model.CBG;
+import com.model.cytoscape.Graph;
 
 public interface CBGService {
 	public List<CBG> loadCBGSummary();
-	public Map<String,List<String>> getSelectedCBGDetail(Map<String,Boolean> query);
+	public List<Graph> getSelectedCBGDetail(String id,String type);
 }

@@ -60,7 +60,7 @@ public class QueryPathwayServiceImpl implements QueryPathwayService {
 		//输入的是pathway的第一类别,根据一级类别获取所有pathway
 		else if(level == 1)
 		{
-			for (String id : ids) {
+			for(String id : ids) {
 				Set<String>set = new HashSet<String>();
 				set.add(id);
 				result.put(id,pwayDao.getMainCatalog(set));

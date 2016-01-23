@@ -22,7 +22,11 @@
 						<div>
 							<div>
 								<span>Pathway过滤 </span>
+								
+								
 								<button type="button" style="float: right" onclick="drawGraph()">画图</button>
+							
+							
 							</div>
 							<div class="row post-content-row">
 								<div class="col-md-12 services-left-pathway"
@@ -58,7 +62,11 @@
 						</div>
 						<div>
 							<h4>查询结果</h4>
+							
+							<div id="downloadPanel" name="dowloadPanel" class="hidden">
 							<h5 style="float:right"><a id="download" href="#">点击下载</a></h5>
+							</div>
+							
 							<div class="row post-content-row">
 								<div id="cy"></div>
 							</div>

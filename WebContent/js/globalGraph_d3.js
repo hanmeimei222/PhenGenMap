@@ -1,3 +1,8 @@
+function showDownloadPanel(){
+
+}
+
+
 function selectAllEdge()
 {
 	var chk = document.getElementById("chkEdge");
@@ -59,13 +64,20 @@ function drawGraph()
 		url : "queryGlobalAsso.do",
 		dataType : "json",
 		success : function(msg) {
+			if(msg!=""){
+				$("#downloadPanel").attr('class','show');
+			}else
+			{
+				$("#downloadPanel").attr('class','hidden');
+			}
 			drawGlobalGraph(msg.data);
+	
 			if(msg.path!="")
 			{
 				$("#download").attr("href",msg.path);
-
+	
 			}
-		}
+	}
 	});
 }
 
@@ -105,8 +117,8 @@ function initClassInfo()
 		url : "initPathwayClassInfo.do",
 		dataType : "json",
 		success : function(msg){
-			initPathwayInfo(msg);
-		}
+		initPathwayInfo(msg);
+	}
 	});
 
 	getPhenInfo("MP:0000001",0);
@@ -120,9 +132,9 @@ function getGlobalAsso()
 		url : "	queryAllAsso.do",
 		dataType : "json",
 		success : function(msg){
-			//用d3来画
-			drawGlobalGraph(msg);
-		}
+		//用d3来画
+		drawGlobalGraph(msg);
+	}
 	});
 
 }

@@ -54,51 +54,51 @@
 											${res.node.pheno_id}
 										</td>
 
-										<td><a href="javascript:void(0)"
+										<td><a href="#cy"
 											onclick="clickData('${res.node.pheno_id }','0_1')">${res.step1[0]}</a>
 										</td>
-										<td><a href="javascript:void(0)"
+										<td><a href="#cy"
 											onclick="clickData('${res.node.pheno_id }','1_1')">${res.step1[0]}</a>
 										</td>
-										<td><a href="javascript:void(0)"
+										<td><a href="#cy"
 											onclick="clickData('${res.node.pheno_id }','1_1')">${res.step1[0]}</a>
 										</td>
 
-										<td><a href="javascript:void(0)"
+										<td><a href="#cy"
 											onclick="clickData('${res.node.pheno_id }','0_2')">${res.step2[0]}</a>
 										</td>
-										<td><a href="javascript:void(0)"
+										<td><a href="#cy"
 											onclick="clickData('${res.node.pheno_id }','1_2')">${res.step2[1]}</a>
 										</td>
-										<td><a href="javascript:void(0)"
+										<td><a href="#cy"
 											onclick="clickData('${res.node.pheno_id }','2_2')">${res.step2[2]}</a>
 										</td>
-										<td><a href="javascript:void(0)"
+										<td><a href="#cy"
 											onclick="clickData('${res.node.pheno_id }','2_1')">${res.step2[3]}</a>
 										</td>
-										<td><a href="javascript:void(0)"
+										<td><a href="#cy"
 											onclick="clickData('${res.node.pheno_id }','2_0')">${res.step2[4]}</a>
 										</td>
 
-										<td><a href="javascript:void(0)"
+										<td><a href="#cy"
 											onclick="clickData('${res.node.pheno_id }','0_3')">${res.step3[0]}</a>
 										</td>
-										<td><a href="javascript:void(0)"
+										<td><a href="#cy"
 											onclick="clickData('${res.node.pheno_id }','1_3')">${res.step3[1]}</a>
 										</td>
-										<td><a href="javascript:void(0)"
+										<td><a href="j#cy"
 											onclick="clickData('${res.node.pheno_id }','2_3')">${res.step3[2]}</a>
 										</td>
-										<td><a href="javascript:void(0)"
+										<td><a href="#cy"
 											onclick="clickData('${res.node.pheno_id }','3_3')">${res.step3[3]}</a>
 										</td>
-										<td><a href="javascript:void(0)"
+										<td><a href="#cy"
 											onclick="clickData('${res.node.pheno_id }','3_2')">${res.step3[4]}</a>
 										</td>
-										<td><a href="javascript:void(0)"
+										<td><a href="#cy"
 											onclick="clickData('${res.node.pheno_id }','3_1')">${res.step3[5]}</a>
 										</td>
-										<td><a href="javascript:void(0)"
+										<td><a href="#cy"
 											onclick="clickData('${res.node.pheno_id }','3_0')">${res.step3[6]}</a>
 										</td>
 										<td>${res.association }</td>

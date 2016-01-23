@@ -9,9 +9,10 @@ function clickData(phen_id,type)
 		type:"post",
 		success:function(result)
 		{
-			$.each(result,function(i,data){
-			drwcytoCBG(data);
-			});
+			drwcytoCBG(result);
+//			$.each(result,function(i,data){
+//			drwcytoCBG(data);
+//			});
 		}
 	});
 }

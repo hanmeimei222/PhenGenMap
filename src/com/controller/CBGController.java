@@ -33,10 +33,10 @@ public class CBGController {
 	
 	@RequestMapping("/detail")
 	@ResponseBody
-	public List<Graph> getCBGDetail(@RequestParam("id")String id,
+	public Graph getCBGDetail(@RequestParam("id")String id,
 			@RequestParam("type")String type)
 	{
-		List<Graph> result=cbgService.getSelectedCBGDetail(id,type);
+		Graph result=cbgService.getSelectedCBGDetail(id,type);
 		return result;
 	}
 	

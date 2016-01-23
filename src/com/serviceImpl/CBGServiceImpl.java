@@ -1,6 +1,5 @@
 package com.serviceImpl;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -40,9 +39,14 @@ public class CBGServiceImpl implements CBGService{
 	}
 
 	@Override
-	public List<Graph> getSelectedCBGDetail(String id, String type) {
+	public Graph getSelectedCBGDetail(String id, String type) {
 
-		List<Graph> gList = new ArrayList<Graph>();
+		Graph g = new Graph();
+		
+		Set<CytoNode> nodes = new HashSet<CytoNode>();
+		Set<CytoEdge> edges = new HashSet<CytoEdge>();
+		g.setEdges(edges);
+		g.setNodes(nodes);
 		
 		List<String> cbgs = cbgDao.getSelectedCBGDetail(id, type);
 		String[] tmp =type.split("_");
@@ -52,13 +56,7 @@ public class CBGServiceImpl implements CBGService{
 		int totalNodes = geneNum+mpNum+2;//加起点和终点
 		for (String cbg : cbgs)
 		{
-			Graph g = new Graph();
-			gList.add(g);
 			
-			Set<CytoNode> nodes = new HashSet<CytoNode>();
-			Set<CytoEdge> edges = new HashSet<CytoEdge>();
-			g.setEdges(edges);
-			g.setNodes(nodes);
 
 			String[] ns = cbg.split("\t");
 			
@@ -146,6 +144,6 @@ public class CBGServiceImpl implements CBGService{
 
 		}
 		
-		return gList;
+		return g;
 	}
 }

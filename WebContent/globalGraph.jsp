@@ -63,8 +63,8 @@
 						<div>
 							<h4>查询结果</h4>
 							
-							<div id="downloadPanel" name="dowloadPanel" class="hidden">
-							<h5 style="float:right"><a id="download" href="#">点击下载</a></h5>
+							<div id="downloadPanel" name="dowloadPanel" class="hidden" style="float:right">
+							<h5 ><a id="download" href="#">点击下载</a></h5>
 							</div>
 							
 							<div class="row post-content-row">

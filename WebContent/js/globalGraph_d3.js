@@ -70,7 +70,6 @@ function drawGraph()
 			if(msg.path!="")
 			{
 				$("#download").attr("href",msg.path);
-	
 			}
 	}
 	});

@@ -1,8 +1,3 @@
-function showDownloadPanel(){
-
-}
-
-
 function selectAllEdge()
 {
 	var chk = document.getElementById("chkEdge");
@@ -75,7 +70,6 @@ function drawGraph()
 			if(msg.path!="")
 			{
 				$("#download").attr("href",msg.path);
-	
 			}
 	}
 	});

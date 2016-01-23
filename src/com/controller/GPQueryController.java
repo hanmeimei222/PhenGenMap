@@ -68,15 +68,6 @@ public class GPQueryController {
 		return gpService.getAsso(map) ;
 	}
 	
-	
-	@RequestMapping("/queryAllAsso")
-	@ResponseBody
-	public D3Graph getAllGPAssociation()
-	{
-		return gpService.getGlobalAsso();
-	}
-	
-	
 	@RequestMapping("/queryGlobalAsso")
 	@ResponseBody
 	public ModelMap queryAssiciation(@RequestParam("phenList")String phenList,

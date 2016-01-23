@@ -182,50 +182,6 @@ public class QueryGPServiceImpl implements QueryAssoService{
 		return d3g;
 	}
 
-	@Override
-	public D3Graph getGlobalAsso() {
-
-		Set<PNode> pNodes = pDao.getAllPhens();
-		Set<GNode> gNodes = gDao.getAllGenes();
-		Set<Pathway> pathways = pathwayDao.getPathwaySet();
-		Set<PPINode> ppis = ppiDao.getAllPPIs();
-
-		//构建用户绘图的边
-		Graph g = new Graph();
-		Set<CytoNode> nodes = new HashSet<CytoNode>();
-		Set<CytoEdge> edges = new HashSet<CytoEdge>();
-		g.setNodes(nodes);
-		g.setEdges(edges);
-
-		//构建mp之间的
-		Graph ppgraph = getAssoByPhenoPhen(pNodes,new HashMap<String, Boolean>());
-		//
-		Graph gpgraph = getAssoByPhenoGene(gNodes, pNodes,new HashMap<String, Boolean>(),new HashMap<String, Boolean>());
-		//
-		//		Graph pathwayGenegraph = getAssoByPathwayGene(gNodes, pathways, new HashMap<String, Boolean>());
-		//
-		//		Graph gppigraph = getAssoByPPIGene(gNodes, ppis,new HashMap<String, Boolean>(), new HashMap<String, Boolean>());
-		//
-		//		Graph ppigraph = getAssoByPPI2PPI(ppis, new HashMap<String, Boolean>());
-
-		nodes.addAll(ppgraph.getNodes());
-		nodes.addAll(gpgraph.getNodes());
-		//		nodes.addAll(pathwayGenegraph.getNodes());
-		//		nodes.addAll(gppigraph.getNodes());
-		//		nodes.addAll(ppigraph.getNodes());
-
-		edges.addAll(ppgraph.getEdges());
-		edges.addAll(gpgraph.getEdges());
-		//		edges.addAll(pathwayGenegraph.getEdges());
-		//		edges.addAll(gppigraph.getEdges());
-		//		edges.addAll(ppigraph.getEdges());
-
-
-		D3Graph d3g = ModelTransferUtil.cytoGraph2D3Graph(g);
-		return d3g;
-
-	}
-
 	/**
 	 * 策略：1.如果未输入gene集合，用其他节点关联的gene先构造出基因集合
 	 * 2.在有了gene集合的情况下，对于未输入节点的类型，用gene关联的集合对其进行补充

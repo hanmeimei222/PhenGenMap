@@ -1,8 +1,3 @@
-function showDownloadPanel(){
-
-}
-
-
 function selectAllEdge()
 {
 	var chk = document.getElementById("chkEdge");
@@ -122,22 +117,7 @@ function initClassInfo()
 	});
 
 	getPhenInfo("MP:0000001",0);
-//	getGlobalAsso();
 } 
-
-function getGlobalAsso()
-{
-	$.ajax({
-		type : "get",
-		url : "	queryAllAsso.do",
-		dataType : "json",
-		success : function(msg){
-		//用d3来画
-		drawGlobalGraph(msg);
-	}
-	});
-
-}
 
 function getPhenInfo(mpId,level)
 {

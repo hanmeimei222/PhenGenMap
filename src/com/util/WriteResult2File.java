@@ -19,6 +19,7 @@ import com.model.d3.TreeNode;
 public class WriteResult2File {
 
 	private static String path =GlobalData.PATH;
+	
 	public static String write2File(Graph g)
 	{
 		String fileName = generateFileName();
@@ -61,10 +62,10 @@ public class WriteResult2File {
 		{
 			out= new BufferedWriter(new FileWriter(new File(filePath)));
 			List<Node> nodes = g.getNodes(); 
-			List<Links> list =g.getLinks();
+			List<Links> link =g.getLinks();
 			String title = "Atype\tAgroup\tAid\tAname\tBtype\tBgroup\tBid\tBname\n";
 			out.write(title);
-			for (Links links : list) {
+			for (Links links : link) {
 				int source = links.getSource();
 				int target = links.getTarget();
 				if(source<0 || target<0)

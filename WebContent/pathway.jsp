@@ -71,7 +71,7 @@
 }
 </style>
 
-<title>pathway</title>
+<title>Pathway</title>
 
 <script src="js/d3/d3.v3.min.js"></script>
 
@@ -106,8 +106,11 @@
 							<label class="post-content-row-title">step1：查看全体pathway信息</label>
 							<button type="button" onclick="showAllPathway()"
 								class="btn btn-default">查看</button>
-							<a href="index.jsp"><button type="button" onclick="showAllPathway()"
-								class="btn btn-default">全部下载</button></a>
+							<div id="downloadPanel" name="dowloadPanel" class="hidden" style="float:left">
+								<a id="download" href="#"><button type="button"
+								class="btn btn-default">数据下载</button></a>
+							</div>
+							
 						</div>
 
 						<div class=" post-content-row">

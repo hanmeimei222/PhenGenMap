@@ -50,7 +50,7 @@ public class GlobalData {
 	
 	//cbg数据信息，每一个CBG对应一个phen大类别中的统计数据summary
 	public static List<CBG> cbgSummary = new ArrayList<CBG>();
-	//cbg详细信息，最外层map对应phen的大类别，第二个map对应cbg的type，list中的string表示一个cbg，做边是gene,右边是表型，？？
+	//cbg详细信息，最外层map对应phen的大类别，第二个map对应cbg的type，list中的string表示一个cbg，左边是gene,右边是表型，？？
 	public static Map<String,Map<String,List<String>>> cbgDetail = new HashMap<String, Map<String,List<String>>>();
 	//存储cbg中基因行号和基因symbol的对应关系
 	public static Map<String,String> mgiIdxSymbolMapping = new HashMap<String, String>();

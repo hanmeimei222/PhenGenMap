@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -14,6 +15,7 @@ import com.constant.NodeType;
 import com.model.d3.PathwayGraphAndTree;
 import com.model.d3.TreeNode;
 import com.service.QueryPathwayService;
+import com.util.WriteResult2File;
 
 
 @Controller
@@ -25,9 +27,17 @@ public class PathwayController {
 
 	@RequestMapping("/allPathway")
 	@ResponseBody
-	public TreeNode showAllPathways(){
-		return pwayService.allPathway();
+	public ModelMap showAllPathways(){
+		ModelMap map = new ModelMap();
+		TreeNode tree = pwayService.allPathway();
+		String filename = WriteResult2File.write2File(tree);
+		map.put("data", tree);
+		map.put("path", filename);
+		return map;
 	}
+//	public TreeNode showAllPathways(){
+//		return pwayService.allPathway();
+//	}
 
 //	@RequestMapping("/relatedPathway")
 //	@ResponseBody

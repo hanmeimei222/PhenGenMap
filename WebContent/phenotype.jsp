@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-<title>Home</title>
+<title>Phenotype</title>
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
@@ -67,10 +67,14 @@ MP:0008347</textarea>
 						<div class="row post-content-row">
 							<label class="post-content-row-title"> step4:提交查询</label>
 							<div class="form-group">
-								<button type="button" onclick="submitQuery()"
+								<div style="float:left"><button type="button" onclick="submitQuery()"
 									class="btn btn-default">绘图</button>
+								</div>
+								
+								<div id="downloadPanel" name="dowloadPanel" class="hidden" style="float:left">
 								<a id="download" href="#"><button type="button"
 								class="btn btn-default">数据下载</button></a>
+								</div>
 							</div>
 						</div>
 					</div>

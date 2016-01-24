@@ -48,6 +48,11 @@ function submitQuery()
 		url : "pheQuery.do",
 		dataType : "json",
 		success : function(msg) {
+			if(msg!=""){
+			$("#downloadPanel").attr('class','show');
+			}else{
+			$("#downloadPanel").attr('class','hidden');
+			}
 			cytoscapeDraw(msg.data);
 			if(msg.path!="")
 			{

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import com.constant.NodeType;
 import com.global.GlobalData;
 import com.model.cytoscape.CytoEdge;
 import com.model.cytoscape.CytoNode;
@@ -16,7 +17,6 @@ import com.model.d3.D3Graph;
 import com.model.d3.Links;
 import com.model.d3.Node;
 import com.model.d3.TreeNode;
-
 public class WriteResult2File {
 
 	private static String path =GlobalData.PATH;
@@ -38,15 +38,22 @@ public class WriteResult2File {
 		String title = "\nNodes Data\nNode Type\tNode Id\tNode Name\tLevel\n";
 		out.write(title);
 		for(CytoNode node : nodes){
-			if(node.getData().getId().equals("phen")||node.getData().getParent().equals("phen")){
-				continue;
-			}
 			String type = node.getData().getNodeType();
-			String id = node.getData().getId();
-			String name = node.getData().getName();
-			String level = node.getData().getParent();
-			
-			out.write(type+"\t"+id+"\t"+name+"\t"+level+"\n");
+			NodeType TYPE = NodeType.getTypeByStr(type);
+			switch (TYPE){
+			case MP:
+				if(node.getData().getId().equals("phen")||node.getData().getParent().equals("phen")){
+					continue;
+				}
+				String id = node.getData().getId();
+				String name = node.getData().getName();
+				String level = node.getData().getParent();
+				
+				out.write(type+"\t"+id+"\t"+name+"\t"+level+"\n");
+				break;
+			default:
+				break;
+			}
 		}
 		
 	}
@@ -123,7 +130,23 @@ public class WriteResult2File {
 		try
 		{
 			out= new BufferedWriter(new FileWriter(new File(filePath)));
-			out.write(tree.toString());
+			String title = "Classified Pathway Dataset\nMainClass\tSubClass\tPathway Id\tPathway Name\n";
+			out.write(title);
+			List<TreeNode>Tree1=tree.getChildren();
+			for (TreeNode tree1 : Tree1) {
+				String class1name = tree1.getId();
+				List<TreeNode>Tree2 = tree1.getChildren();
+				for (TreeNode tree2 : Tree2) {
+					String class2name = tree2.getId();
+					List<TreeNode>pathway = tree2.getChildren();
+					for (TreeNode pw : pathway) {
+						String pwid = pw.getId();
+						String pwname = pw.getName();
+						out.write(class1name+"\t"+class2name+"\t"+pwid+"\t"+pwname+"\n");
+					}
+				}
+			}
+
 		}
 		catch(IOException e)
 		{

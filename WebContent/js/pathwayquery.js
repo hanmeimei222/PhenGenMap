@@ -24,7 +24,16 @@ function showAllPathway(){
 		url : "allPathway.do",
 		dataType : "json",
 		success : function(msg) {
-			d3DrawPathway(msg);
+			if(msg!=""){
+			$("#downloadPanel").attr('class','show');
+			}else{
+			$("#downloadPanel").attr('class','hidden');
+			}
+			d3DrawPathway(msg.data);
+			if(msg.path!="")
+			{
+				$("#download").attr("href",msg.path);
+			}
 		}
 	});
 }

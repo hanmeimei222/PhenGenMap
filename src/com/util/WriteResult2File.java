@@ -64,8 +64,9 @@ public class WriteResult2File {
 				break;
 			case GENE:
 			case PATHWAY:
+			case PPI:
 				String id = node.getData().getId();
-				if(id.equals("pathway")||id.equals("gene")){
+				if(id.equals("pathway")||id.equals("gene")||id.equals("ppi")){
 					continue;
 				}
 				String name = "";
@@ -75,8 +76,6 @@ public class WriteResult2File {
 					name = node.getData().getName();
 				}
 				out.write(type+"\t"+id+"\t"+name+"\n");
-				break;
-			case PPI:
 				break;
 			default:
 				break;

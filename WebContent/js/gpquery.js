@@ -69,7 +69,16 @@ function submitGPQuery()
 		url : "queryAsso.do",
 		dataType : "json",
 		success : function(msg) {
-			cytoscapeDraw(msg);
+			if(msg!=""){
+			$("#downloadPanel").attr('class','show');
+			}else{
+			$("#downloadPanel").attr('class','hidden');
+			}
+			cytoscapeDraw(msg.data);
+			if(msg.path!="")
+			{
+				$("#download").attr("href",msg.path);
+			}
 		}
 	});
 }

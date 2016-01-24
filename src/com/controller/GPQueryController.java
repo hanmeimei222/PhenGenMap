@@ -37,8 +37,9 @@ public class GPQueryController {
 	
 	@RequestMapping("/queryAsso")
 	@ResponseBody
-	public Graph queryAssiciationByPathway(HttpServletRequest request)
+	public ModelMap queryAssiciationByPathway(HttpServletRequest request)
 	{
+		ModelMap modelmap = new ModelMap();
 		String queryType = request.getParameter("queryType");
 		String[]nodeType=queryType.split("_");
 		//解析出输入的节点集合及类型
@@ -65,7 +66,11 @@ public class GPQueryController {
 		}
 		//调用函数查询输入的节点，以及各种节点之间的关系
 		
-		return gpService.getAsso(map) ;
+		Graph graph = gpService.getAsso(map) ;
+		String filename = WriteResult2File.write2File(graph);
+		modelmap.put("data", graph);
+		modelmap.put("path", filename);
+		return modelmap;
 	}
 	
 	@RequestMapping("/queryGlobalAsso")

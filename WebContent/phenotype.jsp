@@ -69,13 +69,15 @@ MP:0008347</textarea>
 							<div class="form-group">
 								<button type="button" onclick="submitQuery()"
 									class="btn btn-default">绘图</button>
+								<a id="download" href="#"><button type="button"
+								class="btn btn-default">数据下载</button></a>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="col-md-8 services-middle">
 					<h3>查询结果</h3>
-					<h5  style="float:right"><a id="download" href="#">点击下载</a></h5>
+					
 					<div>
 						<div id="cy"></div>
 					</div>

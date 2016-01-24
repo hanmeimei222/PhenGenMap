@@ -10,6 +10,7 @@ import java.util.Set;
 
 import com.global.GlobalData;
 import com.model.cytoscape.CytoEdge;
+import com.model.cytoscape.CytoNode;
 import com.model.cytoscape.Graph;
 import com.model.d3.D3Graph;
 import com.model.d3.Links;
@@ -20,6 +21,35 @@ public class WriteResult2File {
 
 	private static String path =GlobalData.PATH;
 	
+	private static void writeLinks2File(BufferedWriter out,Graph g) throws IOException{
+		Set<CytoEdge> links =g.getEdges();
+		String title = "Links Data\nLink Type\tA(Start)\tB(End)\n";
+		out.write(title);
+		for (CytoEdge link : links) {
+			String source = link.getData().getSource();
+			String target = link.getData().getTarget();
+			String type = link.getData().getEdgeType();
+			
+			out.write(type+"\t"+source+"\t"+target+"\n");
+		}
+	}
+	private static void writeNodes2File(BufferedWriter out,Graph g) throws IOException{
+		Set<CytoNode> nodes = g.getNodes();
+		String title = "\nNodes Data\nNode Type\tNode Id\tNode Name\tLevel\n";
+		out.write(title);
+		for(CytoNode node : nodes){
+			if(node.getData().getId().equals("phen")||node.getData().getParent().equals("phen")){
+				continue;
+			}
+			String type = node.getData().getNodeType();
+			String id = node.getData().getId();
+			String name = node.getData().getName();
+			String level = node.getData().getParent();
+			
+			out.write(type+"\t"+id+"\t"+name+"\t"+level+"\n");
+		}
+		
+	}
 	public static String write2File(Graph g)
 	{
 		String fileName = generateFileName();
@@ -28,16 +58,8 @@ public class WriteResult2File {
 		try
 		{
 			out= new BufferedWriter(new FileWriter(new File(filePath)));
-			Set<CytoEdge> list =g.getEdges();
-			String title = "Link Type\tA\tB\n";
-			out.write(title);
-			for (CytoEdge links : list) {
-				String source = links.getData().getSource();
-				String target = links.getData().getTarget();
-				String type = links.getData().getEdgeType();
-				
-				out.write(type+"\t"+source+"\t"+target+"\n");
-			}
+			writeLinks2File(out,g);
+			writeNodes2File(out,g);
 		}
 		catch(IOException e)
 		{

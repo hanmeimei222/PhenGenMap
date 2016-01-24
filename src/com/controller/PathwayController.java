@@ -25,20 +25,6 @@ public class PathwayController {
 	@Autowired
 	QueryPathwayService pwayService;
 
-	@RequestMapping("/allPathway")
-	@ResponseBody
-	public ModelMap showAllPathways(){
-		ModelMap map = new ModelMap();
-		TreeNode tree = pwayService.allPathway();
-		String filename = WriteResult2File.write2File(tree);
-		map.put("data", tree);
-		map.put("path", filename);
-		return map;
-	}
-//	public TreeNode showAllPathways(){
-//		return pwayService.allPathway();
-//	}
-
 //	@RequestMapping("/relatedPathway")
 //	@ResponseBody
 //	public TreeNode getRelatedPathway(HttpServletRequest request){
@@ -68,10 +54,23 @@ public class PathwayController {
 //		}
 //		return pwayService.getRelatedPathway(map);
 //	}
+	
+	@RequestMapping("/allPathway")
+	@ResponseBody
+	public ModelMap showAllPathways(){
+		ModelMap map = new ModelMap();
+		TreeNode tree = pwayService.allPathway();
+		String filename = WriteResult2File.write2File(tree);
+		map.put("data", tree);
+		map.put("path", filename);
+		return map;
+	}
+
 
 	@RequestMapping("/pwayQuery")
 	@ResponseBody
-	public PathwayGraphAndTree pwayQuery(HttpServletRequest request){
+	public ModelMap pwayQuery(HttpServletRequest request){
+		ModelMap modelmap = new ModelMap();
 		String queryType = request.getParameter("queryType");
 		String[]nodeType=queryType.split("_");
 		//解析出输入的节点集合及类型
@@ -97,8 +96,10 @@ public class PathwayController {
 			}
 		}
 		PathwayGraphAndTree graphAndTree = pwayService.getGenePathwayAsso(map);
-		
-		return graphAndTree;
+		String filename = WriteResult2File.write2File(graphAndTree.getGraph());
+		modelmap.put("data", graphAndTree);
+		modelmap.put("path", filename);
+		return modelmap;
 	}
 
 

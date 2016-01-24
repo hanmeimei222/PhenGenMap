@@ -23,19 +23,30 @@ public class WriteResult2File {
 	
 	private static void writeLinks2File(BufferedWriter out,Graph g) throws IOException{
 		Set<CytoEdge> links =g.getEdges();
-		String title = "Links Data\nLink Type\tA(Start)\tB(End)\n";
+		String title = "Links Data\nLink Type\tA_id(Start)\tB_id(End)\n";
 		out.write(title);
 		for (CytoEdge link : links) {
 			String source = link.getData().getSource();
 			String target = link.getData().getTarget();
 			String type = link.getData().getEdgeType();
-			
+			if(type.equals("typelink")){
+				continue;
+			}
 			out.write(type+"\t"+source+"\t"+target+"\n");
 		}
 	}
 	private static void writeNodes2File(BufferedWriter out,Graph g) throws IOException{
 		Set<CytoNode> nodes = g.getNodes();
-		String title = "\nNodes Data\nNode Type\tNode Id\tNode Name\tLevel\n";
+		String title = "";
+		for (CytoNode cytoNode : nodes) {
+			if(cytoNode.getData().getNodeType().equals("mp")){
+				title = "\nNodes Data\nNode_Type\tNode_Id\tNode_Name\tLevel\n";
+				break;
+			}else{
+				title = "\nNodes Data\nNode_Type\tNode_Id\tNode_Name\n";
+				break;
+			}
+		}
 		out.write(title);
 		for(CytoNode node : nodes){
 			String type = node.getData().getNodeType();
@@ -45,11 +56,27 @@ public class WriteResult2File {
 				if(node.getData().getId().equals("phen")||node.getData().getParent().equals("phen")){
 					continue;
 				}
-				String id = node.getData().getId();
-				String name = node.getData().getName();
-				String level = node.getData().getParent();
+				String mpid = node.getData().getId();
+				String mpname = node.getData().getName();
+				String mplevel = node.getData().getParent();
 				
-				out.write(type+"\t"+id+"\t"+name+"\t"+level+"\n");
+				out.write(type+"\t"+mpid+"\t"+mpname+"\t"+mplevel+"\n");
+				break;
+			case GENE:
+			case PATHWAY:
+				String id = node.getData().getId();
+				if(id.equals("pathway")||id.equals("gene")){
+					continue;
+				}
+				String name = "";
+				if(type.equals("gene")){
+					name = node.getData().getId();
+				}else{
+					name = node.getData().getName();
+				}
+				out.write(type+"\t"+id+"\t"+name+"\n");
+				break;
+			case PPI:
 				break;
 			default:
 				break;
@@ -82,6 +109,7 @@ public class WriteResult2File {
 		return fileName;
 	}
 
+	
 	public static String write2File(D3Graph g)
 	{
 		String fileName = generateFileName();

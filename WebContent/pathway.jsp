@@ -104,10 +104,12 @@
 
 						<div class=" post-content-row">
 							<label class="post-content-row-title">step1：查看全体pathway信息</label>
-							<button type="button" onclick="showAllPathway()"
+							<div style="float:left">
+								<button type="button" onclick="showAllPathway()"
 								class="btn btn-default">查看</button>
-							<div id="downloadPanel" name="dowloadPanel" class="hidden" style="float:left">
-								<a id="download" href="#"><button type="button"
+							</div>
+							<div id="downloadPanel1" name="dowloadPanel1" class="hidden" style="float:left">
+								<a id="downloadAllPathway" href="#"><button type="button"
 								class="btn btn-default">数据下载</button></a>
 							</div>
 							
@@ -152,8 +154,14 @@ mmu00603</textarea>
 						<div class="row post-content-row">
 							<label class="post-content-row-title">提交查询</label>
 							<div class="form-group">
+								<div style="float:left">
 								<button type="button" onclick="submitPathwayQuery()"
 									class="btn btn-default">绘图</button>
+								</div>
+								<div id="downloadPanel2" name="dowloadPanel2" class="hidden" style="float:left">
+								<a id="download" href="#"><button type="button"
+								class="btn btn-default">数据下载</button></a>
+								</div>
 							</div>
 						</div>
 

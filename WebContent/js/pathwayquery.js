@@ -25,14 +25,14 @@ function showAllPathway(){
 		dataType : "json",
 		success : function(msg) {
 			if(msg!=""){
-			$("#downloadPanel").attr('class','show');
+			$("#downloadPanel1").attr('class','show');
 			}else{
-			$("#downloadPanel").attr('class','hidden');
+			$("#downloadPanel1").attr('class','hidden');
 			}
 			d3DrawPathway(msg.data);
 			if(msg.path!="")
 			{
-				$("#download").attr("href",msg.path);
+				$("#downloadAllPathway").attr("href",msg.path);
 			}
 		}
 	});
@@ -62,12 +62,23 @@ function submitPathwayQuery()
 		url : "pwayQuery.do",
 		dataType : "json",
 		success : function(msg) {
-			cytoscapeDraw(msg.graph);
-			var simArr = msg.treenode;
+			if(msg!=""){
+			$("#downloadPanel2").attr('class','show');
+			}else{
+			$("#downloadPanel2").attr('class','hidden');
+			}
+			if(msg.path!="")
+			{
+				$("#download").attr("href",msg.path);
+			}
+			cytoscapeDraw(msg.data.graph);
+			
+			var simArr = msg.data.treenode;
 			for(var i=0;i<simArr.length;i++)
 			{
-				drawSimPathway(msg.treenode[i],msg.treenode[i].children[0].id);
+				drawSimPathway(msg.data.treenode[i],msg.data.treenode[i].children[0].id);
 			}
+			
 		}
 	});
 }

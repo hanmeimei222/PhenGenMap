@@ -9,9 +9,9 @@
 
 </head>
 <body onload="initClassInfo()">
-	
+
 	<jsp:include page="header.jsp"></jsp:include>
-	
+
 	<!--services start here-->
 	<div class="services">
 		<div class="mycontainer">
@@ -22,12 +22,13 @@
 						<div>
 							<div>
 								<span>Pathway过滤 </span>
-								
-								
-								
-								<button type="button" class="btn btn-default" style="float: right" onclick="drawGraph()">画图</button>
-							
-							
+
+
+
+								<button type="button" class="btn btn-default"
+									style="float: right" onclick="drawGraph()">画图</button>
+
+
 							</div>
 							<div class="row post-content-row">
 								<div class="col-md-12 services-left-pathway"
@@ -35,12 +36,12 @@
 								<div class=" services-left-pathway" id="pathway_second_class"></div>
 								<div class="services-left-pathway" id="pathway_name"></div>
 							</div>
-							
+
 						</div>
 					</div>
 
 					<div class="col-md-8 services-middle">
-						<div class="row middle_chk_panel">
+						<div class="middle_chk_panel">
 							<h4>显示边的类型</h4>
 							<div class="col-md-2">
 								<input type="checkbox" id="chkEdge" name="chkAll"
@@ -62,17 +63,20 @@
 								<input type="checkbox" id="e5" name="chkEdgeType" />PPI-PPI
 							</div>
 						</div>
+						<div class="graphHeader">
+							<div style="float: left">
+								<h4>查询结果</h4>
+							</div>
+							<div id="downloadPanel" name="dowloadPanel" class="hidden"
+								style="float: right">
+								<h5>
+									<a id="download" href="#"><button type="button"
+											class="btn btn-default">数据下载</button></a>
+								</h5>
+							</div>
+						</div>
 						<div>
-						<div style="float:left">
-							<h4>查询结果</h4>
-							</div>
-							<div id="downloadPanel" name="dowloadPanel" class="hidden" style="float:right">
-							<h5 ><a id="download" href="#"><button type="button" class="btn btn-default">数据下载</button></a></h5>
-							</div>
-							
-							<div class="row post-content-row">
-								<div id="cy"></div>
-							</div>
+							<div id="cy"></div>
 						</div>
 					</div>
 
@@ -80,7 +84,8 @@
 						<div>
 							<div>
 								<span style="float: right">Phenotype过滤</span>
-								<button type="button" class="btn btn-default" onclick="drawGraph()">画图</button>
+								<button type="button" class="btn btn-default"
+									onclick="drawGraph()">画图</button>
 							</div>
 							<div class="row post-content-row">
 								<div class="col-md-12 services-left" id="phen_1_class"></div>

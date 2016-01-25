@@ -205,8 +205,13 @@ span.menu {
 	font-size:0.8em;
 	padding:2px 0 2px 0;
 }
+.graphHeader
+{
+	margin-top: 40px;
+}
 
 #cy {
-	width: 90%;
+	width: auto;
 	height: 400px;
+
 }

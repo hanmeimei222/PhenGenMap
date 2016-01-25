@@ -3,7 +3,7 @@ function drawGlobalGraph(str)
 	//绘制图例
 	$("#cy").empty();
 	$("#cy").append('<global_graph></global_graph>');
-	width=800;
+	width=880;
 	height = 800;
 	var color = d3.scale.category20();
 	var force0 = d3.layout.force().charge(-20).linkDistance(40).size([ width, height ]);

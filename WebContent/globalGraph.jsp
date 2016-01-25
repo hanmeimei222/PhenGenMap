@@ -63,8 +63,9 @@
 							</div>
 						</div>
 						<div>
+						<div style="float:left">
 							<h4>查询结果</h4>
-							
+							</div>
 							<div id="downloadPanel" name="dowloadPanel" class="hidden" style="float:right">
 							<h5 ><a id="download" href="#"><button type="button" class="btn btn-default">数据下载</button></a></h5>
 							</div>

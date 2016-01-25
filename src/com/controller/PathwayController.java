@@ -96,9 +96,13 @@ public class PathwayController {
 			}
 		}
 		PathwayGraphAndTree graphAndTree = pwayService.getGenePathwayAsso(map);
-		String filename = WriteResult2File.write2File(graphAndTree.getGraph());
+		String filenameGraph = WriteResult2File.write2File(graphAndTree.getGraph());
+		String filenameTree = WriteResult2File.write2File(graphAndTree.getTreenode());
+		
+		
 		modelmap.put("data", graphAndTree);
-		modelmap.put("path", filename);
+		modelmap.put("pathGraph", filenameGraph);
+		modelmap.put("pathTree", filenameTree);
 		return modelmap;
 	}
 

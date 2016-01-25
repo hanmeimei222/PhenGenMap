@@ -163,9 +163,15 @@ mmu00603</textarea>
 					</br>
 					<div id="downloadPanel2" name="dowloadPanel2" class="hidden" style="float:right">
 								<a id="download" href="#"><button type="button"
-								class="btn btn-default">查询数据下载</button></a>
+								class="btn btn-default">数据下载</button></a>
 					</div>
 					<div id="cy"></div>
+					</br>
+					<div id="downloadPanel3" name="dowloadPanel3" class="hidden" style="float:right">
+								<a id="downloadSimData" href="#"><button type="button"
+								class="btn btn-default">数据下载</button></a>
+					</div>
+					<div id="bubble"></div>
 
 				</div>
 				<div class="clearfix"></div>

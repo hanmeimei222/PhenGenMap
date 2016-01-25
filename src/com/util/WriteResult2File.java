@@ -20,7 +20,7 @@ import com.model.d3.TreeNode;
 public class WriteResult2File {
 
 	private static String path =GlobalData.PATH;
-	
+
 	private static void writeLinks2File(BufferedWriter out,Graph g) throws IOException{
 		Set<CytoEdge> links =g.getEdges();
 		String title = "Links Data\nLink Type\tA_id(Start)\tB_id(End)\n";
@@ -50,7 +50,7 @@ public class WriteResult2File {
 				String mpid = node.getData().getId();
 				String mpname = node.getData().getName();
 				String mplevel = node.getData().getParent();
-				
+
 				out.write(type+"\t"+mpid+"\t"+mpname+"\t"+"("+mplevel+")"+"\n");
 				break;
 			case GENE:
@@ -72,7 +72,7 @@ public class WriteResult2File {
 				break;
 			}
 		}
-		
+
 	}
 	public static String write2File(Graph g)
 	{
@@ -99,7 +99,7 @@ public class WriteResult2File {
 		return fileName;
 	}
 
-	
+
 	public static String write2File(D3Graph g)
 	{
 		String fileName = generateFileName();
@@ -177,10 +177,55 @@ public class WriteResult2File {
 			} catch (IOException e) {
 			}
 		}
-		
+
 		return fileName;
 	}
 
+	public static String write2File(Set<TreeNode>treeset){
+		String fileName = generateFileName();
+		String filePath = path+fileName;
+
+		BufferedWriter out=null;
+		try
+		{
+			out= new BufferedWriter(new FileWriter(new File(filePath)));
+			String title = "Similar Pathway Dataset\nPathway_Id\tPathway_Name\tCommon_Genes\n";
+			out.write(title);
+		for (TreeNode treeNode : treeset) {
+			//六个大圆圈
+			List<TreeNode>Trees=treeNode.getChildren();
+			for (TreeNode tree : Trees) {
+				String id = tree.getId();
+				String name = tree.getName();
+				String genes = "";
+				List<TreeNode>genelist = tree.getChildren();
+				for (TreeNode gene : genelist) {
+					String genename = gene.getName();
+					genes+=genename+'\t';
+				}
+				out.write(id+"\t"+name+"\t"+genes+"\n");
+				
+			}
+			out.write("\n");
+		}
+		
+		
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			try {
+				out.close();
+			} catch (IOException e) {
+			}
+		}
+
+		return fileName;
+
+	}
 	private static String generateFileName()
 	{
 		Random random = new Random(); 

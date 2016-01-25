@@ -62,15 +62,26 @@ function submitPathwayQuery()
 		url : "pwayQuery.do",
 		dataType : "json",
 		success : function(msg) {
-			if(msg!=""){
-			$("#downloadPanel2").attr('class','show');
+			if(msg.data.graph!=""){
+				$("#downloadPanel2").attr('class','show');
 			}else{
-			$("#downloadPanel2").attr('class','hidden');
+				$("#downloadPanel2").attr('class','hidden');
 			}
-			if(msg.path!="")
+			if(msg.data.treenode!=""){
+				$("#downloadPanel3").attr('class','show');
+			}else{
+				$("#downloadPanel3").attr('class','hidden');
+			}
+			if(msg.pathGraph!="")
 			{
-				$("#download").attr("href",msg.path);
+				$("#download").attr("href",msg.pathGraph);
 			}
+			if(msg.pathTree!=""){
+				$("#downloadSimData").attr("href",msg.pathTree);
+			}
+			
+			var title = $('<div>与查询Pathway相似度较高的其他Pathway</br>(按包含共同gene比例由高到低排序):</div>');
+			$("#bubble").append(title);
 			var simArr = msg.data.treenode;
 			for(var i=0;i<simArr.length;i++)
 			{
@@ -79,7 +90,7 @@ function submitPathwayQuery()
 			
 			cytoscapeDraw(msg.data.graph);
 			
-			
+//			$("#downloadSimData").attr("href",msg.pathGraph);			
 			
 		}
 	});

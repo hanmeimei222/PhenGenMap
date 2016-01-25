@@ -165,10 +165,7 @@ mmu00603</textarea>
 
 				<div class="col-md-8 services-middle">
 					<div style="float:left"><h3>查询结果</h3></div>
-					<div id="downloadPanel2" name="dowloadPanel2" class="hidden" style="float:right">
-								<a id="download" href="#"><button type="button"
-								class="btn btn-default">查询数据下载</button></a>
-					</div>
+					
 					<div id="downloadPanel1" name="dowloadPanel1" class="hidden" style="float:right">
 								<a id="downloadAllPathway" href="#"><button type="button"
 								class="btn btn-default">Pathway全体数据下载</button></a>
@@ -177,7 +174,11 @@ mmu00603</textarea>
 					
 					
 					<div id="tree-container"></div>
-
+					</br>
+					<div id="downloadPanel2" name="dowloadPanel2" class="hidden" style="float:right">
+								<a id="download" href="#"><button type="button"
+								class="btn btn-default">查询数据下载</button></a>
+					</div>
 					<div id="cy"></div>
 
 				</div>

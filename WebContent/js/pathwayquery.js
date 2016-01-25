@@ -71,13 +71,15 @@ function submitPathwayQuery()
 			{
 				$("#download").attr("href",msg.path);
 			}
-			cytoscapeDraw(msg.data.graph);
-			
 			var simArr = msg.data.treenode;
 			for(var i=0;i<simArr.length;i++)
 			{
 				drawSimPathway(msg.data.treenode[i],msg.data.treenode[i].children[0].id);
 			}
+			
+			cytoscapeDraw(msg.data.graph);
+			
+			
 			
 		}
 	});

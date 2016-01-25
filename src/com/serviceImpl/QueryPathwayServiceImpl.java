@@ -70,7 +70,8 @@ public class QueryPathwayServiceImpl implements QueryPathwayService {
 		// 返回所有pathway,按二级类别返回
 		else if(level ==-1)
 		{
-			result=pwayDao.getCls2PathwayMap();
+//			result=pwayDao.getCls2PathwayMap();
+			return result;
 		}
 		return result;
 	}

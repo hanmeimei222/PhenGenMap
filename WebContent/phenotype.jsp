@@ -67,21 +67,23 @@ MP:0008347</textarea>
 						<div class="row post-content-row">
 							<label class="post-content-row-title"> step4:提交查询</label>
 							<div class="form-group">
-								<div style="float:left"><button type="button" onclick="submitQuery()"
+								<button type="button" onclick="submitQuery()"
 									class="btn btn-default">绘图</button>
-								</div>
 								
-								<div id="downloadPanel" name="dowloadPanel" class="hidden" style="float:left">
-								<a id="download" href="#"><button type="button"
-								class="btn btn-default">数据下载</button></a>
-								</div>
+								
+								
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="col-md-8 services-middle">
+					<div style="float:left">
 					<h3>查询结果</h3>
-					
+					</div>
+					<div id="downloadPanel" name="dowloadPanel" class="hidden" style="float:right">
+								<a id="download" href="#"><button type="button"
+								class="btn btn-default">数据下载</button></a>
+					</div>
 					<div>
 						<div id="cy"></div>
 					</div>

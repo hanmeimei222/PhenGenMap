@@ -72,22 +72,21 @@ MP:0003415
 						<div class="row post-content-row">
 							<label class="post-content-row-title">提交查询</label>
 							<div class="form-group">
-								<div style="float:left">
 								<button type="button" onclick="submitGPQuery()"
 									class="btn btn-default">绘图</button>
-								</div>	
-								<div id="downloadPanel" name="dowloadPanel" class="hidden" style="float:left">
-								<a id="download" href="#"><button type="button"
-								class="btn btn-default">数据下载</button></a>
-								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="col-md-8 services-middle">
+					<div style="float:left">
 					<h3>查询结果</h3>
-					
-						<div id="cy"></div>
+					</div>
+					<div id="downloadPanel" name="dowloadPanel" class="hidden" style="float:right">
+								<a id="download" href="#"><button type="button"
+								class="btn btn-default">数据下载</button></a>
+					</div>
+					<div id="cy"></div>
 					
 				</div>
 				<div class="col-md-2 services-right">

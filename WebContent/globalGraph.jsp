@@ -24,6 +24,7 @@
 								<span>Pathway过滤 </span>
 								
 								
+								
 								<button type="button" class="btn btn-default" style="float: right" onclick="drawGraph()">画图</button>
 							
 							
@@ -34,6 +35,7 @@
 								<div class=" services-left-pathway" id="pathway_second_class"></div>
 								<div class="services-left-pathway" id="pathway_name"></div>
 							</div>
+							
 						</div>
 					</div>
 

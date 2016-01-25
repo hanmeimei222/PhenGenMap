@@ -1,5 +1,6 @@
 function selectAllEdge()
 {
+	//边的类型全选
 	var chk = document.getElementById("chkEdge");
 	var subchk = document.getElementsByName("chkEdgeType");
 	if(chk.checked)
@@ -17,6 +18,7 @@ function selectAllEdge()
 		}
 	}
 }
+
 
 function getselectType()
 {
@@ -36,6 +38,27 @@ function getselectType()
 		}
 	}
 	return type.join("");
+}
+
+function selectAllPathway()
+{
+	//边的类型全选
+	var chk = document.getElementById("chkPathway");
+	var subchk = document.getElementsByName("1_pathway_chk");
+	if(chk.checked)
+	{
+		for(var i=0;i<subchk.length;i++)
+		{
+			subchk[i].checked = true;
+		}
+	}
+	else
+	{
+		for(var i=0;i<subchk.length;i++)
+		{
+			subchk[i].checked = false;
+		}
+	}
 }
 function drawGraph()
 {
@@ -168,23 +191,38 @@ function showPhenInfo(msg,level)
 
 function initPathwayInfo(pathwayInfo)
 {
+	var selectAll = '<div sytle="float:left"><input type="checkbox" id="chkPathway" name="chkAllPathway" onchange="selectAllPathway()" />全选';
+	$("#pathway_first_class").append(selectAll);
 	$(pathwayInfo.children).each(function(i,val) 
 			{
 		var info = JSON.stringify(val);
-		var chkInfo = '<input type="checkbox" onclick="showSecondLevel()" name="1_pathway_chk" id=\''
-			+info+'\' value="'+
-			val.id+'" />'
-			+ val.name+' <br>';
+		if(i==0||i==1){
+			var chkInfo = '<input type="checkbox" name="1_pathway_chk" id=\''
+				+info+'\' value="'+
+				val.id+'"checked />'
+				+ val.name+' <br>';
+		}else{
+			var chkInfo = '<input type="checkbox" name="1_pathway_chk" id=\''
+				+info+'\' value="'+
+				val.id+'" />'
+				+ val.name+' <br>';
+		}
+		
 		$("#pathway_first_class").append(chkInfo);
 			});
+	var next = '<button type="button" class="btn btn-default" onclick="showSecondLevel()">下一层</button>';
+	$("#pathway_first_class").append(next);
 }
 
 function showSecondLevel()
 {
 	$("#pathway_first_class").removeClass().addClass('col-md-1 services-left opacity25');
+	$("#pathway_second_class").show();
 	$("#pathway_second_class").removeClass().addClass('col-md-10 services-left');
 	var chks = document.getElementsByName("1_pathway_chk");
 	$("#pathway_second_class").empty();
+//	var selectAll = '<div sytle="float:left"><input type="checkbox" id="chkPathway" name="chkAllPathway" onchange="selectAllPathway()" />全选';
+//	$("#pathway_second_class").append(next);
 	for(var i=0;i<chks.length;i++)
 	{
 		if(chks[i].checked)
@@ -205,7 +243,15 @@ function showSecondLevel()
 		}
 
 	}
+	var back = '<button type="button" class="btn btn-default" onclick=" showFirstLevelBack()">返回重选</button>';
+	var next = '<button type="button" class="btn btn-default" onclick="showPathwayLevel()">下一层</button>';
+	$("#pathway_second_class").append(back).append(next);
+	
 
+}
+function showFirstLevelBack(){
+	$("#pathway_second_class").hide();
+	$("#pathway_first_class").removeClass().addClass('col-md-12 services-left-pathway');
 }
 
 function showPathwayLevel()

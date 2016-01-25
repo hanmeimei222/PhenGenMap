@@ -37,16 +37,7 @@ public class WriteResult2File {
 	}
 	private static void writeNodes2File(BufferedWriter out,Graph g) throws IOException{
 		Set<CytoNode> nodes = g.getNodes();
-		String title = "";
-		for (CytoNode cytoNode : nodes) {
-			if(cytoNode.getData().getNodeType().equals("mp")){
-				title = "\nNodes Data\nNode_Type\tNode_Id\tNode_Name\tLevel\n";
-				break;
-			}else{
-				title = "\nNodes Data\nNode_Type\tNode_Id\tNode_Name\n";
-				break;
-			}
-		}
+		String title ="\nNodes Data\nNode_Type\tNode_Id\tNode_Name\t(Level)\n";
 		out.write(title);
 		for(CytoNode node : nodes){
 			String type = node.getData().getNodeType();
@@ -60,7 +51,7 @@ public class WriteResult2File {
 				String mpname = node.getData().getName();
 				String mplevel = node.getData().getParent();
 				
-				out.write(type+"\t"+mpid+"\t"+mpname+"\t"+mplevel+"\n");
+				out.write(type+"\t"+mpid+"\t"+mpname+"\t"+"("+mplevel+")"+"\n");
 				break;
 			case GENE:
 			case PATHWAY:

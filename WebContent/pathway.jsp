@@ -177,6 +177,24 @@ mmu00603</textarea>
 					<div id="bubble"></div>
 
 				</div>
+				
+				<div class="col-md-2 services-right">
+					<div class="row post-content-row">
+						<h3>图内检索</h3>
+					</div>
+					<div class="row post-content-row ">
+						<div id="queryPanel">
+
+							<div id="search-wrapper">
+								<input type="text" class="form-control" id="search" autofocus
+									placeholder="Search In graph">
+							</div>
+							<button id="reset" name="reset" class="btn btn-default">重置</button>
+							<div id="info"></div>
+						</div>
+					</div>
+				</div>
+				
 				<div class="clearfix"></div>
 			</div>
 			<!-- services-main end here -->

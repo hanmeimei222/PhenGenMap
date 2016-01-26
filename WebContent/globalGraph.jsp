@@ -31,8 +31,7 @@
 
 							</div>
 							<div class="row post-content-row">
-								<div class="col-md-12 services-left-pathway"
-									id="pathway_first_class"></div>
+								<div class="col-md-12 services-left-pathway" id="pathway_first_class"></div>
 								<div class=" services-left-pathway" id="pathway_second_class"></div>
 								<div class="services-left-pathway" id="pathway_name"></div>
 							</div>
@@ -90,6 +89,8 @@
 							</div>
 							<div class="row post-content-row">
 								<div class="col-md-12 services-left" id="phen_1_class"></div>
+								<div class="services-left" id="phen_2_class"></div>
+								<div class="services-left" id="phen_3_class"></div>
 							</div>
 						</div>
 					</div>

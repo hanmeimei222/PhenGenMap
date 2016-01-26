@@ -43,7 +43,6 @@ function getselectType()
 //Pathway-Level1的全选
 function selectAllLevel1Pathway()
 {
-	//边的类型全选
 	var chk = document.getElementById("chkLevel1Pathway");
 	var subchk = document.getElementsByName("1_pathway_chk");
 	if(chk.checked)
@@ -65,7 +64,6 @@ function selectAllLevel1Pathway()
 //Pathway-Level2的全选
 function selectAllLevel2Pathway()
 {
-	//边的类型全选
 	var chk = document.getElementById("chkLevel2Pathway");
 	var subchk = document.getElementsByName("2_pathway_chk");
 	if(chk.checked)
@@ -87,9 +85,34 @@ function selectAllLevel2Pathway()
 //Pathway-Level3的全选
 function selectAllLevel3Pathway()
 {
-	//边的类型全选
 	var chk = document.getElementById("chkLevel3Pathway");
 	var subchk = document.getElementsByName("3_pathway_chk");
+	if(chk.checked)
+	{
+		for(var i=0;i<subchk.length;i++)
+		{
+			subchk[i].checked = true;
+		}
+	}
+	else
+	{
+		for(var i=0;i<subchk.length;i++)
+		{
+			subchk[i].checked = false;
+		}
+	}
+}
+
+//Phenotype-Level的全选
+function selectAllLevelPhenotype(level)
+{
+	//根据不同层动态拼接每一层的全选id以及下属各checkbox的Name
+	var chkallbylevel = "chkLevel"+level+"Phenotype";
+	var subchkbylevel = "level"+level+"phen_chk";
+
+	var chk = document.getElementById(chkallbylevel);
+	var subchk = document.getElementsByName(subchkbylevel);
+
 	if(chk.checked)
 	{
 		for(var i=0;i<subchk.length;i++)
@@ -128,18 +151,18 @@ function drawGraph()
 		url : "queryGlobalAsso.do",
 		dataType : "json",
 		success : function(msg) {
-			if(msg!=""){
-				$("#downloadPanel").attr('class','show');
-			}else
-			{
-				$("#downloadPanel").attr('class','hidden');
-			}
-			drawGlobalGraph(msg.data);
-	
-			if(msg.path!="")
-			{
-				$("#download").attr("href",msg.path);
-			}
+		if(msg!=""){
+			$("#downloadPanel").attr('class','show');
+		}else
+		{
+			$("#downloadPanel").attr('class','hidden');
+		}
+		drawGlobalGraph(msg.data);
+
+		if(msg.path!="")
+		{
+			$("#download").attr("href",msg.path);
+		}
 	}
 	});
 }
@@ -184,10 +207,10 @@ function initClassInfo()
 	}
 	});
 
-	getPhenInfo("MP:0000001",0);
+	getPhenInfo(0,"MP:0000001");
 } 
 
-function getPhenInfo(mpId,level)
+function getPhenInfo(level,mpId)
 {
 	var chks = document.getElementsByName("level"+level+"phen_chk");
 	if(level>0)
@@ -218,9 +241,22 @@ function getPhenInfo(mpId,level)
 function showPhenInfo(msg,level)
 {
 	level = level + 1;
+	//当前层及上一层的样式改变的设置
+	$("#phen_"+(level-1)+"_class").removeClass().addClass('col-md-1 services-left opacity25');
+//	$("#phen_"+(level-1)+"_class").hide();
+	$("#phen_"+level+"_class").show();
+	$("#phen_"+level+"_class").removeClass().addClass('col-md-10 services-left');
+
 	$("#phen_"+level+"_class").empty();
 	var name="level"+level+"phen_chk";	
 	var divId ="phen_"+level+"_class";
+	//全选
+	var selectAll = '<div sytle="float:left"><input type="checkbox" id="chkLevel'
+		+level+'Phenotype" name="chkLevel'
+		+level+'Phenotype" onchange="selectAllLevelPhenotype('
+		+level+')" />全选';
+	$("#phen_"+level+"_class").append(selectAll);
+
 	$.each(msg,function(key,node)
 			{
 		$.each(node,function(idx,val){
@@ -233,12 +269,35 @@ function showPhenInfo(msg,level)
 		});
 		$("#"+divId).append('<hr>');
 			});
+	var next = '<button type="button" class="btn btn-default" onclick="getPhenInfo('
+		+level+')">下一层</button>';
+	var back = '<button type="button" class="btn btn-default" onclick=" showBackLevel('
+		+level+')">返回重选</button>';
+	if(level==1){
+		$("#phen_1_class").append(next);
+	}else{
+		$("#phen_"+level+"_class").append(back).append(next);
+	}
+	
+	
+	
+
+
+
 }
+function showBackLevel(level){
+	$("#phen_"+level+"_class").hide();
+	$("#phen_"+(level-1)+"_class").removeClass().addClass('col-md-12 services-left-pathway');
+//	$("#phen_"+(level-1)+"_class").show();
+}
+
 
 function initPathwayInfo(pathwayInfo)
 {
+
 	var selectAll = '<div sytle="float:left"><input type="checkbox" id="chkLevel1Pathway" name="chkLevel1Pathway" onchange="selectAllLevel1Pathway()" />全选';
 	$("#pathway_first_class").append(selectAll);
+
 	$(pathwayInfo.children).each(function(i,val) 
 			{
 		var info = JSON.stringify(val);
@@ -253,7 +312,7 @@ function initPathwayInfo(pathwayInfo)
 				val.id+'" />'
 				+ val.name+' <br>';
 		}
-		
+
 		$("#pathway_first_class").append(chkInfo);
 			});
 	var next = '<button type="button" class="btn btn-default" onclick="showSecondLevel()">下一层</button>';
@@ -267,9 +326,11 @@ function showSecondLevel()
 	$("#pathway_second_class").removeClass().addClass('col-md-10 services-left');
 	var chks = document.getElementsByName("1_pathway_chk");
 	$("#pathway_second_class").empty();
+
+
 	var selectAll = '<div sytle="float:left"><input type="checkbox" id="chkLevel2Pathway" name="chkLevel2Pathway" onchange="selectAllLevel2Pathway()" />全选';
 	$("#pathway_second_class").append(selectAll);
-	
+
 	for(var i=0;i<chks.length;i++)
 	{
 		if(chks[i].checked)
@@ -292,7 +353,7 @@ function showSecondLevel()
 	var back = '<button type="button" class="btn btn-default" onclick=" showFirstLevelBack()">返回重选</button>';
 	var next = '<button type="button" class="btn btn-default" onclick="showPathwayLevel()">下一层</button>';
 	$("#pathway_second_class").append(back).append(next);
-	
+
 
 }
 

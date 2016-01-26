@@ -278,6 +278,7 @@ function showPhenInfo(msg,level)
 		$("#"+curLevelId).append(back).append(next);
 	}
 	$("#"+curLevelId).append("</div>");
+	$("#"+curLevelId).append('<div>当前所在层数：'+level+'</div>');
 	//全选
 	var selectAll = '<div sytle="float:left"><input type="checkbox" id="chkLevel'
 		+level+'Phenotype" name="chkLevel'
@@ -288,11 +289,21 @@ function showPhenInfo(msg,level)
 	$.each(msg,function(key,node)
 			{
 		$.each(node,function(idx,val){
-			var chkInfo = '<input type="checkbox" id=\''
-				+val.pheno_id+'\' name='
-				+name+' value="'+
-				val.pheno_id+'"/>'
-				+ val.pheno_name+' <br>';
+			var chkInfo="";
+			if(idx==26){
+				chkInfo = '<input type="checkbox" id=\''
+					+val.pheno_id+'\' name='
+					+name+' value="'+
+					val.pheno_id+'"checked/>'
+					+ val.pheno_name+' <br>';
+			}else{
+				chkInfo = '<input type="checkbox" id=\''
+					+val.pheno_id+'\' name='
+					+name+' value="'+
+					val.pheno_id+'"/>'
+					+ val.pheno_name+' <br>';
+			}
+			
 			$("#"+curLevelId).append(chkInfo);
 		});
 		$("#"+curLevelId).append('<hr>');
@@ -315,6 +326,7 @@ function initPathwayInfo(pathwayInfo)
 {
 	var next = '<button type="button" class="btn btn-default" onclick="showSecondLevel()">下一层</button>';
 	$("#pathway_first_class").append(next);
+	$("#pathway_first_class").append('<div>当前所在层数：1</div>');
 	var selectAll = '<div sytle="float:left"><input type="checkbox" id="chkLevel1Pathway" name="chkLevel1Pathway" onchange="selectAllLevel1Pathway()" />全选';
 	$("#pathway_first_class").append(selectAll);
 
@@ -365,7 +377,7 @@ function showSecondLevel()
 	var back = '<button type="button" class="btn btn-default" onclick=" showFirstLevelBack()">上一层</button>';
 	var next = '<button type="button" class="btn btn-default" onclick="showPathwayLevel()">下一层</button>';
 	$("#pathway_second_class").append(back).append(next);
-
+	$("#pathway_second_class").append('<div>当前所在层数：2</div>');
 
 	var selectAll = '<div sytle="float:left"><input type="checkbox" id="chkLevel2Pathway" name="chkLevel2Pathway" onchange="selectAllLevel2Pathway()" />全选';
 	$("#pathway_second_class").append(selectAll);
@@ -419,6 +431,7 @@ function showPathwayLevel()
 	
 	var back = '<button type="button" class="btn btn-default" onclick=" showSecondLevelBack()">上一层</button>';
 	$("#pathway_name").append(back);
+	$("#pathway_name").append('<div>当前所在层数：3</div>');
 	
 	var selectAll = '<div sytle="float:left"><input type="checkbox" id="chkLevel3Pathway" name="chkLevel3Pathway" onchange="selectAllLevel3Pathway()" />全选';
 	$("#pathway_name").append(selectAll);

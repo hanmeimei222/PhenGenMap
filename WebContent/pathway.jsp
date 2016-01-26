@@ -12,12 +12,15 @@
 	height: 800px;
 	position: relative;
 	width: 80%;
+	
 }
 
 #mainBubble svg {
+	
 	left: 0;
 	position: absolute;
 	top: 0;
+	
 }
 
 #mainBubble circle.topBubble {
@@ -103,7 +106,7 @@
 
 							<div class="row post-content-row">
 								<input type="checkbox" id="chkGene" name="chkGene" />根据Gene查询相关pathway<br>
-								<input type="checkbox" id="chkPathway" name="chkPathway" />根据Pathway相关gene<br>
+								<input type="checkbox" id="chkPathway" name="chkPathway" checked/>根据Pathway相关gene<br>
 							</div>
 
 

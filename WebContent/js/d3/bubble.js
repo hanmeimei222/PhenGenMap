@@ -5,7 +5,7 @@ function drawSimPathway(root,mmuid)
 	var oR = 0;
 	var nTop = 0;
 	
-	var childDiv = $('<div id="'+ mmuid +'" style="height: 618px;"></div>');
+	var childDiv = $('<div id="'+ mmuid +'" style="height: 618px"></div>');
 	
 	//用jquery插入一个div
 	$("#bubble").append(childDiv);
@@ -17,6 +17,7 @@ function drawSimPathway(root,mmuid)
 	.attr("class", "mainBubbleSVG")
 	.attr("width", w)
 	.attr("height",h)
+	.style("padding","30px")
 	.on("mouseleave", function() {return resetBubbles();});
 
 	

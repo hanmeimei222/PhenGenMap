@@ -87,10 +87,8 @@
 								<button type="button" class="btn btn-default"
 									onclick="drawGraph()">画图</button>
 							</div>
-							<div class="row post-content-row">
-								<div class="col-md-12 services-left" id="phen_1_class"></div>
-								<div class="services-left" id="phen_2_class"></div>
-								<div class="services-left" id="phen_3_class"></div>
+							<div id="phenoPanel" class="row post-content-row">
+							
 							</div>
 						</div>
 					</div>

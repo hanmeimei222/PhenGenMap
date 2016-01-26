@@ -197,7 +197,6 @@ span.menu {
 .services-right {
   border-radius:10px 10px 10px 10px;
   background-color: #f0f0f0;
-  padding:5px 20px 5px 20px;
 }
 .autoComplete
 {
@@ -211,7 +210,7 @@ span.menu {
 }
 
 #cy {
-	width: 800;
+	width: 800px;
 	height: 400px;
 
 }

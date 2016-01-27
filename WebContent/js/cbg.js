@@ -138,3 +138,25 @@ function drwcytoCBG(data)
 	});
 
 }
+
+
+//设置table表格隔行显色和鼠标选中变色
+$(document).ready(function(){ 
+	$(".cbgsumtable tr td").mouseover(function(){ 
+	$(this).parent().find("td").css("background-color","#E7F0CC"); 
+	}); 
+	});
+	
+$(document).ready(function(){ 
+$(".cbgsumtable tr td").mouseout(function(){ 
+var bgc = $(this).parent().attr("bg"); 
+$(this).parent().find("td").css("background-color",bgc); 
+}); 
+});
+$(document).ready(function(){ 
+var color="#eeeeee" ;
+$(".cbgsumtable tr:odd td").css("background-color",color); //改变偶数行背景色 
+/* 把背景色保存到属性中 */ 
+$(".cbgsumtable tr:odd").attr("bg",color); 
+$(".cbgsumtable tr:even").attr("bg","#fff"); 
+}) ;

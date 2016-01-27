@@ -7,8 +7,8 @@
 <title>CBGAnalysis</title>
 <link rel="stylesheet" type="text/css" href="css/back_to_top.css">
 </head>
-<body onload='getPhenInfo("MP:0000001",0)'>
-	<jsp:include page="header.jsp"></jsp:include>
+<body><!-- onload='getPhenInfo("MP:0000001",0)'-->
+<jsp:include page="header.jsp"></jsp:include>
 
 	<!--services start here-->
 	<div class="services">
@@ -119,11 +119,12 @@
 							</div>
 						</div>
 					</div>
-				--></div>
+				-->
+				</div>
 				<div class="row" >
 					<span style="text-align: center;"><h4>CBG展示区</h4></span>
 					<div class="col-md-10" id="cy"></div>
-					<div class="col-md-2"></div>
+					
 				</div>
 				<div>
 					<img alt="Top_arrow" class="top_arrow" id="top_arrow"

@@ -7,8 +7,8 @@ import org.springframework.stereotype.Repository;
 
 import com.dao.CBGDao;
 import com.global.GlobalData;
+import com.init.dataLoad.CBGDataLoad;
 import com.model.CBG;
-import com.util.CBGDataLoad;
 
 @Repository
 public class CBGDaoImpl implements CBGDao{

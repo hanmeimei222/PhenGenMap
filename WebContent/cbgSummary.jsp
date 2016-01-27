@@ -61,7 +61,7 @@
 											onclick="clickData('${res.node.pheno_id }','1_1')">${res.step1[1]}</a>
 										</td>
 										<td><a href="#cy"
-											onclick="clickData('${res.node.pheno_id }','1_1')">${res.step1[2]}</a>
+											onclick="clickData('${res.node.pheno_id }','1_0')">${res.step1[2]}</a>
 										</td>
 
 										<td><a href="#cy"
@@ -109,7 +109,7 @@
 						</div>
 					</div>
 
-					<div class="col-md-2 services-right">
+					<!--<div class="col-md-2 services-right">
 						<div>
 							<div>
 								<span style="float: right">Phenotype过滤</span>
@@ -119,7 +119,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				--></div>
 				<div class="row" >
 					<span style="text-align: center;"><h4>CBG展示区</h4></span>
 					<div class="col-md-10" id="cy"></div>
@@ -140,8 +140,8 @@
 	<jsp:include page="footer.jsp"></jsp:include>
 	<!--footer end here-->
 </body>
-<script src="js/globalGraph_d3.js"></script>
-<script type="text/javascript" src="js/back_to_top.js"></script>
+<!--<script src="js/globalGraph_d3.js"></script>
+--><script type="text/javascript" src="js/back_to_top.js"></script>
 <script src="js/cbg.js"></script>
 <script src="js/cytoscape/cytoscape.min.js"></script>
 <script src="js/cytoscape/jquery.cytoscape.js-panzoom.js"></script>

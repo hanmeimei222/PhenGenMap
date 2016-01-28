@@ -33,7 +33,7 @@ h4,h5,h6,h1,h2,h3 {
 	font-family: 'Trebuchet MS', 'Helvetica Neue', Arial, Sans-serif;
 	font-weight: Bold; 	
 	padding: 10px;		
-	color: #444;
+	color: #1B3E5C;
 }
 
 ul,ol {
@@ -60,6 +60,15 @@ html,body {
 	font-family: 'Courgette-Regular';
 	src: url(../fonts/Courgette-Regular.ttf) format('truetype');
 }*/
+
+@font-face {
+    font-family: 'Oxygen-Regular';
+    src:url(../fonts/Oxygen-Regular.ttf) format('truetype');
+}
+@font-face {
+	font-family: 'Scada-Bold';
+    src:url(../fonts/Scada-Bold.ttf) format('truetype');
+}
 
 a {
 	transition: 0.5s all;
@@ -265,4 +274,89 @@ span.menu {
 	width: 800px;
 	height: 400px;
 }
+
+/*--welcome--*/
+.content-welcome {
+  padding: 4em;
+}
+.welcome h3, .red h3{
+	font-size: 3em;
+   font-family: 'Scada-Bold';
+  color: #1B3E5C;
+}
+.welcome h5{
+	font-size:1.15em;
+	text-transform:uppercase;
+	color:#000;
+	margin: 0.85em 0;
+	line-height:1.7em;
+}
+
+.red ul {
+  padding: 0.5em 0 0;
+}
+.red ul li{
+	list-style: none;
+}
+i.glyphicon.glyphicon-ok-sign {
+  margin: 0 10px 0 0;
+}
+.red ul li a{
+	text-decoration: none;
+	color:#B4B2B2;
+	font-size: 1em;
+  margin: 0.4em 0;
+  display: inline-block;
+}
+.red ul li a:hover{
+  padding:0 0 0 0.3em;
+  color: #1B3E5C;
+ }
+ 
+ 
+ 
+ .content-top {
+  padding: 0 0 4em;
+}
+.top-content {
+  text-align: center;
+  padding: 0em 0 2em;
+}
+.top-content h1 {
+  font-size: 3em;
+  color: #1B3E5C;
+  font-family: 'Scada-Bold';
+}
+.top-content p {
+  font-size: 1em;
+  color: #B4B2B2;
+  line-height: 1.9em;
+}
+.grid-top {
+  text-align: center;
+}
+.glyphicon.glyphicon-home ,.glyphicon.glyphicon-time,.glyphicon.glyphicon-cog,
+.glyphicon.glyphicon-lock{
+  font-size: 1.5em;
+  color: #FFF;
+  background: #1b3e5c;
+  border-radius: 100px;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  line-height: 2.3em;
+}
+.top-grid h3{
+	font-size:1.5em;
+	font-weight: 600;
+	color:#000;
+	margin: 0.5em 0 0.3em;
+}
+.top-grid p{
+	  color: #B4B2B2;
+  line-height: 1.9em;
+  font-size: 1em;
+ 
+}
+
 

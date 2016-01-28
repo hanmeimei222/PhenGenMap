@@ -15,14 +15,14 @@
 		<div class="container">
 			<div class="header-main">
 				<div class="logo">
-					<a href="#"><img src="images/logo.png" alt=""></a>
+					<a href="#"><img src="images/logo_5.png" alt=""></a>
 				</div>
 				<div class="top-nav">
 					<span class="menu"> <img src="images/icon.png" alt="" /></span>
 					<ul class="nav nav-pills nav-justified res">
 						
 						<li><a class="active no-bar" href="index.jsp" id="1" onclick="changeActive('1')"><i
-								class="glyphicon glyphicon-home"> </i>Home</a></li>
+								class="glyphicon glyphicon-star"> </i>Home</a></li>
 						<li><a href="phenotype.jsp" id="2" onclick="changeActive('2')"><i
 								class="glyphicon glyphicon-star"> </i>Phenotype</a></li>
 						<li><a href="pathway.jsp"  id="3" onclick="changeActive('3')"><i
@@ -33,6 +33,7 @@
 								class="glyphicon glyphicon-list-alt"> </i>GlobalAsso</a></li>
 						<li><a href="summary.do" id="6" onclick="changeActive('6')"><i class="glyphicon glyphicon-envelope">
 							</i>CBGAnalysis</a></li>
+						
 					</ul>
 				</div>
 				<div class="clearfix"></div>

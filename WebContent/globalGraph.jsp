@@ -62,7 +62,7 @@
 						</div>
 						<div class="graphHeader">
 							<div style="float: left">
-								<h3>查询结果</h3>
+								<h4>查询结果</h4>
 
 							</div>
 							<div id="downloadPanel" name="dowloadPanel" class="hidden"

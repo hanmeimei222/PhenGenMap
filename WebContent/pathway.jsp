@@ -89,10 +89,10 @@
 
 				<div class="col-md-2 services-left">
 					<div>
-						<h3>查询计划</h3>
+						<h4>查询计划</h4>
 
-						<div class=" post-content-row">
-							<label class="post-content-row-title">step1：查看全体pathway信息</label>
+						<div class="post-content-row">
+							<label class="row post-content-row-title">step1：查看全体pathway信息</label>
 							
 								<button type="button" onclick="showAllPathway()"
 								class="btn btn-default">查看</button>
@@ -101,8 +101,8 @@
 							
 						</div>
 
-						<div class=" post-content-row">
-							<label class="post-content-row-title">step2:请选择查询类型</label>
+						<div class="post-content-row">
+							<label class="row post-content-row-title">step2:请选择查询类型</label>
 
 							<div class="row post-content-row">
 								<input type="checkbox" id="chkGene" name="chkGene" />根据Gene查询相关pathway<br>
@@ -137,8 +137,8 @@ mmu00603</textarea>
 
 
 
-						<div class="row post-content-row">
-							<label class="post-content-row-title">提交查询</label>
+						<div class="post-content-row">
+							<label class="row post-content-row-title">step3:提交查询</label>
 							<div class="form-group">
 								
 								<button type="button" onclick="submitPathwayQuery()"
@@ -153,7 +153,7 @@ mmu00603</textarea>
 				</div>
 
 				<div class="col-md-8 services-middle">
-					<div style="float:left"><h3>查询结果</h3></div>
+					<div style="float:left"><h4>查询结果</h4></div>
 					
 					<div id="downloadPanel1" name="dowloadPanel1" class="hidden" style="float:right">
 								<a id="downloadAllPathway" href="#"><button type="button"
@@ -180,7 +180,7 @@ mmu00603</textarea>
 				
 				<div class="col-md-2 services-right">
 					<div class="row post-content-row">
-						<h3>图内检索</h3>
+						<h4>图内检索</h4>
 					</div>
 					<div class="row post-content-row ">
 						<div id="queryPanel">

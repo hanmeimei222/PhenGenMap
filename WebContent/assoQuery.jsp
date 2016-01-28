@@ -17,7 +17,7 @@
 			<div class="services-main">
 				<div class="col-md-2 services-left">
 					<div>
-						<h3>查询计划</h3>
+						<h4>查询计划</h4>
 						<div class="row post-content-row">
 							<label class="post-content-row-title">请选择要输入的节点类型</label>
 							<div class="post-content-row">
@@ -80,7 +80,7 @@ MP:0003415
 				</div>
 				<div class="col-md-8 services-middle">
 					<div style="float:left">
-					<h3>查询结果</h3>
+					<h4>查询结果</h4>
 					</div>
 					<div id="downloadPanel" name="dowloadPanel" class="hidden" style="float:right">
 								<a id="download" href="#"><button type="button"
@@ -92,7 +92,7 @@ MP:0003415
 				<div class="col-md-2 services-right">
 					<div class=" post-content-row ">
 						<div id="filters">
-							<strong>节点类型</strong><br /> <input id="MP" type="checkbox"
+							<h4>节点类型</h4> <input id="MP" type="checkbox"
 								checked></input><label for="soft">MP</label><br /> <input
 								id="GENE" type="checkbox" checked></input><label for="semi-soft">GENE</label><br />
 							<input id="PATHWAY" type="checkbox" checked></input><label
@@ -103,7 +103,7 @@ MP:0003415
 						</div>
 					</div>
 					<div class=" post-content-row">
-						<label class="post-content-row-title"> 图内检索</label>
+						<h4> 图内检索</h4>
 						<div id="queryPanel">
 							<div id="search-wrapper">
 								<input type="text" class="form-control" id="search" autofocus

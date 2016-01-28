@@ -19,7 +19,7 @@
 					<div class="col-md-11 services-middle">
 						<div class="post-content-row" style="margin:10px 10px 10px 60px">
 <span style="text-align: center;"><h4>CBG汇总区</h4></span>
-							<table class="cbgsumtable" border="3px solid #E7F0CC" style="text-align: center;">
+							<table class="cbgsumtable" border="3px solid #1B3E5C" style="text-align: center;">
 
 								<tr>
 									<th rowspan="2">CBG Patterns</th>

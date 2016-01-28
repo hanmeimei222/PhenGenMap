@@ -16,7 +16,7 @@
 			<div class="services-main">
 				<div class="col-md-2 services-left">
 					<div>
-						<h3>查询计划</h3>
+						<h4>查询计划</h4>
 						<div class="row post-content-row">
 							<label class="post-content-row-title"> step1:输入要查询的MP列表</label>
 							<div class="form-group">
@@ -78,7 +78,7 @@ MP:0008347</textarea>
 				</div>
 				<div class="col-md-8 services-middle">
 					<div style="float:left">
-					<h3>查询结果</h3>
+					<h4>查询结果</h4>
 					</div>
 					<div id="downloadPanel" name="dowloadPanel" class="hidden" style="float:right">
 								<a id="download" href="#"><button type="button"
@@ -91,7 +91,7 @@ MP:0008347</textarea>
 
 				<div class="col-md-2 services-right">
 					<div class="row post-content-row">
-						<h3>图内检索</h3>
+						<h4>图内检索</h4>
 					</div>
 					<div class="row post-content-row ">
 						<div id="queryPanel">

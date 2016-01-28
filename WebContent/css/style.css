@@ -30,6 +30,10 @@
 
 h4,h5,h6,h1,h2,h3 {
 	margin-top: 0;
+	font-family: 'Trebuchet MS', 'Helvetica Neue', Arial, Sans-serif;
+	font-weight: Bold; 	
+	padding: 10px;		
+	color: #444;
 }
 
 ul,ol {
@@ -41,6 +45,7 @@ p {
 }
 
 html,body {
+	
 	font: 12px/170% 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 	background: #fff;
 	font-size: 100%;
@@ -235,9 +240,11 @@ span.menu {
 }
 
 .middle_chk_panel {
-	background-color: #e0feff;
+	border-radius: 5px 5px 5px 5px;
 	margin: 0px 0px 0px 0px;
+	background-color: #f0f0f0;
 }
+
 
 .services-right {
 	border-radius: 10px 10px 10px 10px;
@@ -258,3 +265,4 @@ span.menu {
 	width: 800px;
 	height: 400px;
 }
+

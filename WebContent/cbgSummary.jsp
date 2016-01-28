@@ -16,12 +16,12 @@
 			<div class="services-main ">
 
 				<div class="row">
-					<div class="col-md-10 services-middle">
-						<div class="post-content-row">
+					<div class="col-md-11 services-middle">
+						<div class="post-content-row" style="margin:10px 10px 10px 60px">
 <span style="text-align: center;"><h4>CBG汇总区</h4></span>
-							<table class="cbgsumtable" border="1">
+							<table class="cbgsumtable" border="3px solid #E7F0CC" style="text-align: center;">
 
-								<tr style="text-align: center;">
+								<tr>
 									<th rowspan="2">CBG Patterns</th>
 									<th colspan="3">Type 1</th>
 									<th colspan="5">Type 2</th>

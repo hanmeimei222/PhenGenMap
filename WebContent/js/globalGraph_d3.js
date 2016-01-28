@@ -324,7 +324,7 @@ function showBackLevel(level){
 
 function initPathwayInfo(pathwayInfo)
 {
-	var next = '<button type="button" class="btn btn-default" onclick="showSecondLevel()">下一层</button>';
+	var next = '<div style="float:right" ><button type="button" class="btn btn-default" onclick="showSecondLevel()">下一层</button></div><br/>';
 	$("#pathway_first_class").append(next);
 	$("#pathway_first_class").append('<div>当前所在层数：1</div>');
 	var selectAll = '<div sytle="float:left"><input type="checkbox" id="chkLevel1Pathway" name="chkLevel1Pathway" onchange="selectAllLevel1Pathway()" />全选';

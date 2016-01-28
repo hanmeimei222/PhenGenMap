@@ -103,9 +103,8 @@
 				 <i class="glyphicon glyphicon-home"></i>
 				  <div class="top-grid">
 					<h3>MutiAssociation Research</h3>
-					<p>收集多种原始数据</p>
-					<p>自动更新系统数据</p>
-					<p>原始数据的多历史版本选择</p>
+					<p>多数据集融合关联分析</p>
+					<p>多数据集融合节点分析</p>
 					<p>多种原始数据的下载</p>	
 				 </div>
 

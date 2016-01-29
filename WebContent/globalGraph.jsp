@@ -41,23 +41,32 @@
 
 					<div class="col-md-8 services-middle">
 						<div class="middle_chk_panel">
+							
 							<h4>显示边的类型</h4>
+							<div class="row">
+							<div class="col-md-1">
 							<input type="checkbox" id="chkEdge" name="chkAll"
 									onchange="selectAllEdge()" />全选
-							<div style="width:140px;float:left">
-								<input type="checkbox" id="e1" name="chkEdgeType" />Gene-PPI
+									</div>
+							<div class="col-md-2">							
+							<input type="checkbox" id="e1" name="chkEdgeType" />Gene-PPI
+									</div>
+							<div class="col-md-2">					
+							
+							<input type="checkbox" id="e2" name="chkEdgeType" checked />Gene-MP
+							
+									</div>
+							<div class="col-md-3">
+							<input type="checkbox" id="e3" name="chkEdgeType" />Gene-Pathway
+									</div>
+							<div class="col-md-2">
+							
+							<input type="checkbox" id="e4" name="chkEdgeType" />MP-MP
+									</div>
+							<div class="col-md-2">
+							
+							<input type="checkbox" id="e5" name="chkEdgeType" />PPI-PPI
 							</div>
-							<div style="width:140px;float:left">
-								<input type="checkbox" id="e2" name="chkEdgeType" checked />Gene-MP
-							</div>
-							<div style="width:140px;float:left">
-								<input type="checkbox" id="e3" name="chkEdgeType" />Gene-Pathway
-							</div>
-							<div style="width:140px;float:left">
-								<input type="checkbox" id="e4" name="chkEdgeType" />MP-MP
-							</div>
-							<div style="width:140px;float:left">
-								<input type="checkbox" id="e5" name="chkEdgeType" />PPI-PPI
 							</div>
 						</div>
 						<div class="graphHeader">

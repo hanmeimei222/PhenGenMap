@@ -1,5 +1,7 @@
 package com.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -33,5 +35,17 @@ public class InitHomeController {
 	public boolean cutDataVersion(@RequestParam("version")String version)
 	{
 		return initService.loadData(version);
+	}
+	
+	@RequestMapping("/downloadSource")
+	@ResponseBody
+	public ModelMap downloadSourceFile(){
+		ModelMap map = new ModelMap();
+		List<String> filename = initService.getSourceFile();
+		
+		for(int i=0;i<filename.size();i++){
+			map.put("path"+i, filename.get(i));
+		}
+		return map;
 	}
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -27,7 +28,7 @@
 				<div class="col-md-4 red">
 				<h3>DataResource</h3>
 				<div id="dataVersionDiv">
-					选择数据版本
+					<label>选择数据源版本--</label>
 					<label>当前版本:</label><label id="curVersion"></label>
 					<div style="width:270px;float:left;margin:0 20px 0 0">
 					<select id="dataVersion" name="dataVersion" class="form-control"></select>
@@ -35,12 +36,10 @@
 					<div style="float:left">
 					<button class="btn btn-default" type="button" onclick="cutVersion()">切换</button></div>
 				</div>
-				<ul>
-							<li><a href="single.html"><i class="glyphicon glyphicon-ok-sign"> </i>There are many variations</a></li>
-							<li><a href="single.html"><i class="glyphicon glyphicon-ok-sign"> </i>suffered alteration</a></li>
-							<li><a href="single.html"><i class="glyphicon glyphicon-ok-sign"> </i>variations of passages</a></li>
-							<li><a href="single.html"><i class="glyphicon glyphicon-ok-sign"> </i>Lorem Ipsum available</a></li>
-							<li><a href="single.html"><i class="glyphicon glyphicon-ok-sign"> </i>passages of Lorem Ipsum</a></li>
+				
+				<label>数据源下载</label>
+				<ul id="downloadPanel">
+					
 				</ul>
 				</div>
 				<div class="clearfix"> </div>
@@ -62,7 +61,7 @@
 					<h3>DataResource Collection</h3>
 					<p>多种原始数据收集</p>
 					<p>自动更新系统数据</p>
-					<p>原始数据的多历史版本选择</p>
+					<p>数据源的多历史版本选择</p>
 					<p>多种原始数据下载</p>	
 					
 				  </div>

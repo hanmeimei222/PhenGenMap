@@ -123,4 +123,17 @@ public class InitDataServiceImpl implements InitDataService{
 		GlobalData.gene_ppi_map.clear();
 		GlobalData.ppi_gene_map.clear();
 	}
+
+	public List<String> getSourceFile(){
+		List<String> filename = new ArrayList<String>();
+		String path = GlobalData.PATH+"/data/input_data/"+GlobalData.curVersion;
+		File file = new File(path);
+		File[] tempList = file.listFiles();
+		for(int i =0;i<tempList.length;i++){
+			if(tempList[i].isFile()){
+				filename.add("data/input_data/"+GlobalData.curVersion+"/"+tempList[i].getName());
+			}
+		}
+		return filename;
+	}
 }

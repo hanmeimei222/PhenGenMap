@@ -233,4 +233,6 @@ public class WriteResult2File {
 		String fileName = "tmp/"+System.currentTimeMillis() + rannum + ".txt";
 		return fileName;
 	}
+	
+	
 }

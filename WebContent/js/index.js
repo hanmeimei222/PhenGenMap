@@ -12,6 +12,7 @@ function initDataVersion()
 			$("#curVersion").html(msg.curVersion);
 		}
 	});
+	downloadSource();	
 }
 
 function cutVersion()
@@ -29,11 +30,35 @@ function cutVersion()
 			{
 				alert("切换成功");
 				$("#curVersion").html(version);
+				
+				downloadSource();
 			}
 			else
 			{
 				alert("服务器错误，请稍后再试");
 			}
+		}
+	});
+}
+
+function downloadSource(){
+	$.ajax({
+		type : "get",
+		url : "downloadSource.do",
+		dataType : "json",
+		success : function(msg) {
+		if(msg!="")
+		{	
+			$("#downloadPanel").empty();
+			$.each(msg,function(i,filepath)
+			{
+				var fname = filepath.substring(filepath.lastIndexOf("/")+1);
+				$("#downloadPanel").append('<li><a id="download'+i+'"href="#"><i class="glyphicon glyphicon-ok-sign"> </i>'+fname+'</a></li>');
+				$("#download"+i).attr("href",filepath);
+			});
+			
+			
+		}
 		}
 	});
 }

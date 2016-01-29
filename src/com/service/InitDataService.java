@@ -1,5 +1,7 @@
 package com.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 
@@ -12,4 +14,5 @@ import org.springframework.stereotype.Service;
 public interface InitDataService {
 	public void initData();
 	public boolean loadData(String version);
+	public List<String> getSourceFile();
 }

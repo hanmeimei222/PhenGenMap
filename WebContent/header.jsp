@@ -15,7 +15,7 @@
 		<div class="container">
 			<div class="header-main">
 				<div class="logo">
-					<a href="#"><img src="images/logo_5.png" alt=""></a>
+					<a href="#"><img src="images/logo_4.png" alt=""></a>
 				</div>
 				<div class="top-nav">
 					<span class="menu"> <img src="images/icon.png" alt="" /></span>

@@ -28,6 +28,16 @@
 	zoom: 1
 }
 
+@font-face {
+    font-family: 'Oxygen-Regular';
+    src:url(../fonts/Oxygen-Regular.ttf) format('truetype');
+}
+@font-face {
+	font-family: 'Scada-Bold';
+    src:url(../fonts/Scada-Bold.ttf) format('truetype');
+}
+
+
 h4,h5,h6,h1,h2,h3 {
 	margin-top: 0;
 	font-family: 'Trebuchet MS', 'Helvetica Neue', Arial, Sans-serif;
@@ -61,14 +71,6 @@ html,body {
 	src: url(../fonts/Courgette-Regular.ttf) format('truetype');
 }*/
 
-@font-face {
-    font-family: 'Oxygen-Regular';
-    src:url(../fonts/Oxygen-Regular.ttf) format('truetype');
-}
-@font-face {
-	font-family: 'Scada-Bold';
-    src:url(../fonts/Scada-Bold.ttf) format('truetype');
-}
 
 a {
 	transition: 0.5s all;
@@ -156,7 +158,7 @@ span.menu {
 
 .footer {
 	padding: 2.5em 0em 1.5em 0em;
-	background: #505050;
+	background:#1b3e5c;
 }
 
 .copyrigyht p {
@@ -335,8 +337,8 @@ i.glyphicon.glyphicon-ok-sign {
 .grid-top {
   text-align: center;
 }
-.glyphicon.glyphicon-home ,.glyphicon.glyphicon-time,.glyphicon.glyphicon-cog,
-.glyphicon.glyphicon-lock{
+
+.content-top1 i {
   font-size: 1.5em;
   color: #FFF;
   background: #1b3e5c;

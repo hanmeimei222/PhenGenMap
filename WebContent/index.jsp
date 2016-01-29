@@ -57,38 +57,37 @@
 			
 			 <div class=" col-md-4 grid-top">
 				
-				 <i class="glyphicon glyphicon-home"></i>
+				 <i class="glyphicon glyphicon-download-alt"></i>
 				  <div class="top-grid">
 					<h3>DataResource Collection</h3>
-					<p>收集多种原始数据</p>
+					<p>多种原始数据收集</p>
 					<p>自动更新系统数据</p>
 					<p>原始数据的多历史版本选择</p>
-					<p>多种原始数据的下载</p>	
+					<p>多种原始数据下载</p>	
 					
 				  </div>
 				
 			</div>
 			<div class=" col-md-4 grid-top">
-				<span class="glyphicons glyphicons-cluster"></span>
-				 <i class="glyphicon glyphicon-time "></i>
+				<i class="glyphicon glyphicon-sort-by-attributes "></i>
 				  <div class="top-grid">
 					<h3>Phenotype Research</h3>
 					<p>老鼠表型结构概览</p>
 					<p>表型数据层次研究</p>
 					<p>表型数据可达性分析</p>
-					<p>分析结果数据下载</p>	
+					<p>分析结果下载</p>	
 					 </div>
 				
 			</div>
 			<div class=" col-md-4 grid-top">
 				
-				 <i class="glyphicon glyphicon-lock "></i>
+				 <i class="glyphicon glyphicon-tasks"></i>
 				  <div class="top-grid">
 					<h3>Pathway Research</h3>
 					<p>Pathway整体关系概览</p>
 					<p>Pathway与Gene关系研究</p>
 					<p>Pathway相似性分析</p>
-					<p>分析结果数据下载</p>	
+					<p>分析结果下载</p>	
 				 </div>
 
 				
@@ -100,37 +99,36 @@
 			
 			 <div class=" col-md-4 grid-top">
 				
-				 <i class="glyphicon glyphicon-home"></i>
+				 <i class="glyphicon glyphicon-zoom-in"></i>
 				  <div class="top-grid">
 					<h3>MutiAssociation Research</h3>
-					<p>多数据集融合关联分析</p>
-					<p>多数据集融合节点分析</p>
-					<p>多种原始数据的下载</p>	
+					<p>多数据集融合节点及关联可达性分析</p>
+					<p>数据类型筛选及过滤</p>
+					<p>分析结果下载</p>	
 				 </div>
 
 				
 			</div>
 			<div class=" col-md-4 grid-top">
-				<span class="glyphicons glyphicons-cluster"></span>
-				 <i class="glyphicon glyphicon-time "></i>
+				
+				 <i class="glyphicon glyphicon-globe"></i>
 				  <div class="top-grid">
 					<h3>Global Association</h3>
-					<p>收集多种原始数据</p>
-					<p>自动更新系统数据</p>
-					<p>原始数据的多历史版本选择</p>
-					<p>多种原始数据的下载</p>	
+					<p>生物信息全局异构网络概览</p>
+					<p>表型和基因多维度综合网络研究</p>
+					<p>数据类型筛选及过滤</p>
+					<p>分析结果下载</p>	
 				 </div>
 				
 			</div>
 			<div class=" col-md-4 grid-top">
 				
-				 <i class="glyphicon glyphicon-lock "></i>
+				 <i class="glyphicon glyphicon-list-alt"></i>
 				  <div class="top-grid">
 					<h3>CBG Analysis</h3>
-					<p>收集多种原始数据</p>
-					<p>自动更新系统数据</p>
-					<p>原始数据的多历史版本选择</p>
-					<p>多种原始数据的下载</p>	
+					<p>生物信息网络中CBG模式分类及统计</p>
+					<p>CBG模式详情可视化展示及分析</p>
+				
 				 </div>
 				
 			</div>

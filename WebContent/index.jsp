@@ -56,7 +56,7 @@
 			
 			 <div class=" col-md-4 grid-top">
 				
-				 <i class="glyphicon glyphicon-download-alt"></i>
+				<a href="index.jsp"> <i class="glyphicon glyphicon-download-alt"></i>
 				  <div class="top-grid">
 					<h3>DataResource Collection</h3>
 					<p>多种原始数据收集</p>
@@ -65,10 +65,10 @@
 					<p>多种原始数据下载</p>	
 					
 				  </div>
-				
+				</a>
 			</div>
 			<div class=" col-md-4 grid-top">
-				<i class="glyphicon glyphicon-sort-by-attributes "></i>
+				<a href="phenotype.jsp"> <i class="glyphicon glyphicon-sort-by-attributes "></i>
 				  <div class="top-grid">
 					<h3>Phenotype Research</h3>
 					<p>老鼠表型结构概览</p>
@@ -76,11 +76,11 @@
 					<p>表型数据可达性分析</p>
 					<p>分析结果下载</p>	
 					 </div>
-				
+				</a>
 			</div>
 			<div class=" col-md-4 grid-top">
 				
-				 <i class="glyphicon glyphicon-tasks"></i>
+				 <a href="pathway.jsp"><i class="glyphicon glyphicon-tasks"></i>
 				  <div class="top-grid">
 					<h3>Pathway Research</h3>
 					<p>Pathway整体关系概览</p>
@@ -88,7 +88,7 @@
 					<p>Pathway相似性分析</p>
 					<p>分析结果下载</p>	
 				 </div>
-
+				</a>
 				
 			</div>
 			
@@ -98,19 +98,19 @@
 			
 			 <div class=" col-md-4 grid-top">
 				
-				 <i class="glyphicon glyphicon-zoom-in"></i>
+				  <a href="assoQuery.jsp"><i class="glyphicon glyphicon-zoom-in"></i>
 				  <div class="top-grid">
 					<h3>MutiAssociation Research</h3>
 					<p>多数据集融合节点及关联可达性分析</p>
 					<p>数据类型筛选及过滤</p>
 					<p>分析结果下载</p>	
 				 </div>
-
+				</a>
 				
 			</div>
 			<div class=" col-md-4 grid-top">
 				
-				 <i class="glyphicon glyphicon-globe"></i>
+				  <a href="globalGraph.jsp"><i class="glyphicon glyphicon-globe"></i>
 				  <div class="top-grid">
 					<h3>Global Association</h3>
 					<p>生物信息全局异构网络概览</p>
@@ -118,18 +118,18 @@
 					<p>数据类型筛选及过滤</p>
 					<p>分析结果下载</p>	
 				 </div>
-				
+				</a>
 			</div>
 			<div class=" col-md-4 grid-top">
 				
-				 <i class="glyphicon glyphicon-list-alt"></i>
+				 <a href="summary.do"><i class="glyphicon glyphicon-list-alt"></i>
 				  <div class="top-grid">
 					<h3>CBG Analysis</h3>
 					<p>生物信息网络中CBG模式分类及统计</p>
 					<p>CBG模式详情可视化展示及分析</p>
 				
 				 </div>
-				
+				</a>
 			</div>
 			
 			<div class="clearfix"> </div>

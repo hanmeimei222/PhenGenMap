@@ -100,21 +100,29 @@
 						<div id="phenoPanel" class="row post-content-row">
 							
 						</div>
+				<div>
+						<img alt="Top_arrow" class="top_arrow" id="top_arrow"
+						src="images/top.png">
+					</div>
 					</div>
 				</div>
 			</div>
 			<div class="clearfix"></div>
 			</div>
+					
 			<!-- services-main end here -->
 		</div>
 		<!-- container end here -->
 	</div>
+
 	<!-- services end here -->
 	<!--footer start here-->
 	<jsp:include page="footer.jsp"></jsp:include>
 	<!--footer end here-->
 </body>
+<script type="text/javascript" src="js/back_to_top.js"></script>
 <script src="js/globalGraph_d3.js"></script>
 <script src="js/d3/d3.v3.min.js"></script>
 <script src="js/d3/DrawGlobalGraph.js"></script>
+
 </html>

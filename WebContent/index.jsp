@@ -131,15 +131,17 @@
 				 </div>
 				</a>
 			</div>
-			
+		
 			<div class="clearfix"> </div>
+
 		</div>
 	</div>
 	
-	
+		
 	<jsp:include page="footer.jsp"></jsp:include>
 	
 	
 </body>
 <script type="text/javascript" src="js/index.js"></script>
+
 </html>

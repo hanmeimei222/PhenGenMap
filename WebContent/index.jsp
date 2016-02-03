@@ -101,7 +101,7 @@
 				  <a href="assoQuery.jsp"><i class="glyphicon glyphicon-zoom-in"></i>
 				  <div class="top-grid">
 					<h3>MutiAssociation Research</h3>
-					<p>多数据集融合节点及关联可达性分析</p>
+					<p>基于用户输入的多数据集融合节点及关联可达性分析</p>
 					<p>数据类型筛选及过滤</p>
 					<p>分析结果下载</p>	
 				 </div>

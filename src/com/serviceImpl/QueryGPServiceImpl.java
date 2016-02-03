@@ -228,6 +228,9 @@ public class QueryGPServiceImpl implements QueryAssoService{
 
 				for (PNode pNode : pnodes) {
 					Map<GNode,Boolean> geneMap = mp_genes.get(pNode);
+					if(geneMap==null){
+						continue;
+					}
 					gNodes.addAll(geneMap.keySet());
 				}
 			}

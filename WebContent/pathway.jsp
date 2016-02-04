@@ -106,7 +106,7 @@
 
 							<div class="row post-content-row">
 								<input type="checkbox" id="chkGene" name="chkGene" />根据Gene查询相关pathway<br>
-								<input type="checkbox" id="chkPathway" name="chkPathway" checked/>根据Pathway相关gene<br>
+								<input type="checkbox" id="chkPathway" name="chkPathway" checked/>根据Pathway查询相关gene<br>
 							</div>
 
 

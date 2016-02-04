@@ -286,8 +286,12 @@ function showPhenInfo(msg,level)
 		+level+')" />全选';
 	$("#"+curLevelId).append(selectAll);
 
+	
 	$.each(msg,function(key,node)
 			{
+		if(level>1){
+			$("#"+curLevelId).append('<h5>'+key+'</h5>');
+		}
 		$.each(node,function(idx,val){
 			var chkInfo="";
 			if(idx==26){

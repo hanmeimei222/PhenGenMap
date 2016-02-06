@@ -12,7 +12,7 @@ var infoTemplate = Handlebars.compile([
 var patrn=/^\d*$/;
 //生成一组随机颜色
 var colormap={};
-for(var i=1;i<20;i++)
+for(var i=0;i<20;i++)
 {
 	colormap[i]=getRandomColor();
 }

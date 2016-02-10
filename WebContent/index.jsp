@@ -68,6 +68,38 @@
 				</a>
 			</div>
 			<div class=" col-md-4 grid-top">
+				
+				  <a href="globalGraph.jsp"><i class="glyphicon glyphicon-globe"></i>
+				  <div class="top-grid">
+					<h3>Global Association</h3>
+					<p>生物信息全局异构网络概览</p>
+					<p>表型和基因多维度综合网络研究</p>
+					<p>数据类型筛选及过滤</p>
+					<p>分析结果下载</p>	
+				 </div>
+				</a>
+			</div>
+			
+			 <div class=" col-md-4 grid-top">
+				
+				  <a href="assoQuery.jsp"><i class="glyphicon glyphicon-zoom-in"></i>
+				  <div class="top-grid">
+					<h3>MutiAssociation Research</h3>
+					<p>基于用户输入的多数据集融合节点及关联可达性分析</p>
+					<p>数据类型筛选及过滤</p>
+					<p>分析结果下载</p>	
+				 </div>
+				</a>
+				
+			</div>
+			
+			
+			
+			<div class="clearfix"> </div>
+		</div>
+		<div class="content-top1">
+			
+			<div class=" col-md-4 grid-top">
 				<a href="phenotype.jsp"> <i class="glyphicon glyphicon-sort-by-attributes "></i>
 				  <div class="top-grid">
 					<h3>Phenotype Research</h3>
@@ -92,34 +124,6 @@
 				
 			</div>
 			
-			<div class="clearfix"> </div>
-		</div>
-		<div class="content-top1">
-			
-			 <div class=" col-md-4 grid-top">
-				
-				  <a href="assoQuery.jsp"><i class="glyphicon glyphicon-zoom-in"></i>
-				  <div class="top-grid">
-					<h3>MutiAssociation Research</h3>
-					<p>基于用户输入的多数据集融合节点及关联可达性分析</p>
-					<p>数据类型筛选及过滤</p>
-					<p>分析结果下载</p>	
-				 </div>
-				</a>
-				
-			</div>
-			<div class=" col-md-4 grid-top">
-				
-				  <a href="globalGraph.jsp"><i class="glyphicon glyphicon-globe"></i>
-				  <div class="top-grid">
-					<h3>Global Association</h3>
-					<p>生物信息全局异构网络概览</p>
-					<p>表型和基因多维度综合网络研究</p>
-					<p>数据类型筛选及过滤</p>
-					<p>分析结果下载</p>	
-				 </div>
-				</a>
-			</div>
 			<div class=" col-md-4 grid-top">
 				
 				 <a href="summary.do"><i class="glyphicon glyphicon-list-alt"></i>

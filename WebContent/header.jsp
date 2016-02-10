@@ -27,12 +27,13 @@
 								class="glyphicon glyphicon-globe"> </i>GlobalAsso</a></li>
 						<li><a href="assoQuery.jsp" id="4" onclick="changeActive('3')"><i
 								class="glyphicon glyphicon-zoom-in"> </i>AssoSearch</a></li>
-						<li><a href="summary.do" id="6" onclick="changeActive('4')"><i
-								 class="glyphicon glyphicon-list-alt"></i>CBGAnalysis</a></li>
+						
 						<li><a href="phenotype.jsp" id="2" onclick="changeActive('5')"><i
 								class="glyphicon glyphicon-sort-by-attributes "> </i>Phenotype</a></li>
 						<li><a href="pathway.jsp"  id="3" onclick="changeActive('6')"><i
 								class="glyphicon glyphicon-tasks"> </i>Pathway</a></li>
+						<li><a href="summary.do" id="6" onclick="changeActive('4')"><i
+								 class="glyphicon glyphicon-list-alt"></i>CBGAnalysis</a></li>
 						
 						
 						

@@ -212,6 +212,7 @@ function initClassInfo()
 	});
 
 	getPhenInfo(0,"MP:0000001");
+	changeActive('2');
 } 
 
 function getPhenInfo(level,mpId)

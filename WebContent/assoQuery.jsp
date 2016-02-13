@@ -8,7 +8,7 @@
 
 </style>
 </head>
-<body>
+<body onload="changeActive('3');">
 	<jsp:include page="header.jsp"></jsp:include>
 	
 	<!--services start here-->
@@ -125,6 +125,7 @@ MP:0003415
 	<jsp:include page="footer.jsp"></jsp:include>
 	<!--footer end here-->
 </body>
+
 <script src="js/typeahead.bundle.js"></script>
 <script src="js/handlebars.min.js"></script>
 

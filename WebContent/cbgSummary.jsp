@@ -7,7 +7,7 @@
 <title>CBGAnalysis</title>
 <link rel="stylesheet" type="text/css" href="css/back_to_top.css">
 </head>
-<body><!-- onload='getPhenInfo("MP:0000001",0)'-->
+<body  onload="changeActive('6');">
 <jsp:include page="header.jsp"></jsp:include>
 
 	<!--services start here-->

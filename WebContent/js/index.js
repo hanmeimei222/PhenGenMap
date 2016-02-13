@@ -13,6 +13,7 @@ function initDataVersion()
 		}
 	});
 	downloadSource();	
+	changeActive('1');
 }
 
 function cutVersion()

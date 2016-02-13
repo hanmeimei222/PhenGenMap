@@ -7,7 +7,7 @@
 
 <title>Phenotype</title>
 </head>
-<body>
+<body onload="changeActive('4');">
 	<jsp:include page="header.jsp"></jsp:include>
 
 	<!--services start here-->

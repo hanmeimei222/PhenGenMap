@@ -1,3 +1,4 @@
+//commit test
 function clickData(phen_id,type)
 {
 	var data ={"id":phen_id,"type":type};

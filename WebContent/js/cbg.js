@@ -23,7 +23,7 @@ var layoutDuration = 500;
 function drwcytoCBG(data)
 {
 	var cy = window.cy = cytoscape({
-		container: document.getElementById('cy'),
+		container: document.getElementById('cy_cbg'),
 		layout: { 
 			name: 'dagre',
 			padding:layoutPadding

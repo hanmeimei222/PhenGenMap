@@ -18,7 +18,7 @@
 				<div class="row">
 					<div class="col-md-11 services-middle">
 						<div class="post-content-row" style="margin:10px 10px 10px 60px">
-<span style="text-align: center;"><h4>CBG汇总区</h4></span>
+							<span style="text-align: center;"><h4>CBG汇总区</h4></span>
 							<table class="cbgsumtable" border="3px solid #1B3E5C" style="text-align: center;">
 
 								<tr>
@@ -123,7 +123,8 @@
 				</div>
 				<div class="row" >
 					<span style="text-align: center;"><h4>CBG展示区</h4></span>
-					<div class="col-md-10" id="cy"></div>
+					
+					<div class="col-md-10" id="cy_cbg"></div>
 					
 				</div>
 				<div>

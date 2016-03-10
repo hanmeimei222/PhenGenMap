@@ -277,6 +277,10 @@ span.menu {
 	width: 800px;
 	height: 800px;
 }
+#cy_cbg {
+	width: 1200px;
+	height: 1200px;
+}
 
 /*--welcome--*/
 .content-welcome {

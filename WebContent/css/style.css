@@ -292,7 +292,7 @@ span.menu {
   color: #1B3E5C;
 }
 .welcome h5{
-	font-size:1.15em;
+	font-size:1.3em;
 	text-transform:uppercase;
 	color:#000;
 	margin: 0.85em 0;
@@ -310,14 +310,14 @@ i.glyphicon.glyphicon-ok-sign {
 }
 .red ul li a{
 	text-decoration: none;
-	color:#B4B2B2;
+	color:#1B3E5C;
 	font-size: 1em;
   margin: 0.4em 0;
   display: inline-block;
 }
 .red ul li a:hover{
   padding:0 0 0 0.3em;
-  color: #1B3E5C;
+  color: #B4B2B2;
  }
  
  
@@ -336,7 +336,8 @@ i.glyphicon.glyphicon-ok-sign {
 }
 .top-content p {
   font-size: 1em;
-  color: #B4B2B2;
+  color:#1B3E5C;
+  /*color: #B4B2B2*/;
   line-height: 1.9em;
 }
 .grid-top {
@@ -356,13 +357,14 @@ i.glyphicon.glyphicon-ok-sign {
 .top-grid h3{
 	font-size:1.5em;
 	font-weight: 600;
-	color:#000;
+	color:#1B3E5C;
 	margin: 0.5em 0 0.3em;
 }
 .top-grid p{
-	  color: #B4B2B2;
+	  color: #000;
   line-height: 1.9em;
-  font-size: 1em;
+  font-size: 1.3em;
+  font-weight:600;
  
 }
 #dataVersionDiv{

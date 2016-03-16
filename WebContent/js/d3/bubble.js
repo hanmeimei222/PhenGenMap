@@ -1,6 +1,7 @@
 function drawSimPathway(root,mmuid)
 {
-	var w = window.innerWidth*0.68*0.95;
+//	var w = window.innerWidth*0.68*0.95;
+	var w = window.innerWidth*0.95;
 	var h = Math.ceil(w*0.7);
 	var oR = 0;
 	var nTop = 0;
@@ -124,7 +125,7 @@ function drawSimPathway(root,mmuid)
 
 
 function resetBubbles() {
-		w = window.innerWidth*0.68*0.95;
+		w = window.innerWidth*0.95;
 		oR = w/(1+3*nTop);
 
 		h = Math.ceil(w/nTop*2);

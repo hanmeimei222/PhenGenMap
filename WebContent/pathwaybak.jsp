@@ -170,7 +170,11 @@ mmu00603</textarea>
 					</div>
 					<div id="cy"></div>
 					</br>
-
+					<div id="downloadPanel3" name="dowloadPanel3" class="hidden" style="float:right">
+								<a id="downloadSimData" href="#"><button type="button"
+								class="btn btn-default">数据下载</button></a>
+					</div>
+					<div id="bubble"></div>
 
 				</div>
 				
@@ -192,14 +196,6 @@ mmu00603</textarea>
 				</div>
 				
 				<div class="clearfix"></div>
-				<div class="row post-content-row ">
-							<div id="downloadPanel3" name="dowloadPanel3" class="hidden" style="float:right">
-								<a id="downloadSimData" href="#"><button type="button"
-								class="btn btn-default">数据下载</button></a>
-					</div>
-					<div id="bubble"></div>
-				</div>
-				
 			</div>
 			<!-- services-main end here -->
 		</div>

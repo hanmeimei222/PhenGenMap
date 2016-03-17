@@ -5,7 +5,7 @@ function drawGlobalGraph(str)
 	$("#cy").append('<global_graph></global_graph>');
 	width=880;
 	height = 800;
-	var color = d3.scale.category20();
+	var color = d3.scale.category10();
 	var force0 = d3.layout.force().charge(-20).linkDistance(40).size([ width, height ]);
 
 	var svg0 = d3.select("global_graph").append("svg").attr("width", width).attr("height", height);

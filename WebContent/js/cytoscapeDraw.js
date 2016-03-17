@@ -11,11 +11,12 @@ var infoTemplate = Handlebars.compile([
 
 var patrn=/^\d*$/;
 //生成一组随机颜色
-var colormap={};
-for(var i=0;i<20;i++)
-{
-	colormap[i]=getRandomColor();
-}
+var colormap=["#4fc5c7","#97ec71","#dbf977","#ed9dd6","#4fc5c7","#dbf977","#ed9dd6","#fa6e86","#4fc5c7","#97ec71","#dbf977","#ed9dd6","#fa6e86","#4fc5c7","#97ec71","#dbf977","#ed9dd6","#fa6e86"];
+
+//for(var i=0;i<20;i++)
+//{
+//	//colormap[i]=getRandomColor();
+//}
 function getRandomColor() 
 { 
 	var c = '#'; 
@@ -41,6 +42,9 @@ function cytoscapeDraw(data)
 		.selector('node')
 		.css({
 			'content': 'data(id)',
+			'font-size':40,
+			'width':40,
+			'height':40,
 			'background-color': function(ele){
 				if(ele.data().queryInput)
 				{
@@ -98,20 +102,20 @@ function cytoscapeDraw(data)
 				//gene 的父层节点
 				if(ele.data().id == 'gene')
 				{
-					return '#F7E7E2';
+					return '#f7a6b5';
 				}
 				//phen的父层节点
 				if(ele.data().id == 'phen')
 				{
-					return '#D3D7DD';
+					return '#dee5f3';
 				}
 				if(ele.data().id == 'pathway')
 				{
-					return '#90B2DF';
+					return '#fff586';
 				}
 				if(ele.data().id == 'ppi')
 				{
-					return '#B290fD';
+					return '#e8c698';
 				}
 				if (patrn.test(ele.data().id)){
 					return colormap[ele.data().id];
@@ -119,7 +123,7 @@ function cytoscapeDraw(data)
 				}
 				else
 				{
-					return '#00ff00';
+					return '#93e887';
 				}
 			}
 		})

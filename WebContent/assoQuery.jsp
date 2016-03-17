@@ -22,8 +22,8 @@
 							<label class="post-content-row-title">请选择要输入的节点类型</label>
 							<div class="post-content-row">
 								<input type="checkbox" id="chkGene" name="chkGene" />Gene<br>
-								<input type="checkbox" id="chkMp" name="chkMp" />MPO<br> <input
-									type="checkbox" id="chkPathway" name="chkPathway" />Pathway<br>
+								<input type="checkbox" id="chkMp" name="chkMp" checked />MPO<br> <input
+									type="checkbox" id="chkPathway" name="chkPathway" checked />Pathway<br>
 								<input type="checkbox" id="chkPPI" name="chkPPI" />PPI<br>
 
 							</div>
@@ -46,21 +46,44 @@ ADA</textarea>
 							<div class="form-group hidden" id="mpInputPanel">
 								<label class="post-content-row-title"> 输入批量MP：</label>
 								<textarea id="mpList" name="mpList" class="form-control"
-									rows="5">MP:0002098
-MP:0004576
-MP:0008160
-MP:0008161
-MP:0000729
-MP:0004206
-MP:0001379
-MP:0003415
+									rows="5">MP:0010282
+MP:0010283
+MP:0020189
+MP:0020188
+MP:0002037
+MP:0002052
+MP:0002053
+MP:0001273
+MP:0002051
+MP:0002013
+MP:0010308
+MP:0001272
+MP:0013151
+MP:0013152
+MP:0010347
+MP:0009828
+MP:0010273
+MP:0002732
+MP:0003447
+MP:0010274
+MP:0009469
+MP:0004208
+MP:0010322
+MP:0010300
+MP:0004502
+MP:0009704
+MP:0003721
+MP:0004499
+MP:0013488
+MP:0002020
+MP:0002021
 </textarea>
 							</div>
 
 							<div class="form-group hidden" id="pathwayInputPanel">
 								<label class="post-content-row-title"> 输入批量Pathway：</label>
 								<textarea id="pathwayList" name="pathwayList"
-									class="form-control" rows="5">mmu05216</textarea>
+									class="form-control" rows="5">mmu05217</textarea>
 							</div>
 							<div class="form-group hidden" id="ppiInputPanel">
 								<label class="post-content-row-title"> 输入批量PPI：</label>
@@ -132,6 +155,7 @@ MP:0003415
 <script src="js/cytoscape/cytoscape.min.js"></script>
 <script src="js/cytoscapeDraw.js"></script>
 <script src="js/gpquery.js"></script>
+
 <script
 	src="https://cdn.rawgit.com/cpettitt/dagre/v0.7.4/dist/dagre.min.js"></script>
 <script

@@ -21,7 +21,7 @@
 						<div class="row post-content-row">
 							<label class="post-content-row-title">请选择要输入的节点类型</label>
 							<div class="post-content-row">
-								<input type="checkbox" id="chkGene" name="chkGene" />Gene<br>
+								<input type="checkbox" id="chkGene" name="chkGene" checked/>Gene<br>
 								<input type="checkbox" id="chkMp" name="chkMp" checked />MPO<br> <input
 									type="checkbox" id="chkPathway" name="chkPathway" checked />Pathway<br>
 								<input type="checkbox" id="chkPPI" name="chkPPI" />PPI<br>
@@ -38,10 +38,72 @@
 							<div class="form-group hidden" id="geneInputPanel">
 								<label class="post-content-row-title"> 输入批量Gene：</label>
 								<textarea id="geneList" name="geneList" class="form-control"
-									rows="5">EDNRA
-GLI3
-PAX3
-ADA</textarea>
+									rows="5">VHL
+ITGB3
+DKC1
+EPHA2
+APC
+MLH1
+ACADVL
+A
+TSC2
+STK11
+CDKN2A
+ERCC6
+DGKD
+PRKAR1A
+MSH2
+KIT
+EPHA2
+MSH2
+LEP
+ERCC2
+NBN
+TRP53
+APC
+ERCC2
+STK11
+DDB2
+CYBB
+TSC1
+TSC1
+CDKN2A
+ATP2A2
+IL10
+BRCA2
+APC
+PLG
+KRAS
+POLH
+IFNG
+NBN
+CYBB
+BLM
+BLM
+PTCH1
+KRAS
+BRCA2
+TRP53
+BRAF
+ERCC2
+ATM
+ATP2A2
+ERCC2
+STK11
+TRP53
+APC
+FHIT
+TLR4
+FHIT
+PTEN
+NEIL1
+APC
+BUB1B
+MEN1
+LEPR
+IFNG
+PTCH1
+CDKN2A</textarea>
 							</div>
 							<div class="form-group hidden" id="mpInputPanel">
 								<label class="post-content-row-title"> 输入批量MP：</label>

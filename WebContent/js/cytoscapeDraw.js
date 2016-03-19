@@ -11,7 +11,7 @@ var infoTemplate = Handlebars.compile([
 
 var patrn=/^\d*$/;
 //生成一组随机颜色
-var colormap=["#4fc5c7","#97ec71","#dbf977","#ed9dd6","#4fc5c7","#dbf977","#ed9dd6","#fa6e86","#4fc5c7","#97ec71","#dbf977","#ed9dd6","#fa6e86","#4fc5c7","#97ec71","#dbf977","#ed9dd6","#fa6e86"];
+var colormap=["#4fc5c7","#97ec71","#dbf977","#ed9dd6","#fa6e86","#dbf977","#ed9dd6","#fa6e86","#4fc5c7","#97ec71","#dbf977","#ed9dd6","#fa6e86","#4fc5c7","#97ec71","#dbf977","#ed9dd6","#fa6e86"];
 
 //for(var i=0;i<20;i++)
 //{
@@ -34,7 +34,8 @@ function cytoscapeDraw(data)
 	var cy = window.cy = cytoscape({
 		container: document.getElementById('cy'),
 		layout: { 
-			name: 'dagre',
+//			name: 'dagre',
+			name:'grid',
 			directed:true,
 			padding:layoutPadding
 		},
@@ -60,19 +61,19 @@ function cytoscapeDraw(data)
 		.css({
 			'target-arrow-shape': 'triangle',
 			'target-arrow-color':'#9dbaea',
-			'width':3,
+			'width':6,
 			'line-color': function(ele){
 				var d = ele.data();
 				if(ele.data().edgeType == 'gplink')
 				{
-					return '#9dbaea';
+					return '#800080';
 				}else if(ele.data().edgeType == 'pplink')
 				{
 					return '#1dbaea';
 				}
 				else if(ele.data().edgeType == 'gpathwaylink')
 				{
-					return '#fdbaea';
+					return '#800';
 				}
 				else if(ele.data().edgeType == 'gppilink')
 				{
@@ -94,7 +95,7 @@ function cytoscapeDraw(data)
 			'padding-left': '20px',
 			'padding-bottom': '20px',
 			'padding-right': '20px',
-			'font-size': 20,
+			'font-size': 60,
 			'text-valign': 'top',
 			'text-halign': 'center',
 			'background-color':function(ele)
@@ -150,9 +151,9 @@ function cytoscapeDraw(data)
 	});
 
 	cy.on('select', 'node', function(e){
-		var node = this;
-		highlight( node );
-		showNodeInfo( node );
+//		var node = this;
+//		highlight( node );
+//		showNodeInfo( node );
 	});
 
 	cy.on('unselect', 'node', function(e){

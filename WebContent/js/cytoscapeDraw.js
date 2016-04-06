@@ -11,7 +11,7 @@ var infoTemplate = Handlebars.compile([
 
 var patrn=/^\d*$/;
 //生成一组随机颜色
-var colormap=["#4fc5c7","#97ec71","#dbf977","#ed9dd6","#fa6e86","#dbf977","#ed9dd6","#fa6e86","#4fc5c7","#97ec71","#dbf977","#ed9dd6","#fa6e86","#4fc5c7","#97ec71","#dbf977","#ed9dd6","#fa6e86"];
+var colormap=["#4fc5c7","#97ec71","#dbf977","#ed9dd6","#fa6e86","#dbf977","#4fc5c7","#fa6e86","#dbf977","#97ec71","#ed9dd6","#fa6e86","#dbf977","#4fc5c7","#97ec71","#dbf977","#ed9dd6","#fa6e86"];
 
 //for(var i=0;i<20;i++)
 //{
@@ -34,8 +34,8 @@ function cytoscapeDraw(data)
 	var cy = window.cy = cytoscape({
 		container: document.getElementById('cy'),
 		layout: { 
-//			name: 'dagre',
-			name:'grid',
+			name: 'dagre',
+//			name:'grid',
 			directed:true,
 			padding:layoutPadding
 		},
@@ -43,9 +43,9 @@ function cytoscapeDraw(data)
 		.selector('node')
 		.css({
 			'content': 'data(id)',
-			'font-size':40,
-			'width':40,
-			'height':40,
+			'font-size':80,
+			'width':80,
+			'height':80,
 			'background-color': function(ele){
 				if(ele.data().queryInput)
 				{
@@ -95,7 +95,7 @@ function cytoscapeDraw(data)
 			'padding-left': '20px',
 			'padding-bottom': '20px',
 			'padding-right': '20px',
-			'font-size': 60,
+			'font-size': 80,
 			'text-valign': 'top',
 			'text-halign': 'center',
 			'background-color':function(ele)
@@ -151,9 +151,9 @@ function cytoscapeDraw(data)
 	});
 
 	cy.on('select', 'node', function(e){
-//		var node = this;
-//		highlight( node );
-//		showNodeInfo( node );
+		var node = this;
+		highlight( node );
+		showNodeInfo( node );
 	});
 
 	cy.on('unselect', 'node', function(e){

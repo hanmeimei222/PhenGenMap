@@ -73,11 +73,47 @@ public class GPQueryController {
 		return modelmap;
 	}
 	
+//	@RequestMapping("/queryGlobalAsso")
+//	@ResponseBody
+//	public ModelMap queryAssiciation(@RequestParam("phenList")String phenList,
+//			@RequestParam("pathwayList")String pathwayList,
+//			@RequestParam("level")int level,
+//			@RequestParam("selected_type") String selected_type)
+//	{
+//		String[] arr = phenList.split("\t");
+//		Map<String,Boolean> ids = new HashMap<String, Boolean>();
+//		for (String str : arr) {
+//			if(!"".equals(str))
+//			{
+//				ids.put(str.trim(),true);
+//			}
+//		}
+//
+//		Map<String,Boolean> pathwayInfos = new HashMap<String, Boolean>();
+//		arr = pathwayList.split("\t");
+//		for (String str : arr) {
+//			if(!"".equals(str))
+//			{
+//				pathwayInfos.put(str.trim(),true);
+//			}
+//		}
+//		Map<String,Set<PNode>> phenNodes = phenService.expandPhens(ids);
+//		
+//		Map<String,Set<Pathway>> pathways =  pathwayService.queryPathway(pathwayInfos, level);
+//		
+//		D3Graph graph = gpService.getGlobalAsso(phenNodes,pathways,selected_type);
+//		String filename = WriteResult2File.write2File(graph);
+//		ModelMap map = new ModelMap();
+//		map.put("data", graph);
+//		map.put("path", filename);
+//		return map;
+//	}
+	
+	
 	@RequestMapping("/queryGlobalAsso")
 	@ResponseBody
 	public ModelMap queryAssiciation(@RequestParam("phenList")String phenList,
 			@RequestParam("pathwayList")String pathwayList,
-			@RequestParam("level")int level,
 			@RequestParam("selected_type") String selected_type)
 	{
 		String[] arr = phenList.split("\t");
@@ -99,7 +135,7 @@ public class GPQueryController {
 		}
 		Map<String,Set<PNode>> phenNodes = phenService.expandPhens(ids);
 		
-		Map<String,Set<Pathway>> pathways =  pathwayService.queryPathway(pathwayInfos, level);
+		Map<String,Set<Pathway>> pathways =  pathwayService.queryPathway(pathwayInfos,3);
 		
 		D3Graph graph = gpService.getGlobalAsso(phenNodes,pathways,selected_type);
 		String filename = WriteResult2File.write2File(graph);

@@ -18,6 +18,8 @@
 <div class="services-main ">
 
 <div class="row">
+
+<!--ztree PathwaySelect-->
 <div class="col-md-2 services-left">
 <div class="row post-content-row">
 <div class="col-md-10 services-left">
@@ -30,30 +32,21 @@
 </div>
 </div>
 
+
 <div class="row post-content-row">
-<div class="col-md-12 services-left-pathway" id="pathway_first_class"></div>
-<div class=" services-left-pathway" id="pathway_second_class"></div>
-<div class="services-left-pathway" id="pathway_name"></div>
-</div>
-
-</div>
-
-
-<!--ztree PathwaySelect-->
-
-<div class="col-md-2 services-left">
 <div class="demo">
-<div style="margin-bottom: 5px;"><a class="button"
-	href="javascript:void(0);" id="showchecked">Get Selected Nodes</a></div>
+
 <div
-	style="border-bottom: #c3daf9 1px solid; border-left: #c3daf9 1px solid; width: 250px; height: 500px; overflow: auto; border-top: #c3daf9 1px solid; border-right: #c3daf9 1px solid;">
+	style="width: 230px; height: 800px; overflow: auto; ">
 <div id="tree"></div>
 
 </div>
 </div>
 </div>
 
+</div>
 <!--	ztree End			-->
+
 
 <div class="col-md-8 services-middle">
 <div class="middle_chk_panel">

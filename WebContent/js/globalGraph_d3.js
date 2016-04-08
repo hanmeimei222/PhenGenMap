@@ -129,6 +129,51 @@ function selectAllLevelPhenotype(level)
 	}
 }
 var curShowLevel=1;
+//function drawGraph()
+//{
+//	//获取选中的类别
+//	var pheList = new Array();
+//	var phe_chks = document.getElementsByName("level"+curShowLevel+"phen_chk");
+//	for(var i=0;i<phe_chks.length;i++)
+//	{
+//		if(phe_chks[i].checked)
+//		{
+//			pheList.push(phe_chks[i].id);
+//		}
+//	}
+//
+//	selected_pathway = getSelectedPathway();
+//
+//	if(pheList.length==0 && selected_pathway.level==-1)
+//	{
+//		alert("请勾选Phenotype或者pathway");
+//		return -1;
+//	}
+//
+//	selected_type = getselectType();
+//	data = {"phenList":pheList.join("\t"),"pathwayList":selected_pathway.pathwayList,"level":selected_pathway.level,"selected_type":selected_type};
+//	$.ajax({
+//		type : "post",
+//		data : data,
+//		url : "queryGlobalAsso.do",
+//		dataType : "json",
+//		success : function(msg) {
+//		if(msg!=""){
+//			$("#downloadPanel").attr('class','show');
+//		}else
+//		{
+//			$("#downloadPanel").attr('class','hidden');
+//		}
+//		drawGlobalGraph(msg.data);
+//
+//		if(msg.path!="")
+//		{
+//			$("#download").attr("href",msg.path);
+//		}
+//	}
+//	});
+//}
+
 function drawGraph()
 {
 	//获取选中的类别
@@ -142,16 +187,16 @@ function drawGraph()
 		}
 	}
 
-	selected_pathway = getSelectedPathway();
+	pathwayList = getSelectedPathway();
 
-	if(pheList.length==0 && selected_pathway.level==-1)
+	if(pheList.length==0 && pathwayList.length==0)
 	{
 		alert("请勾选Phenotype或者pathway");
 		return -1;
 	}
 
 	selected_type = getselectType();
-	data = {"phenList":pheList.join("\t"),"pathwayList":selected_pathway.pathwayList,"level":selected_pathway.level,"selected_type":selected_type};
+	data = {"phenList":pheList.join("\t"),"pathwayList":pathwayList.join("\t"),"selected_type":selected_type};
 	$.ajax({
 		type : "post",
 		data : data,
@@ -173,32 +218,49 @@ function drawGraph()
 	}
 	});
 }
-var curPathwayLevel=1;
-function getSelectedPathway()
-{
-	//从最底层开始找，选择最精确的勾选，作为查询输入
-	selected_list= new Array();
 
-	var pathway_chks = document.getElementsByName(curPathwayLevel+"_pathway_chk");
-	for(var j=0;j<pathway_chks.length;j++)
-	{
-		if(pathway_chks[j].checked)
-		{
-			selected_list.push(pathway_chks[j].value);
+var curPathwayLevel=1;
+//function getSelectedPathway()
+//{
+//	//从最底层开始找，选择最精确的勾选，作为查询输入
+//	selected_list= new Array();
+//
+//	var pathway_chks = document.getElementsByName(curPathwayLevel+"_pathway_chk");
+//	for(var j=0;j<pathway_chks.length;j++)
+//	{
+//		if(pathway_chks[j].checked)
+//		{
+//			selected_list.push(pathway_chks[j].value);
+//		}
+//	}
+//
+//	if(selected_list.length==0)
+//	{
+//		i=-1;
+//	}
+//	else
+//	{
+//		i = curPathwayLevel;
+//	}
+//	return {"pathwayList":selected_list.join("\t"),"level":i};
+//
+//}
+
+
+function getSelectedPathway(){
+	var pathwayArray = new Array();
+	var s=$("#tree").getCheckedNodes();
+	for(var i=0; i<s.length;i++){
+		if(s[i].substring(0,3)=='mmu'){
+			pathwayArray.push(s[i]);
 		}
 	}
-
-	if(selected_list.length==0)
-	{
-		i=-1;
-	}
-	else
-	{
-		i = curPathwayLevel;
-	}
-	return {"pathwayList":selected_list.join("\t"),"level":i};
-
+	return pathwayArray;
 }
+
+
+
+
 
 function initClassInfo()
 {
@@ -494,3 +556,5 @@ function showSecondLevelBack(){
 	$("#pathway_name").hide();
 	$("#pathway_second_class").removeClass().addClass('col-md-10 services-left-pathway');
 }
+
+

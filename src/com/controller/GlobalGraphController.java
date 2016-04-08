@@ -1,6 +1,7 @@
 package com.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.model.PNode;
-import com.model.d3.TreeNode;
+import com.model.ztree.ZtreeNode;
 import com.service.QueryPathwayService;
 import com.service.QueryPhenService;
 
@@ -25,9 +26,9 @@ public class GlobalGraphController {
 	
 	@RequestMapping("/initPathwayClassInfo.do")
 	@ResponseBody
-	public  TreeNode getPathwayClassInfo()
+	public  List<ZtreeNode> getPathwayClassInfo()
 	{
-		TreeNode pathwayInfo= pathwayService.allPathway();
+		List<ZtreeNode> pathwayInfo = pathwayService.getpathwayztree();
 		return pathwayInfo;
 	}
 

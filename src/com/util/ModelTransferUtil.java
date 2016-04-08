@@ -18,6 +18,7 @@ import com.model.cytoscape.Node;
 import com.model.d3.D3Graph;
 import com.model.d3.Links;
 import com.model.d3.TreeNode;
+import com.model.ztree.ZtreeNode;
 
 public class ModelTransferUtil {
 	
@@ -262,6 +263,41 @@ public class ModelTransferUtil {
 	}
 
 	/**
+	 * 使用ztree.js绘出全体pathway的树形图
+	 * @param allpathways
+	 * @return
+	 */
+	public static List<ZtreeNode> allpathway2ztree(Map<String, Map<String, Map<Pathway, Boolean>>> allpathways){
+		//构造根节点
+		List<ZtreeNode>children = new ArrayList<ZtreeNode>();
+		ZtreeNode root = new ZtreeNode("0","全选","root",true,true,true,0,true,children);
+		
+		//构造root下的六棵子树
+		Set<String>cls1set= allpathways.keySet();
+		for (String cls1 : cls1set) {
+			List<ZtreeNode>cls1child = new ArrayList<ZtreeNode>();
+			children.add(new ZtreeNode(cls1,cls1,cls1,true,true,false,0,true,cls1child));
+			Map<String, Map<Pathway, Boolean>>cls2map = allpathways.get(cls1);
+			Set<String>cls2set = cls2map.keySet();
+			
+			for (String cls2 : cls2set) {
+				List<ZtreeNode>cls2child = new ArrayList<ZtreeNode>();
+				cls1child.add(new ZtreeNode(cls2,cls2,cls2,true,true,false,0,true,cls2child));
+				Set<Pathway>pwset = cls2map.get(cls2).keySet();
+				for (Pathway pw : pwset) {
+					String id = pw.getPw_id();
+					String name = pw.getPw_name();
+					cls2child.add(new ZtreeNode(id,name,name,true,true,false,0,false,null));
+				}
+			}
+		}
+		List<ZtreeNode> result = new ArrayList<ZtreeNode>(1);
+		result.add(root);
+		return result;
+	}
+	
+	
+	/**
 	 * 使用d3.js绘出全体pathway的树形图
 	 * @param allpathways
 	 * @return
@@ -294,6 +330,9 @@ public class ModelTransferUtil {
 		return root;
 	}
 
+	
+	
+	
 
 	//	public static Graph sglpathways2graph(Set<Pathway> set,Map<String,Boolean> queryInput){
 	//		Graph g = new Graph();

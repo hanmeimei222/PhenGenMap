@@ -158,19 +158,19 @@ function drawGraph()
 		url : "queryGlobalAsso.do",
 		dataType : "json",
 		success : function(msg) {
-			if(msg!=""){
-				$("#downloadPanel").attr('class','show');
-			}else
-			{
-				$("#downloadPanel").attr('class','hidden');
-			}
-			drawGlobalGraph(msg.data);
-
-			if(msg.path!="")
-			{
-				$("#download").attr("href",msg.path);
-			}
+		if(msg!=""){
+			$("#downloadPanel").attr('class','show');
+		}else
+		{
+			$("#downloadPanel").attr('class','hidden');
 		}
+		drawGlobalGraph(msg.data);
+
+		if(msg.path!="")
+		{
+			$("#download").attr("href",msg.path);
+		}
+	}
 	});
 }
 var curPathwayLevel=1;
@@ -207,8 +207,9 @@ function initClassInfo()
 		url : "initPathwayClassInfo.do",
 		dataType : "json",
 		success : function(msg){
-			initPathwayInfo(msg);
-		}
+//		initPathwayInfo(msg);
+		initPathwayTree(msg);
+	}
 	});
 
 	getPhenInfo(0,"MP:0000001");
@@ -271,7 +272,7 @@ function showPhenInfo(msg,level)
 		+level+')">下一层</button>';
 	var back = '<button type="button" class="btn btn-default" onclick=" showBackLevel('
 		+level+')">上一层</button>';
-	
+
 	$("#"+curLevelId).append("<div>");
 	if(level==1){
 		$("#"+curLevelId).append(next);
@@ -287,7 +288,7 @@ function showPhenInfo(msg,level)
 		+level+')" />全选';
 	$("#"+curLevelId).append(selectAll);
 
-	
+
 	$.each(msg,function(key,node)
 			{
 		if(level>1){
@@ -308,7 +309,7 @@ function showPhenInfo(msg,level)
 					val.pheno_id+'"/>'
 					+ val.pheno_name+' <br>';
 			}
-			
+
 			$("#"+curLevelId).append(chkInfo);
 		});
 		$("#"+curLevelId).append('<hr>');
@@ -326,6 +327,28 @@ function showBackLevel(level){
 	}
 	curShowLevel = level-1;
 }
+
+
+function initPathwayTree(pathwayInfo){
+	var o = { showcheck: true
+			//onnodeclick:function(item){alert(item.text);},        
+	};
+//	o.data = treedata; 
+	o.data = pathwayInfo;
+// console.log(JSON.stringify(pathwayInfo)); 
+	
+	$("#tree").treeview(o);            
+	$("#showchecked").click(function(e){
+		var s=$("#tree").getCheckedNodes();
+		if(s !=null&&s.length>0)
+			alert(s.join(","));
+		else
+			alert("NULL");
+	});
+
+
+}
+
 
 function initPathwayInfo(pathwayInfo)
 {
@@ -359,7 +382,7 @@ function initPathwayInfo(pathwayInfo)
 
 function showSecondLevel()
 {
-	
+
 	var chks = document.getElementsByName("1_pathway_chk");
 	var flag = false;
 	for(var i=0;i<chks.length;i++)
@@ -371,14 +394,14 @@ function showSecondLevel()
 		alert("请勾选当前层的pathway");
 		return;
 	}
-	
+
 	curPathwayLevel = 2;
 	$("#pathway_first_class").removeClass().addClass('col-md-1 services-left opacity25');
 	$("#pathway_second_class").show();
 	$("#pathway_second_class").removeClass().addClass('col-md-10 services-left');
-	
+
 	$("#pathway_second_class").empty();
-	
+
 	var back = '<button type="button" class="btn btn-default" onclick=" showFirstLevelBack()">上一层</button>';
 	var next = '<button type="button" class="btn btn-default" onclick="showPathwayLevel()">下一层</button>';
 	$("#pathway_second_class").append(back).append(next);
@@ -424,8 +447,8 @@ function showPathwayLevel()
 		alert("请勾选当前层的pathway");
 		return;
 	}
-	
-	
+
+
 	curPathwayLevel = 3;
 	$("#pathway_first_class").removeClass().addClass('col-md-1 services-left opacity25');
 	$("#pathway_second_class").removeClass().addClass('col-md-1 services-left opacity25');
@@ -433,14 +456,14 @@ function showPathwayLevel()
 	$("#pathway_name").removeClass().addClass('col-md-8 services-left');
 
 	$("#pathway_name").empty();
-	
+
 	var back = '<button type="button" class="btn btn-default" onclick=" showSecondLevelBack()">上一层</button>';
 	$("#pathway_name").append(back);
 	$("#pathway_name").append('<div>当前所在层数：3</div>');
-	
+
 	var selectAll = '<div sytle="float:left"><input type="checkbox" id="chkLevel3Pathway" name="chkLevel3Pathway" onchange="selectAllLevel3Pathway()" />全选';
 	$("#pathway_name").append(selectAll);
-	
+
 	for(var i=0;i<chks.length;i++)
 	{
 		if(chks[i].checked)

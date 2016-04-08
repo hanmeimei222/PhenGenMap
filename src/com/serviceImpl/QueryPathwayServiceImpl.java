@@ -22,6 +22,7 @@ import com.model.cytoscape.Graph;
 import com.model.cytoscape.Node;
 import com.model.d3.PathwayGraphAndTree;
 import com.model.d3.TreeNode;
+import com.model.ztree.ZtreeNode;
 import com.service.QueryPathwayService;
 import com.util.ModelTransferUtil;
 
@@ -35,6 +36,15 @@ public class QueryPathwayServiceImpl implements QueryPathwayService {
 	GeneDao gDao;
 
 
+	@Override
+	public List<ZtreeNode> getpathwayztree() {
+		List<ZtreeNode> pathwayztree;
+		Map<String, Map<String, Map<Pathway, Boolean>>> allpathways = pwayDao.getAllPathways();
+		pathwayztree = ModelTransferUtil.allpathway2ztree(allpathways);
+		return pathwayztree;
+	}
+	
+	
 	@Override
 	public Map<String,Set<Pathway>> queryPathway(Map<String,Boolean> info, int level) {
 		//输入的是pathway的id
@@ -244,5 +254,7 @@ public class QueryPathwayServiceImpl implements QueryPathwayService {
 		}
 		return root;
 	}
+
+	
 
 }

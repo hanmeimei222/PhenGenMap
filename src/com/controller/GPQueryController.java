@@ -133,7 +133,9 @@ public class GPQueryController {
 				pathwayInfos.put(str.trim(),true);
 			}
 		}
-		Map<String,Set<PNode>> phenNodes = phenService.expandPhens(ids);
+//		Map<String,Set<PNode>> phenNodes = phenService.expandPhens(ids);
+		
+		Set<PNode> phenNodes = phenService.getPhenInfo(ids);
 		
 		Map<String,Set<Pathway>> pathways =  pathwayService.queryPathway(pathwayInfos,3);
 		

@@ -2,6 +2,8 @@ package com.model.ztree;
 
 import java.util.List;
 
+import com.model.PNode;
+
 public class ZtreeNode {
 
 	private String id;
@@ -88,5 +90,25 @@ public class ZtreeNode {
 		ChildNodes = childNodes;
 	}
 	
+	
+	public ZtreeNode(PNode p)
+	{
+		this.id = p.getPheno_id();
+		this.text = p.getPheno_name();
+		this.value = p.getPheno_id();
+		this.showcheck = true;
+		this.complete = true;
+		this.isexpand = false;
+		this.checkstate = 0;
+		if(p.getSon()!=null && p.getSon().size()!=0)
+		{
+			this.hasChildren = true;
+		}
+		else
+		{
+			this.hasChildren = false;
+		}
+
+	}
 	
 }

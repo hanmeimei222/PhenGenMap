@@ -21,5 +21,5 @@ public interface QueryAssoService {
 	 */
 	public Graph getAsso(Map<NodeType,Map<String,Boolean>> map);
 	
-	public D3Graph getGlobalAsso(Map<String,Set<PNode>> phenNodes,Map<String,Set<Pathway>> pathways,String selected_type);
+	public D3Graph getGlobalAsso(Set<PNode> phenNodes,Map<String,Set<Pathway>> pathways,String selected_type);
 }

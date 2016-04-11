@@ -1,5 +1,6 @@
 package com.service;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.constant.PhenQueryType;
 import com.model.PNode;
 import com.model.cytoscape.Graph;
+import com.model.ztree.ZtreeNode;
 
 @Service
 public interface QueryPhenService {
@@ -33,10 +35,19 @@ public interface QueryPhenService {
 	 */
 	public Set<PNode> getPhenInfo(Map<String,Boolean> queryMap);
 	
+	
+	
+	
 	/**
 	 * 全局查询关联时，扩展mp节点为其子孙
 	 * @param queryMap
 	 * @return
 	 */
 	public  Map<String,Set<PNode>> expandPhens(Map<String,Boolean> queryMap);
+	
+	/**
+	 * 构造全图关联查询时phenotype的ztree初始化加载
+	 */
+	public List<ZtreeNode> getphenztree();
+	
 }

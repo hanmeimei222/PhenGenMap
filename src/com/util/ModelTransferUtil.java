@@ -3,6 +3,7 @@ package com.util;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -287,7 +288,7 @@ public class ModelTransferUtil {
 				for (Pathway pw : pwset) {
 					String id = pw.getPw_id();
 					String name = pw.getPw_name();
-					cls2child.add(new ZtreeNode(id,name,name,true,true,false,0,false,null));
+					cls2child.add(new ZtreeNode(id,name,id,true,true,false,0,false,null));
 				}
 			}
 		}
@@ -296,6 +297,37 @@ public class ModelTransferUtil {
 		return result;
 	}
 	
+	/**
+	 * 使用ztree.js绘出全体phenotype的树形图
+	 * @param Set<PNode>allpnodes,PNode root
+	 * @return
+	 */
+	public static List<ZtreeNode> allphen2ztree(PNode root){
+		List<ZtreeNode> result = new ArrayList<ZtreeNode>();
+		
+		//构造根节点
+		ZtreeNode zroot = new ZtreeNode("0","全选","root",true,true,true,0,true,null);
+
+		result.add(zroot);
+
+		copyTree(root,zroot);
+		return result;
+	}
+	
+	
+	private static void copyTree(PNode root,ZtreeNode zroot)
+	{
+		Set<PNode>rChild = root.getSon().keySet();
+		int n =rChild.size();
+		List<ZtreeNode> zChild = new ArrayList<ZtreeNode>(n);
+		zroot.setChildNodes(zChild);
+		
+		for (PNode pNode : rChild) {
+			ZtreeNode z = new ZtreeNode(pNode);
+			zChild.add(z);
+			copyTree(pNode,z);
+		}
+	}
 	
 	/**
 	 * 使用d3.js绘出全体pathway的树形图

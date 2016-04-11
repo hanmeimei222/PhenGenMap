@@ -19,7 +19,7 @@ function selectAllEdge()
 		}
 	}
 }
-
+//获取勾选的边的种类
 function getselectType()
 {
 	var type = [];
@@ -40,68 +40,255 @@ function getselectType()
 	return type.join("");
 }
 
+function initClassInfo()
+{
+	$.ajax({
+		type : "get",
+		url : "initPathwayClassInfo.do",
+		dataType : "json",
+		success : function(msg){
+//		initPathwayInfo(msg);
+		initPathwayTree(msg);
+	}
+	});
+
+//	getPhenInfo(0,"MP:0000001");
+
+	$.ajax({
+		type : "post",
+		url : "initPhenClassInfo.do",
+		dataType : "json",
+		success : function(msg) 
+		{
+			initPhenTree(msg);
+		}
+	});	
+	changeActive('2');
+}
+
+function initPathwayTree(pathwayInfo){
+	var o = { showcheck: true     
+	};
+
+	o.data = pathwayInfo;
+// console.log(JSON.stringify(pathwayInfo)); 
+	
+	$("#pathwaytree").treeview(o);            
+}
+
+function initPhenTree(phenInfo){
+	var o = { showcheck: true 
+	};
+
+	o.data = phenInfo;
+	$("#phentree").treeview(o);   
+	$("#showchecked").click(function(e){
+        var s=$("#phentree").getCheckedNodes();
+        if(s !=null&&s.length>0)
+        alert(s.join(","));
+        else
+        alert("NULL");
+    });
+}
+
+
+
+
+function drawGraph()
+{
+	//获取选中的类别
+	var pheList = getSelectedPhen();
+	var pathwayList = getSelectedPathway();
+
+	if(pheList.length==0 && pathwayList.length==0)
+	{
+		alert("请勾选Phenotype或者pathway");
+		return -1;
+	}
+
+	var selected_type = getselectType();
+	data = {"phenList":pheList.join("\t"),"pathwayList":pathwayList.join("\t"),"selected_type":selected_type};
+	$.ajax({
+		type : "post",
+		data : data,
+		url : "queryGlobalAsso.do",
+		dataType : "json",
+		success : function(msg) {
+			if(msg!=""){
+				$("#downloadPanel").attr('class','show');
+			}else{
+				$("#downloadPanel").attr('class','hidden');
+			}
+			drawGlobalGraph(msg.data);
+	
+			if(msg.path!=""){
+				$("#download").attr("href",msg.path);
+			}
+		}
+		});
+}
+
+
+function getSelectedPathway(){
+	var pathwayArray = new Array();
+	var s=$("#pathwaytree").getCheckedNodes();
+	for(var i=0; i<s.length;i++){
+		if(s[i].substring(0,3)=='mmu'){
+			pathwayArray.push(s[i]);
+		}
+	}
+	return pathwayArray;
+}
+
+function getSelectedPhen(){
+	var phenArray = new Array();
+	var s = $("#phentree").getCheckedNodes();
+	return s;
+}
+
+
+
+//function drawGraph()
+//{
+//	//获取选中的类别
+//	var pheList = new Array();
+//	var phe_chks = document.getElementsByName("level"+curShowLevel+"phen_chk");
+//	for(var i=0;i<phe_chks.length;i++)
+//	{
+//		if(phe_chks[i].checked)
+//		{
+//			pheList.push(phe_chks[i].id);
+//		}
+//	}
+//
+//	pathwayList = getSelectedPathway();
+//
+//	if(pheList.length==0 && pathwayList.length==0)
+//	{
+//		alert("请勾选Phenotype或者pathway");
+//		return -1;
+//	}
+//
+//	selected_type = getselectType();
+//	data = {"phenList":pheList.join("\t"),"pathwayList":pathwayList.join("\t"),"selected_type":selected_type};
+//	$.ajax({
+//		type : "post",
+//		data : data,
+//		url : "queryGlobalAsso.do",
+//		dataType : "json",
+//		success : function(msg) {
+//			if(msg!=""){
+//				$("#downloadPanel").attr('class','show');
+//			}else{
+//				$("#downloadPanel").attr('class','hidden');
+//			}
+//			drawGlobalGraph(msg.data);
+//	
+//			if(msg.path!=""){
+//				$("#download").attr("href",msg.path);
+//			}
+//		}
+//		});
+//}
+
+//function getPhenInfo(level,mpId)
+//{
+//	var chks = document.getElementsByName("level"+level+"phen_chk");
+//	if(level>0)
+//	{
+//		mpId="";
+//		for(var i=0;i<chks.length;i++)
+//		{
+//			if(chks[i].checked)
+//			{
+//				mpId+=chks[i].id;
+//				mpId+='\t';
+//			}
+//		}
+//	}
+//	if(mpId=="")
+//	{
+//		alert("请勾选当前层phenotype");
+//		return -1;
+//	}
+//	$.ajax({
+//		type : "post",
+//		data:{"fatherId":mpId},
+//		url : "initPhenClassInfo.do",
+//		dataType : "json",
+//		success : function(msg) 
+//		{
+//			if(msg!="" && msg!=null)
+//			{
+//				showPhenInfo(msg,level);
+//			}
+//		}
+//	});	
+//}
+
+
 //Pathway-Level1的全选
-function selectAllLevel1Pathway()
-{
-	var chk = document.getElementById("chkLevel1Pathway");
-	var subchk = document.getElementsByName("1_pathway_chk");
-	if(chk.checked)
-	{
-		for(var i=0;i<subchk.length;i++)
-		{
-			subchk[i].checked = true;
-		}
-	}
-	else
-	{
-		for(var i=0;i<subchk.length;i++)
-		{
-			subchk[i].checked = false;
-		}
-	}
-}
-
-//Pathway-Level2的全选
-function selectAllLevel2Pathway()
-{
-	var chk = document.getElementById("chkLevel2Pathway");
-	var subchk = document.getElementsByName("2_pathway_chk");
-	if(chk.checked)
-	{
-		for(var i=0;i<subchk.length;i++)
-		{
-			subchk[i].checked = true;
-		}
-	}
-	else
-	{
-		for(var i=0;i<subchk.length;i++)
-		{
-			subchk[i].checked = false;
-		}
-	}
-}
-
-//Pathway-Level3的全选
-function selectAllLevel3Pathway()
-{
-	var chk = document.getElementById("chkLevel3Pathway");
-	var subchk = document.getElementsByName("3_pathway_chk");
-	if(chk.checked)
-	{
-		for(var i=0;i<subchk.length;i++)
-		{
-			subchk[i].checked = true;
-		}
-	}
-	else
-	{
-		for(var i=0;i<subchk.length;i++)
-		{
-			subchk[i].checked = false;
-		}
-	}
-}
+//function selectAllLevel1Pathway()
+//{
+//	var chk = document.getElementById("chkLevel1Pathway");
+//	var subchk = document.getElementsByName("1_pathway_chk");
+//	if(chk.checked)
+//	{
+//		for(var i=0;i<subchk.length;i++)
+//		{
+//			subchk[i].checked = true;
+//		}
+//	}
+//	else
+//	{
+//		for(var i=0;i<subchk.length;i++)
+//		{
+//			subchk[i].checked = false;
+//		}
+//	}
+//}
+//
+////Pathway-Level2的全选
+//function selectAllLevel2Pathway()
+//{
+//	var chk = document.getElementById("chkLevel2Pathway");
+//	var subchk = document.getElementsByName("2_pathway_chk");
+//	if(chk.checked)
+//	{
+//		for(var i=0;i<subchk.length;i++)
+//		{
+//			subchk[i].checked = true;
+//		}
+//	}
+//	else
+//	{
+//		for(var i=0;i<subchk.length;i++)
+//		{
+//			subchk[i].checked = false;
+//		}
+//	}
+//}
+//
+////Pathway-Level3的全选
+//function selectAllLevel3Pathway()
+//{
+//	var chk = document.getElementById("chkLevel3Pathway");
+//	var subchk = document.getElementsByName("3_pathway_chk");
+//	if(chk.checked)
+//	{
+//		for(var i=0;i<subchk.length;i++)
+//		{
+//			subchk[i].checked = true;
+//		}
+//	}
+//	else
+//	{
+//		for(var i=0;i<subchk.length;i++)
+//		{
+//			subchk[i].checked = false;
+//		}
+//	}
+//}
 
 //Phenotype-Level的全选
 function selectAllLevelPhenotype(level)
@@ -174,50 +361,7 @@ var curShowLevel=1;
 //	});
 //}
 
-function drawGraph()
-{
-	//获取选中的类别
-	var pheList = new Array();
-	var phe_chks = document.getElementsByName("level"+curShowLevel+"phen_chk");
-	for(var i=0;i<phe_chks.length;i++)
-	{
-		if(phe_chks[i].checked)
-		{
-			pheList.push(phe_chks[i].id);
-		}
-	}
 
-	pathwayList = getSelectedPathway();
-
-	if(pheList.length==0 && pathwayList.length==0)
-	{
-		alert("请勾选Phenotype或者pathway");
-		return -1;
-	}
-
-	selected_type = getselectType();
-	data = {"phenList":pheList.join("\t"),"pathwayList":pathwayList.join("\t"),"selected_type":selected_type};
-	$.ajax({
-		type : "post",
-		data : data,
-		url : "queryGlobalAsso.do",
-		dataType : "json",
-		success : function(msg) {
-		if(msg!=""){
-			$("#downloadPanel").attr('class','show');
-		}else
-		{
-			$("#downloadPanel").attr('class','hidden');
-		}
-		drawGlobalGraph(msg.data);
-
-		if(msg.path!="")
-		{
-			$("#download").attr("href",msg.path);
-		}
-	}
-	});
-}
 
 var curPathwayLevel=1;
 //function getSelectedPathway()
@@ -247,71 +391,15 @@ var curPathwayLevel=1;
 //}
 
 
-function getSelectedPathway(){
-	var pathwayArray = new Array();
-	var s=$("#tree").getCheckedNodes();
-	for(var i=0; i<s.length;i++){
-		if(s[i].substring(0,3)=='mmu'){
-			pathwayArray.push(s[i]);
-		}
-	}
-	return pathwayArray;
-}
 
 
 
 
 
-function initClassInfo()
-{
-	$.ajax({
-		type : "get",
-		url : "initPathwayClassInfo.do",
-		dataType : "json",
-		success : function(msg){
-//		initPathwayInfo(msg);
-		initPathwayTree(msg);
-	}
-	});
 
-	getPhenInfo(0,"MP:0000001");
-	changeActive('2');
-} 
+ 
 
-function getPhenInfo(level,mpId)
-{
-	var chks = document.getElementsByName("level"+level+"phen_chk");
-	if(level>0)
-	{
-		mpId="";
-		for(var i=0;i<chks.length;i++)
-		{
-			if(chks[i].checked)
-			{
-				mpId+=chks[i].id;
-				mpId+='\t';
-			}
-		}
-	}
-	if(mpId=="")
-	{
-		alert("请勾选当前层phenotype");
-		return -1;
-	}
-	$.ajax({
-		type : "post",
-		data:{"fatherId":mpId},
-		url : "initPhenClassInfo.do",
-		dataType : "json",
-		success : function(msg) 
-		{
-			if(msg!="" && msg!=null)
-			{
-				showPhenInfo(msg,level);
-			}
-		}
-	});	
-}
+
 
 //参数的level是父亲level
 function showPhenInfo(msg,level)
@@ -391,25 +479,7 @@ function showBackLevel(level){
 }
 
 
-function initPathwayTree(pathwayInfo){
-	var o = { showcheck: true
-			//onnodeclick:function(item){alert(item.text);},        
-	};
-//	o.data = treedata; 
-	o.data = pathwayInfo;
-// console.log(JSON.stringify(pathwayInfo)); 
-	
-	$("#tree").treeview(o);            
-	$("#showchecked").click(function(e){
-		var s=$("#tree").getCheckedNodes();
-		if(s !=null&&s.length>0)
-			alert(s.join(","));
-		else
-			alert("NULL");
-	});
 
-
-}
 
 
 function initPathwayInfo(pathwayInfo)

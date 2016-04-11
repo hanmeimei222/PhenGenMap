@@ -2,6 +2,7 @@ package com.serviceImpl;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -11,7 +12,9 @@ import org.springframework.stereotype.Service;
 import com.constant.PhenQueryType;
 import com.dao.PhenDao;
 import com.model.PNode;
+import com.model.Pathway;
 import com.model.cytoscape.Graph;
+import com.model.ztree.ZtreeNode;
 import com.service.QueryPhenService;
 import com.util.ModelTransferUtil;
 
@@ -86,9 +89,18 @@ public class QueryPhenServiceImpl implements QueryPhenService{
 
 	@Override
 	public Set<PNode> aucoComplete(String query) {
-		// TODO Auto-generated method stub
 		Set<PNode> result =pheDao.getAutoCompleteNodes(query);
 		return result;
 //		return ModelTransferUtil.pNode2CytoNode(result);
+	}
+	@Override
+	public List<ZtreeNode> getphenztree() {
+		List<ZtreeNode> phenztree;
+		
+		PNode root = pheDao.getSinglePNodeById("MP:0000001");
+		
+		phenztree = ModelTransferUtil.allphen2ztree(root);
+		return phenztree;
+
 	}
 }

@@ -45,7 +45,7 @@ function drawGlobalGraph(str)
 			}).call(force0.drag);
 	node.append("title").text(function(d) 
 			{
-		return d.type+":"+d.id ;
+		return d.type+":"+d.name ;
 			});
 	force0.on("tick", function() 
 			{

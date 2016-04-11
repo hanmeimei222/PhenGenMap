@@ -19,7 +19,7 @@
 
 <div class="row">
 
-<!--ztree PathwaySelect-->
+<!--ztree PathwaySelect Start-->
 <div class="col-md-2 services-left">
 <div class="row post-content-row">
 <div class="col-md-10 services-left">
@@ -37,16 +37,17 @@
 <div class="demo">
 
 <div
-	style="width: 230px; height: 800px; overflow: auto; ">
-<div id="tree"></div>
+	style="width: 220px; height: 800px; overflow: auto; ">
+<div id="pathwaytree"></div>
 
 </div>
 </div>
 </div>
 
 </div>
-<!--	ztree End			-->
+<!--	ztree PathwaySelect End		-->
 
+<!--Result Graph section Start-->
 
 <div class="col-md-8 services-middle">
 <div class="middle_chk_panel">
@@ -83,7 +84,11 @@
 <div id="cy"></div>
 </div>
 </div>
+<!--Result Graph section End-->
 
+
+
+<!--ztree PhenotypeSelect Start-->
 <div class="col-md-2 services-right">
 
 <div class="row post-content-row">
@@ -94,13 +99,29 @@
 <div style="width: 150px; float: left">
 <h4>Phenotype过滤</h4>
 </div>
-
 </div>
 
-<div id="phenoPanel" class="row post-content-row"></div>
-<div><img alt="Top_arrow" class="top_arrow" id="top_arrow"
-	src="images/top.png"></div>
+<!--<div id="phenoPanel" class="row post-content-row"></div>-->
+<div class="demo">
+<div style="margin-bottom:5px;">
+        <a class="button" href="javascript:void(0);" id="showchecked">Get Selected Nodes</a>
+       
+    </div>
+<div
+	style="width: 210px; height: 800px; overflow: auto; ">
+<div id="phentree"></div>
+
 </div>
+</div>
+
+
+<!--ztree PhenotypeSelect End-->
+
+
+
+
+
+
 </div>
 </div>
 <div class="clearfix"></div>

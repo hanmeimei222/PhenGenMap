@@ -48,18 +48,23 @@ public class QueryGPServiceImpl implements QueryAssoService{
 
 
 	@Override
-	public D3Graph getGlobalAsso(Map<String,Set<PNode>> phenNodes,Map<String,Set<Pathway>> queryPathways,String selected_type) {
-		
+	public D3Graph getGlobalAsso(Set<PNode> phenNodes,Map<String,Set<Pathway>> queryPathways,String selected_type) {
+//		@Override
+		//		public D3Graph getGlobalAsso(Map<String,Set<PNode>> phenNodes,Map<String,Set<Pathway>> queryPathways,String selected_type) {
+				
 		//MP节点
-		Set<PNode> pNodes = new HashSet<PNode>();
-		Set<String> ancesstors = phenNodes.keySet();
-		for (String anc : ancesstors) {
-			Set<PNode> nodes= phenNodes.get(anc);
-			for (PNode n : nodes) {
-				n.setGroup(anc);
-				pNodes.add(n);
-			}
-		}
+//		Set<PNode> pNodes = new HashSet<PNode>();
+//		Set<String> ancesstors = phenNodes.keySet();
+//		for (String anc : ancesstors) {
+//			Set<PNode> nodes= phenNodes.get(anc);
+//			for (PNode n : nodes) {
+//				n.setGroup(anc);
+//				pNodes.add(n);
+//			}
+//		}
+		
+		Set<PNode> pNodes = phenNodes;
+		
 		//gene节点
 		Set<GNode> gNodes = new HashSet<GNode>();
 		Set<String> pathwayClass = queryPathways.keySet();
@@ -377,7 +382,7 @@ public class QueryGPServiceImpl implements QueryAssoService{
 				{
 					isQuery = true;
 				}
-				Node n = new Node(gNode.getSymbol_name(), gNode.getId(),"gene","gene",isQuery);
+				Node n = new Node( gNode.getSymbol_name(),gNode.getSymbol_name(),"gene","gene",isQuery);
 				n.setGroup(gNode.getGroup());
 				cnode =new CytoNode(n);
 				nodes.add(cnode);

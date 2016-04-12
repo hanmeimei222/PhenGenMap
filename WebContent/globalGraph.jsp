@@ -37,7 +37,7 @@
 <div class="demo">
 
 <div
-	style="width: 220px; height: 800px; overflow: auto; ">
+	style="width: 220px; height: 580px; overflow: auto; ">
 <div id="pathwaytree"></div>
 
 </div>
@@ -103,12 +103,9 @@
 
 <!--<div id="phenoPanel" class="row post-content-row"></div>-->
 <div class="demo">
-<div style="margin-bottom:5px;">
-        <a class="button" href="javascript:void(0);" id="showchecked">Get Selected Nodes</a>
-       
-    </div>
+
 <div
-	style="width: 210px; height: 800px; overflow: auto; ">
+	style="width: 210px; height: 580px; overflow: auto; ">
 <div id="phentree"></div>
 
 </div>

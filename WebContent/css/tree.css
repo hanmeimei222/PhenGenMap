@@ -163,15 +163,15 @@
 
 /****************************/
 .bbit-tree-node-expanded .bbit-tree-node-icon{
-	background-image:url(../images/tree/folder-open.gif);
+	background-image:url(../images/tree/folder-open.png);
 }
 
 .bbit-tree-node-leaf .bbit-tree-node-icon{
-	background-image:url(../images/tree/leaf.gif);
+	background-image:url(../images/tree/leaf.png);
 }
 
 .bbit-tree-node-collapsed .bbit-tree-node-icon{
-	background-image:url(../images/tree/folder.gif);
+	background-image:url(../images/tree/folder.png);
 }
 
 .bbit-tree-node-loading .bbit-tree-node-icon{
